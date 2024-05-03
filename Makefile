@@ -1,30 +1,18 @@
-all: webapp
+PYTHON := python3
+PIP := pip3
 
-webapp:
-	@echo "Building env...."
-	@python3 -m venv env
-	@. env/bin/activate
-	@echo "installing requirements..."
-	@pip3 install -r webapp/requirements.txt
-	@echo "lanching server..."
-	@python3 webapp/backend/manage.py migrate
-	@python3 webapp/backend/manage.py runserver
+all: install migrate runserver
 
-clean:
-	@echo "deleting env..."
-	@rm -rf env/
-fclean: clean
+install:
+	@echo "Installing requirements..."
+	@$(PIP) install -r webapp/requirements.txt
 
-re: clean all
+migrate: install
+	@echo "Running database migrations..."
+	@$(PYTHON) webapp/backend/manage.py migrate
 
-show:
-	docker ps
-	docker volume ls -q
-	docker container ls -q
-
-logs:
-	docker logs wordpress
-	docker logs mariadb
-	docker logs nginx
-
-.PHONY: up clean stop re fclean show logs webapp
+runserver: migrate
+	@echo "Launching server..."
+	@$(PYTHON) webapp/backend/manage.py runserver
+    
+.PHONY: all install migrate runserver
