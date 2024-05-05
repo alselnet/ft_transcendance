@@ -4,9 +4,10 @@ PIP := pip3
 all: database install migrate runserver
 
 database:
+	@echo "Creating DB volume..."
+	@mkdir -p ~/Postgres_volume
 	@echo "Setting up DB container..."
-	@docker build -t postgres ./DB/
-	@docker run --name postgresDB -p 5432:5432 -e POSTGRES_DB=transcenDB -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -d postgres
+	@docker-compose up -d
 
 install:
 	@echo "Installing requirements..."
@@ -17,20 +18,26 @@ migrate: install
 	@echo "Running database migrations..."
 	@$(PYTHON) webapp/backend/manage.py makemigrations
 	@$(PYTHON) webapp/backend/manage.py migrate
+	@$(PYTHON) webapp/backend/manage.py createsuperuser --noinput \
+		--username=admin \
+		--email=""
 
 runserver: migrate
 	@echo "Launching server..."
 	@$(PYTHON) webapp/backend/manage.py runserver
     
 stop:
-	@docker stop postgresDB
+	@echo "Stopping DB container..."
+	@docker-compose down
     
 clean: stop
-	@docker rm postgresDB
+	@echo "Deleting database image..."
+	@docker rmi transcendocker-postgresdb
 
-fclean: stop
+prune: stop
+	@echo "Deleting docker data..."
 	@docker system prune -af
 
 re: fclean all
 
-.PHONY: all database install migrate runserver stop clean fclean re
+.PHONY: all database install migrate runserver stop clean prune re
