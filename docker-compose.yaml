@@ -5,7 +5,7 @@ services:
     container_name: postgres
     build: ./DB/
     volumes:
-      - /Postgres_volume:/var/lib/postgresql/data
+      - DB:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: "admin"
       POSTGRES_PASSWORD: "admin"
@@ -15,3 +15,11 @@ services:
     ports:
       - "5432:5432"
     restart: unless-stopped
+    
+volumes:
+  DB:
+    driver: local
+    driver_opts:
+      type: volumes
+      o: bind
+      device: /Postgres_volume

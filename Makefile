@@ -1,7 +1,7 @@
 PYTHON := python3
 PIP := pip3
 
-all: database install migrate runserver
+all: runserver
 
 database:
 	@echo "Creating DB volume..."
@@ -14,30 +14,31 @@ install:
 	@sudo apt-get install pip
 	@$(PIP) install -r webapp/requirements.txt
 
-migrate: install
+superuser:
+	@echo "Please enter a valid username and password for the new superuser (email field can stay blank): "
+	@$(PYTHON) webapp/backend/manage.py createsuperuser
+
+migrate:
 	@echo "Running database migrations..."
 	@$(PYTHON) webapp/backend/manage.py makemigrations
 	@$(PYTHON) webapp/backend/manage.py migrate
-	@$(PYTHON) webapp/backend/manage.py createsuperuser --noinput \
-		--username=admin \
-		--email=""
 
-runserver: migrate
+runserver: database migrate
 	@echo "Launching server..."
 	@$(PYTHON) webapp/backend/manage.py runserver
     
-stop:
+dbstop:
 	@echo "Stopping DB container..."
 	@docker-compose down
     
-clean: stop
+clean: dbstop
 	@echo "Deleting database image..."
-	@docker rmi transcendocker-postgresdb
+	@docker rmi ft_transcendance-postgresdb
 
 prune: stop
 	@echo "Deleting docker data..."
-	@docker system prune -af
+	@docker system prune -af --volumes
 
 re: fclean all
 
-.PHONY: all database install migrate runserver stop clean prune re
+.PHONY: all database install migrate superuser runserver stop clean prune re
