@@ -1,44 +1,49 @@
 PYTHON := python3
 PIP := pip3
 
-all: runserver
+all: up
 
-database:
+up:
 	@echo "Creating DB volume..."
 	@mkdir -p ~/Postgres_volume
-	@echo "Setting up DB container..."
-	@docker-compose up -d
-
-install:
-	@echo "Installing requirements..."
-	@sudo apt-get install pip
-	@$(PIP) install -r webapp/requirements.txt
+	@echo "Launching docker-compose..."
+	@docker-compose -f srcs/docker-compose.yml up -d --build
 
 superuser:
 	@echo "Please enter a valid username and password for the new superuser (email field can stay blank): "
-	@$(PYTHON) webapp/backend/manage.py createsuperuser
+	@$(PYTHON) srcs/requirements/webapp/backend/manage.py createsuperuser
 
-migrate:
-	@echo "Running database migrations..."
-	@$(PYTHON) webapp/backend/manage.py makemigrations
-	@$(PYTHON) webapp/backend/manage.py migrate
-
-runserver: database migrate
+runserver:
 	@echo "Launching server..."
-	@$(PYTHON) webapp/backend/manage.py runserver
-    
-dbstop:
-	@echo "Stopping DB container..."
-	@docker-compose down
-    
-clean: dbstop
-	@echo "Deleting database image..."
-	@docker rmi -f ft_transcendance_postgresdb
+	@$(PYTHON) srcs/requirements/webapp/backend/manage.py runserver
 
-prune: dbstop
+stop:
+	@echo "Stopping containers..."
+	@docker-compose -f srcs/docker-compose.yml down
+    
+clean: stop
+	@echo "Deleting database image..."
+	@docker stop $(docker ps -aq)
+	@docker rm $(docker ps -aq)
+	@docker rmi $(docker images -q)
+
+prune: stop
 	@echo "Deleting docker data..."
-	@docker system prune -af --volumes
+	@docker system prune -af
+
+wipedb: stop
+	@echo "Deleting docker volume..."
+	@docker volume prune -f
+
+show:
+	@docker ps
+	@docker volume ls -q
+	@docker image ls -q
+
+logs:
+	@docker logs postgresdb
+	@docker logs webapp
 
 re: clean all
 
-.PHONY: all database install migrate superuser runserver stop clean prune re
+.PHONY: all up stop clean prune wipedb show logs re

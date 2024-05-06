@@ -3,7 +3,7 @@ version: '3'
 services:
   postgresdb:
     container_name: postgres
-    build: ./DB/
+    build: ./requirements/DB/
     volumes:
       - DB:/var/lib/postgresql/data
     environment:
@@ -14,6 +14,21 @@ services:
       - "5432"
     ports:
       - "5432:5432"
+    networks:
+      - transcendance
+    restart: unless-stopped
+
+  webapp:
+    container_name: webapp
+    build: ./requirements/webapp/
+    depends_on:
+      - postgresdb
+    expose:
+      - "8000"
+    ports:
+      - "8000:8000"
+    networks:
+      - transcendance
     restart: unless-stopped
     
 volumes:
@@ -23,3 +38,7 @@ volumes:
       type: volumes
       o: bind
       device: ~/Postgres_volume
+      
+networks:
+  transcendance:
+    driver: bridge
