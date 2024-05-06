@@ -33,12 +33,12 @@ dbstop:
     
 clean: dbstop
 	@echo "Deleting database image..."
-	@docker rmi ft_transcendance-postgresdb
+	@docker rmi -f ft_transcendance_postgresdb
 
-prune: stop
+prune: dbstop
 	@echo "Deleting docker data..."
 	@docker system prune -af --volumes
 
-re: fclean all
+re: clean all
 
 .PHONY: all database install migrate superuser runserver stop clean prune re
