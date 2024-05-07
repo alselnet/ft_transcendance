@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-+@d&r!khzmp7e)=j_*kl2^#huo+=10ev=1^tsl7^bq@nyw7t%%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'webapp']
 
 
 # Application definition
@@ -70,7 +70,7 @@ DATABASES = {
         'NAME': 'transcenDB',
         'USER': 'admin',
         'PASSWORD': 'admin',
-        'HOST': 'localhost',
+        'HOST': 'postgresdb',
         'PORT': '5432',
     }
 }

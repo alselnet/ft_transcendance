@@ -7,7 +7,7 @@ up:
 	@echo "Creating DB volume..."
 	@mkdir -p ~/Postgres_volume
 	@echo "Launching docker-compose..."
-	@docker-compose -f srcs/docker-compose.yml up -d --build
+	@docker-compose -f srcs/docker-compose.yml up --build
 
 superuser:
 	@echo "Please enter a valid username and password for the new superuser (email field can stay blank): "
@@ -21,13 +21,16 @@ stop:
 	@echo "Stopping containers..."
 	@docker-compose -f srcs/docker-compose.yml down
     
-clean: stop
+clean:
 	@echo "Deleting database image..."
-	@docker stop $(docker ps -aq)
-	@docker rm $(docker ps -aq)
-	@docker rmi $(docker images -q)
+	@docker rmi srcs_postgresdb
+	@docker rmi srcs_webapp
 
-prune: stop
+fclean:
+	@docker rmi debian
+	@docker rmi postgres
+
+prune:
 	@echo "Deleting docker data..."
 	@docker system prune -af
 
@@ -40,10 +43,6 @@ show:
 	@docker volume ls -q
 	@docker image ls -q
 
-logs:
-	@docker logs postgresdb
-	@docker logs webapp
-
 re: clean all
 
-.PHONY: all up stop clean prune wipedb show logs re
+.PHONY: all up stop clean fclean prune wipedb show logs re
