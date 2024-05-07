@@ -20,7 +20,3 @@ ENV PATH="/home/backend_webapp/env/bin:$PATH"
 RUN env/bin/pip install --no-cache-dir -r requirements.txt
 
 CMD ["sh", "start.sh"]
-#RUN env/bin/python3 manage.py makemigrations
-#RUN env/bin/python3 manage.py migrate
-#RUN env/bin/python3 manage.py runserver
-
