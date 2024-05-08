@@ -11,11 +11,11 @@ up:
 
 superuser:
 	@echo "Please enter a valid username and password for the new superuser (email field can stay blank): "
-	@$(PYTHON) srcs/requirements/webapp/backend/manage.py createsuperuser
+	@$(PYTHON) srcs/requirements/webapp_back/backend/manage.py createsuperuser
 
 runserver:
 	@echo "Launching server..."
-	@$(PYTHON) srcs/requirements/webapp/backend/manage.py runserver
+	@$(PYTHON) srcs/requirements/webapp_back/backend/manage.py runserver
 
 stop:
 	@echo "Stopping containers..."
