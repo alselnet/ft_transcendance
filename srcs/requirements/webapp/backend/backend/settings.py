@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-+@d&r!khzmp7e)=j_*kl2^#huo+=10ev=1^tsl7^bq@nyw7t%%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'webapp']
 
 
 # Application definition
@@ -66,11 +66,14 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'transcenDB',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
+        'HOST': 'postgresdb',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
