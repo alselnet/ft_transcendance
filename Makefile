@@ -23,8 +23,8 @@ stop:
     
 clean:
 	@echo "Deleting database image..."
-	@docker rmi srcs_postgresdb
-	@docker rmi srcs_webapp
+	@docker rmi srcs-postgresdb
+	@docker rmi srcs-webapp
 
 fclean:
 	@docker rmi debian

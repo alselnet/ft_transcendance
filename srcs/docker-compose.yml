@@ -9,11 +9,9 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
-      POSTGRES_DB: postgresdb
+      POSTGRES_DB: transcenDB
     expose:
       - "5432"
-#    ports:
-#      - "5432:5432"
     networks:
       - transcendance
     restart: unless-stopped
@@ -23,8 +21,6 @@ services:
     build: ./requirements/webapp/
     depends_on:
       - postgresdb
-    links:
-      - postgresdb:postgresdb
     ports:
       - "8000:8000"
     networks:
