@@ -9,8 +9,5 @@ class TodoView(viewsets.ModelViewSet):
     serializer_class = TodoSerializer
     queryset = Todo.objects.all()
 
-def index(request):
-    template_path = 'index.html'
-    template = get_template(template_path)
-    content = template.render()
-    return HttpResponse(content)
+def home(request):
+    return render(request, 'ft_transcendance/home.html')
