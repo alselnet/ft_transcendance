@@ -18,7 +18,7 @@ services:
 
   webapp:
     container_name: webapp
-    build: ./requirements/webapp_back/
+    build: ./requirements/ft_transcendance/
     depends_on:
       - postgresdb
     ports:

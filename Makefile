@@ -12,17 +12,13 @@ up:
 
 superuser:
 	@echo "Please enter a valid username and password for the new superuser (email field can stay blank): "
-	@$(PYTHON) srcs/requirements/webapp_back/backend/manage.py createsuperuser
-
-runserver:
-	@echo "Launching server..."
-	@$(PYTHON) srcs/requirements/webapp_back/backend/manage.py runserver
+	@$(PYTHON) srcs/requirements/ft_transcendance/ft_transcendance/manage.py createsuperuser
 
 stop:
 	@echo "Stopping containers..."
 	@docker-compose -f srcs/docker-compose.yml down
     
-clean:
+clean: stop
 	@echo "Deleting database image..."
 	@docker rmi srcs-postgresdb
 	@docker rmi srcs-webapp
