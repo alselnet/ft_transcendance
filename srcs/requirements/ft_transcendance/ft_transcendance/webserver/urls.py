@@ -10,5 +10,5 @@ router.register(r'todos', views.TodoView, 'todo')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('home/', TemplateView.as_view(template_name='home.html')),
+    path('', TemplateView.as_view(template_name='index.html')),
 ]
