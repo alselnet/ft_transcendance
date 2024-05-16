@@ -21,7 +21,7 @@ class Todo(models.Model):
 #         return self.username
 
 class GameSummary(models.Model):
-    winner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='won_games')
+    winner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='won_games') #cote user, user.won_games.all() retournerait toutes les games gagnées par l'utilisateur
     loser = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='lost_games')
     score = models.CharField(max_length=100)
     date_time = models.DateTimeField(auto_now_add=True)
