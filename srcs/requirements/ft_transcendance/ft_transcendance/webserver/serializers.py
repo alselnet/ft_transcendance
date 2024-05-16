@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import Todo
+from .models import GameSummary
 
-class TodoSerializer(serializers.ModelSerializer):
+class GameSummarySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Todo
-        fields = ('id', 'title', 'description', 'completed')
+        model = GameSummary
+        fields = ('winner', 'loser', 'score', 'date_time')

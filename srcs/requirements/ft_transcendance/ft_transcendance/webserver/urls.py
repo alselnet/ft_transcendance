@@ -5,7 +5,7 @@ from rest_framework import routers
 from webserver import views
 
 router = routers.DefaultRouter()
-router.register(r'todos', views.TodoView, 'todo')
+router.register(r'gamesummaries', views.GameSummaryView, 'gamesummary')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

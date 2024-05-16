@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Todo
+from .models import GameSummary
 
-class TodoAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'completed')
+class GameSummaryAdmin(admin.ModelAdmin):
+    list_display = ('winner', 'loser', 'score', 'date_time')
 
-admin.site.register(Todo, TodoAdmin)
+admin.site.register(GameSummary, GameSummaryAdmin)
