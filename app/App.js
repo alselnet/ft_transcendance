@@ -8,7 +8,7 @@ import { Search } from "./components/Search.js"
 export const App = () => {
 let divRoot = document.querySelector("#root") //pour récupérer l'élément HTML qui a l'ID "root"
 
-    divRoot.innerHTML = "<h1> Nuestra primera web SPA</h1>" //la fonction modifie le contenu de l'élément racine en y ajoutant un titre
+    divRoot.innerHTML = "" //la fonction modifie le contenu de l'élément racine en y ajoutant un titre
     /* la fonction appelle les fonctions Header(), Search() et 
     Main(), qui qui renvoient des éléments DOM représentant 
     différents composants de notre application. 
@@ -21,7 +21,4 @@ let divRoot = document.querySelector("#root") //pour récupérer l'élément HTM
     Router() //fonction responsable de la configuration et de la
     // gestion du routage dans notre application.
     //Cela peut inclure la définition des routes et la gestion des changements d'URL.
-
-
-
 }
