@@ -1,17 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
-#A merge av la classe user de jules:
-# 
-# from django.contrib.auth.models import AbstractUser
-# class Userwithhist(AbstractUser):
-# 
-#     history = models.ManyToManyField(GameSummary, related_name='players')
-# 
-#     def __str__(self):
-#         return self.username
-
 class GameSummary(models.Model):
     winner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='won_games') #cote user, user.won_games.all() retournerait toutes les games gagnées par l'utilisateur
     loser = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='lost_games')
@@ -20,6 +9,10 @@ class GameSummary(models.Model):
 
     def __str__(self):
         return f"Winner: {self.winner}, Loser: {self.loser}, Score: {self.score}, Date: {self.date_time}"
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    game_history = models.ManyToManyField(GameSummary, related_name='players')
 
 # -------------------------
 # Logique pour creer un résumé de partie et le link aux utilisateurs concernés
