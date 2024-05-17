@@ -5,7 +5,6 @@ let {name, image, species, id} = props
     div.style.width = "18rem";
 
     document.addEventListener("click", (event) => {
-        // console.log(event.target.className)
         if (event.target.className == "btn btn-primary") {
             localStorage.setItem("id", event.target.id)
         }
