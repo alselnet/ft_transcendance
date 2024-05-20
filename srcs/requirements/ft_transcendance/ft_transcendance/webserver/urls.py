@@ -12,5 +12,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
 	path('register/', UserRegistration.as_view(), name='user-registration'),
-    path('', TemplateView.as_view(template_name='index.html')),
+    path('home/', TemplateView.as_view(template_name='index.html')),
+    # path('', TemplateView.as_view(template_name='index.html')),
 ]
