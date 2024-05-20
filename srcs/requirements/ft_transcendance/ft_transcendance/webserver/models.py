@@ -13,6 +13,10 @@ class GameSummary(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     game_history = models.ManyToManyField(GameSummary, related_name='players')
+    # avatar = models.ImageField(null=True) need to install a dep called Pillow ?
+    
+    def __str__(self):
+        return self.user.username
 
 # -------------------------
 # Logique pour creer un résumé de partie et le link aux utilisateurs concernés
