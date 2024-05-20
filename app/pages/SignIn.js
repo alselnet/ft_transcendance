@@ -1,7 +1,7 @@
 const SignIn = () => {
 
-        let form = document.createElement("form");
-        form.innerHTML = `
+    let form = document.createElement("form");
+    form.innerHTML = `
             <h1>INSCRIPTION</h1>
             <div class="mb-3">
                 <label for="username" class="form-label">Nom d'utilisateur</label>
@@ -22,19 +22,20 @@ const SignIn = () => {
             <button type="submit" class="btn btn-primary">S'inscrire</button>
         `;
 
-        form.addEventListener("submit", (event) => {
-
+    form.addEventListener("submit", (event) => {
         event.preventDefault(); // Empêche le formulaire de soumettre de manière traditionnelle
-        
-        //stock input dans une variable
-        const username = document.getElementById("username").value
-        const email = document.getElementById("email").value
-        const password = document.getElementById("password").value
-        const confirmPassword = document.getElementById("confirmPassword").value
 
-        const emailValid = checkEmail(email);
-        const passwordValid = checkPassword(password);
-        const passwordMatch = password === confirmPassword;
+        //stock chaque input dans une variable elles mêmes stockées dans un object 'formData'
+        const formData = {
+            username: document.getElementById("username").value,
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value,
+            confirmPassword: document.getElementById("confirmPassword").value
+        };
+
+        const emailValid = checkEmail(formData.email);
+        const passwordValid = checkPassword(formData.password);
+        const passwordMatch = formData.password === formData.confirmPassword;
 
         if (!emailValid) {
             alert("email non conforme");
@@ -45,6 +46,7 @@ const SignIn = () => {
             alert("confirmation de mot de passe incorrect")
         } else {
             alert("Inscription réussie !")
+            sendFormData(formData);
         }
         //check si nom d'utilisateur existe déjà
 
@@ -68,3 +70,28 @@ const checkEmail = (email) => {
 }
 
 export default SignIn;
+
+
+/*Pour transformer les inputs de l'incription en données JSON il faut
+-extraire les valeurs des champs du formulaire
+-organiser ces valeurs dans un objet javaScript
+-convertir cet objet en JSON avec JSON.stringify
+-envoyer les données JSON avec 'fetch' (= méthode pour envoyer une requête HTTP au serveur)
+
+
+Pas besoin de créer un fichier JSON. A partir de cet objet
+converti on envoie une chaine JSON au serveur backend
+qui la reçoit et la traite.
+
+Le serveur décode les données JSON et effectue les opérations
+necéssaire (stockage base de données, traitement, validation,...*/
+
+const sendFormData = (formData) => {
+    fetch('https://votre-backend-url/api/inscription', {
+        method: 'POST',
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Erreur:', error));
+};
