@@ -33,7 +33,7 @@ volumes:
     driver_opts:
       type: volumes
       o: bind
-      device: ~/Postgres_volume
+      device: /Users/alexandreselnet/Coding/Postgres_volume # a changer selon la machine
       
 networks:
   transcendance:

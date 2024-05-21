@@ -5,8 +5,11 @@ all: up
 
 up:
 	@echo "Creating DB volume..."
-	@mkdir -p ~/Postgres_volume
-	@chmod -R 777 ~/Postgres_volume
+	# les deux prochaines lignes different selon l'OS :
+	# -> choisir un chemin absolu pour un dossier pouvant contenir le volume
+	# il faudra egalement modifier le docker-compose.yml
+	@mkdir -p /Users/alexandreselnet/Coding/Postgres_volume 
+	@chmod -R 777 /Users/alexandreselnet/Coding/Postgres_volume
 	@echo "Launching docker-compose..."
 	@docker-compose -f srcs/docker-compose.yml up --build
 
