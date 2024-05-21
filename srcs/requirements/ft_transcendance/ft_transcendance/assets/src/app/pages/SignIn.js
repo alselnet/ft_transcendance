@@ -45,7 +45,7 @@ const SignIn = () => {
         else if (!passwordMatch) {
             alert("confirmation de mot de passe incorrect")
         } else {
-            alert("Inscription réussie !")
+            // alert("Inscription réussie !")
             sendFormData(formData);
         }
         //check si nom d'utilisateur existe déjà
@@ -87,7 +87,7 @@ Le serveur décode les données JSON et effectue les opérations
 necéssaire (stockage base de données, traitement, validation,...*/
 
 const sendFormData = (formData) => {
-    fetch('https://votre-backend-url/api/inscription', {
+    fetch('http://localhost:8000/register/', {
         method: 'POST',
         body: JSON.stringify(formData)
     })
