@@ -89,9 +89,23 @@ necéssaire (stockage base de données, traitement, validation,...*/
 const sendFormData = (formData) => {
     fetch('http://localhost:8000/register/', {
         method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
         body: JSON.stringify(formData)
     })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Erreur:', error));
+    .then(response => {
+		if (!response.ok) {
+			return response.json().then(err => { throw new Error(err) });
+		}
+		return response.json();
+	})
+    .then(data => {
+		alert('User created successfully.');
+		window.location.href = '/home/';
+	})
+    .catch(error => {
+		alert('User creation failed.');
+		console.error('Error:', error);
+	});
 };
