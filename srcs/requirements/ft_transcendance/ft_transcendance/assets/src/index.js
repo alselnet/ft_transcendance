@@ -1,20 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.css';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.css';
+import { App } from "./app/App.js"
 
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+/* Lorsque cet événement est déclenché, la fonction App
+est appelée. Cela garantit que votre application est
+initialisée une fois que le DOM est prêt avec "DomContentLoaded"*/
+document.addEventListener("DOMContentLoaded", App)
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+/* déclenche la fonction App lorsque la partie de l'URL de 
+hachage (le fragment d'URL qui suit le symbole "#") change.
+C'est généralement qu'une nouvelle "page" virtuelle est demandée.
+=> permet à notre application de réagir aux changements d'URL
+et de mettre à jour son contenu en conséquence. */
+window.addEventListener("hashchange", App)

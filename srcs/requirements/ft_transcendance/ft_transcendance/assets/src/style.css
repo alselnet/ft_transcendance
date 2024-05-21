@@ -1,0 +1,9 @@
+#section {
+    display:flex;
+}
+
+#section > div {
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+}
