@@ -5,8 +5,8 @@ all: up
 
 up:
 	@echo "Creating DB volume..."
-	@mkdir -p ~/Postgres_volume
-	@chmod -R 777 ~/Postgres_volume
+	@mkdir -p /home/tas/Postgres_volume
+	@chmod -R 777 /home/tas/Postgres_volume
 	@echo "Launching docker-compose..."
 	@docker-compose -f srcs/docker-compose.yml up --build
 
