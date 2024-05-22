@@ -18,10 +18,14 @@ class UserRegistration(APIView):
         serializer = UserRegistrationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            user = authenticate(username=serializer.data.get('username'), password=serializer.data.get('password'))
+            refresh = RefreshToken.for_user(user)
             return Response({
-               "username": serializer.data['username'],
-                "email": serializer.data['email'],
-                "message": "User created successfully"
+               'username': serializer.data['username'],
+                'email': serializer.data['email'],
+                'message': 'User created successfully',
+                'refresh': str(refresh),
+                'access': str(refresh.acces_token)
 			}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -39,5 +43,7 @@ class UserSignin(APIView):
             })
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
+# class fortytwologin(APIView):
+    
 def home(request):
     return render(request, 'ft_transcendance/home.html')
