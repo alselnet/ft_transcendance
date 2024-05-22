@@ -31,8 +31,11 @@ const LogIn = () => {
 };
 
 const sendLogData = (formData) => {
-    fetch('http://localhost:8000/register/', {
+    fetch('http://localhost:8000/api/signin/', {
         method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
         body: JSON.stringify(formData)
     })
 
