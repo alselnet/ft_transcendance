@@ -16,8 +16,41 @@ const LogIn = () => {
     document.querySelector("#section").innerHTML = "";
     document.querySelector("#section").append(form);
 
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
 
-    return ;
+        const logData = {
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value,
+        };
+
+        sendLogData(logData);
+
+    });
+
+};
+
+const sendLogData = (formData) => {
+    fetch('http://localhost:8000/register/', {
+        method: 'POST',
+        body: JSON.stringify(formData)
+    })
+
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur de connexion');
+        }
+        return response.json();
+    })
+
+    .then(data => {  // gérerr réponse du backend
+        console.log('Réponse du backend:', data);
+        window.location.href = '/connected'; // renvoie vers la page connected
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        alert('Nom d utilisateur ou mot de passe incorrect');
+    });
 };
 
 export default LogIn;
