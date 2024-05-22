@@ -102,7 +102,7 @@ const sendFormData = (formData) => {
 	})
     .then(data => {
 		alert('User created successfully.');
-		window.location.href = '/succes/';
+		window.location.href = '/myprofile';
 	})
     .catch(error => {
 		alert('User creation failed.');

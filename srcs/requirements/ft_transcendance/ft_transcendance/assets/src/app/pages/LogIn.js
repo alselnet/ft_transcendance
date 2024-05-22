@@ -49,7 +49,7 @@ const sendLogData = (formData) => {
 
     .then(data => {  // gérerr réponse du backend
         console.log('Réponse du backend:', data);
-        window.location.href = '/connected'; // renvoie vers la page connected
+        window.location.href = '/home'; // renvoie vers la page connected
     })
     .catch(error => {
         console.error('Erreur:', error);
