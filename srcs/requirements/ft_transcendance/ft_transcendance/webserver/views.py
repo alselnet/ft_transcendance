@@ -19,13 +19,13 @@ class UserRegistration(APIView):
         if serializer.is_valid():
             serializer.save()
             user = authenticate(username=serializer.data.get('username'), password=serializer.data.get('password'))
-            refresh = RefreshToken.for_user(user)
+            # refresh = RefreshToken.for_user(user)
             return Response({
                'username': serializer.data['username'],
                 'email': serializer.data['email'],
                 'message': 'User created successfully',
-                'refresh': str(refresh),
-                'access': str(refresh.acces_token)
+                # 'refresh': str(refresh),
+                # 'access': str(refresh.acces_token)
 			}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -36,10 +36,10 @@ class UserSignin(APIView):
         user = authenticate(username=username, password=password)
 
         if user is not None:
-            refresh = RefreshToken.for_user(user)
+            # refresh = RefreshToken.for_user(user)
             return Response({
-                'refresh': str(refresh),
-                'access': str(refresh.access_token),
+                # 'refresh': str(refresh),
+                # 'access': str(refresh.access_token),
                 'message':'successful login'
             }, status=status.HTTP_200_OK)
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
