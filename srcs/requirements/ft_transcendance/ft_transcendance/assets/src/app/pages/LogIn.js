@@ -12,7 +12,7 @@ const LogIn = () => {
             <input type="password" class="form-control" id="password" required>
         </div>
         <button type="submit" class="btn btn-primary">Se connecter</button>
-        <button onclick="window.location='https://42.fr/';">Connexion avec 42</button>
+        <button onclick="window.location='http://localhost:8000/api/42login';">Connexion avec 42</button>
     `;
     document.querySelector("#section").innerHTML = "";
     document.querySelector("#section").append(form);
