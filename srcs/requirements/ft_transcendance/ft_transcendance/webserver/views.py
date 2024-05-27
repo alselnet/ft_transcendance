@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
+from django.conf import settings
 from django.template.loader import get_template
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
@@ -56,12 +57,10 @@ def FortyTwoLogin(request):
 
 class Callback(APIView):
     def get(self, request):
-        logger.info("------------->1<-------------")
         code = request.GET.get('code')
-        logger.info(f"code:{code}")
-        client_id = 'u-s4t2ud-4a8765005fe04140b558efe9051388e6a5d1f458ba5b995ac961b074239af7f7'
-        client_secret = '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'
-        redirect_uri = 'http://localhost:8000/api/callback'
+        client_id = settings.CLIENT_ID
+        client_secret = settings.CLIENT_SECRET
+        redirect_uri = settings.REDIRECT_URI
         token_url = 'https://api.intra.42.fr/oauth/token'
         data = {
             'grant_type': 'authorization_code',
@@ -69,25 +68,17 @@ class Callback(APIView):
             'client_secret': client_secret,
             'code': code,
             'redirect_uri': redirect_uri
-            # 'state': optional security measure to proctect against cross forgery attacks
         }
-        
-        logger.info("------------->2<-------------")
         try:
             response = requests.post(token_url, data=data)
-            logger.info("------------->3<-------------")
-            logger.info("------------->try block<-------------")
             response.raise_for_status()
             token_info = response.json()
-            logger.info(f'Token response: {token_info}') # tmp
             access_token = token_info['access_token']  
             user_info_url = 'https://api.intra.42.fr/v2/me'
             headers = {'Authorization': f'Bearer {access_token}'}
-            logger.info("------------->querying api for user info<-------------")
             user_info_response = requests.get(user_info_url, headers=headers)
             user_info_response.raise_for_status()
             user_info = user_info_response.json()
-            logger.info(f'user info: {user_info}') # tmp
             username = user_info['login']
             email = user_info['email']
             user, created = User.objects.get_or_create(username=username, defaults={'email': email})
@@ -97,6 +88,5 @@ class Callback(APIView):
                 user.save()
             
             return Response({'message': 'User registered successfully'}, status=status.HTTP_200_OK)
-        # SHOULD DELIVER A JWT AND REDIRECT TO PROFILE PAGE
         except requests.exceptions.RequestException as e:
             return Response({'error': 'Failed to obtain access token', 'details': str(e)}, status=status.HTTP_400_BAD_REQUEST)

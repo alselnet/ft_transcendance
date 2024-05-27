@@ -6,10 +6,8 @@ services:
     build: ./requirements/DB/
     volumes:
       - DB:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: transcenDB
+    env_file:
+      - ./requirements/DB/.env
     expose:
       - "5432"
     networks:
@@ -19,6 +17,8 @@ services:
   webapp:
     container_name: webapp
     build: ./requirements/ft_transcendance/
+    env_file:
+      - ./requirements/ft_transcendance/.env
     depends_on:
       - postgresdb
     ports:
