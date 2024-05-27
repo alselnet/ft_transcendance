@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import GameSummarySerializer, UserRegistrationSerializer
-from .models import GameSummary
+from .models import GameSummary, Profile
 import logging, requests
 
 logger = logging.getLogger(__name__)
@@ -86,7 +86,11 @@ class Callback(APIView):
             if not created:
                 user.email = email
                 user.save()
-            
-            return Response({'message': 'User registered successfully'}, status=status.HTTP_200_OK)
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+                'message': 'User registered successfully'
+                }, status=status.HTTP_200_OK)
         except requests.exceptions.RequestException as e:
             return Response({'error': 'Failed to obtain access token', 'details': str(e)}, status=status.HTTP_400_BAD_REQUEST)
