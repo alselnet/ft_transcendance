@@ -33,7 +33,7 @@ volumes:
     driver_opts:
       type: volumes
       o: bind
-      device: /root/Postgres_volume
+      device: /home/jules/Postgres_volume
       
 networks:
   transcendance:

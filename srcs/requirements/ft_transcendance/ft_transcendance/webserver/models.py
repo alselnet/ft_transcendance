@@ -1,6 +1,9 @@
 import random
 from django.db import models
 from django.contrib.auth.models import User
+import logging, requests
+
+logger = logging.getLogger(__name__)
 
 class GameSummary(models.Model):
     winner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='won_games') #cote user, user.won_games.all() retournerait toutes les games gagnées par l'utilisateur
@@ -19,9 +22,9 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-class Code(models.Model):
-    number = models.CharField(max_length=5, blank=True)
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
+class TwoFactorsCode(models.Model):
+    number = models.CharField(max_length=5, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)  
 
     def __str__(self):
         return str(self.number)
