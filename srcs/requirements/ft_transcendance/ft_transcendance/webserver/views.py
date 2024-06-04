@@ -8,11 +8,39 @@ from rest_framework import viewsets, status, request
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import GameSummarySerializer, UserRegistrationSerializer
+from .serializers import GameSummarySerializer, UserRegistrationSerializer, TwoFactorsCodeSerializer
 from .models import GameSummary, Profile
 import logging, requests
+from django.core.mail import send_mail, EmailMessage
+from ft_transcendance.settings import EMAIL_HOST_USER
 
 logger = logging.getLogger(__name__)
+
+class Generate2FACodeView(APIView):
+    def post(self, request):
+        user = request.user
+        if not user.is_authenticated:
+            return Response({'error': 'User not authenticated'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        # code = ''.join(random.choices('0123456789', k=5))
+        two_factors_code, created = TwoFactorsCode.objects.get_or_create(user=user)
+        # two_factors_code.number = code
+        two_factors_code.save()
+
+        subject = 'Your 2FA Code'
+        message = f'Your 2FA code is {two_factors_code.number}'
+        recipient_list = [user.email]
+
+        try:
+            send_mail(subject, message, EMAIL_HOST_USER, recipient_list)
+            logger.info(f"2FA code sent to {user.email}")
+
+            serializer = TwoFactorsCodeSerializer(two_factors_code)
+            return Response(serializer, status=status.HTTP_200_OK)
+        except Exception as e:
+            logger.error(f"Error sending email: {str(e)}")
+            return Response({'error': 'Failed to send 2FA code'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 class GameSummaryView(viewsets.ModelViewSet):
     serializer_class = GameSummarySerializer
@@ -34,7 +62,7 @@ class UserRegistration(APIView):
 			}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class UserSignin(APIView):
+class UserSignin(APIView): 
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')

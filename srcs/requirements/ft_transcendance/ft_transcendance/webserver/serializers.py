@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import GameSummary, Profile
+from .models import GameSummary, Profile, TwoFactorsCode
 
 class GameSummarySerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,3 +31,9 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             password = validated_data['password']
         )
         return user
+
+class TwoFactorsCodeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TwoFactorsCode
+        fields = ['number', 'user']
+        read_only_fields = ['number', 'user']
