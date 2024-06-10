@@ -31,3 +31,31 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             password = validated_data['password']
         )
         return user
+
+class PublicUserInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'email')
+
+class EmailUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['email']
+    def validate_email(self, value):
+        if User.objects.filter(email=value).exists():
+            raise serializers.ValidationError("email already in use")
+        return value
+    
+class UsernameUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username']
+    def validate_username(self, value):
+        if User.objects.filter(username=value).exists():
+            raise serializers.ValidationError("username already in use")
+        return value
+    
+class PasswordUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['password']
