@@ -20,10 +20,3 @@ def save_user_profile(sender, instance, **kwargs):
 def post_save_generate_code(sender, instance, created, *args, **kwargs):
     if created:
         TwoFactorsCode.objects.create(user=instance)
-        # send_mail(
-        #     instance.username,
-        #     "123456",
-        #     "from@example.com",
-        #     ["to@example.com"],
-        #     fail_silently=False,
-        # )

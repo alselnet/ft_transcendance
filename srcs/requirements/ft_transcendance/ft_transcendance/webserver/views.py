@@ -16,6 +16,10 @@ from ft_transcendance.settings import EMAIL_HOST_USER
 
 logger = logging.getLogger(__name__)
 
+# class SendConfirmationEmailView(APIView):
+
+
+
 class Generate2FACodeView(APIView):
     def post(self, request):
         user = request.user
