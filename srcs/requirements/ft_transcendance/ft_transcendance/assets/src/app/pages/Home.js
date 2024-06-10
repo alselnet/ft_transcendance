@@ -32,9 +32,7 @@ const Home = () => {
                 <img src="./app/images/42.png" class="img-42-home" alt="button-42-home">
             </button>
         </div>
-    </div>
-
-   
+    </div>   
     `;
     console.log("Section content:", section.innerHTML);
     } else {

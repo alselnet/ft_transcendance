@@ -1,8 +1,11 @@
 const LogIn = () => {
 
-    let form = document.createElement("form");
-    form.innerHTML = `
-    <div class="container-fluid">
+    console.log("Login component loaded");
+
+    let section = document.querySelector("#section");
+    if (section) {
+        section.innerHTML = 
+    `
         <div class="balls-login d-none d-sm-flex">
             <div class="orange-ball-login"></div>
             <div class="white-ball-login">
@@ -23,12 +26,16 @@ const LogIn = () => {
                 </div>
             </div>
         </div>
-    </div>`;
-    
-    document.querySelector("#section").innerHTML = "";
-    document.querySelector("#section").append(form);
+    `;
+    console.log("Section content:", section.innerHTML);
+    } else {
+        console.error("#section not found in the DOM");
+    }
 
-    form.addEventListener("submit", (event) => {
+    // document.querySelector("#section").innerHTML = "";
+    // document.querySelector("#section").append(form);
+
+    section.addEventListener("submit", (event) => {
         event.preventDefault();
 
         const logData = {

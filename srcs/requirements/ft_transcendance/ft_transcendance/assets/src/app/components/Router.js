@@ -30,6 +30,3 @@ export const Router = () => {
             break;
     }
 };
-
-// window.addEventListener('hashchange', Router);
-// document.addEventListener('DOMContentLoaded', Router);

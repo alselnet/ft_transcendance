@@ -1,8 +1,11 @@
 const SignIn = () => {
 
-    let form = document.createElement("form");
-    form.innerHTML = `
-    <div class="container-fluid">
+    console.log("SignIn component loaded");
+
+    let section = document.querySelector("#section");
+    if (section) {
+        section.innerHTML = 
+    `
     <div class="balls-signin d-none d-sm-flex">
         <div class="white-ball-signin"></div>
         <div class="orange-ball-signin">
@@ -27,10 +30,13 @@ const SignIn = () => {
             </div>
         </div>
     </div>
-</div>
         `;
+        console.log("Section content:", section.innerHTML);
+    } else {
+        console.error("#section not found in the DOM");
+    }
 
-    form.addEventListener("submit", (event) => {
+    section.addEventListener("submit", (event) => {
         event.preventDefault(); // Empêche le formulaire de soumettre de manière traditionnelle
 
         //stock chaque input dans une variable elles mêmes stockées dans un object 'formData'
@@ -58,9 +64,6 @@ const SignIn = () => {
         }
     });
 
-    document.querySelector("#section").innerHTML = "";
-    document.querySelector("#section").append(form);
-
 };
 
 //check mdp
@@ -76,7 +79,6 @@ const checkEmail = (email) => {
 }
 
 export default SignIn;
-
 
 /*Pour transformer les inputs de l'incription en données JSON il faut
 -extraire les valeurs des champs du formulaire

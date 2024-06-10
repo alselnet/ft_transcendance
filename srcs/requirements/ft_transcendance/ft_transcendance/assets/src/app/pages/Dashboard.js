@@ -5,6 +5,7 @@ import { HistoryDash } from "../components/HistoryDash.js"
 
 
 export const Dashboard = () => {
+
 let divRoot = document.querySelector("#root")
 
     divRoot.innerHTML = ""
