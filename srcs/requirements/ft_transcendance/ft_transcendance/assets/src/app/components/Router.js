@@ -1,10 +1,18 @@
 import Home from "../pages/Home.js";
 import LogIn from "../pages/LogIn.js";
-import MyProfile from "../pages/MyProfile.js";
 import SignIn from "../pages/SignIn.js";
+import Game from "../pages/Game.js";
+import Dashboard from "../pages/Dashboard.js"
 
 export const Router = () => {
     let { hash } = location;
+
+    let section = document.getElementById("section");
+
+    if (!section) {
+        console.error("#section not found in the DOM");
+        return;
+    }
 
     switch (hash) {
         case "#/":
@@ -13,9 +21,15 @@ export const Router = () => {
             return SignIn();
         case "#/connexion":
             return LogIn();
-        case "#/myprofile":
-            return MyProfile();
+        case "#/jeu":
+            return Game();
+        case "#/dashboard":
+            return Dashboard();
         default:
+            document.getElementById("section").innerHTML = "<h1>Page not found</h1>";
             break;
     }
 };
+
+// window.addEventListener('hashchange', Router);
+// document.addEventListener('DOMContentLoaded', Router);

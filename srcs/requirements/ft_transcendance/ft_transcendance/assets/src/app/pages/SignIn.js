@@ -2,24 +2,32 @@ const SignIn = () => {
 
     let form = document.createElement("form");
     form.innerHTML = `
-            <h1>INSCRIPTION</h1>
-            <div class="mb-3">
-                <label for="username" class="form-label">Nom d'utilisateur</label>
-                <input type="text" class="form-control" id="username" required>
+    <div class="container-fluid">
+    <div class="balls-signin d-none d-sm-flex">
+        <div class="white-ball-signin"></div>
+        <div class="orange-ball-signin">
+            <div class="login-form-signin">
+                <input type="text" id="username" placeholder="nom d'utilisateur">
+                <input type="email" id="email" placeholder="email">
+                <input type="password" id="password" placeholder="mot de passe">
+                <input type="password" id="confirmPassword" placeholder="confirmer mot de passe">
+                <button type="submit" class="button-signin">s'inscrire</button>
             </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" required>
+        </div>
+    </div>
+
+    <div class="balls-signin d-lg-none d-sm-flex">
+        <div class="orange-ball-sm-signin">
+            <div class="login-form-signin">
+                <input type="text" id="username-sm" placeholder="nom d'utilisateur">
+                <input type="email" id="email-sm" placeholder="email">
+                <input type="password" id="password-sm" placeholder="mot de passe">
+                <input type="password" id="confirmPassword-sm" placeholder="confirmer mot de passe">
+                <button type="submit" class="button-signin">s'inscrire</button>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="password" required>
-            </div>
-            <div class="mb-3">
-                <label for="confirmPassword" class="form-label">Confirmation de mot de passe</label>
-                <input type="password" class="form-control" id="confirmPassword" required>
-            </div>
-            <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </div>
+    </div>
+</div>
         `;
 
     form.addEventListener("submit", (event) => {
@@ -48,8 +56,6 @@ const SignIn = () => {
             // alert("Inscription réussie !")
             sendFormData(formData);
         }
-        //check si nom d'utilisateur existe déjà
-
     });
 
     document.querySelector("#section").innerHTML = "";

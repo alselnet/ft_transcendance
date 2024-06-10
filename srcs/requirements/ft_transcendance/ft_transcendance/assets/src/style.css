@@ -1,9 +1,25 @@
-#section {
-    display:flex;
-}
+@import url('./app/style/Home.css');
+@import url('./app/style/SignIn.css');
+@import url('./app/style/LogIn.css');
+@import url('./app/style/Navbar.css');
+@import url('./app/style/Game.css');
+@import url('./app/style/Dashboard.css');
 
-#section > div {
-    display: flex;
-    width: 90%;
-    flex-wrap: wrap;
+/* #section { */
+    /* display:flex; */
+/* } */
+/*  */
+/* #section > div { */
+    /* display: flex; */
+    /* width: 90%; */
+    /* flex-wrap: wrap; */
+/* } */
+
+body {
+    /* font-family: Lato, sans-serif; */
+    margin: 0;
+    background-image: url('./app/images/background.png');
+    background-size: cover;
+    height: 100vh;
+    overflow: hidden;
 }

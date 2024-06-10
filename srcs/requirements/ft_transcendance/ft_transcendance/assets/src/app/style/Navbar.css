@@ -1,0 +1,38 @@
+/* NAVBAR */
+.navbar-container {
+    float: inline-end;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+}
+
+.myNavbar {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.myNavbar .nav-link {
+    opacity: 0.75;
+    color: rgba(255, 255, 255, 0.75);
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    filter: blur(2px);
+}
+
+.myNavbar .nav-link.active {
+    opacity: 1;
+    color: white;
+    -webkit-filter: blur(0px);
+    -moz-filter: blur(0px);
+    filter: blur(0px);
+}
+
+.navSm {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+}
