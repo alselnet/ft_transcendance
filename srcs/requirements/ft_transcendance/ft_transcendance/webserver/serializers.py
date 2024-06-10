@@ -30,6 +30,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             email = validated_data['email'],
             password = validated_data['password']
         )
+        profile = Profile.objects.create(user=user)
         return user
 
 class PublicUserInfoSerializer(serializers.ModelSerializer):
