@@ -7,9 +7,14 @@ class GameSummarySerializer(serializers.ModelSerializer):
         model = GameSummary
         fields = ('winner', 'loser', 'score', 'date_time')
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ('game_history')
+
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
-
+    
     class Meta:
         model = User
         fields = ('username', 'email', 'password')
@@ -34,9 +39,11 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         return user
 
 class PublicUserInfoSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer
+	
     class Meta:
         model = User
-        fields = ('username', 'email')
+        fields = ('username', 'email', 'profile')
 
 class EmailUpdateSerializer(serializers.ModelSerializer):
     class Meta:

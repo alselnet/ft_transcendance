@@ -12,7 +12,7 @@ class GameSummary(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    game_history = models.ManyToManyField(GameSummary, related_name='players')
+    game_history = models.ManyToManyField(GameSummary, blank=True, default=None, related_name='players')
     #avatar = models.ImageField(null=True) need to install a dep called Pillow ?
     
     def __str__(self):
