@@ -1,4 +1,3 @@
-/* NAVBAR */
 .navbar-container {
     float: inline-end;
     display: flex;
@@ -16,16 +15,13 @@
 .myNavbar .nav-link {
     opacity: 0.75;
     color: rgba(255, 255, 255, 0.75);
-    -webkit-filter: blur(2px);
-    -moz-filter: blur(2px);
     filter: blur(2px);
+    transition: all 0.3s ease;
 }
 
 .myNavbar .nav-link.active {
     opacity: 1;
     color: white;
-    -webkit-filter: blur(0px);
-    -moz-filter: blur(0px);
     filter: blur(0px);
 }
 
