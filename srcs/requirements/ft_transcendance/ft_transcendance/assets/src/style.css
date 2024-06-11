@@ -3,22 +3,15 @@
 @import url('./app/style/LogIn.css');
 @import url('./app/style/Navbar.css');
 @import url('./app/style/Game.css');
-/* @import url('./app/style/Dashboard.css'); */
-/* @import url('./app/style/Dash2.css'); */
-@import url('./app/style/Dash3.css');
+@import url('./app/style/Dashboard.css');
 
-/* #section { */
-    /* display:flex; */
-/* } */
-/*  */
-/* #section > div { */
-    /* display: flex; */
-    /* width: 90%; */
-    /* flex-wrap: wrap; */
-/* } */
+@font-face {
+    font-family: 'JuliusSansOne';
+    src: url( './app/fonts/Julius_Sans_One/JuliusSansOne-Regular.ttf');
+}
 
 body {
-    /* font-family: Lato, sans-serif; */
+    font-family: 'JuliusSansOne', sans-serif;
     margin: 0;
     background-image: url('./app/images/background.png');
     background-size: cover;

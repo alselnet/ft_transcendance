@@ -1,5 +1,5 @@
 import { Navbar } from "../components/Navbar.js"
-import { Main } from "../components/Main.js"
+import { Main } from "../utils/Main.js"
 import { DashStat } from "../components/StatDash.js"
 import { HistoryDash } from "../components/HistoryDash.js"
 
@@ -23,35 +23,3 @@ let divRoot = document.querySelector("#root")
 }
 
 export default Dashboard;
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     if (location.hash === "#/dashboard") {
-//         Dashboard();
-//     }
-// });
-
-
-// import { Navbar } from "../components/Navbar.js"
-// import { Main } from "../components/Main.js"
-// import { DashStat } from "../components/StatDash.js"
-// import { HistoryDash } from "../components/HistoryDash.js"
-// 
-// 
-// export const Dashboard = () => {
-// let divRoot = document.querySelector("#root")
-// 
-    // divRoot.innerHTML = ""
-    // 
-    // divRoot.append(Navbar());
-    // divRoot.append(Main());
-    // divRoot.append(HistoryDash());
-    // divRoot.append(DashStat());
-// }
-// 
-// export default Dashboard;
-// 
-// document.addEventListener('DOMContentLoaded', () => {
-    // if (location.hash === "#/dashboard") {
-        // Dashboard();
-    // }
-// });

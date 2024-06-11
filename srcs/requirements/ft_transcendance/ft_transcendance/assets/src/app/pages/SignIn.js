@@ -59,7 +59,6 @@ const SignIn = () => {
         else if (!passwordMatch) {
             alert("confirmation de mot de passe incorrect")
         } else {
-            // alert("Inscription réussie !")
             sendFormData(formData);
         }
     });

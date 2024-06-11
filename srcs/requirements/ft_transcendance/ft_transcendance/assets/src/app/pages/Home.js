@@ -45,7 +45,6 @@ export default Home;
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Ajout des écouteurs d'événements aux liens de navigation
     const links = document.querySelectorAll('a[data-hash]');
     links.forEach(link => {
         link.addEventListener('click', (event) => {
@@ -54,8 +53,4 @@ document.addEventListener('DOMContentLoaded', () => {
             location.hash = `#/${hash}`;
         });
     });
-
-    // Initialisation du routeur
-    // window.addEventListener('hashchange', Router);
-    // Router();
 });

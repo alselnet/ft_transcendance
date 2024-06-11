@@ -1,5 +1,4 @@
 /* BALLS */
-
 .balls-login {
     position: relative;
     display: flex;
@@ -30,7 +29,6 @@
     align-items: center;
     height: 100vh;
     margin: 0;
-
     position: absolute;
     margin-left: 25%;
     margin-top: 6%;
@@ -61,27 +59,12 @@
 }
 
 .login-form-login::before {
-    /* content: ''; */
     position: relative;
-    /* top: 10%; */
-    /* left: 25%; */
-    /* width: 50%; */
-    /* height: 50%; */
     background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     transform: rotate(45deg);
     opacity: 0.6;
 }
-
-/* input[type="text"], input[type="password"] {
-    border: none;
-    border-bottom: 1px solid #333;
-    background-color: transparent;
-    margin: 10px 0;
-    padding: 8px;
-    width: calc(100% - 20px);
-    outline: none;
-} */
 
 .button-login {
     font-family: Lato, sans-serif;
@@ -90,15 +73,11 @@
     background-color: transparent;
     border: solid 2px;
     border-radius: 5px;
-    /* padding: 10px 100px; */
     cursor: pointer;
     text-transform: uppercase;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     transition: background-color 0.3s, box-shadow 0.3s;
-    /* width: 50%; */
-    /* margin: 10px auto; */
     margin-top: 35px;
-    /* margin-bottom: 40px; */
     font-weight: bold;
 }
 
@@ -107,8 +86,7 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
-/* MOBILE SIZE*/
-
+/* MOBILE VERSION */
 .white-ball-sm-login {
     position: relative;
     display: flex;

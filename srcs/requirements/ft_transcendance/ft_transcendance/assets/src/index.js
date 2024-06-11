@@ -1,6 +1,5 @@
 import { App } from "./app/App.js"
 
-
 /* Lorsque cet événement est déclenché, la fonction App
 est appelée. Cela garantit que votre application est
 initialisée une fois que le DOM est prêt avec "DomContentLoaded"*/

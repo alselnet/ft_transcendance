@@ -4,6 +4,7 @@ import SignIn from "../pages/SignIn.js";
 import Game from "../pages/Game.js";
 import Dashboard from "../pages/Dashboard.js"
 
+//définition des routes et la gestion des changements d'URL
 export const Router = () => {
     let { hash } = location;
 

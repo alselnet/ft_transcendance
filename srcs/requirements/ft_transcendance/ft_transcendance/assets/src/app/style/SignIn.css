@@ -1,5 +1,4 @@
 /* BALLS */
-
 .balls-signin {
     position: relative;
     display: flex;
@@ -90,6 +89,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
+/* MOBILE VERSION */
 .balls-sm-signin {
     position: relative;
     display: flex;

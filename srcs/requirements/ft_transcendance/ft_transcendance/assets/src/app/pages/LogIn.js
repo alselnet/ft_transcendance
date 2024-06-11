@@ -32,9 +32,6 @@ const LogIn = () => {
         console.error("#section not found in the DOM");
     }
 
-    // document.querySelector("#section").innerHTML = "";
-    // document.querySelector("#section").append(form);
-
     section.addEventListener("submit", (event) => {
         event.preventDefault();
 
@@ -65,9 +62,9 @@ const sendLogData = (formData) => {
         return response.json();
     })
 
-    .then(data => {  // gérerr réponse du backend
+    .then(data => {
         console.log('Réponse du backend:', data);
-        window.location.href = '/home'; // renvoie vers la page connected
+        window.location.href = '/home';
     })
     .catch(error => {
         console.error('Erreur:', error);
