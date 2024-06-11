@@ -9,13 +9,13 @@ export const Dashboard = () => {
 let divRoot = document.querySelector("#root")
 
     divRoot.innerHTML = ""
-    
+
     divRoot.append(Navbar());
     divRoot.append(Main());
-
+    
     let dashboardContainer = document.createElement("div");
     dashboardContainer.className = "dashboard-container";
-
+    
     dashboardContainer.append(DashStat());
     dashboardContainer.append(HistoryDash());
     

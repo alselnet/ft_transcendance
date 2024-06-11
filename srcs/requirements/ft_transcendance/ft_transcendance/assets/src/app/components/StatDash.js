@@ -2,7 +2,6 @@ const DashStat = () => {
 
     let form = document.createElement("div");
     form.innerHTML = `
-    <div class="container-fluid">
     <div class="left-side-stat">
         <div class="id-stat">
             <div><img src="./app/images/tmejri_avatar.png" alt="profile-pic" class="profile-picture-stat"></div>
@@ -53,8 +52,6 @@ const DashStat = () => {
             </div>
         </div>
     </div>
-</div>
-
     `;
     return form;
 };

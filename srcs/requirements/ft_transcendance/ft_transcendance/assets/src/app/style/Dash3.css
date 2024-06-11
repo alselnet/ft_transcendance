@@ -1,16 +1,15 @@
-Container for the dashboard
 .dashboard-container {
     display: flex;
-    flex-direction: row; /* Affiche les composants côte à côte */
-    justify-content: space-between; /* Ajoute de l'espace entre les composants */
+    flex-direction: row;
+    justify-content: space-between;
     padding: 20px;
 }
 
-/* Common styles for left and right sections */
-.left-side-stat, .right-side-history {
-    flex: 1; /* Permet aux composants de prendre la même largeur */
-    margin: 10px; /* Ajoute un espace entre les composants */
-    box-sizing: border-box; /* Assure que le padding et les bordures sont inclus dans la taille totale */
+.left-side-stat,
+.right-side-history {
+    flex: 1;
+    margin: 10px;
+    box-sizing: border-box;
 }
 
 .id-stat {
@@ -41,16 +40,21 @@ Container for the dashboard
     justify-content: flex-start;
 }
 
-.right-side-history .history-history {
+.right-side-history {
+    margin-right: 5vw;
+}
+
+.history-history {
     width: 100%;
     height: auto;
-    padding: 20px;
+    /* padding: 20px; */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
+    /* text-align: center; */
     justify-content: center;
-    margin-left: 60vw;
+    /* margin-left: 60vw; */
     margin-top: 20vh;
     width: 25vw;
     height: 35vw;
@@ -60,40 +64,42 @@ Container for the dashboard
     background-color: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
-}
+    }
 
-.right-side-history {
-    display: flex;
-    flex-direction: column;
-}
+/* .right-side-history { */
+/* display: flex; */
+/* flex-direction: column; */
+/* } */
 
-/* Specific styles for components */
 .profile-picture-stat {
     width: 7vw;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.text-stat {
-    margin-left: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: 100%;
-}
+/* .text-stat { */
+/* margin-left: 20px; */
+/* display: flex; */
+/* flex-direction: column; */
+/* justify-content: flex-start; */
+/* height: 100%; */
+/* } */
 
-.status-stat {
-    margin-top: 5px;
+ .status-stat {
+    margin-top: 3px;
+    margin-left: 15px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     height: 100%;
-}
+} 
+
 
 .username-stat {
     color: white;
     text-align: center;
     text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
     margin-top: 10px;
+    margin-left: 20px;
     font-size: 300%;
 }
 
@@ -154,17 +160,18 @@ Container for the dashboard
     font-size: 1.5vw;
 }
 
+
 .right-side-stat {
     display: flex;
     flex-direction: column;
 }
 
 .stat-title-stat {
-    margin-left: 3vw;
-    color: white;
-    text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
-    margin-top: 3vh;
-    font-size: 170%;
+margin-left: 3vw;
+color: white;
+text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
+margin-top: 3vh;
+font-size: 170%;
 }
 
 .camambert-stat {
@@ -191,10 +198,10 @@ Container for the dashboard
 }
 
 .stat-data-stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;   
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;   
 }
 
 .stat-text-stat {
@@ -206,10 +213,10 @@ Container for the dashboard
 }
 
 .stat-number-stat {
-    font-size: 250%;
-    color: rgb(201, 100, 100);
-    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
-    margin-left: 3vw;
+font-size: 250%;
+color: rgb(201, 100, 100);
+text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+margin-left: 3vw;
 }
 
 .victory-history .number-history {
@@ -219,7 +226,8 @@ Container for the dashboard
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
 }
 
-.victory-history, .defeat-history {
+.victory-history,
+.defeat-history {
     text-align: center;
 }
 
