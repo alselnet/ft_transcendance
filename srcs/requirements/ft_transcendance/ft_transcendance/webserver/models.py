@@ -19,7 +19,7 @@ class Profile(models.Model):
     game_history = models.ManyToManyField(GameSummary, related_name='players')
     two_factors_auth_status = models.BooleanField(default=False)
     mail_confirmation_status = models.BooleanField(default=False)
-    #avatar = models.ImageField(null=True) need to install a dep called Pillow ?
+    avatar = models.ImageField(upload_to='avatars/', default='avatars/default.png')
     
     def __str__(self):
         return self.user.username

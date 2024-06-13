@@ -2,6 +2,17 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import GameSummary, Profile, TwoFactorsCode
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ('avatar',)
+
+    def update(self, instance, validated_data):
+        instance.avatar = validated_data.get('avatar', instance.avatar)
+        instance.save()
+        return instance
+
+
 class GameSummarySerializer(serializers.ModelSerializer):
     class Meta:
         model = GameSummary

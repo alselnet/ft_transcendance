@@ -8,8 +8,9 @@ from rest_framework import viewsets, status, request
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import GameSummarySerializer, UserRegistrationSerializer, TwoFactorsCodeSerializer
-from .models import GameSummary, Profile
+from rest_framework.parsers import MultiPartParser, FormParser
+from .serializers import GameSummarySerializer, UserRegistrationSerializer, TwoFactorsCodeSerializer, ProfileSerializer
+from .models import GameSummary, Profile, TwoFactorsCode
 import logging, requests
 from django.core.mail import send_mail, EmailMessage
 from ft_transcendance.settings import EMAIL_HOST_USER
@@ -18,6 +19,19 @@ logger = logging.getLogger(__name__)
 
 # class SendConfirmationEmailView(APIView):
 
+class ChangeAvatarAPIView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+
+    def post(self, request):
+        profile = request.user.profile
+
+        serializer = ProfileSerializer(profile, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class Generate2FACodeView(APIView):

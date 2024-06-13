@@ -5,7 +5,7 @@ RUN apt-get install python3 -y
 RUN apt-get install python3-venv -y
 RUN apt-get install pip -y
 
-RUN apt-get install netcat-openbsd -y
+RUN apt-get install -y netcat-openbsd libjpeg-dev zlib1g-dev
 ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /usr/local/bin/wait-for-it.sh
 RUN chmod +x /usr/local/bin/wait-for-it.sh
 
