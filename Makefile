@@ -6,7 +6,9 @@ all: up
 up:
 	@echo "Creating DB volume..."
 	@mkdir -p /Users/alexandreselnet/Coding/Postgres_volume
+	@mkdir -p /Users/alexandreselnet/Coding/static_volume
 	@chmod -R 777 /Users/alexandreselnet/Coding/Postgres_volume
+	@chmod -R 777 /Users/alexandreselnet/Coding/static_volume
 	@echo "Launching docker-compose..."
 	@docker-compose -f srcs/docker-compose.yml up --build
 
@@ -22,10 +24,12 @@ clean: stop
 	@echo "Deleting database image..."
 	@docker rmi srcs-postgresdb
 	@docker rmi srcs-webapp
+	@docker rmi srcs-nginx
 
-fclean:
-	@docker rmi debian
-	@docker rmi postgres
+# fclean:
+# 	@docker rmi debian
+# 	@docker rmi postgres
+# 	@docker rmi nginx
 
 prune:
 	@echo "Deleting docker data..."
