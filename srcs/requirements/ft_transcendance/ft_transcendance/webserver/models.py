@@ -20,6 +20,7 @@ class Profile(models.Model):
     two_factors_auth_status = models.BooleanField(default=False)
     mail_confirmation_status = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to='avatars/', default='avatars/default.png')
+    phone_number = models.PhoneNumberField(blank=True, null=True)
     
     def __str__(self):
         return self.user.username

@@ -14,6 +14,7 @@ from .models import GameSummary, Profile, TwoFactorsCode
 import logging, requests
 from django.core.mail import send_mail, EmailMessage
 from ft_transcendance.settings import EMAIL_HOST_USER
+from twilio.rest import Client
 
 logger = logging.getLogger(__name__)
 
@@ -40,24 +41,48 @@ class Generate2FACodeView(APIView):
         if not user.is_authenticated:
             return Response({'error': 'User not authenticated'}, status=status.HTTP_401_UNAUTHORIZED)
 
+        method = request.data.get('method')
+
         # code = ''.join(random.choices('0123456789', k=5))
         two_factors_code, created = TwoFactorsCode.objects.get_or_create(user=user)
         # two_factors_code.number = code
         two_factors_code.save()
 
-        subject = 'Your 2FA Code'
-        message = f'Your 2FA code is {two_factors_code.number}'
-        recipient_list = [user.email]
+        if method == 'sms':
+            profile = Profile.objects.get(user=user)
+            phone_number = profile.phone_number
+            if not phone_number:
+                return Response({'error': 'No phone number provided'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            try:
+                client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+                message = client.message.create(
+                    body=f'Your 2FA code is {two_factors_code.number}',
+                    from_=settings.TWILIO_PHONE_NUMBER,
+                    to=phone_number
+                )
+                logger.info(f"2FA code sent to {phone_number}")
 
-        try:
-            send_mail(subject, message, EMAIL_HOST_USER, recipient_list)
-            logger.info(f"2FA code sent to {user.email}")
+                serializer = TwoFactorsCodeSerializer(two_factors_code)
+                return Response(serializer, status=status.HTTP_200_OK)
+            except Exception as e:
+                logger.error(f"Error sending SMS: {str(e)}")
+                return Response({'error': 'Failed to send 2FA code via SMS'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        elif method == 'email':
+            subject = 'Your 2FA Code'
+            message = f'Your 2FA code is {two_factors_code.number}'
+            recipient_list = [user.email]
 
-            serializer = TwoFactorsCodeSerializer(two_factors_code)
-            return Response(serializer, status=status.HTTP_200_OK)
-        except Exception as e:
-            logger.error(f"Error sending email: {str(e)}")
-            return Response({'error': 'Failed to send 2FA code'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            try:
+                send_mail(subject, message, EMAIL_HOST_USER, recipient_list)
+                logger.info(f"2FA code sent to {user.email}")
+
+                serializer = TwoFactorsCodeSerializer(two_factors_code)
+                return Response(serializer, status=status.HTTP_200_OK)
+            except Exception as e:
+                logger.error(f"Error sending email: {str(e)}")
+                return Response({'error': 'Failed to send 2FA code via email'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class GameSummaryView(viewsets.ModelViewSet):
