@@ -19,23 +19,26 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         model = User
         fields = ('username', 'email', 'password')
     
-    def validate_username(self, value):
-        if User.objects.filter(username=value).exists():
-            raise serializers.ValidationError("username already in use")
-        return value
-    
-    def validate_email(self, value):
-        if User.objects.filter(email=value).exists():
-            raise serializers.ValidationError("email already in use")
-        return value
+    def validate(self, attrs):
+        username = attrs.get('username')
+        email = attrs.get('email')
+
+        if User.objects.filter(username=username).exists():
+            raise serializers.ValidationError("Username already in use")
+        
+        if User.objects.filter(email=email).exists():
+            raise serializers.ValidationError("Email already in use")
+        
+        return attrs
 
     def create(self, validated_data):
-        user = User.objects.create_user(
-            username = validated_data['username'],
-            email = validated_data['email'],
-            password = validated_data['password']
-        )
-        profile = Profile.objects.create(user=user)
+        password = validated_data.pop('password', None)
+        user = User(**validated_data)
+        
+        if password:
+            user.set_password(password)
+    
+        user.save()
         return user
 
 class PublicUserInfoSerializer(serializers.ModelSerializer):

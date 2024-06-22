@@ -29,12 +29,11 @@ services:
     
   nginx:
     container_name: nginx
-    # build: ./requirements/nginx/
-    image: nginx:latest
+    build: ./requirements/nginx/
     volumes:
       - ./requirements/NGINX/nginx.conf:/etc/nginx/nginx.conf
       - ./requirements/NGINX/html/index.html:/usr/share/nginx/html/index.html
-      - ./requirements/NGINX/html/bundle.js:/usr/share/nginx/html/bundle.js
+      - ./requirements/NGINX/html/index.js:/usr/share/nginx/html/index.js
     depends_on:
       - webapp
     ports:

@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'webapp']
 
 # Application definition
 
@@ -132,9 +132,12 @@ REST_FRAMEWORK = {
 	]
 }
 
-CORS_ORIGIN_WHITELIST = [
-     'http://localhost:3000'
-]
+CORS_ALLOW_ALL_ORIGINS = True
+
+# CORS_ORIGIN_WHITELIST = [
+#      'http://localhost:80',
+# 	 'http://aselnet.42.fr'
+# ]
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -222,3 +225,7 @@ LOGGING = {
 CLIENT_ID = config('CLIENT_ID')
 CLIENT_SECRET = config('CLIENT_SECRET')
 REDIRECT_URI = config('REDIRECT_URI')
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:80']
+
+CSRF_COOKIE_HTTPONLY = False

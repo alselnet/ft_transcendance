@@ -24,11 +24,6 @@ clean: stop
 	@docker rmi srcs-webapp
 	@docker rmi srcs-nginx
 
-# fclean:
-# 	@docker rmi debian
-# 	@docker rmi postgres
-# 	@docker rmi nginx
-
 prune:
 	@echo "Deleting docker data..."
 	@docker system prune -af
@@ -43,6 +38,6 @@ show:
 	@docker volume ls -q
 	@docker image ls -q
 
-re: clean all
+re: prune all
 
 .PHONY: all up stop clean fclean prune wipedb show logs re

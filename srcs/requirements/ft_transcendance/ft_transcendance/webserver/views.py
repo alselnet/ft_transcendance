@@ -24,14 +24,10 @@ class UserRegistrationView(APIView):
         serializer = UserRegistrationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            user = authenticate(username=serializer.data.get('username'), password=serializer.data.get('password'))
-            refresh = RefreshToken.for_user(user)
             return Response({
                 'message': 'User created successfully',
                 'username': serializer.data['username'],
                 'email': serializer.data['email'],
-                'refresh': str(refresh),
-                'access': str(refresh.acces_token)
 			}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
