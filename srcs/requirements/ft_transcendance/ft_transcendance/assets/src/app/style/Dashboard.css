@@ -108,6 +108,20 @@
     font-size: 1.5vw;
 }
 
+.leader-text-stat:hover {
+    color:gold;
+}
+
+.trophy-icon {
+    font-size: 3rem;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.trophy-icon:hover {
+    color: gold;
+}
+
 .friends-list-stat {
     margin-left: 11vw;
     display: flex;
@@ -122,7 +136,6 @@
     font-size: 1.5vw;
 }
 
-
 .right-side-stat {
     display: flex;
     flex-direction: column;
@@ -136,12 +149,24 @@
     font-size: 170%;
 }
 
-.camambert-stat {
+/* .camambert-stat {
     width: 15vw;
     height: 15vw;
     background-color: green;
     border-radius: 50%;
     margin-top: 5vh;
+    margin-left: 5vw;
+} */
+
+/* ANIMATION DASHBOARD ELEMENT */
+.camambert-stat {
+    width: 0;
+    height: 0;
+    background-color: green;
+    border-radius: 50%;
+    position: absolute;
+    transition: width 0.5s ease, height 0.5s ease;
+    margin-top: 7vh;
     margin-left: 5vw;
 }
 
@@ -202,6 +227,7 @@
     color: rgb(201, 100, 100);
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
     margin-left: 3vw;
+    transition: all 0.5s ease-out;
 }
 
 .victory-history .number-history {
