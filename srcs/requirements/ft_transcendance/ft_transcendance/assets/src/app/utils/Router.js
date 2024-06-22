@@ -3,7 +3,13 @@ import LogIn from "../pages/LogIn.js";
 import SignIn from "../pages/SignIn.js";
 import Game from "../pages/Game.js";
 import Dashboard from "../pages/Dashboard.js"
+<<<<<<< HEAD
 import Leaderboard from "../pages/Leaderboard.js";
+=======
+import GameHistory from "./game-history.js";
+import Settings from "./settings.js";
+import TwoFactorAuth from "./2FA.js";
+>>>>>>> 84958df2e481de4bcac9b84e404125b24414d0c1
 
 //définition des routes et la gestion des changements d'URL
 export const Router = () => {
