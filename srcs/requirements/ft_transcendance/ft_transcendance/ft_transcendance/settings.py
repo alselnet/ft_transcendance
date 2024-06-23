@@ -111,7 +111,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -138,10 +138,6 @@ CORS_ALLOW_ALL_ORIGINS = True
 #      'http://localhost:80',
 # 	 'http://aselnet.42.fr'
 # ]
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-+@d&r!khzmp7e)=j_*kl2^#huo+=10ev=1^tsl7^bq@nyw7t%%'

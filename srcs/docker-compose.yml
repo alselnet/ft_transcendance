@@ -17,6 +17,8 @@ services:
   webapp:
     container_name: webapp
     build: ./requirements/ft_transcendance/
+    volumes:
+      - STATIC:/home/ft_transcendance/static/
     env_file:
       - ./requirements/ft_transcendance/.env
     depends_on:
@@ -36,6 +38,7 @@ services:
       - ./requirements/NGINX/html/index.js:/usr/share/nginx/html/index.js
       - ./requirements/NGINX/conf/server.crt:/etc/nginx/ssl/server.crt
       - ./requirements/NGINX/conf/server.key:/etc/nginx/ssl/server.key
+      - STATIC:/static
     depends_on:
       - webapp
     ports:
@@ -51,6 +54,13 @@ volumes:
       type: volumes
       o: bind
       device: /Users/alexandreselnet/Coding/Postgres_volume
+
+  STATIC:
+    driver: local
+    driver_opts:
+      type: volumes
+      o: bind
+      device: /Users/alexandreselnet/Coding/Static_volume
       
 networks:
   transcendance:
