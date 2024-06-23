@@ -43,7 +43,6 @@ export const Router = () => {
             AboutUs();
             break;
     
-    
         default:
             section.innerHTML = "<h1>Page not found</h1>";
             break;
