@@ -16,7 +16,7 @@ et de mettre à jour son contenu en conséquence. */
 
 // ---------------------------------------------------
 
-
+import './style.css';
 import { App } from "./app/App.js";
 
 document.addEventListener("DOMContentLoaded", App);
