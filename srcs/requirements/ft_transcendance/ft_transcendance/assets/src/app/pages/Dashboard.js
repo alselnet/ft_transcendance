@@ -3,7 +3,7 @@ import { Main } from "../utils/Main.js";
 import { DashStat } from "../components/StatDash.js";
 import { HistoryDash } from "../components/HistoryDash.js";
 import { showCircle } from "../animation/ShowCircle.js";
-import Leaderboard from "./Leaderboard.js";
+import { Leaderboard } from "./Leaderboard.js";
 
 export const Dashboard = () => {
     // Vérifie l'authentification de l'utilisateur
