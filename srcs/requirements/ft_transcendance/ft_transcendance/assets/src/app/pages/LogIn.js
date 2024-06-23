@@ -46,25 +46,28 @@ const LogIn = () => {
 
 };
 
+// Ajoute le stockage des tokens JWT dans le localStorage et redirige après une connexion réussie
 const sendLogData = (formData) => {
     fetch('http://localhost:8000/api/signin/', {
         method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(formData)
     })
-
     .then(response => {
         if (!response.ok) {
             throw new Error('Erreur de connexion');
         }
         return response.json();
     })
-
     .then(data => {
         console.log('Réponse du backend:', data);
-        window.location.href = '/home';
+        // Stocker les tokens JWT dans le localStorage
+        localStorage.setItem('accessToken', data.access);
+        localStorage.setItem('refreshToken', data.refresh);
+        // Rediriger vers le tableau de bord
+        window.location.href = '#/dashboard';
     })
     .catch(error => {
         console.error('Erreur:', error);
