@@ -5,6 +5,7 @@
 @import url('./app/style/Game.css');
 @import url('./app/style/Dashboard.css');
 @import url('./app/style/Leaderboard.css');
+@import url('./app/style/Settings.css');
 
 @font-face {
     font-family: 'JuliusSansOne';

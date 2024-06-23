@@ -26,7 +26,7 @@ export const Dashboard = () => {
         return true;
     };
 
-    if (!checkAuthentication()) return; // Arrêter le chargement de la page si l'utilisateur n'est pas authentifié
+    // if (!checkAuthentication()) return; // Arrêter le chargement de la page si l'utilisateur n'est pas authentifié
     
     let divRoot = document.querySelector("#root");
 
@@ -93,6 +93,7 @@ export const Dashboard = () => {
     } else {
         console.error('camambert-stat element not found');
     }
+
 };
 
 export default Dashboard;
