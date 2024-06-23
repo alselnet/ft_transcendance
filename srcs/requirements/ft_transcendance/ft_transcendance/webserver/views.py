@@ -1,16 +1,18 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.conf import settings
 from django.template.loader import get_template
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.middleware.csrf import get_token
 from rest_framework import viewsets, status, request
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.decorators import action
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import GameSummarySerializer, UserRegistrationSerializer, EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, PublicUserInfoSerializer
-from .models import GameSummary, Profile
+from .serializers import GameSummarySerializer, UserRegistrationSerializer, EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, PublicUserInfoSerializer, FriendSerializer, UserSerializer
+from .models import GameSummary, Profile, Friend
 import logging, requests
 
 logger = logging.getLogger(__name__)
@@ -91,6 +93,10 @@ class UpdatePasswordView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+def CsrfTokenView(request):
+    csrf_token = get_token(request)
+    return JsonResponse({'csrfToken': csrf_token})
+
 def FortyTwoLoginView(request):
     client_id = 'u-s4t2ud-4a8765005fe04140b558efe9051388e6a5d1f458ba5b995ac961b074239af7f7'
     redirect_uri = 'https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-4a8765005fe04140b558efe9051388e6a5d1f458ba5b995ac961b074239af7f7&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Fapi%2Fcallback&response_type=code'
@@ -136,3 +142,37 @@ class Callback(APIView):
                 }, status=status.HTTP_200_OK)
         except requests.exceptions.RequestException as e:
             return Response({'error': 'Failed to obtain access token', 'details': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+class AddFriendView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, request, username, friend_username):
+        user = get_object_or_404(User, username=username)
+        friend = get_object_or_404(User, username=friend_username)
+
+        if Friend.objects.filter(user=user, friend=friend).exists():
+            return Response({'detail': 'Already friends'}, status=status.HTTP_400_BAD_REQUEST)
+
+        Friend.objects.create(user=user, friend=friend)
+        return Response({'detail': 'Friend added'}, status=status.HTTP_201_CREATED)
+
+class RemoveFriendView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, request, username, friend_username):
+        user = get_object_or_404(User, username=username)
+        friend = get_object_or_404(User, username=friend_username)
+
+        friendship = Friend.objects.filter(user=user, friend=friend).first()
+        if not friendship:
+            return Response({'detail': 'Friendship does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+
+        friendship.delete()
+        return Response({'detail': 'Friend removed'}, status=status.HTTP_204_NO_CONTENT)
+    
+class FriendListView(APIView):
+    def get(self, request, username):
+        user = get_object_or_404(User, username=username)
+        friends = user.friends.all()
+        serializer = UserSerializer(friends, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

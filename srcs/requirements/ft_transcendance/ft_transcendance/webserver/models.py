@@ -18,6 +18,13 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+class Friend(models.Model):
+    user = models.ForeignKey(User, related_name='friends', on_delete=models.CASCADE)
+    friend = models.ForeignKey(User, related_name='friend_of', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user', 'friend')
+
 # -------------------------
 # Logique pour creer un résumé de partie et le link aux utilisateurs concernés
 # 

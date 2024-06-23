@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import GameSummary, Profile
+from .models import GameSummary, Profile, Friend
 
 class GameSummarySerializer(serializers.ModelSerializer):
     class Meta:
@@ -70,3 +70,16 @@ class PasswordUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['password']
+        
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username']
+
+class FriendSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    friend = UserSerializer()
+
+    class Meta:
+        model = Friend
+        fields = ['user', 'friend']
