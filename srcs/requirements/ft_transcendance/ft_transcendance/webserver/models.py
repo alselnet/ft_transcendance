@@ -11,10 +11,16 @@ class GameSummary(models.Model):
         return f"Winner: {self.winner}, Loser: {self.loser}, Score: {self.score}, Date: {self.date_time}"
 
 class Profile(models.Model):
+    STATUS_CHOICES = (
+        ('online', 'Online'),
+        ('offline', 'Offline'),
+        ('in_game', 'In Game'),
+    )
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='offline')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     game_history = models.ManyToManyField(GameSummary, blank=True, default=None, related_name='players')
     #avatar = models.ImageField(null=True) need to install a dep called Pillow ?
-    
+
     def __str__(self):
         return self.user.username
 

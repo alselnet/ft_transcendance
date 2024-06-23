@@ -10,7 +10,7 @@ class GameSummarySerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('game_history')
+        fields = ('game_history', 'status')
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -42,11 +42,10 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         return user
 
 class PublicUserInfoSerializer(serializers.ModelSerializer):
-    profile = ProfileSerializer
 	
     class Meta:
         model = User
-        fields = ('username', 'email', 'profile')
+        fields = ('username', 'email')
 
 class EmailUpdateSerializer(serializers.ModelSerializer):
     class Meta:
