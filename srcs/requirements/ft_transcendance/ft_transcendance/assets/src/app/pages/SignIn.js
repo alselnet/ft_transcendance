@@ -94,7 +94,7 @@ Le serveur décode les données JSON et effectue les opérations
 necéssaire (stockage base de données, traitement, validation,...*/
 
 const sendFormData = (formData) => {
-    fetch('http://localhost:8000/api/register/', {
+    fetch('https://localhost/api/register/', {
         method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
