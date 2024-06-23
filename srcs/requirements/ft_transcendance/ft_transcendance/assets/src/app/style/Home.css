@@ -1,0 +1,232 @@
+a {
+    text-decoration: none;
+    color: black;
+    font-size: larger;
+}
+
+/* BALLS */
+.balls-home {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.orange-ball-home {
+    position: absolute;
+    width: 40vw;
+    height: 40vw;
+    max-width: 60vh;
+    max-height: 60vh;
+    border-radius: 50%;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.white-ball-home {
+    position: absolute;
+    width: 40vw;
+    height: 40vw;
+    max-width: 60vh;
+    max-height: 60vh;
+    margin-top: 6%;
+    border-radius: 50%;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.orange-ball-home {
+    background-color: rgb(218, 147, 16);
+    margin-right: 30vw;
+    z-index: 1;
+}
+
+.white-ball-home {
+    background-color: white;
+    margin-left: 25%;
+    z-index: 2;
+}
+
+/* Positionnement des lettres */
+.orange-ball-home span,
+.white-ball-home span {
+    position: absolute;
+    transform-origin: center;
+}
+
+/* Lettres sur la balle orange */
+.orange-ball-home {
+span:nth-child(1) { transform: rotate(10deg); top: 50.1%; left: 33%; }
+span:nth-child(2) { transform: rotate(9deg); top: 50.5%; left: 35%; }
+span:nth-child(3) { transform: rotate(6deg); top: 51.1%; left: 39%; }
+span:nth-child(4) { transform: rotate(4deg); top: 51.3%; left: 42%; }
+span:nth-child(5) { transform: rotate(2deg); top: 51.5%; left: 46%; }
+span:nth-child(6) { transform: rotate(0deg); top: 51.5%; left: 50%; }
+span:nth-child(7) { transform: rotate(-2deg); top: 51.5%; left: 52%; }
+span:nth-child(8) { transform: rotate(-4deg); top: 51.3%; left: 56%; }
+span:nth-child(9) { transform: rotate(-6deg); top: 51.1%; left: 59%; }
+span:nth-child(10) { transform: rotate(-8deg); top: 50.5%; left: 61%; }
+span:nth-child(11) { transform: rotate(-10deg); top: 50.1%; left: 65%; }
+}
+
+/* Lettres sur la balle orange */
+.white-ball-home {
+span:nth-child(1) { transform: rotate(9deg); top: 50%; left: 35%; }
+span:nth-child(2) { transform: rotate(6deg); top: 50.5%; left: 38%; }
+span:nth-child(3) { transform: rotate(4deg); top: 51%; left: 42%; }
+span:nth-child(4) { transform: rotate(2deg); top: 51.1%; left: 46%; }
+span:nth-child(5) { transform: rotate(0deg); top: 51.3%; left: 50%; }
+span:nth-child(6) { transform: rotate(-2deg); top: 51.2%; left: 53%; }
+span:nth-child(7) { transform: rotate(-4deg); top: 51%; left: 56%; }
+span:nth-child(8) { transform: rotate(-6deg); top: 50.5%; left: 58%; }
+span:nth-child(9) { transform: rotate(-8deg); top: 50%; left: 62%; }
+}
+
+
+/* BUTTON */
+.btn-container-home {
+    position: absolute;
+    top: 85%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-42-home {
+    display: flex;
+    align-items: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.co-42-home {
+    margin-right: 10px;
+}
+
+.img-42-home {
+    width: 40px;
+    height: auto;
+    margin-bottom: 10%;
+}
+
+/* MOBILE VERSION */
+.balls-sm-home {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.orange-ball-sm-home {
+    margin-bottom: 30vh;
+    width: 40vw;
+    height: 40vw;
+    max-width: 60vh;
+    max-height: 60vh;
+    background-color: rgb(218, 147, 16);
+    border-radius: 50%;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.white-ball-sm-home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    margin-top: 6%;
+    width: 40vw;
+    height: 40vw;
+    max-width: 60vh;
+    max-height: 60vh;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
+    z-index: 2;   
+}
+
+.btn-container-sm-home {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/*********************************/
+
+
+/* MOBILE VERSION */
+/*
+.balls-sm-home {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.orange-ball-sm-home {
+    margin-bottom: 30vh;
+    width: 40vw;
+    height: 40vw;
+    max-width: 60vh;
+    max-height: 60vh;
+    background-color: rgb(218, 147, 16);
+    border-radius: 50%;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.white-ball-sm-home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    margin-top: 6%;
+    width: 40vw;
+    height: 40vw;
+    max-width: 60vh;
+    max-height: 60vh;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
+    z-index: 2;   
+}
+
+.btn-container-sm-home {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}*/

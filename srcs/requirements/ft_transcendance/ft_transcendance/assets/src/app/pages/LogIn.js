@@ -1,23 +1,37 @@
 const LogIn = () => {
+    console.log("Login component loaded");
 
-    let form = document.createElement("form");
-    form.innerHTML = `
-        <h1>CONNEXION</h1>
-        <div class="mb-3">
-            <label for="username" class="form-label">Nom d'utilisateur</label>
-            <input type="text" class="form-control" id="username" required>
+    let section = document.querySelector("#section");
+    if (section) {
+        section.innerHTML = 
+    `
+        <div class="balls-login d-none d-sm-flex">
+            <div class="orange-ball-login"></div>
+            <div class="white-ball-login">
+                <div class="login-form-login">
+                    <input type="text" id="username" placeholder="Username">
+                    <input type="password" id="password" placeholder="Password">
+                    <button type="submit" class="button-login">se connecter</button>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control" id="password" required>
+
+        <div class="balls-login balls-sm-login d-lg-none d-sm-flex">
+            <div class="white-ball-sm-login">
+                <div class="login-form-login">
+                    <input type="text" id="username-sm" placeholder="Username">
+                    <input type="password" id="password-sm" placeholder="Password">
+                    <button type="submit" class="button-login">se connecter</button>
+                </div>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Se connecter</button>
-        <button onclick="window.location='http://localhost:8000/api/42login';">Connexion avec 42</button>
     `;
-    document.querySelector("#section").innerHTML = "";
-    document.querySelector("#section").append(form);
+    console.log("Section content:", section.innerHTML);
+    } else {
+        console.error("#section not found in the DOM");
+    }
 
-    form.addEventListener("submit", (event) => {
+    section.addEventListener("submit", (event) => {
         event.preventDefault();
 
         const logData = {
@@ -31,30 +45,47 @@ const LogIn = () => {
 
 };
 
-const sendLogData = (formData) => {
-    fetch('http://localhost:8000/api/signin/', {
-        method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-        body: JSON.stringify(formData)
-    })
+// Ajoute le stockage des tokens JWT et CSRF dans le localStorage et redirige après une connexion réussie
+const sendLogData = async (formData) => {
+    try {
+        const response = await fetch('https://localhost/api/signin/', {  // Modification de l'URL
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
 
-    .then(response => {
         if (!response.ok) {
             throw new Error('Erreur de connexion');
         }
-        return response.json();
-    })
 
-    .then(data => {  // gérerr réponse du backend
+        const data = await response.json();
         console.log('Réponse du backend:', data);
-        window.location.href = '/home'; // renvoie vers la page connected
-    })
-    .catch(error => {
+        
+        // Stocker les tokens JWT dans le localStorage
+        localStorage.setItem('accessToken', data.access);
+        localStorage.setItem('refreshToken', data.refresh);
+
+        // Récupérer le token CSRF et le stocker dans les cookies
+        const csrfResponse = await fetch('https://localhost/api/csrf_token', {
+            method: 'GET',
+            credentials: 'include'  // Important pour inclure les cookies dans la requête
+        });
+        
+        if (!csrfResponse.ok) {
+            throw new Error('Erreur lors de la récupération du token CSRF');
+        }
+
+        const csrfData = await csrfResponse.json();
+        document.cookie = `csrftoken=${csrfData.token};path=/`;
+
+        // Rediriger vers le tableau de bord
+        window.location.href = '#/dashboard';
+    } catch (error) {
         console.error('Erreur:', error);
         alert('Nom d utilisateur ou mot de passe incorrect');
-    });
+    }
 };
 
 export default LogIn;

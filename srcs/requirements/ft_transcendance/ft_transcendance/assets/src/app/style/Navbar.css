@@ -1,0 +1,34 @@
+.navbar-container {
+    float: inline-end;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+}
+
+.myNavbar {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.myNavbar .nav-link {
+    opacity: 0.75;
+    color: rgba(255, 255, 255, 0.75);
+    filter: blur(2px);
+    transition: all 0.3s ease;
+}
+
+.myNavbar .nav-link.active {
+    opacity: 1;
+    color: white;
+    filter: blur(0px);
+}
+
+.navSm {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+}

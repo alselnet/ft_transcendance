@@ -1,9 +1,22 @@
-#section {
-    display:flex;
+@import url('./app/style/Home.css');
+@import url('./app/style/SignIn.css');
+@import url('./app/style/LogIn.css');
+@import url('./app/style/Navbar.css');
+@import url('./app/style/Game.css');
+@import url('./app/style/Dashboard.css');
+@import url('./app/style/Leaderboard.css');
+@import url('./app/style/Settings.css');
+
+@font-face {
+    font-family: 'JuliusSansOne';
+    src: url( './app/fonts/Julius_Sans_One/JuliusSansOne-Regular.ttf');
 }
 
-#section > div {
-    display: flex;
-    width: 90%;
-    flex-wrap: wrap;
+body {
+    font-family: 'JuliusSansOne', sans-serif;
+    margin: 0;
+    background-image: url('./app/images/background.png');
+    background-size: cover;
+    height: 100vh;
+    overflow: hidden;
 }
