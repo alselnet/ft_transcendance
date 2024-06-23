@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'webapp']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'tenisse.io']
 
 # Application definition
 
@@ -229,3 +229,9 @@ REDIRECT_URI = config('REDIRECT_URI')
 CSRF_TRUSTED_ORIGINS = ['http://localhost:80']
 
 CSRF_COOKIE_HTTPONLY = False
+
+CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_SECURE = True
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
