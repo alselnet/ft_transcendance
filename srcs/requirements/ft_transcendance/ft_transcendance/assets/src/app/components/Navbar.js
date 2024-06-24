@@ -2,12 +2,6 @@ export const Navbar = () => {
     let nav = document.createElement("nav");
 
     nav.innerHTML = `
-        <a href="#/">Home</a>
-        <a href="#/inscription">Inscription</a>
-        <a href="#/connexion">Connexion</a>
-        <a href="#/jeu">Jeu</a>
-        <a href="#/dashboard">Dash</a>
-
         <nav class="navbar-container">
             <div class="container-fluid">
                 <div class="myNavbar d-none d-lg-flex">
