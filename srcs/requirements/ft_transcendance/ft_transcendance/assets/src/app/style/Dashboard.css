@@ -122,6 +122,15 @@
     color: gold;
 }
 
+.list-icon {
+    font-size: 3rem;
+    color: white;
+}
+
+.list-icon:hover {
+    color: gold;
+}
+
 .friends-list-stat {
     margin-left: 11vw;
     display: flex;
@@ -136,6 +145,10 @@
     font-size: 1.5vw;
 }
 
+.list-text-stat:hover {
+    color: gold;
+}
+
 .right-side-stat {
     display: flex;
     flex-direction: column;
@@ -148,15 +161,6 @@
     margin-top: 3vh;
     font-size: 170%;
 }
-
-/* .camambert-stat {
-    width: 15vw;
-    height: 15vw;
-    background-color: green;
-    border-radius: 50%;
-    margin-top: 5vh;
-    margin-left: 5vw;
-} */
 
 /* ANIMATION DASHBOARD ELEMENT */
 .camambert-stat {
@@ -231,7 +235,7 @@
 }
 
 .victory-history .number-history {
-    margin-top: 23vw;
+    margin-top: 28vw;
     color: green;
     font-size: 150px;
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
@@ -254,7 +258,6 @@
 
 .game-historic-history {
     color: white;
-    margin-top: 3vw;
     margin-left: 10vw;
     text-decoration: underline;
 }

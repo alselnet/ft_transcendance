@@ -44,27 +44,3 @@ const HistoryDash = () => {
 };
 
 export { HistoryDash };
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     const counters = document.querySelectorAll('.number-history');
-//     const speed = 200; // Ajuster la vitesse selon les besoins
-
-//     counters.forEach(counter => {
-//         const updateCount = () => {
-//             const target = +counter.getAttribute('data-target');
-//             const count = +counter.innerText;
-
-//             // Calculer l'incrément
-//             const increment = target / speed;
-
-//             if (count < target) {
-//                 counter.innerText = Math.ceil(count + increment);
-//                 setTimeout(updateCount, 10); // Ajuster le délai pour une animation plus fluide
-//             } else {
-//                 counter.innerText = target;
-//             }
-//         };
-
-//         updateCount();
-//     });
-// });

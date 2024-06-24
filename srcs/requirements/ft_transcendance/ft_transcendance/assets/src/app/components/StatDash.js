@@ -57,10 +57,12 @@ const DashStat = () => {
                     <p class="leader-text-stat">Leaderboard</p>
                 </div>
             </a>
-            <div class="friends-list-stat">
-                <i class="bi bi-list-task" style="font-size: 3rem; color: white;"></i>
-                <p class="list-text-stat">Liste d'amis</p>
-            </div>
+            <a class="nav-link" href="#/friendlist">         
+                <div class="friends-list-stat">
+                    <i class="bi bi-list-task list-icon"></i>
+                    <p class="list-text-stat">Liste d'amis</p>
+                </div>
+            </a>
         </div>
     </div>
     `;

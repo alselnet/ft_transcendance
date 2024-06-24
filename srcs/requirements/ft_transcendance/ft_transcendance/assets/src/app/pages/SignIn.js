@@ -2,6 +2,17 @@ const SignIn = () => {
 
     console.log("SignIn component loaded");
 
+    let root = document.getElementById("root");
+    if (!root) {
+        console.error("#root not found in the DOM");
+        return;
+    }
+
+    let navbar = document.querySelector("#root > nav");
+    if (navbar) {
+        navbar.remove();
+    }
+
     let section = document.querySelector("#section");
     if (section) {
         section.innerHTML = 
@@ -109,7 +120,7 @@ const sendFormData = (formData) => {
 	})
     .then(data => {
 		alert('User created successfully.');
-		window.location.href = '/myprofile';
+		window.location.href = '#/jeu';
 	})
     .catch(error => {
 		alert('User creation failed.');

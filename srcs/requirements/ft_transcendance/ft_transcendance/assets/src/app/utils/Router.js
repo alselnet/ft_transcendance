@@ -6,6 +6,7 @@ import Dashboard from "../pages/Dashboard.js";
 import Leaderboard from "../pages/Leaderboard.js";
 import Settings from "../components/settings.js";
 import AboutUs from "../pages/AboutUs.js";
+import FriendList from "../pages/FriendsList.js";
 
 export const Router = () => {
     let { hash } = location;
@@ -42,6 +43,10 @@ export const Router = () => {
         case "#/aboutus":
             AboutUs();
             break;
+        case "#/friendlist":
+            FriendList();
+            break;
+
     
         default:
             section.innerHTML = "<h1>Page not found</h1>";
