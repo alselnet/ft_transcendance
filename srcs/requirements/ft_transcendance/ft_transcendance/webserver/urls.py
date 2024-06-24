@@ -4,7 +4,9 @@ from django.views.generic import TemplateView
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from webserver import views
-from webserver.views import GameSummaryView, UserRegistration, UserSignin, Callback, Generate2FACodeView
+from webserver.views import GameSummaryView, UserRegistration, UserSignin, Callback, Generate2FACodeView, ChangeAvatarView, SendConfirmationEmailView, ConfirmEmailView
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 router.register(r'gamesummaries', views.GameSummaryView, 'gamesummary')
@@ -17,5 +19,11 @@ urlpatterns = [
 	path('api/42login', views.FortyTwoLogin, name='forty-two-login'),
 	path('api/callback', Callback.as_view(), name='callback'),
 	re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name="index.html")),
-	path('api/generate-2fa-code/', Generate2FACodeView.as_view(), name='verify-2fa-code'),
+	path('api/generate-2fa-code/', Generate2FACodeView.as_view(), name='generate-2fa-code'),
+	path('api/change-avatar/', ChangeAvatarView.as_view(), name='change-avatar'),
+    path('api/send-confirmation-email/', SendConfirmationEmailView.as_view(), name='send-confirmation-email'),
+    path('api/confirm-email/<str:token>/', ConfirmEmailView.as_view(), name='confirm-email')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

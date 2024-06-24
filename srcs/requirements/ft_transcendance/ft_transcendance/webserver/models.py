@@ -2,6 +2,7 @@ import random
 from django.db import models
 from django.contrib.auth.models import User
 import logging, requests
+from phonenumber_field.modelfields import PhoneNumberField
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +21,7 @@ class Profile(models.Model):
     two_factors_auth_status = models.BooleanField(default=False)
     mail_confirmation_status = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to='avatars/', default='avatars/default.png')
-    phone_number = models.PhoneNumberField(blank=True, null=True)
+    phone_number = PhoneNumberField(blank=True, null=True)
     
     def __str__(self):
         return self.user.username

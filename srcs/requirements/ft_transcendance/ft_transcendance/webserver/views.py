@@ -15,13 +15,47 @@ import logging, requests
 from django.core.mail import send_mail, EmailMessage
 from ft_transcendance.settings import EMAIL_HOST_USER
 from twilio.rest import Client
+from .utils import generate_token, verify_token
+from django.template.loader import render_to_string
+from django.urls import reverse
 
 logger = logging.getLogger(__name__)
 
-# class SendConfirmationEmailView(APIView):
 
-class ChangeAvatarAPIView(APIView):
-    parser_classes = (MultiPartParser, FormParser)
+class ConfirmEmailView(APIView):
+    def get(self, request, token):
+        email = verify_token(token)
+        if email:
+            try:
+                user = User.objects.get(email=email)
+                user.profile.mail_confirmation_status = True
+                user.profile.save()
+                return Response({'message': 'Email confirmed'}, status=status.HTTP_200_OK)
+            except User.DoesNotExist:
+                return Response({'error': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({'error': 'Invalid or expired token'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SendConfirmationEmailView(APIView):
+    def post(self, request):
+        email = request.data.get('email')
+        try:
+            user = User.objects.get(email=email)
+            token = generate_token(email)
+            confirm_url = request.build_absolute_uri(reverse('confirm-email', args=[token])) # construit l'url de confirmation
+
+            subject = 'Email Confirmation'
+            message = render_to_string('confirmation_email.html', {'confirm_url': confirm_url})
+            send_mail(subject, message, settings.EMAIL_HOST_USER, [email])
+
+            return Response({'message': 'Confirmation email sent'}, status=status.HTTP_200_OK)
+        except User.DoesNotExist:
+            return Response({'error': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+
+class ChangeAvatarView(APIView):
+    parser_classes = (MultiPartParser, FormParser) # Definit les parseurs utilises -> typiquement pour les DL de fichiers
 
     def post(self, request):
         profile = request.user.profile
