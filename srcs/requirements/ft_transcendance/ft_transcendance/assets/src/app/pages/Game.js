@@ -4,8 +4,10 @@ const Game = () => {
     let section = document.querySelector("#section");
     if (section) {
         section.innerHTML = 
-    `   <div class="frame-game">
-            <h1 class="title-game">Jeu du pong</h1>
+    `   <div class="frame-game-container">
+            <div class="frame-game">
+                <h1 class="title-game">Jeu du pong</h1>
+            </div>
         </div>
     `; 
     console.log("Section content:", section.innerHTML);

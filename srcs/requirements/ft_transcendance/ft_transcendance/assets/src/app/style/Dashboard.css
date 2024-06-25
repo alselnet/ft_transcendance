@@ -56,6 +56,11 @@
     height: 100%;
 }
 
+.name-and-settings {
+    display: flex;
+    flex-direction: row;
+}
+
 .username-stat {
     color: white;
     text-align: center;
@@ -81,9 +86,16 @@
     background-color: green;
 }
 
-.bi-gear-fill-stat {
-    margin-left: 15px;
-    margin-top: 20px;
+.gear-icon {
+    display: flex;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.2);
+    margin-left: 20px;
+    margin-top: 33px;
+}
+
+.gear-icon:hover {
+    color: white;
 }
 
 .friends-and-leaderboard-stat {
@@ -261,3 +273,20 @@
     margin-left: 10vw;
     text-decoration: underline;
 }
+
+/* ANIMATION ICON GEAR */
+
+/* @keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.gear-icon {
+    transition: transform 0.5s ease;
+}
+*/
+

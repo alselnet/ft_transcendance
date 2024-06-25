@@ -6,6 +6,9 @@
 @import url('./app/style/Dashboard.css');
 @import url('./app/style/Leaderboard.css');
 @import url('./app/style/Settings.css');
+@import url('./app/style/2FA.css');
+@import url('./app/style/GameHistory.css');
+@import url('./app/style/FriendsList.css');
 
 @font-face {
     font-family: 'JuliusSansOne';

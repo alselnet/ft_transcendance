@@ -8,12 +8,23 @@
     margin: 0;
 }
 
+.arrow {
+    color: white;
+    margin-bottom: 30vh;
+    margin-right: 5vh;
+    font-size: 2rem;
+}
+
+.arrow:hover {
+    color: rgb(218, 147, 16);
+}
+
 .orange-ball-signin {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* height: 100vh; */
     margin: 0;
     margin-right: 30vw;
     width: 40vw;

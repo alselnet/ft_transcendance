@@ -6,8 +6,9 @@ import Dashboard from "../pages/Dashboard.js";
 import Leaderboard from "../pages/Leaderboard.js";
 import Settings from "../components/settings.js";
 import AboutUs from "../pages/AboutUs.js";
-import FriendList from "../pages/FriendsList.js";
+import FriendList from "../components/FriendsList.js";
 import GameHistory from "../components/game-history.js";
+import DeuxFA from "../components/2FA.js"
 
 export const Router = () => {
     let { hash } = location;
@@ -50,6 +51,10 @@ export const Router = () => {
         case "#/gamehistory":
             GameHistory();
             break;
+        case "#/2fa":
+            DeuxFA();
+            break;
+    
     
         default:
             section.innerHTML = "<h1>Page not found</h1>";

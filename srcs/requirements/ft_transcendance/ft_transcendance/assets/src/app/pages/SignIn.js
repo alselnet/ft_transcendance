@@ -19,12 +19,15 @@ const SignIn = () => {
     `
     <div class="balls-signin d-none d-sm-flex">
         <div class="white-ball-signin"></div>
+        <a class="nav-link" href="#/">
+            <div class="arrow"><i class="bi bi-arrow-left-circle-fill"></i></div>
+        </a>
         <div class="orange-ball-signin">
             <div class="login-form-signin">
                 <input type="text" id="username" placeholder="nom d'utilisateur">
                 <input type="email" id="email" placeholder="email">
                 <input type="password" id="password" placeholder="mot de passe">
-                <input type="password" id="confirmPassword" placeholder="confirmer mot de passe">
+                <input type="password" id="confirmPassword" placeholder="confirmer mdp">
                 <button type="submit" class="button-signin">s'inscrire</button>
             </div>
         </div>
@@ -36,7 +39,7 @@ const SignIn = () => {
                 <input type="text" id="username-sm" placeholder="nom d'utilisateur">
                 <input type="email" id="email-sm" placeholder="email">
                 <input type="password" id="password-sm" placeholder="mot de passe">
-                <input type="password" id="confirmPassword-sm" placeholder="confirmer mot de passe">
+                <input type="password" id="confirmPassword-sm" placeholder="confirmer mdp">
                 <button type="submit" class="button-signin">s'inscrire</button>
             </div>
         </div>

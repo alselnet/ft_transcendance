@@ -18,7 +18,11 @@ const LogIn = () => {
         section.innerHTML = 
     `
         <div class="balls-login d-none d-sm-flex">
-            <div class="orange-ball-login"></div>
+            <div class="orange-ball-login">
+                <a class="nav-link" href="#/">
+                    <div class="arrow"><i class="bi bi-arrow-left-circle-fill"></i></div>
+                </a>
+            </div>
             <div class="white-ball-login">
                 <div class="login-form-login">
                     <input type="text" id="username" placeholder="Username">

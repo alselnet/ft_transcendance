@@ -1,3 +1,12 @@
+.frame-game-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
 .frame-game {
     margin-left: 2vw;
     width: 90vw;
@@ -7,7 +16,6 @@
     background-color: rgba(255, 255, 255, 0.2);
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 3vh;
 }
 
 .title-game {

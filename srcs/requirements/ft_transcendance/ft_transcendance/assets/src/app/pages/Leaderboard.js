@@ -1,5 +1,18 @@
 const Leaderboard = () => {
 	console.log("Leaderboard component loaded");
+
+    let root = document.getElementById("root");
+    if (!root) {
+        console.error("#root not found in the DOM");
+        return;
+    }
+
+    // Retirer Navbar de root
+    let navbar = document.querySelector("#root > nav");
+    if (navbar) {
+        navbar.remove();
+    }
+
 	let section = document.querySelector("#section");
 	if (section) {
 		section.innerHTML = `

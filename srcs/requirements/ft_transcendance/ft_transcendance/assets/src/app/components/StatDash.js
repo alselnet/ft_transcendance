@@ -19,11 +19,13 @@ const DashStat = () => {
         <div class="id-stat">
             <div><img src="./app/images/tmejri_avatar.png" alt="profile-pic" class="profile-picture-stat"></div>
             <div class="text-stat">
-                <div class="username-stat">Tmejri</div>
+                <div class="name-and-settings">
+                    <div class="username-stat">Tmejri</div>
+                    <a class="nav-link" href="#/settings"><i class="bi bi-gear-fill gear-icon"></i></a>
+                </div>
                 <div class="status-stat">
                     <div class="pastille-stat"></div>
                     <div class="status-text-stat">en ligne</div>
-                    <div class="icon-settings-stat"><i class="bi bi-gear-fill-stat" style="font-size: 1.5rem; color: white;"></i></div>
                 </div>
             </div>
         </div>
@@ -77,5 +79,9 @@ const DashStat = () => {
 
     return form;
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById('root').appendChild(DashStat());
+});
 
 export { DashStat };
