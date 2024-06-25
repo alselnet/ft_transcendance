@@ -1,3 +1,33 @@
+const translations = {};
+
+function loadLanguage(lang) {
+    fetch(`languages/${lang}.json`)
+        .then(response => response.json())
+        .then(data => {
+            translations[lang] = data;
+            applyTranslations(lang);
+        })
+        .catch(error => console.error('Error loading language:', error));
+}
+
+function applyTranslations(lang) {
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[lang] && translations[lang][key]) {
+            element.textContent = translations[lang][key];
+        }
+    });
+}
+
+function changeLanguage(lang) {
+    if (translations[lang]) {
+        applyTranslations(lang);
+    } else {
+        loadLanguage(lang);
+    }
+}
+
 const Settings = () => {
     let form = document.createElement("div");
 
