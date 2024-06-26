@@ -9,6 +9,7 @@
 @import url('./app/style/2FA.css');
 @import url('./app/style/GameHistory.css');
 @import url('./app/style/FriendsList.css');
+@import url('./app/style/LogOut.css');
 
 @font-face {
     font-family: 'JuliusSansOne';

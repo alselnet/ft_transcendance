@@ -1,3 +1,4 @@
+// import { LogOut } from "./components/LogOut.js";
 import { Navbar } from "./components/Navbar.js";
 import { Main } from "./utils/Main.js";
 import { Router } from "./utils/Router.js";
@@ -13,6 +14,7 @@ export const App = () => {
     root.innerHTML = "";
     root.append(Navbar());
     root.append(Main());
+    // root.append(LogOut());
     
     if (!window.location.hash) {
         window.location.href = '#/';
