@@ -1,5 +1,10 @@
+import random
 from django.db import models
 from django.contrib.auth.models import User
+import logging, requests
+from phonenumber_field.modelfields import PhoneNumberField
+
+logger = logging.getLogger(__name__)
 
 class GameSummary(models.Model):
     winner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='won_games') #cote user, user.won_games.all() retournerait toutes les games gagnées par l'utilisateur
@@ -19,10 +24,14 @@ class Profile(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='offline')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     game_history = models.ManyToManyField(GameSummary, blank=True, default=None, related_name='players')
-    #avatar = models.ImageField(null=True) need to install a dep called Pillow ?
-
+    two_factors_auth_status = models.BooleanField(default=False)
+    mail_confirmation_status = models.BooleanField(default=False)
+    avatar = models.ImageField(upload_to='avatars/', default='avatars/default.png')
+    phone_number = PhoneNumberField(blank=True, null=True)
+    
     def __str__(self):
         return self.user.username
+
 
 class Friend(models.Model):
     user = models.ForeignKey(User, related_name='friends', on_delete=models.CASCADE)
@@ -30,6 +39,26 @@ class Friend(models.Model):
 
     class Meta:
         unique_together = ('user', 'friend')
+
+
+class TwoFactorsCode(models.Model):
+    number = models.CharField(max_length=5, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)  
+
+    def __str__(self):
+        return str(self.number)
+
+    def save(self, *args, **kwargs):
+        number_list = [x for x in range(10)]
+        code_items = []
+
+        for i in range(5):
+            num = random.choice(number_list)
+            code_items.append(num)
+
+        code_string = "".join(str(item) for item in code_items)
+        self.number = code_string
+        super().save(*args, **kwargs)
 
 # -------------------------
 # Logique pour creer un résumé de partie et le link aux utilisateurs concernés

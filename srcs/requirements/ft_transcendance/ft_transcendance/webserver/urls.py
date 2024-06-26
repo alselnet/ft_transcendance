@@ -5,6 +5,9 @@ from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from webserver import views
 from webserver.views import GameSummaryView, UserRegistrationView, UserSigninView, Callback, UpdateEmailView, UpdateUsernameView, UpdatePasswordView, FortyTwoLoginView, PublicUserInfoView, CsrfTokenView, AddFriendView, RemoveFriendView, FriendListView, ProfileStatusUpdateView, ProfileView
+from webserver.views import Generate2FACodeView, ChangeAvatarView, SendConfirmationEmailView, ConfirmEmailView
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 router.register(r'gamesummaries', views.GameSummaryView, 'gamesummary')
@@ -27,4 +30,12 @@ urlpatterns = [
 	path('api/user/<str:username>/friendlist', FriendListView.as_view(), name='friend-list'),
 	path('api/user/<str:username>/update-status', ProfileStatusUpdateView.as_view(), name='profile-status-update'), # PUT request, json : status "online", "offline" or "in-game"
 	path('api/user/<str:username>/profile', ProfileView.as_view(), name='profile')
+	re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name="index.html")),
+	path('api/generate-2fa-code/', Generate2FACodeView.as_view(), name='generate-2fa-code'),
+	path('api/change-avatar/', ChangeAvatarView.as_view(), name='change-avatar'),
+    path('api/send-confirmation-email/', SendConfirmationEmailView.as_view(), name='send-confirmation-email'),
+    path('api/confirm-email/<str:token>/', ConfirmEmailView.as_view(), name='confirm-email')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
