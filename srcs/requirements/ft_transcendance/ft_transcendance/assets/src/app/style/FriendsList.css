@@ -1,0 +1,118 @@
+html, body {
+    font-family: Lato, sans-serif;
+    color: white;
+    margin: 0;
+    background-image: url('../images/background.png');
+    background-size: cover;
+    height: 100vh;
+    overflow: hidden;
+    font-weight: 300;
+}
+
+.main-containerf {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.friends-containerf {
+    margin-top: 10px;
+    width: 31%;
+    height: 80%;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.close-btnf {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.close-btnf:hover {
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+}
+
+h2 {
+    color: white;
+    text-align: center;
+    text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.friends-tablef {
+    width: 150%;
+    margin-top: 50px;
+    table-layout: fixed;
+}
+
+.friends-tablef td {
+    padding: 13px;
+    text-align: center;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-top: 50px;
+}
+
+.friends-tablef td img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-left: 100px;
+}
+
+.userf {
+    margin-left: -210px;
+    text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.5);
+}
+
+
+/* .remove-btn {
+    cursor: pointer;
+    color: red;
+    font-size: 24px;
+    font-weight: bold;
+    display: inline-block;
+    line-height: 1;
+    padding: 0 10px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    background-color: transparent;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.remove-btn:hover {
+    color: darkred;
+    border-color: darkred;
+} */
+
+.remove-btn {
+    cursor: pointer;
+    color: #ff0000;
+    font-size: 25px;
+    border: none;
+    background-color: transparent;
+    margin-right: 220px;
+    margin-left: -220px;
+    text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.4);
+}
+
+.remove-btn:hover {
+    color: #ff0000;
+    text-shadow: 0 3px 3px rgba(255, 0, 0, 0.7); 
+    border: none;
+}
