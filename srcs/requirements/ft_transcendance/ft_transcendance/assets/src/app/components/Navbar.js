@@ -1,6 +1,7 @@
 export const Navbar = () => {
     let nav = document.createElement("nav");
-
+    nav.classList.add('navbar-container');
+    
     nav.innerHTML = `
         <nav class="navbar-container">
             <div class="container-fluid">

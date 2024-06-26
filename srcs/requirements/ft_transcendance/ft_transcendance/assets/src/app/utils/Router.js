@@ -9,6 +9,7 @@ import AboutUs from "../pages/AboutUs.js";
 import FriendList from "../components/FriendsList.js";
 import GameHistory from "../components/game-history.js";
 import DeuxFA from "../components/2FA.js"
+import LogOut from "../components/LogOutMsg.js";
 
 export const Router = () => {
     let { hash } = location;
@@ -54,7 +55,9 @@ export const Router = () => {
         case "#/2fa":
             DeuxFA();
             break;
-    
+        case "#/logout":
+            LogOut();
+            break;
     
         default:
             section.innerHTML = "<h1>Page not found</h1>";

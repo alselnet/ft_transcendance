@@ -4,6 +4,7 @@ import { DashStat } from "../components/StatDash.js";
 import { HistoryDash } from "../components/HistoryDash.js";
 import { showCircle } from "../animation/ShowCircle.js";
 import  Leaderboard  from "./Leaderboard.js";
+import { LogOut } from "../components/LogOut.js";
 
 export const Dashboard = () => {
     // Vérifie l'authentification de l'utilisateur
@@ -33,6 +34,7 @@ export const Dashboard = () => {
     divRoot.innerHTML = "";
 
     divRoot.append(Navbar());
+    divRoot.append(LogOut());
     divRoot.append(Main());
 
     let dashboardContainer = document.createElement("div");

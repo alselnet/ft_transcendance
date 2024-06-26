@@ -1,18 +1,14 @@
-const LogOut = () => {
-
-    console.log("LogOut component loaded");
-    let icon = document.querySelector("#section");
-    if (section) {
-        section.innerHTML =
-        `   
+export const LogOut = () => {
+    
+    let icon = document.createElement("div");
+    
+    icon.classList.add('logout-container');
+    icon.innerHTML = 
+    ` 
+        <a class="nav-link" href="#/logout">
             <i class="bi bi-box-arrow-right"></i>
-        `;
-        console.log("Section content:", section.innerHTML);
-    } else {
-        console.error("#section not found in the DOM");
-    }
-
+        </a>
+    `;
+    
     return icon;
 };
-
-export default LogOut;

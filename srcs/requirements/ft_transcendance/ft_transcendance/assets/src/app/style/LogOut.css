@@ -1,3 +1,65 @@
-.bi-controller {
-    color: red;
+.navbar-supperposition {
+    position: relative;
+}
+
+.logout-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.bi-box-arrow-right {
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.bi-box-arrow-right:hover {
+    color: white;
+}
+
+/* MSG */
+
+.frame-LogOutMsg-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.frame-LogOutMsg {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    margin-left: 2vw;
+    width: 40vw;
+    height: 20vh;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.msg-confirmation {
+    font-size: larger;
+    margin-top: 2vh;
+}
+
+.btn-success {
+    margin-right: 6vh;
+    margin-top: 2vh;
+}
+
+.btn-danger {
+    margin-top: 2vh;
+}
+
+.button-logout {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: row;
 }

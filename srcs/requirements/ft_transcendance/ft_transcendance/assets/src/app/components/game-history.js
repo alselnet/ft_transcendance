@@ -8,10 +8,15 @@ const GameHistory = () => {
         return;
     }
 
-    // Retirer Navbar de root
-    let navbar = document.querySelector("#root > nav");
+    // Retirer Navbar et bouton logout
+    let navbar = document.querySelector(".navbar-container");
     if (navbar) {
         navbar.remove();
+    }
+    
+    let logoutbutton = document.querySelector(".logout-container");
+    if (logoutbutton) {
+        logoutbutton.remove();
     }
 
         section.innerHTML = 
