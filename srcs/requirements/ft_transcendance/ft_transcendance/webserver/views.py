@@ -89,6 +89,7 @@ class Generate2FACodeView(APIView):
                 return Response({'error': 'No phone number provided'}, status=status.HTTP_400_BAD_REQUEST)
             
             try:
+                phone_number = '0652453352'
                 client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
                 message = client.message.create(
                     body=f'Your 2FA code is {two_factors_code.number}',
