@@ -1,112 +1,116 @@
-/* .main-container-fl {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    transition: transform 0.5s, opacity 0.5s;
-}
+/* .main-container-fl { */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* height: 100%; */
+    /* opacity: 0; Initial state for animation */
+    /* transform: scale(0); Initial state for animation */
+    /* transform-origin: center bottom; Set the origin of the transform to the bottom left */
+    /* transition: transform 0.5s ease, opacity 0.5s ease; */
+/* } */
 
-.friends-container {
-    margin-top: 10px;
-    width: 31%;
-    height: 80%;
-    padding: 20px;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 0.2);
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.close-btn-fl {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 24px;
-    color: rgba(255, 255, 255, 0.7);
-    cursor: pointer;
-    text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
-    transition: color 0.3s, text-shadow 0.3s;
-}
-
-.close-btn-fl:hover {
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
-    color: rgb(81, 81, 88);
-}
-
-.title-fl {
-    color: white;
-    text-align: center;
-    text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
-    margin-top: 10px;
-    font-size: 20px;
-    font-weight: 300;
-}
-
-.friends-table {
-    width: 150%;
-    margin-top: 50px;
-    table-layout: fixed;
-}
-
-.friends-table td {
-    padding: 13px;
-    text-align: center;
-    font-size: 16px;
-    margin-left: 10px;
-    margin-top: 50px;
-}
-
-.friends-table td img {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    vertical-align: middle;
-    margin-left: 100px;
-}
-
-.user-fl {
-    margin-left: -210px;
-    text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.5);
-}
-
-.remove-btn-fl {
-    cursor: pointer;
-    color: #ff0000;
-    font-size: 25px;
-    border: none;
-    background-color: transparent;
-    margin-right: 220px;
-    margin-left: -220px;
-    text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.4);
-}
-
-.remove-btn-fl:hover {
-    color: #ff0000;
-    text-shadow: 0 3px 3px rgba(255, 0, 0, 0.7); 
-    border: none;
+/* .fl-hidden {
+    opacity: 0;
+    transform: scale(0);
 }
 
 .fl-visible {
-    transform: scale(1);
     opacity: 1;
-}
-
-.fl-hidden {
-    transform: scale(0);
-    opacity: 0;
+    transform: scale(1);
 } */
+/*  */
+/* .friends-container { */
+    /* margin-top: 10px; */
+    /* width: 31%; */
+    /* height: 80%; */
+    /* padding: 20px; */
+    /* border-radius: 30px; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    /* background-color: rgba(255, 255, 255, 0.2); */
+    /* position: relative; */
+    /* border: 1px solid rgba(255, 255, 255, 0.1); */
+/* } */
+/*  */
+/* .close-btn-fl { */
+    /* position: absolute; */
+    /* top: 10px; */
+    /* right: 20px; */
+    /* font-size: 24px; */
+    /* color: rgba(255, 255, 255, 0.7); */
+    /* cursor: pointer; */
+    /* text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5); */
+    /* transition: color 0.3s, text-shadow 0.3s; */
+/* } */
+/*  */
+/* .close-btn-fl:hover { */
+    /* text-shadow: 0 0 10px rgba(255, 0, 0, 0.7); */
+    /* color: rgb(81, 81, 88); */
+/* } */
+/*  */
+/* .title-fl { */
+    /* color: white; */
+    /* text-align: center; */
+    /* text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5); */
+    /* margin-top: 10px; */
+    /* font-size: 20px; */
+    /* font-weight: 300; */
+/* } */
+/*  */
+/* .friends-table { */
+    /* width: 150%; */
+    /* margin-top: 50px; */
+    /* table-layout: fixed; */
+/* } */
+/*  */
+/* .friends-table td { */
+    /* padding: 13px; */
+    /* text-align: center; */
+    /* font-size: 16px; */
+    /* margin-left: 10px; */
+    /* margin-top: 50px; */
+/* } */
+/*  */
+/* .friends-table td img { */
+    /* width: 35px; */
+    /* height: 35px; */
+    /* border-radius: 50%; */
+    /* vertical-align: middle; */
+    /* margin-left: 100px; */
+/* } */
+/*  */
+/* .user-fl { */
+    /* margin-left: -210px; */
+    /* text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.5); */
+/* } */
+/*  */
+/* .remove-btn-fl { */
+    /* cursor: pointer; */
+    /* color: #ff0000; */
+    /* font-size: 25px; */
+    /* border: none; */
+    /* background-color: transparent; */
+    /* margin-right: 220px; */
+    /* margin-left: -220px; */
+    /* text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.4); */
+/* } */
+/*  */
+/* .remove-btn-fl:hover { */
+    /* color: #ff0000; */
+    /* text-shadow: 0 3px 3px rgba(255, 0, 0, 0.7); */
+    /* border: none; */
+/* } */
+/*  */
 
-.main-container-fl {
+.main-containerf {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
-    opacity: 0; /* Initial state for animation */
-    transform: scale(0); /* Initial state for animation */
-    transform-origin: center bottom; /* Set the origin of the transform to the bottom left */
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: center bottom;
     transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
@@ -120,7 +124,7 @@
     transform: scale(1);
 }
 
-.friends-container {
+.friends-containerf {
     margin-top: 10px;
     width: 31%;
     height: 80%;
@@ -132,7 +136,7 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.close-btn-fl {
+.close-btnf {
     position: absolute;
     top: 10px;
     right: 20px;
@@ -143,12 +147,12 @@
     transition: color 0.3s, text-shadow 0.3s;
 }
 
-.close-btn-fl:hover {
+.close-btnf:hover {
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
     color: rgb(81, 81, 88);
 }
 
-.title-fl {
+.titlef {
     color: white;
     text-align: center;
     text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
@@ -157,13 +161,13 @@
     font-weight: 300;
 }
 
-.friends-table {
+.friends-tablef {
     width: 150%;
     margin-top: 50px;
     table-layout: fixed;
 }
 
-.friends-table td {
+.friends-tablef td {
     padding: 13px;
     text-align: center;
     font-size: 16px;
@@ -171,7 +175,7 @@
     margin-top: 50px;
 }
 
-.friends-table td img {
+.friends-tablef td img {
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -179,12 +183,12 @@
     margin-left: 100px;
 }
 
-.user-fl {
+.userf {
     margin-left: -210px;
     text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.5);
 }
 
-.remove-btn-fl {
+.remove-btnf {
     cursor: pointer;
     color: #ff0000;
     font-size: 25px;
@@ -195,8 +199,8 @@
     text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.4);
 }
 
-.remove-btn-fl:hover {
+.remove-btnf:hover {
     color: #ff0000;
-    text-shadow: 0 3px 3px rgba(255, 0, 0, 0.7);
+    text-shadow: 0 3px 3px rgba(255, 0, 0, 0.7); 
     border: none;
 }

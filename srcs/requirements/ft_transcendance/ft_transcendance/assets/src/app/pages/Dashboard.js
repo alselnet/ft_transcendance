@@ -96,7 +96,8 @@ export const Dashboard = () => {
             FriendList();
 
             // After the Friend List is loaded, update the position and animation
-            const friendlistElement = section.querySelector('.main-container-fl');
+            const friendlistElement = section.querySelector('.main-containerf');
+            // const friendlistElement = section.querySelector('.main-container-fl');
             setTimeout(() => {
                 section.style.position = 'relative';
                 section.style.left = '0';
@@ -126,7 +127,8 @@ export const Dashboard = () => {
             GameHistory();
 
             // After the Friend List is loaded, update the position and animation
-            const gameHistoryElement = section.querySelector('.main-container-ga');
+            const gameHistoryElement = section.querySelector('.main-container2');
+            // const gameHistoryElement = section.querySelector('.main-container-ga');
             setTimeout(() => {
                 section.style.position = 'relative';
                 section.style.left = '0';

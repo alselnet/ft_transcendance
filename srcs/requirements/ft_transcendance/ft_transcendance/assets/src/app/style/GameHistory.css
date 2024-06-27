@@ -1,15 +1,109 @@
-.main-container-ga {
+/* .main-container-ga { */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* height: 100%; */
+    /* opacity: 0; Initial state for animation */
+    /* transform: scale(0); Initial state for animation */
+    /* transform-origin: bottom right; Set the origin of the transform to the bottom left */
+    /* transition: transform 0.5s ease, opacity 0.5s ease; */
+/* } */
+/*  */
+/* .ga-hidden { */
+    /* opacity: 0; */
+    /* transform: scale(0); */
+/* } */
+/*  */
+/* .ga-visible { */
+    /* opacity: 1; */
+    /* transform: scale(1); */
+/* } */
+/*  */
+/* .history-container-ga { */
+    /* margin-top: 10px; */
+    /* width: 85%; */
+    /* height: 70%; */
+    /* padding: 20px; */
+    /* border-radius: 30px; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    /* background-color: rgba(255, 255, 255, 0.2); */
+    /* position: relative; */
+    /* border: 1px solid rgba(255, 255, 255, 0.1); */
+/* } */
+    /*  */
+/* .close-btn-ga { */
+    /* position: absolute; */
+    /* top: 10px; */
+    /* right: 20px; */
+    /* font-size: 24px; */
+    /* color: rgba(255, 255, 255, 0.7); */
+    /* cursor: pointer; */
+    /* text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5); */
+/* } */
+/*  */
+/* .close-btn-ga:hover { */
+    /* text-shadow: 0 0 10px rgba(255, 0, 0, 0.7); */
+    /* color: rgb(81, 81, 88); */
+/* } */
+/*  */
+/* .title-ga { */
+    /* color: white; */
+    /* text-align: center; */
+    /* text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5); */
+    /* margin-top: -10px; */
+    /* font-size: 30px; */
+/* } */
+/*  */
+/* .history-table-ga { */
+    /* width: 100%; */
+    /* border-collapse: collapse; */
+    /* margin-top: 20px; */
+    /* table-layout: fixed; */
+/* } */
+    /*  */
+/* .history-table-ga th, .history-table-ga td { */
+    /* padding: 10px; */
+    /* text-shadow: 0px 5px 9px rgba(0, 0, 0, 0.5); */
+    /* text-align: center; */
+/* } */
+/*  */
+/* .history-table-ga th { */
+    /* font-size: 20px; */
+    /* color: white; */
+/* } */
+/*  */
+/* .history-table-ga td img { */
+    /* width: 30px; */
+    /* height: 30px; */
+    /* border-radius: 50%; */
+    /* vertical-align: middle; */
+/* } */
+/*  */
+/* .defeat-ga { */
+    /* color: #C20D0D; */
+/* } */
+/*  */
+/* .victory-ga { */
+    /* color: #2B6E25; */
+/* } */
+/*  */
+/* .game-historic-history:hover { */
+    /* color: gold; */
+/* } */
+
+
+.main-container2 {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
-    opacity: 0; /* Initial state for animation */
-    transform: scale(0); /* Initial state for animation */
-    transform-origin: bottom right; /* Set the origin of the transform to the bottom left */
-    transition: transform 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: bottom right;
+    transition: transform 0.5s ease, opacity 0.5s ease; 
 }
-
 .ga-hidden {
     opacity: 0;
     transform: scale(0);
@@ -20,7 +114,7 @@
     transform: scale(1);
 }
 
-.history-container-ga {
+.history-container2 {
     margin-top: 10px;
     width: 85%;
     height: 70%;
@@ -32,7 +126,7 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
     
-.close-btn-ga {
+.close-btn2 {
     position: absolute;
     top: 10px;
     right: 20px;
@@ -42,12 +136,12 @@
     text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
 }
 
-.close-btn-ga:hover {
+.close-btn2:hover {
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
     color: rgb(81, 81, 88);
 }
 
-.title-ga {
+.title2 {
     color: white;
     text-align: center;
     text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
@@ -55,36 +149,36 @@
     font-size: 30px;
 }
 
-.history-table-ga {
+.history-table2 {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
     table-layout: fixed;
 }
     
-.history-table-ga th, .history-table-ga td {
+.history-table2 th, .history-table2 td {
     padding: 10px;
     text-shadow: 0px 5px 9px rgba(0, 0, 0, 0.5);
     text-align: center;
 }
 
-.history-table-ga th {
+.history-table2 th {
     font-size: 20px;
     color: white;
 }
 
-.history-table-ga td img {
+.history-table2 td img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
     vertical-align: middle;
 }
 
-.defeat-ga {
+.defeat2 {
     color: #C20D0D;
 }
 
-.victory-ga {
+.victory2 {
     color: #2B6E25;
 }
 
