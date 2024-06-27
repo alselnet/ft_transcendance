@@ -1,5 +1,4 @@
 const GameHistory = () => {
-    let form = document.createElement("div");
     console.log("Game History component loaded");
 
     let root = document.getElementById("root");
@@ -8,7 +7,6 @@ const GameHistory = () => {
         return;
     }
 
-    // Retirer Navbar et bouton logout
     let navbar = document.querySelector(".navbar-container");
     if (navbar) {
         navbar.remove();
@@ -19,9 +17,11 @@ const GameHistory = () => {
         logoutbutton.remove();
     }
 
+    let section = document.querySelector("#section");
+    if (section) {
         section.innerHTML = 
         `
-        <div class="main-container-ga">
+        <div class="main-container-ga ga-hidden">
             <h1 class="title-ga">Match History</h1>
             <div class="history-container-ga">
             <a class="nav-link" href="#/dashboard">
@@ -78,7 +78,20 @@ const GameHistory = () => {
             </div>
         </div>
         `; 
-        return form;
+
+        console.log("Section content:", section.innerHTML);
+
+        const gameHistoryContainer = document.querySelector('.main-container-ga');
+        if (gameHistoryContainer) {
+            setTimeout(() => {
+                gameHistoryContainer.classList.add('ga-visible');
+                gameHistoryContainer.classList.remove('ga-hidden');
+            }, 0); // Delay to ensure the DOM has updated
+        }
+    } else {
+        console.error("#section not found in the DOM");
+    }
+
 };
 
 export default GameHistory;

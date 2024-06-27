@@ -8,10 +8,15 @@ const SignIn = () => {
         return;
     }
 
-    let navbar = document.querySelector("#root > nav");
+    let navbar = document.querySelector(".navbar-container");
     if (navbar) {
         navbar.remove();
     }
+
+    let logoutbutton = document.querySelector(".logout-container");
+    if (logoutbutton) {
+        logoutbutton.remove();
+    }    
 
     let section = document.querySelector("#section");
     if (section) {

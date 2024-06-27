@@ -7,7 +7,6 @@ const Leaderboard = () => {
         return;
     }
 
-    // Retirer Navbar et bouton logout
     let navbar = document.querySelector(".navbar-container");
     if (navbar) {
         navbar.remove();

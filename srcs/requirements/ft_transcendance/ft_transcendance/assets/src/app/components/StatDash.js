@@ -60,7 +60,7 @@ const DashStat = () => {
                 </div>
             </a>
             <a class="nav-link" href="#/friendlist">         
-                <div class="friends-list-stat">
+                <div class="friends-list-stat" id="list-stat">
                     <i class="bi bi-list-task list-icon"></i>
                     <p class="list-text-stat">Liste d'amis</p>
                 </div>

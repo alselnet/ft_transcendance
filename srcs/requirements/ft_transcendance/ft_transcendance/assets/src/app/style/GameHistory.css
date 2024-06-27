@@ -4,8 +4,22 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    opacity: 0; /* Initial state for animation */
+    transform: scale(0); /* Initial state for animation */
+    transform-origin: bottom right; /* Set the origin of the transform to the bottom left */
+    transition: transform 0.5s ease, opacity 0.5s ease;
 }
-    
+
+.ga-hidden {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.ga-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
 .history-container-ga {
     margin-top: 10px;
     width: 85%;
@@ -72,4 +86,8 @@
 
 .victory-ga {
     color: #2B6E25;
+}
+
+.game-historic-history:hover {
+    color: gold;
 }

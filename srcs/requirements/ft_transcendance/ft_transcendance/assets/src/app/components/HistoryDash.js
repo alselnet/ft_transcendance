@@ -28,7 +28,9 @@ const HistoryDash = () => {
 				<p class="text-history">défaite(s)</p>
 			</div>
             <a class="nav-link" href="#/gamehistory">
-				<p class="game-historic-history">voir l'historique des parties</p>
+                <div id="game-history">
+					<p class="game-historic-history">voir l'historique des parties</p>
+                </div>
 			</a>
 		</div>
 	</div>

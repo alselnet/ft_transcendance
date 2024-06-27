@@ -18,7 +18,7 @@ const LogOutMsg = () => {
     if (logoutbutton) {
         logoutbutton.remove();
     }
-    
+
     if (msg) {
         msg.innerHTML = 
     `   <div class="frame-LogOutMsg-container">
