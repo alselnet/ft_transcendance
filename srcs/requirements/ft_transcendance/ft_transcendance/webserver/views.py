@@ -11,11 +11,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import GameSummarySerializer, UserRegistrationSerializer, EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, PublicUserInfoSerializer, FriendSerializer, UserSerializer, ProfileSerializer
-from .models import GameSummary, Profile, Friend
+from .serializers import GameSummarySerializer, UserRegistrationSerializer, EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, PublicUserInfoSerializer, FriendSerializer, UserSerializer, ProfileSerializer, TwoFactorsCodeSerializer
+from .models import GameSummary, Profile, Friend, TwoFactorsCode
 from rest_framework.parsers import MultiPartParser, FormParser
-from .serializers import TwoFactorsCodeSerializer
-from .models import GameSummary, Profile, TwoFactorsCode
 import logging, requests
 from django.core.mail import send_mail, EmailMessage
 from ft_transcendance.settings import EMAIL_HOST_USER
@@ -303,7 +301,7 @@ class ProfileStatusUpdateView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    
+
 class ProfileView(APIView):
     
     def get(self, request, username):

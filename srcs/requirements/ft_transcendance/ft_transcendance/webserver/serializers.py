@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import GameSummary, Profile, TwoFactorsCode
+from .models import GameSummary, Profile, TwoFactorsCode, Friend
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:

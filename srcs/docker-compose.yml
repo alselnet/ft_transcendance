@@ -31,7 +31,7 @@ services:
     
   nginx:
     container_name: nginx
-    build: ./requirements/nginx/
+    build: ./requirements/NGINX/
     volumes:
       - ./requirements/NGINX/nginx.conf:/etc/nginx/nginx.conf
       - ./requirements/NGINX/html/index.html:/usr/share/nginx/html/index.html
@@ -56,14 +56,14 @@ volumes:
     driver_opts:
       type: volumes
       o: bind
-      device: /Users/jeremycointre/Coding/Postgres_volume
+      device: /home/jules/Postgres_volume
 
   STATIC:
     driver: local
     driver_opts:
       type: volumes
       o: bind
-      device: /Users/jeremycointre/Coding/Static_volume
+      device: /home/jules/Static_volume
       
 networks:
   transcendance:
