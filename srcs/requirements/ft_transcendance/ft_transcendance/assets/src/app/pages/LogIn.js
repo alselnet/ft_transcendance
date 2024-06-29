@@ -21,7 +21,7 @@ const LogIn = () => {
     if (section) {
         section.innerHTML = 
     `
-        <div class="balls-login d-none d-sm-flex">
+        <div class="balls-login d-none d-md-flex">
             <div class="orange-ball-login">
                 <a class="nav-link" href="#/">
                     <div class="arrow"><i class="bi bi-arrow-left-circle-fill"></i></div>
@@ -36,8 +36,11 @@ const LogIn = () => {
             </div>
         </div>
 
-        <div class="balls-login balls-sm-login d-lg-none d-sm-flex">
-            <div class="white-ball-sm-login">
+        <div class="balls-login d-none d-sm-flex d-md-none">
+            <a class="nav-link" href="#/">
+                <div class="arrow-sm"><i class="bi bi-arrow-left-circle-fill"></i></div>
+            </a>
+        <div class="white-ball-login-sm">
                 <div class="login-form-login">
                     <input type="text" id="username-sm" placeholder="Username">
                     <input type="password" id="password-sm" placeholder="Password">

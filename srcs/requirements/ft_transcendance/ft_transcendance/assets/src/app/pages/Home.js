@@ -21,7 +21,7 @@ const Home = () => {
     if (section) {
 
         section.innerHTML = `
-        <div class="balls-home d-none d-sm-flex">
+        <div class="balls-home d-none d-md-flex">
             <div class="orange-ball-home">
                 <a href="#/inscription" data-hash="inscription">
                     <span>I</span>
@@ -38,6 +38,43 @@ const Home = () => {
                 </a>
             </div>
             <div class="white-ball-home">
+                <a href="#/connexion" data-hash="connexion">
+                    <span>c</span>
+                    <span>o</span>
+                    <span>n</span>
+                    <span>n</span>
+                    <span>e</span>
+                    <span>x</span>
+                    <span>i</span>
+                    <span>o</span>
+                    <span>n</span>
+                </a>
+            </div>
+            <div class="btn-container-home">
+                <button onclick="window.location='https://42.fr/';" class="btn-42-home">
+                    <p class="co-42-home">connexion avec</p>
+                    <img src="./app/images/42.png" class="img-42-home" alt="button-42">
+                </button>
+            </div>
+        </div>
+
+        <div class="balls-home-sm d-none d-sm-flex d-md-none">
+            <div class="orange-ball-home-sm">
+                <a href="#/inscription" data-hash="inscription">
+                    <span>I</span>
+                    <span>n</span>
+                    <span>s</span>
+                    <span>c</span>
+                    <span>r</span>
+                    <span>i</span>
+                    <span>p</span>
+                    <span>t</span>
+                    <span>i</span>
+                    <span>o</span>
+                    <span>n</span>
+                </a>
+            </div>
+            <div class="white-ball-home-sm">
                 <a href="#/connexion" data-hash="connexion">
                     <span>c</span>
                     <span>o</span>

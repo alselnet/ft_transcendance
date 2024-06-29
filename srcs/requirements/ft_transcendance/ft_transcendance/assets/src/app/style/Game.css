@@ -25,3 +25,22 @@
     margin-top: 10px;
     font-size: 30px;
 }
+
+.frame-game-sm {
+    margin-left: 2vw;
+    width: 96vw;
+    height: 82vh;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.title-game-sm {
+    color: white;
+    text-align: center;
+    text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
+    margin-top: 10px;
+    font-size: 30px;
+}

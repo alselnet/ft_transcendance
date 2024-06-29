@@ -8,7 +8,6 @@
     justify-content: flex-end;
     align-items: center;
     height: 100vh;
-
     position: relative;
 }
 
@@ -32,6 +31,19 @@
     filter: blur(0px);
 }
 
+/* NAVBAR SMALL SCREEN */
+
+.navbar-container-sm {
+    position: absolute;
+    /* top: 0; */
+    /* right: 0; */
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    /* padding: 10px; */
+    z-index: 1000; 
+}
+
 .navSm {
     display: flex;
     flex-direction: column;
@@ -39,3 +51,32 @@
     align-items: center;
     height: 100vh;
 }
+
+.myNavbar-sm .collapse {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+
+.myNavbar-sm {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-right: 10px;
+}
+
+
+.myNavbar-sm .nav-link {
+    color: white;
+}
+
+/* .navbar-toggler-icon { */
+    /* background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%280, 0, 0, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); Optional: Custom icon for the toggler */
+/* } */
+/*  */
+
+/* TO FIX */
+/* .myNavbar-sm .nav-link.active { */
+    /* color: red; */
+/* } */

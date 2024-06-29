@@ -23,7 +23,6 @@ const LogOutMsg = () => {
         msg.innerHTML = 
     `   <div class="frame-LogOutMsg-container">
             <div class="frame-LogOutMsg">
-                <a class="nav-link" href="#/dashboard"><span class="close-btn-ldb">&times;</span></a>
                 <p class="msg-confirmation">Êtes-vous sûr(e) de vouloir vous déconnecter ?</p>
                 <div class="button-logout">
                     <a class="nav-link" href="#/">

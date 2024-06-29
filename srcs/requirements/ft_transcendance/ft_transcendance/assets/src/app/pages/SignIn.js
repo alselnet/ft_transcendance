@@ -22,24 +22,28 @@ const SignIn = () => {
     if (section) {
         section.innerHTML = 
     `
-    <div class="balls-signin d-none d-sm-flex">
+    <div class="balls-signin d-none d-md-flex">
         <div class="white-ball-signin"></div>
-        <a class="nav-link" href="#/">
-            <div class="arrow"><i class="bi bi-arrow-left-circle-fill"></i></div>
-        </a>
-        <div class="orange-ball-signin">
-            <div class="login-form-signin">
-                <input type="text" id="username" placeholder="nom d'utilisateur">
-                <input type="email" id="email" placeholder="email">
-                <input type="password" id="password" placeholder="mot de passe">
-                <input type="password" id="confirmPassword" placeholder="confirmer mdp">
-                <button type="submit" class="button-signin">s'inscrire</button>
+            <a class="nav-link" href="#/">
+                <div class="arrow"><i class="bi bi-arrow-left-circle-fill"></i></div>
+            </a>
+            <div class="orange-ball-signin">
+                <div class="login-form-signin">
+                    <input type="text" id="username" placeholder="nom d'utilisateur">
+                    <input type="email" id="email" placeholder="email">
+                    <input type="password" id="password" placeholder="mot de passe">
+                    <input type="password" id="confirmPassword" placeholder="confirmer mdp">
+                    <button type="submit" class="button-signin">s'inscrire</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="balls-signin d-lg-none d-sm-flex">
-        <div class="orange-ball-sm-signin">
+    <div class="balls-signin d-none d-sm-flex d-md-none">
+        <a class="nav-link" href="#/">
+            <div class="arrow-s-sm"><i class="bi bi-arrow-left-circle-fill"></i></div>
+        </a>
+        <div class="orange-ball-signin-sm">
             <div class="login-form-signin">
                 <input type="text" id="username-sm" placeholder="nom d'utilisateur">
                 <input type="email" id="email-sm" placeholder="email">
