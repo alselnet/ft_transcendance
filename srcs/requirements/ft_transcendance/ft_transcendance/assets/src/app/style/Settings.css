@@ -1,8 +1,8 @@
-/* img {
+.img-settings {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-} */
+}
  
 .profile-section {
     display: flex;
@@ -154,7 +154,7 @@ input:checked + .slider.red {
     margin-right: 10px;
 }
 
-.close-btn {
+.close-btn-settings {
     position: absolute;
     top: 10px;
     right: 20px;
@@ -165,11 +165,11 @@ input:checked + .slider.red {
     transition: color 0.3s, text-shadow 0.3s;
 }
 
-.close-btn:hover {
+.close-btn-settings:hover {
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
 }
 
-h2 {
+.title-settings {
     display: flex;
     align-items: center;
     position: relative;

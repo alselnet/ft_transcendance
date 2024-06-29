@@ -1,20 +1,23 @@
-html, body {
-    font-family: Lato, sans-serif;
-    color: white;
-    margin: 0;
-    background-image: url('../images/background.png');
-    background-size: cover;
-    height: 100vh;
-    overflow: hidden;
-    font-weight: 300;
-}
-
 .main-containerf {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: center bottom;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.fl-hidden {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.fl-visible {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .friends-containerf {
@@ -31,9 +34,9 @@ html, body {
 
 .close-btnf {
     position: absolute;
-    top: 10px;
+    top: 5px;
     right: 20px;
-    font-size: 24px;
+    font-size: 40px;
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
     text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
@@ -42,9 +45,10 @@ html, body {
 
 .close-btnf:hover {
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+    color: rgb(81, 81, 88);
 }
 
-h2 {
+.titlef {
     color: white;
     text-align: center;
     text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
@@ -80,27 +84,7 @@ h2 {
     text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.5);
 }
 
-
-/* .remove-btn {
-    cursor: pointer;
-    color: red;
-    font-size: 24px;
-    font-weight: bold;
-    display: inline-block;
-    line-height: 1;
-    padding: 0 10px;
-    border: 1px solid transparent;
-    border-radius: 3px;
-    background-color: transparent;
-    transition: color 0.3s, border-color 0.3s;
-}
-
-.remove-btn:hover {
-    color: darkred;
-    border-color: darkred;
-} */
-
-.remove-btn {
+.remove-btnf {
     cursor: pointer;
     color: #ff0000;
     font-size: 25px;
@@ -111,7 +95,7 @@ h2 {
     text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.4);
 }
 
-.remove-btn:hover {
+.remove-btnf:hover {
     color: #ff0000;
     text-shadow: 0 3px 3px rgba(255, 0, 0, 0.7); 
     border: none;

@@ -12,7 +12,7 @@ const animateNumbers = (element, target) => {
     }, 10);
 };
 
-const DashStat = () => {
+const FriendDashStat = () => {
     let form = document.createElement("div");
     form.innerHTML = `
     <div class="left-side-stat">
@@ -21,7 +21,7 @@ const DashStat = () => {
             <div class="text-stat">
                 <div class="name-and-settings">
                     <div class="username-stat">Tmejri</div>
-                    <a class="nav-link" href="#/settings"><i class="bi bi-gear-fill gear-icon"></i></a>
+                    <a class="nav-link" href="#/deletefriendmsg"><i class="bi bi-person-dash gear-icon"></i></a>
                 </div>
                 <div class="status-stat">
                     <div class="pastille-stat"></div>
@@ -84,4 +84,4 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('root').appendChild(DashStat());
 });
 
-export { DashStat };
+export { FriendDashStat };

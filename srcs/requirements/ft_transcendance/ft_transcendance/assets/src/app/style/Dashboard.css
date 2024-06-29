@@ -56,6 +56,11 @@
     height: 100%;
 }
 
+.name-and-settings {
+    display: flex;
+    flex-direction: row;
+}
+
 .username-stat {
     color: white;
     text-align: center;
@@ -81,9 +86,16 @@
     background-color: green;
 }
 
-.bi-gear-fill-stat {
-    margin-left: 15px;
-    margin-top: 20px;
+.gear-icon {
+    display: flex;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.2);
+    margin-left: 20px;
+    margin-top: 33px;
+}
+
+.gear-icon:hover {
+    color: white;
 }
 
 .friends-and-leaderboard-stat {
@@ -122,6 +134,15 @@
     color: gold;
 }
 
+.list-icon {
+    font-size: 3rem;
+    color: white;
+}
+
+.list-icon:hover {
+    color: gold;
+}
+
 .friends-list-stat {
     margin-left: 11vw;
     display: flex;
@@ -136,6 +157,10 @@
     font-size: 1.5vw;
 }
 
+.list-text-stat:hover {
+    color: gold;
+}
+
 .right-side-stat {
     display: flex;
     flex-direction: column;
@@ -148,15 +173,6 @@
     margin-top: 3vh;
     font-size: 170%;
 }
-
-/* .camambert-stat {
-    width: 15vw;
-    height: 15vw;
-    background-color: green;
-    border-radius: 50%;
-    margin-top: 5vh;
-    margin-left: 5vw;
-} */
 
 /* ANIMATION DASHBOARD ELEMENT */
 .camambert-stat {
@@ -231,7 +247,7 @@
 }
 
 .victory-history .number-history {
-    margin-top: 23vw;
+    margin-top: 28vw;
     color: green;
     font-size: 150px;
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
@@ -254,7 +270,23 @@
 
 .game-historic-history {
     color: white;
-    margin-top: 3vw;
     margin-left: 10vw;
     text-decoration: underline;
 }
+
+/* ANIMATION ICON GEAR */
+
+/* @keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.gear-icon {
+    transition: transform 0.5s ease;
+}
+*/
+

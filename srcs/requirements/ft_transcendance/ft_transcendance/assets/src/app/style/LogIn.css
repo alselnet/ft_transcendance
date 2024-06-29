@@ -87,8 +87,7 @@
 }
 
 /* MOBILE VERSION */
-.white-ball-sm-login {
-    position: relative;
+.white-ball-login-sm {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -105,4 +104,15 @@
     inset 0 2px 4px rgba(255,255,255,0.5);
     background-color: white;
     z-index: 2;
+}
+
+.arrow-sm {
+    color: white;
+    margin-bottom: 40vh;
+    margin-right: 50vh;
+    font-size: 2rem;
+}
+
+.arrow-sm:hover {
+    color: orange;
 }

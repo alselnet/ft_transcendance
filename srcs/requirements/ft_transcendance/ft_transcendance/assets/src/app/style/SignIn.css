@@ -8,12 +8,23 @@
     margin: 0;
 }
 
+.arrow {
+    color: white;
+    margin-bottom: 30vh;
+    margin-right: 5vh;
+    font-size: 2rem;
+}
+
+.arrow:hover {
+    color: rgb(218, 147, 16);
+}
+
 .orange-ball-signin {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* height: 100vh; */
     margin: 0;
     margin-right: 30vw;
     width: 40vw;
@@ -90,28 +101,33 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 /* MOBILE VERSION */
-.balls-sm-signin {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
 
-.orange-ball-sm-signin {
-    position: relative;
+.orange-ball-signin-sm {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    width: 80vw;
-    height: 80vw;
+    width: 70vw;
+    height: 70vw;
+    max-width: 60vh;
+    max-height: 60vh;
     background-color: rgb(218, 147, 16);
     border-radius: 50%;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3),
     inset 0 2px 4px rgba(255,255,255,0.5);
     background-color: rgb(218, 147, 16);
     z-index: 2;
+}
+
+.arrow-s-sm {
+    color: rgb(218, 147, 16);
+    margin-bottom: 40vh;
+    margin-right: 50vh;
+    font-size: 2rem;
+}
+
+.arrow-s-sm:hover {
+    color: white;
 }

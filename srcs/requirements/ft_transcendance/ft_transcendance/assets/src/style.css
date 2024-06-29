@@ -3,11 +3,14 @@
 @import url('./app/style/LogIn.css');
 @import url('./app/style/Navbar.css');
 @import url('./app/style/Game.css');
-@import url('./app/style/GameHistory.css');
 @import url('./app/style/Dashboard.css');
 @import url('./app/style/Leaderboard.css');
 @import url('./app/style/Settings.css');
+@import url('./app/style/2FA.css');
+@import url('./app/style/GameHistory.css');
 @import url('./app/style/FriendsList.css');
+@import url('./app/style/LogOut.css');
+@import url('./app/style/DeleteFriendMsg.css');
 
 @font-face {
     font-family: 'JuliusSansOne';
