@@ -81,7 +81,7 @@ const FriendDashStat = () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById('root').appendChild(DashStat());
+    document.getElementById('root').appendChild(FriendDashStat());
 });
 
 export { FriendDashStat };

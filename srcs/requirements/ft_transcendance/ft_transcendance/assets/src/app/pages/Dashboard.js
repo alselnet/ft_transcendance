@@ -6,7 +6,7 @@ import { showCircle } from "../animation/ShowCircle.js";
 import Leaderboard from "./Leaderboard.js";
 import { LogOut } from "../components/LogOut.js";
 import FriendList from "../components/FriendsList.js";
-import GameHistory from "../components/game-history.js";
+import GameHistory from "../components/GameHistory.js";
 
 export const Dashboard = () => {
     // Vérifie l'authentification de l'utilisateur
