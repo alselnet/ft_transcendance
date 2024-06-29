@@ -10,6 +10,7 @@
 @import url('./app/style/GameHistory.css');
 @import url('./app/style/FriendsList.css');
 @import url('./app/style/LogOut.css');
+@import url('./app/style/DeleteFriendMsg.css');
 
 @font-face {
     font-family: 'JuliusSansOne';

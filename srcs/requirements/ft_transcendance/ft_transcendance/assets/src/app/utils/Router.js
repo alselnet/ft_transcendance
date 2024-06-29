@@ -10,6 +10,8 @@ import FriendList from "../components/FriendsList.js";
 import GameHistory from "../components/game-history.js";
 import DeuxFA from "../components/2FA.js"
 import LogOut from "../components/LogOutMsg.js";
+import FriendDashboard from "../pages/FriendDashboard.js";
+import DeleteFriendMsg from "../components/DeleteFriendMsg.js";
 
 export const Router = () => {
     let { hash } = location;
@@ -58,6 +60,14 @@ export const Router = () => {
         case "#/logout":
             LogOut();
             break;
+        case "#/frienddashboard":
+            FriendDashboard();
+            break;
+        case "#/deletefriendmsg":
+            DeleteFriendMsg();
+            break;
+    
+
     
         default:
             section.innerHTML = "<h1>Page not found</h1>";
