@@ -4,10 +4,10 @@ import SignIn from "../pages/SignIn.js";
 import Game from "../pages/Game.js";
 import Dashboard from "../pages/Dashboard.js";
 import Leaderboard from "../pages/Leaderboard.js";
-import Settings from "../components/settings.js";
+import Settings from "../pages/Settings.js";
 import AboutUs from "../pages/AboutUs.js";
 import FriendList from "../components/FriendsList.js";
-import GameHistory from "../components/game-history.js";
+import GameHistory from "../components/GameHistory.js";
 import DeuxFA from "../components/2FA.js"
 import LogOut from "../components/LogOutMsg.js";
 import FriendDashboard from "../pages/FriendDashboard.js";

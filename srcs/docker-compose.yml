@@ -31,7 +31,7 @@ services:
     
   nginx:
     container_name: nginx
-    build: ./requirements/nginx/
+    build: ./requirements/NGINX/
     volumes:
       - ./requirements/NGINX/nginx.conf:/etc/nginx/nginx.conf
       - ./requirements/NGINX/html/index.html:/usr/share/nginx/html/index.html
@@ -46,6 +46,17 @@ services:
       - webapp
     ports:
       - "443:443"
+    networks:
+      - transcendance
+    restart: unless-stopped
+
+  redis:
+    container_name: redis
+    build: ./requirements/REDIS
+    depends_on: 
+      - postgresdb
+    expose:
+      - "6380"
     networks:
       - transcendance
     restart: unless-stopped

@@ -231,3 +231,18 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'pongvivelepong@gmail.com'
+EMAIL_HOST_PASSWORD = 'pomqfexqyuokxvab'
+EMAIL_USE_TLS = True 
+EMAIL_USE_SSL = False
+
+TWILIO_ACCOUNT_SID = 'ACf8363ddbe2a27c756f7dc1f5c2a3f774'
+TWILIO_AUTH_TOKEN = '570c1f1b2033c8b736d883771ed4b2d3'
+TWILIO_PHONE_NUMBER = 'your_twilio_phone_number'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

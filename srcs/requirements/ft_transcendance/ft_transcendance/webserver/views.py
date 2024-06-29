@@ -11,11 +11,117 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import GameSummarySerializer, UserRegistrationSerializer, EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, PublicUserInfoSerializer, FriendSerializer, UserSerializer, ProfileSerializer
-from .models import GameSummary, Profile, Friend
+from .serializers import GameSummarySerializer, UserRegistrationSerializer, EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, PublicUserInfoSerializer, FriendSerializer, UserSerializer, ProfileSerializer, TwoFactorsCodeSerializer
+from .models import GameSummary, Profile, Friend, TwoFactorsCode
+from rest_framework.parsers import MultiPartParser, FormParser
 import logging, requests
+from django.core.mail import send_mail, EmailMessage
+from ft_transcendance.settings import EMAIL_HOST_USER
+from twilio.rest import Client
+from .utils import generate_token, verify_token
+from django.template.loader import render_to_string
+from django.urls import reverse
 
 logger = logging.getLogger(__name__)
+
+
+class ConfirmEmailView(APIView):
+    def get(self, request, token):
+        email = verify_token(token)
+        if email:
+            try:
+                user = User.objects.get(email=email)
+                user.profile.mail_confirmation_status = True
+                user.profile.save()
+                return Response({'message': 'Email confirmed'}, status=status.HTTP_200_OK)
+            except User.DoesNotExist:
+                return Response({'error': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({'error': 'Invalid or expired token'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SendConfirmationEmailView(APIView):
+    def post(self, request):
+        email = request.data.get('email')
+        try:
+            user = User.objects.get(email=email)
+            token = generate_token(email)
+            confirm_url = request.build_absolute_uri(reverse('confirm-email', args=[token])) # construit l'url de confirmation
+
+            subject = 'Email Confirmation'
+            message = render_to_string('confirmation_email.html', {'confirm_url': confirm_url})
+            send_mail(subject, message, settings.EMAIL_HOST_USER, [email])
+
+            return Response({'message': 'Confirmation email sent'}, status=status.HTTP_200_OK)
+        except User.DoesNotExist:
+            return Response({'error': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+
+class ChangeAvatarView(APIView):
+    parser_classes = (MultiPartParser, FormParser) # Definit les parseurs utilises -> typiquement pour les DL de fichiers
+
+    def post(self, request):
+        profile = request.user.profile
+
+        serializer = ProfileSerializer(profile, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class Generate2FACodeView(APIView):
+    def post(self, request):
+        user = request.user
+        if not user.is_authenticated:
+            return Response({'error': 'User not authenticated'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        method = request.data.get('method')
+
+        # code = ''.join(random.choices('0123456789', k=5))
+        two_factors_code, created = TwoFactorsCode.objects.get_or_create(user=user)
+        # two_factors_code.number = code
+        two_factors_code.save()
+
+        if method == 'sms':
+            profile = Profile.objects.get(user=user)
+            phone_number = profile.phone_number
+            if not phone_number:
+                return Response({'error': 'No phone number provided'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            try:
+                phone_number = '0652453352'
+                client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+                message = client.message.create(
+                    body=f'Your 2FA code is {two_factors_code.number}',
+                    from_=settings.TWILIO_PHONE_NUMBER,
+                    to=phone_number
+                )
+                logger.info(f"2FA code sent to {phone_number}")
+
+                serializer = TwoFactorsCodeSerializer(two_factors_code)
+                return Response(serializer, status=status.HTTP_200_OK)
+            except Exception as e:
+                logger.error(f"Error sending SMS: {str(e)}")
+                return Response({'error': 'Failed to send 2FA code via SMS'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        elif method == 'email':
+            subject = 'Your 2FA Code'
+            message = f'Your 2FA code is {two_factors_code.number}'
+            recipient_list = [user.email]
+
+            try:
+                send_mail(subject, message, EMAIL_HOST_USER, recipient_list)
+                logger.info(f"2FA code sent to {user.email}")
+
+                serializer = TwoFactorsCodeSerializer(two_factors_code)
+                return Response(serializer, status=status.HTTP_200_OK)
+            except Exception as e:
+                logger.error(f"Error sending email: {str(e)}")
+                return Response({'error': 'Failed to send 2FA code via email'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 class GameSummaryView(viewsets.ModelViewSet):
     serializer_class = GameSummarySerializer
@@ -143,6 +249,7 @@ class Callback(APIView):
         except requests.exceptions.RequestException as e:
             return Response({'error': 'Failed to obtain access token', 'details': str(e)}, status=status.HTTP_400_BAD_REQUEST)
         
+
 class AddFriendView(APIView):
     permission_classes = [IsAuthenticated]
     
@@ -155,6 +262,7 @@ class AddFriendView(APIView):
 
         Friend.objects.create(user=user, friend=friend)
         return Response({'detail': 'Friend added'}, status=status.HTTP_201_CREATED)
+
 
 class RemoveFriendView(APIView):
     permission_classes = [IsAuthenticated]
@@ -170,6 +278,7 @@ class RemoveFriendView(APIView):
         friendship.delete()
         return Response({'detail': 'Friend removed'}, status=status.HTTP_204_NO_CONTENT)
     
+
 class FriendListView(APIView):
     def get(self, request, username):
         user = get_object_or_404(User, username=username)
@@ -177,6 +286,7 @@ class FriendListView(APIView):
         serializer = UserSerializer(friends, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+
 class ProfileStatusUpdateView(APIView):
 
     def put(self, request, username):
@@ -191,6 +301,7 @@ class ProfileStatusUpdateView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+
 class ProfileView(APIView):
     
     def get(self, request, username):
