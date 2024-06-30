@@ -1,6 +1,6 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
-from .pong_logic import PongGame
+from .game_logic import PongGame
 import asyncio
 
 class PongConsumer(AsyncWebsocketConsumer):
@@ -27,7 +27,10 @@ class PongConsumer(AsyncWebsocketConsumer):
 
     async def receive(self, text_data):
         data = json.loads(text_data)
-        if data['type'] == 'move':
+        if data['type'] == 'config':
+            self.pong_game.ball_speed = int(data['ball_speed'])
+            self.pong_game.player_speed = int(data['paddle_speed'])
+        elif data['type'] == 'move':
             player = data['player']
             direction = 1 if data['direction'] == 'down' else -1
             self.pong_game.update_player_position(player, direction)

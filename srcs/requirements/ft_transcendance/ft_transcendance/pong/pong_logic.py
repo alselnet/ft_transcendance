@@ -96,11 +96,12 @@ class PongGame:
             self.ball_y_position = self.player2_y_position + self.player_height / 2 - self.ball_size / 2
 
     def start_ball_movement(self):
-        self.ball_waiting = False
-        if self.waiting_player == 1:
-            self.ball_x_speed = self.ball_speed
-        else:
-            self.ball_x_speed = -self.ball_speed
+        if (self.ball_waiting == True):
+            self.ball_waiting = False
+            if self.waiting_player == 1:
+                self.ball_x_speed = self.ball_speed
+            else:
+                self.ball_x_speed = -self.ball_speed
 
     def check_game_over(self):
         if self.score_player1 >= 3:

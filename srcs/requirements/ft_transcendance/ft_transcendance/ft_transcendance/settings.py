@@ -246,3 +246,12 @@ TWILIO_PHONE_NUMBER = 'your_twilio_phone_number'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6380)],
+        },
+    },
+}
