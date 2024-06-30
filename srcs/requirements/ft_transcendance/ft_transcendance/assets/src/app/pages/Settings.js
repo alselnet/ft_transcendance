@@ -36,10 +36,10 @@ const Settings = () => {
     section.innerHTML = 
         `
         <div class="container">
-            <h2>SETTINGS</h2>
-            <span class="close-btn">&times;</span>
+            <h2 class="title-settings">SETTINGS</h2>
+            <span class="close-btn-settings">&times;</span>
             <div class="profile-section">
-                <img src="../images/jecointr_avatar.png" alt="jecointr"> 
+                <img class="img-settings" src="./app/images/jecointr_avatar.png" alt="jecointr"> 
                 <a href="#" class="edit-link">edit</a>
             </div>
             <div class="info-section">

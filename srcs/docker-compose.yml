@@ -49,6 +49,17 @@ services:
     networks:
       - transcendance
     restart: unless-stopped
+
+  redis:
+    container_name: redis
+    build: ./requirements/REDIS
+    depends_on: 
+      - postgresdb
+    expose:
+      - "6380"
+    networks:
+      - transcendance
+    restart: unless-stopped
   
 volumes:
   DB:

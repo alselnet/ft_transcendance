@@ -1,5 +1,22 @@
 const Leaderboard = () => {
 	console.log("Leaderboard component loaded");
+
+    let root = document.getElementById("root");
+    if (!root) {
+        console.error("#root not found in the DOM");
+        return;
+    }
+
+    let navbar = document.querySelector(".navbar-container");
+    if (navbar) {
+        navbar.remove();
+    }
+    
+    let logoutbutton = document.querySelector(".logout-container");
+    if (logoutbutton) {
+        logoutbutton.remove();
+    }    
+
 	let section = document.querySelector("#section");
 	if (section) {
 		section.innerHTML = `
@@ -7,17 +24,36 @@ const Leaderboard = () => {
             <h1 class="title-ldb">Leaderboard</h1>
             <div class="frame-ldb">
                 <a class="nav-link" href="#/dashboard"><span class="close-btn-ldb">&times;</span></a>
-                <div class="podium-ldb">
-                    <div class="second-ldb">
-                        <p class="two-ldb">2</p>
+                    <div class="podium-ldb">
+                        <div class="second-ldb">
+                            <div class="pod-result-ldb">
+                                <div class="profile-picture-ldb"><img src="./app/images/tmejri_avatar.png" alt="jcointre"></div>
+                                <div class="username-ldb">Jcointre</div>
+                                <div class="score-ldb">1234 pts</div>
+                            </div>
+
+                            <p class="two-ldb">2</p>
+                        </div>
+
+                        <div class="first-ldb">
+                            <div class="pod-result-one-ldb">
+                                <div class="profile-picture-ldb"><img src="./app/images/jecointr_avatar.png" alt="jcointre"></div>
+                                <div class="username-ldb">Jcointre</div>
+                                <div class="score-ldb">1234 pts</div>
+                            </div>
+
+                            <p class="one-ldb">1</p>
+                        </div>
+
+                        <div class="third-ldb">
+                            <div class="pod-result-third-ldb">
+                                <div class="profile-picture-ldb"><img src="./app/images/jecointr_avatar.png" alt="jcointre"></div>
+                                <div class="username-ldb">Jcointre</div>
+                                <div class="score-ldb">1234 pts</div>
+                            </div>
+                            <p class="three-ldb">3</p>
+                        </div>
                     </div>
-                    <div class="first-ldb">
-                        <p class="one-ldb">1</p>
-                    </div>
-                    <div class="third-ldb">
-                        <p class="three-ldb">3</p>
-                    </div>
-                </div>
 
                 <div class="leaderboard-list-ldb">
                     <div class="profil-ldb">
@@ -54,7 +90,7 @@ const Leaderboard = () => {
 		if (leaderboardContainer) {
 			setTimeout(() => {
 				leaderboardContainer.classList.add('animate-ldb');
-			}, 0); // Delay to ensure the DOM has updated
+			}, 0);
 		}
 	} else {
 		console.error("#section not found in the DOM");
@@ -62,3 +98,13 @@ const Leaderboard = () => {
 };
 
 export default Leaderboard;
+
+
+
+                        {/* <div class="pod-two"> */}
+                            {/* <div class="pod-result-ldb"> */}
+                                {/* <div class="profile-picture-ldb"><img src="./app/images/tmejri_avatar.png" alt="jcointre"></div> */}
+                                {/* <div class="username-ldb">Jcointre</div> */}
+                                {/* <div class="score-ldb">1234 pts</div> */}
+                            {/* </div> */}
+                        {/* </div> */}

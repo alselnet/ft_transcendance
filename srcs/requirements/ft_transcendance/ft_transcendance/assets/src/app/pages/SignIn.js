@@ -2,30 +2,53 @@ const SignIn = () => {
 
     console.log("SignIn component loaded");
 
+    let root = document.getElementById("root");
+    if (!root) {
+        console.error("#root not found in the DOM");
+        return;
+    }
+
+    let navbar = document.querySelector(".navbar-container");
+    if (navbar) {
+        navbar.remove();
+    }
+
+    let logoutbutton = document.querySelector(".logout-container");
+    if (logoutbutton) {
+        logoutbutton.remove();
+    }    
+
     let section = document.querySelector("#section");
     if (section) {
         section.innerHTML = 
     `
-    <div class="balls-signin d-none d-sm-flex">
+    <div class="balls-signin d-none d-md-flex">
         <div class="white-ball-signin"></div>
-        <div class="orange-ball-signin">
-            <div class="login-form-signin">
-                <input type="text" id="username" placeholder="nom d'utilisateur">
-                <input type="email" id="email" placeholder="email">
-                <input type="password" id="password" placeholder="mot de passe">
-                <input type="password" id="confirmPassword" placeholder="confirmer mot de passe">
-                <button type="submit" class="button-signin">s'inscrire</button>
+            <a class="nav-link" href="#/">
+                <div class="arrow"><i class="bi bi-arrow-left-circle-fill"></i></div>
+            </a>
+            <div class="orange-ball-signin">
+                <div class="login-form-signin">
+                    <input type="text" id="username" placeholder="nom d'utilisateur">
+                    <input type="email" id="email" placeholder="email">
+                    <input type="password" id="password" placeholder="mot de passe">
+                    <input type="password" id="confirmPassword" placeholder="confirmer mdp">
+                    <button type="submit" class="button-signin">s'inscrire</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="balls-signin d-lg-none d-sm-flex">
-        <div class="orange-ball-sm-signin">
+    <div class="balls-signin d-none d-sm-flex d-md-none">
+        <a class="nav-link" href="#/">
+            <div class="arrow-s-sm"><i class="bi bi-arrow-left-circle-fill"></i></div>
+        </a>
+        <div class="orange-ball-signin-sm">
             <div class="login-form-signin">
                 <input type="text" id="username-sm" placeholder="nom d'utilisateur">
                 <input type="email" id="email-sm" placeholder="email">
                 <input type="password" id="password-sm" placeholder="mot de passe">
-                <input type="password" id="confirmPassword-sm" placeholder="confirmer mot de passe">
+                <input type="password" id="confirmPassword-sm" placeholder="confirmer mdp">
                 <button type="submit" class="button-signin">s'inscrire</button>
             </div>
         </div>
@@ -109,7 +132,7 @@ const sendFormData = (formData) => {
 	})
     .then(data => {
 		alert('User created successfully.');
-		window.location.href = '/myprofile';
+		window.location.href = '#/jeu';
 	})
     .catch(error => {
 		alert('User creation failed.');

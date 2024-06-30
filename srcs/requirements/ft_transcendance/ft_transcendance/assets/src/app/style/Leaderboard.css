@@ -16,13 +16,17 @@
     background-color: rgba(255, 255, 255, 0.2);
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
 }
 
 .close-btn-ldb {
     position: absolute;
-    top: 10px;
+    top: 5px;
     right: 20px;
-    font-size: 24px;
+    font-size: 40px;
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
     text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
@@ -33,6 +37,7 @@
 }
 
 .close-btn-ldb:hover {
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
     color: rgb(81, 81, 88);
 }
 
@@ -64,6 +69,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .first-img-ldb {
@@ -77,6 +83,7 @@
     font-size: 500%;
     margin-top: 10px;
     text-shadow:  2px 2px 3px rgba(0, 0, 0, 0.5);
+    margin-bottom: 22vh;
 }
 
 .second-ldb {
@@ -84,6 +91,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .two-ldb {
@@ -91,6 +99,7 @@
     font-size: 300%;
     margin-top: 10px;
     text-shadow:  2px 2px 3px rgba(0, 0, 0, 0.5);
+    margin-bottom: 17vh;
 }
 
 .third-ldb {
@@ -98,6 +107,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .three-ldb {
@@ -105,14 +115,46 @@
     font-size: 270%;
     margin-top: 10px;
     text-shadow:  2px 2px 3px rgba(0, 0, 0, 0.5);
+    margin-bottom: 21vh;
 }
 
-.leaderboard-list-ldb {
-    width: 100%;
-    margin-top: 40px;
+.pod-result-ldb {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin-top: 7vh;
+    margin-bottom: 2vh;
+    font-size: 10px;
+}
+
+.pod-result-one-ldb {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12vh;
+    margin-bottom: 2vh;
+    font-size: 10px;
+}
+
+.pod-result-third-ldb {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 11vh;
+    margin-bottom: 2vh;
+    font-size: 10px;
+}
+
+.leaderboard-list-ldb {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px; 
+    margin-right: 5vw;
 }
 
 .profil-ldb {

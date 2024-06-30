@@ -13,7 +13,7 @@ const animateNumbers = (element, target) => {
 };
 
 
-const HistoryDash = () => {
+const FriendHistoryDash = () => {
     let form = document.createElement("div");
     
 	form.innerHTML = `
@@ -47,4 +47,4 @@ const HistoryDash = () => {
 	return form;
 };
 
-export { HistoryDash };
+export { FriendHistoryDash };

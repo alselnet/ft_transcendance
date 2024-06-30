@@ -1,46 +1,9 @@
-// const path = require('path');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-// module.exports = {
-//   entry: './src/index.js',
-//   output: {
-//     path: path.resolve(__dirname, 'dist'),
-//     filename: 'bundle.js',
-//     publicPath: '/',
-//   },
-//   module: {
-//     rules: [
-//       {
-//         test: /\.css$/,
-//         use: ['style-loader', 'css-loader'],
-//       },
-//       {
-//         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-//         type: 'asset/resource',
-//       },
-//     ],
-//   },
-//   plugins: [
-//     new HtmlWebpackPlugin({
-//       template: './src/index.html',
-//       filename: 'index.html',
-//     }),
-//   ],
-//   devServer: {
-//     static: path.join(__dirname, 'dist'),
-//     compress: true,
-//     port: 3000,
-//     historyApiFallback: true,
-//   },
-//   mode: 'development',
-// };
-
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  entry: './src/index.js',  // Assurez-vous que ce chemin est correct
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -70,7 +33,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',  // Assurez-vous que ce chemin est correct
+      template: './src/index.html',
       filename: 'index.html',
     }),
     new MiniCssExtractPlugin({

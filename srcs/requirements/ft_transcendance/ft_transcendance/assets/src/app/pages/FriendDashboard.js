@@ -1,36 +1,15 @@
 import { Navbar } from "../components/Navbar.js";
 import { Main } from "../utils/Main.js";
-import { DashStat } from "../components/StatDash.js";
-import { HistoryDash } from "../components/HistoryDash.js";
+import { FriendDashStat } from "../components/FriendStatDash.js";
+import { FriendHistoryDash } from "../components/FriendHistoryDash.js";
 import { showCircle } from "../animation/ShowCircle.js";
 import Leaderboard from "./Leaderboard.js";
 import { LogOut } from "../components/LogOut.js";
 import FriendList from "../components/FriendsList.js";
 import GameHistory from "../components/GameHistory.js";
 
-export const Dashboard = () => {
-    // Vérifie l'authentification de l'utilisateur
-    const checkAuthentication = () => {
-        const token = localStorage.getItem('accessToken');
-        if (!token) {
-            window.location.href = '#/connexion'; // Redirige vers la page de login si pas de token
-            return false;
-        } else {
-            const payload = JSON.parse(atob(token.split('.')[1])); // Décodage du payload du token
-            const expiry = payload.exp * 1000; // Convertir le temps d'expiration en millisecondes
-            if (Date.now() >= expiry) {
-                // Si le token est expiré, supprimer et rediriger
-                localStorage.removeItem('accessToken');
-                localStorage.removeItem('refreshToken');
-                window.location.href = '#/connexion';
-                return false;
-            }
-        }
-        return true;
-    };
-
-    // if (!checkAuthentication()) return; // Arrêter le chargement de la page si l'utilisateur n'est pas authentifié
-
+export const FriendDashboard = () => {
+  
     let divRoot = document.querySelector("#root");
 
     divRoot.innerHTML = "";
@@ -42,8 +21,8 @@ export const Dashboard = () => {
     let dashboardContainer = document.createElement("div");
     dashboardContainer.className = "dashboard-container";
 
-    dashboardContainer.append(DashStat());
-    dashboardContainer.append(HistoryDash());
+    dashboardContainer.append(FriendDashStat());
+    dashboardContainer.append(FriendHistoryDash());
 
     divRoot.append(dashboardContainer);
 
@@ -156,8 +135,6 @@ export const Dashboard = () => {
     }
 
 
-
-
 };
 
-export default Dashboard;
+export default FriendDashboard;

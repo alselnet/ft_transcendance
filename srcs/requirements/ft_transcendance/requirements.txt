@@ -22,7 +22,7 @@ psycopg2-binary==2.9.9
 pyasn1==0.6.0
 pyasn1_modules==0.4.0
 pycparser==2.22
-PyJWT==2.8.0
+# PyJWT==2.8.0
 pyOpenSSL==24.1.0
 python-decouple==3.8
 requests==2.32.2
@@ -34,3 +34,7 @@ txaio==23.1.1
 typing_extensions==4.12.2
 urllib3==2.2.1
 zope.interface==6.4.post2
+PyJWT==1.7.1
+Pillow==9.0.1
+twilio==6.60.0
+django-phonenumber-field[phonenumberslite]==7.0.0
