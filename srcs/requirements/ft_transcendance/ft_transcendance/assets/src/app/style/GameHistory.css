@@ -7,7 +7,8 @@
     opacity: 0;
     transform: scale(0);
     transform-origin: bottom right;
-    transition: transform 0.5s ease, opacity 0.5s ease; 
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    margin-top: 10vh;
 }
 .ga-hidden {
     opacity: 0;
