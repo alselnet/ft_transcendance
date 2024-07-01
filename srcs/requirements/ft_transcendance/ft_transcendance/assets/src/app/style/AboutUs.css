@@ -1,0 +1,53 @@
+.main-container-aboutus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.container-aboutus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 10vh;
+}
+
+.frame-aboutus {
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+}
+
+.name-cube {
+    font-size: x-large;
+}
+
+.img-us {
+    width: 10vw;
+    height: 10vw;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.title-aboutus {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.frame-aboutus:hover {
+    background-color: rgba(255, 255, 255, 0.452);
+}
