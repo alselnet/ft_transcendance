@@ -13,7 +13,7 @@ export const Dashboard = () => {
     const checkAuthentication = () => {
         const token = localStorage.getItem('accessToken');
         if (!token) {
-            window.location.href = '#/connexion'; // Redirige vers la page de login si pas de token
+            window.location.href = '#/login'; // Redirige vers la page de login si pas de token
             return false;
         } else {
             const payload = JSON.parse(atob(token.split('.')[1])); // Décodage du payload du token
@@ -22,7 +22,7 @@ export const Dashboard = () => {
                 // Si le token est expiré, supprimer et rediriger
                 localStorage.removeItem('accessToken');
                 localStorage.removeItem('refreshToken');
-                window.location.href = '#/connexion';
+                window.location.href = '#/login';
                 return false;
             }
         }

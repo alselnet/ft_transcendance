@@ -132,7 +132,7 @@ const sendFormData = (formData) => {
 	})
     .then(data => {
 		alert('User created successfully.');
-		window.location.href = '#/jeu';
+		window.location.href = '#/game';
 	})
     .catch(error => {
 		alert('User creation failed.');

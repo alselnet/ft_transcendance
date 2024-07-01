@@ -23,7 +23,7 @@ const Home = () => {
         section.innerHTML = `
         <div class="balls-home d-none d-md-flex">
             <div class="orange-ball-home">
-                <a href="#/inscription" data-hash="inscription">
+                <a href="#/signin" data-hash="signin">
                     <span>I</span>
                     <span>n</span>
                     <span>s</span>
@@ -38,7 +38,7 @@ const Home = () => {
                 </a>
             </div>
             <div class="white-ball-home">
-                <a href="#/connexion" data-hash="connexion">
+                <a href="#/login" data-hash="login">
                     <span>c</span>
                     <span>o</span>
                     <span>n</span>
@@ -60,7 +60,7 @@ const Home = () => {
 
         <div class="balls-home-sm d-none d-sm-flex d-md-none">
             <div class="orange-ball-home-sm">
-                <a href="#/inscription" data-hash="inscription">
+                <a href="#/signin" data-hash="signin">
                     <span>I</span>
                     <span>n</span>
                     <span>s</span>
@@ -75,7 +75,7 @@ const Home = () => {
                 </a>
             </div>
             <div class="white-ball-home-sm">
-                <a href="#/connexion" data-hash="connexion">
+                <a href="#/login" data-hash="login">
                     <span>c</span>
                     <span>o</span>
                     <span>n</span>

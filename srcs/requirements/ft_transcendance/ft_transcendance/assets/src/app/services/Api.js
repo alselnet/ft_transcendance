@@ -45,7 +45,7 @@ const fetchWithAuth = async (url, options = {}) => {
             } else {
                 localStorage.removeItem('accessToken');
                 localStorage.removeItem('refreshToken');
-                window.location.href = '#/connexion';
+                window.location.href = '#/login';
             }
         }
     }

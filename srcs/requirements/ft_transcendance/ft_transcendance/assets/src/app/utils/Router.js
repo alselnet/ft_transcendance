@@ -27,13 +27,13 @@ export const Router = () => {
         case "#/":
             Home();
             break;
-        case "#/inscription":
+        case "#/signin":
             SignIn();
             break;
-        case "#/connexion":
+        case "#/login":
             LogIn();
             break;
-        case "#/jeu":
+        case "#/game":
             Game();
             break;
         case "#/dashboard":
