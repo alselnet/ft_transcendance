@@ -18,14 +18,43 @@ const DashStat = () => {
     <div class="left-side-stat">
         <div class="id-stat">
             <div><img src="./app/images/tmejri_avatar.png" alt="profile-pic" class="profile-picture-stat"></div>
+            
             <div class="text-stat">
                 <div class="name-and-settings">
                     <div class="username-stat">Tmejri</div>
                     <a class="nav-link" href="#/settings"><i class="bi bi-gear-fill gear-icon"></i></a>
                 </div>
                 <div class="status-stat">
-                    <div class="pastille-stat"></div>
-                    <div class="status-text-stat">en ligne</div>
+                    <div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle transparent-dropdown d-flex align-items-center" type="button"
+							id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+							<div class="status-dropdown">
+								<div class="green-pastille"></div>
+								<div class="status-text">en ligne</div>
+							</div>
+						</button>
+						<ul class="dropdown-menu transparent-dropdown" aria-labelledby="dropdownMenuButton1">
+							<li class="dropdown-item transparent-dropdown">
+								<div class="status-dropdown">
+									<div class="green-pastille"></div>
+									<div class="status-text">en ligne</div>
+								</div>
+							</li>
+							
+							<li class="dropdown-item transparent-dropdown">
+								<div class="status-dropdown">
+									<div class="yellow-pastille"></div>
+									<div class="status-text">en train de jouer</div>
+								</div>						
+							</li>
+							<li class="dropdown-item transparent-dropdown">
+								<div class="status-dropdown">
+									<div class="red-pastille"></div>
+									<div class="status-text">hors ligne</div>
+								</div>
+    						</li>
+						</ul>
+				    </div>            
                 </div>
             </div>
         </div>
