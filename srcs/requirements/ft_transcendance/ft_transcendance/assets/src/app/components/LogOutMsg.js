@@ -28,8 +28,8 @@ const LogOutMsg = () => {
                     <a class="nav-link" href="#/">
                         <button type="button" class="btn btn-success">Oui</button>
                     </a>
-                    <a class="nav-link" href="#/dashboard">                
-                        <button type="button" class="btn btn-danger">Non</button>
+                    <a>                
+                        <button type="button" class="btn btn-danger" onclick="window.history.back()">Non</button>
                     </a>
                 </div>
             </div>
