@@ -19,7 +19,6 @@ const Home = () => {
 
     let section = document.querySelector("#section");
     if (section) {
-
         section.innerHTML = `
         <div class="balls-home d-none d-md-flex">
             <div class="orange-ball-home">
@@ -141,8 +140,8 @@ const Home = () => {
             whiteBall.style.top = '0';
             orangeBall.style.top = '0';
 
-            const toWhite = (section.clientHeight - whiteBall.clientHeight) / 2.5;
-            const toOrange = (section.clientHeight - orangeBall.clientHeight) / 2.5;
+            const toWhite = (section.clientHeight - whiteBall.clientHeight) / 2;
+            const toOrange = (section.clientHeight - orangeBall.clientHeight) / 2;
 
             console.log(section.clientHeight);
             console.log(whiteBall.clientHeight);

@@ -19,12 +19,23 @@
     color: rgb(218, 147, 16);
 }
 
+.arrow-s {
+    color: white;
+    margin-bottom: 31vh;
+    margin-right: 35vw;
+    font-size: 2rem;
+}
+
+.arrow-s:hover {
+    color: rgb(218, 147, 16);
+}
+
 .orange-ball-signin {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* height: 100vh; */
+    /* text-align: center; */
     margin: 0;
     margin-right: 30vw;
     width: 40vw;
@@ -40,9 +51,12 @@
 }
 
 .white-ball-signin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     margin-left: 25%;
-    margin-top: 6%;
+    margin-top: 12%;
     width: 40vw;
     height: 40vw;
     max-width: 60vh;

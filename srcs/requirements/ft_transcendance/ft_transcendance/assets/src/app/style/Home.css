@@ -47,6 +47,11 @@ a {
     z-index: 1;
 }
 
+/* a voir si je garde*/
+.orange-ball-home:hover {
+    z-index: 200;
+}
+
 .white-ball-home {
     background-color: white;
     margin-left: 25%;

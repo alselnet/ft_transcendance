@@ -24,10 +24,14 @@ const SignIn = () => {
     `
     <div class="balls-signin d-none d-md-flex">
         <div class="white-ball-signin"></div>
-            <a class="nav-link" href="#/">
-                <div class="arrow"><i class="bi bi-arrow-left-circle-fill"></i></div>
-            </a>
+            
+         
             <div class="orange-ball-signin">
+               
+                <a class="nav-link" href="#/">
+                    <div class="arrow-s"><i class="bi bi-arrow-left-circle-fill"></i></div>
+                </a>
+
                 <div class="login-form-signin">
                     <input type="text" id="username" placeholder="nom d'utilisateur">
                     <input type="email" id="email" placeholder="email">
@@ -36,6 +40,12 @@ const SignIn = () => {
                     <button type="submit" class="button-signin">s'inscrire</button>
                 </div>
             </div>
+            
+        <div class="btn-container-home">
+            <button onclick="window.location='https://42.fr/';" class="btn-42-home">
+                <p class="co-42-home">connexion avec</p>
+            <img src="./app/images/42.png" class="img-42-home" alt="button-42">
+            </button>
         </div>
     </div>
 
@@ -52,6 +62,7 @@ const SignIn = () => {
                 <button type="submit" class="button-signin">s'inscrire</button>
             </div>
         </div>
+
     </div>
         `;
         console.log("Section content:", section.innerHTML);
@@ -117,7 +128,7 @@ Le serveur décode les données JSON et effectue les opérations
 necéssaire (stockage base de données, traitement, validation,...*/
 
 const sendFormData = (formData) => {
-    fetch('https://localhost/api/register/', {
+    fetch('/api/register/', {
         method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -139,3 +150,8 @@ const sendFormData = (formData) => {
 		console.error('Error:', error);
 	});
 };
+
+
+/* <a class="nav-link" href="#/"> */
+    /* <div class="arrow"><i class="bi bi-arrow-left-circle-fill"></i></div> */
+/* </a> */
