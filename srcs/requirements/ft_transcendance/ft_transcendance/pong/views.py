@@ -40,7 +40,7 @@ class LocalStartBallView(APIView):
         return Response({'message': 'Ball movement started'}, status=status.HTTP_200_OK)
 
 def pong_game_view(request):
-    return render(request, 'ft_transcendance/assets/src/app/pages/Game.js')
+    return render(request, 'game/game_play.html')
 
 def save_game_result(room_name, winner):
     Game.objects.create(

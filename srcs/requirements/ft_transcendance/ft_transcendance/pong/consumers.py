@@ -16,8 +16,10 @@ class PongConsumer(AsyncWebsocketConsumer):
 
         self.pong_game = PongGame()
         self.update_task = asyncio.create_task(self.update_game_state())
+        self.connected = True
 
     async def disconnect(self, close_code):
+        self.connected = False
         await self.channel_layer.group_discard(
             self.room_group_name,
             self.channel_name
@@ -40,31 +42,32 @@ class PongConsumer(AsyncWebsocketConsumer):
         await self.send_game_state()
 
     async def send_game_state(self):
-        game_state = {
-            'type': 'game_state',
-            'player1_y_position': self.pong_game.player1_y_position,
-            'player2_y_position': self.pong_game.player2_y_position,
-            'ball_x_position': self.pong_game.ball_x_position,
-            'ball_y_position': self.pong_game.ball_y_position,
-            'score_player1': self.pong_game.score_player1,
-            'score_player2': self.pong_game.score_player2
-        }
-        await self.channel_layer.group_send(
-            self.room_group_name,
-            {
+        if self.connected:
+            game_state = {
                 'type': 'game_state',
-                'game_state': game_state
+                'player1_y_position': self.pong_game.player1_y_position,
+                'player2_y_position': self.pong_game.player2_y_position,
+                'ball_x_position': self.pong_game.ball_x_position,
+                'ball_y_position': self.pong_game.ball_y_position,
+                'score_player1': self.pong_game.score_player1,
+                'score_player2': self.pong_game.score_player2
             }
-        )
-
-        if self.pong_game.game_over == True:
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
-                    'type': 'game_over',
-                    'winner': self.pong_game.winner
+                    'type': 'game_state',
+                    'game_state': game_state
                 }
             )
+
+            if self.pong_game.game_over == True:
+                await self.channel_layer.group_send(
+                    self.room_group_name,
+                    {
+                        'type': 'game_over',
+                        'winner': self.pong_game.winner
+                    }
+                )
 
     async def game_state(self, event):
         await self.send(text_data=json.dumps(event['game_state']))
@@ -77,7 +80,7 @@ class PongConsumer(AsyncWebsocketConsumer):
         await self.close()
 
     async def update_game_state(self):
-        while True:
+        while self.connected:
             await asyncio.sleep(0.05)
             self.pong_game.update_ball_position()
             await self.send_game_state()
