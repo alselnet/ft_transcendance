@@ -5,10 +5,10 @@ all: up
 
 up:
 	@echo "Creating DB volume..."
-	@mkdir -p /Users/jeremycointre/Coding/transcendance_repo_gh/Postgres_volume
-	@mkdir -p /Users/jeremycointre/Coding/transcendance_repo_gh/Static_volume
-	@chmod -R 777 /Users/jeremycointre/Coding/transcendance_repo_gh/Postgres_volume
-	@chmod -R 777 /Users/jeremycointre/Coding/transcendance_repo_gh/Static_volume
+	@mkdir -p /Users/alexandreselnet/Coding/Postgres_volume
+	@mkdir -p /Users/alexandreselnet/Coding/Static_volume
+	@chmod -R 777 /Users/alexandreselnet/Coding/Postgres_volume
+	@chmod -R 777 /Users/alexandreselnet/Coding/Static_volume
 	@echo "Launching docker-compose..."
 	@docker-compose -f srcs/docker-compose.yml up --build
 
