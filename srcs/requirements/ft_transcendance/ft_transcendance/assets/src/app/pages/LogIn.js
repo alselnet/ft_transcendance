@@ -119,6 +119,7 @@
 // };
 
 // export default LogIn;
+import { getCookie } from '../utils/cookies'
 
 const LogIn = () => {
     console.log("Login component loaded");
@@ -195,10 +196,12 @@ const LogIn = () => {
         };
 
         // Envoi des données de connexion
-        fetch('https://localhost/api/signin/', {  // Modification de l'URL
+		const csrfToken = getCookie('csrftoken');
+        fetch('https://localhost/api/signin', {  // Modification de l'URL
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+				'X-CSRFToken': csrfToken
             },
             body: JSON.stringify(logData)
         })

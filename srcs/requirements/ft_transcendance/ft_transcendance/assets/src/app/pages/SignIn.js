@@ -140,12 +140,7 @@
 // 	});
 // };
 
-function getCookie(name) //move to utils ?
-{
-    let value = "; " + document.cookie;
-    let parts = value.split("; " + name + "=");
-    if (parts.length === 2) return parts.pop().split(";").shift();
-}
+import { getCookie } from '../utils/cookies'
 
 const SignIn = () => {
     console.log("SignIn component loaded");
@@ -232,13 +227,11 @@ const SignIn = () => {
             alert("confirmation de mot de passe incorrect");
         } else {
 			const csrfToken = getCookie('csrftoken');
-			console.log('CSRF Token:', csrfToken);
-   			alert('CSRF Token: ' + csrfToken); //temp csrf token display
             fetch('https://localhost/api/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken,
+                    'X-CSRFToken': csrfToken
                 },
                 body: JSON.stringify(formData)
             })

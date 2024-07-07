@@ -50,7 +50,7 @@ const Home = () => {
                 </a>
             </div>
             <div class="btn-container-home">
-                <button onclick="window.location='https://42.fr/';" class="btn-42-home">
+                <button onclick="window.location='https://localhost/api/42login';" class="btn-42-home">
                     <p class="co-42-home">connexion avec</p>
                     <img src="./app/images/42.png" class="img-42-home" alt="button-42">
                 </button>
@@ -87,7 +87,7 @@ const Home = () => {
                 </a>
             </div>
             <div class="btn-container-home">
-                <button onclick="window.location='https://42.fr/';" class="btn-42-home">
+                <button onclick="window.location='https://localhost/api/42login';" class="btn-42-home">
                     <p class="co-42-home">connexion avec</p>
                     <img src="./app/images/42.png" class="img-42-home" alt="button-42">
                 </button>
