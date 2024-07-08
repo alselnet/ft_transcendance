@@ -4,7 +4,7 @@ from pong.views import pong_game
 
 urlpatterns = [
 	path('admin', admin.site.urls),
+    path('pong', include('pong.urls')),
 	path('', include('webserver.urls')),
-    path('pong/', include('pong.urls')),
     
 ]
