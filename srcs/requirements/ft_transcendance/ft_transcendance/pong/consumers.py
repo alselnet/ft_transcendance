@@ -26,6 +26,10 @@ class PongConsumer(AsyncWebsocketConsumer):
         )
         if hasattr(self, 'update_task'):
             self.update_task.cancel()
+            try:
+                await self.update_task
+            except asyncio.CancelledError:
+                pass
 
     async def receive(self, text_data):
         data = json.loads(text_data)

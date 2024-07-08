@@ -242,7 +242,7 @@ const Game = () => {
                 socket.close();
             }
         
-            socket = new WebSocket(`ws://${location.host}/game/${roomName}/`);
+            socket = new WebSocket(`wss://localhost/ws/pong/${roomName}/`);
         
             socket.onopen = function(event) {
                 console.log('Connected to the server');
@@ -293,7 +293,7 @@ const Game = () => {
             }
         
             return new Promise((resolve, reject) => {
-                socket = new WebSocket(`ws://${location.host}/game/${roomName}/`);
+                socket = new WebSocket(`wss://localhost/ws/pong/${roomName}/`);
         
                 socket.onopen = function(event) {
                     console.log('Connected to the server');
