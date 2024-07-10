@@ -38,4 +38,4 @@ const DeleteFriendMsg = () => {
     
 };
 
-export default DeleteFriendMsg;
+export { DeleteFriendMsg };

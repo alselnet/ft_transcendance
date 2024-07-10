@@ -14,4 +14,4 @@ const TwoFactorAuth = () => {
       return section;
 };
 
-export default TwoFactorAuth;
+export { TwoFactorAuth };

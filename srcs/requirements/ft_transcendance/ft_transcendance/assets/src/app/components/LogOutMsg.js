@@ -37,4 +37,4 @@ const LogOutMsg = () => {
     }
 };
 
-export default LogOutMsg;
+export { LogOutMsg };

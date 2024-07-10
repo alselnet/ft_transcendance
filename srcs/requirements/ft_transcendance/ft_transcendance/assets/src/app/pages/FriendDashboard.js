@@ -10,7 +10,7 @@ import {
     setupCamembertAnimation
 } from "../animation/DashboardAnimation.js";
 
-export const FriendDashboard = () => {
+const FriendDashboard = () => {
   
     let divRoot = document.querySelector("#root");
 
@@ -36,4 +36,4 @@ export const FriendDashboard = () => {
 
 };
 
-export default FriendDashboard;
+export { FriendDashboard };

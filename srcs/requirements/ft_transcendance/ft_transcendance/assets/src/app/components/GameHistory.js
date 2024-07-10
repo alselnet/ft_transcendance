@@ -87,4 +87,4 @@ const GameHistory = () => {
     }
 };
 
-export default GameHistory;
+export { GameHistory };

@@ -67,4 +67,4 @@ const FriendList = () => {
     } 
 };
 
-export default FriendList;
+export { FriendList };

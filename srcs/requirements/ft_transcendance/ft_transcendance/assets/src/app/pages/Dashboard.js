@@ -10,7 +10,7 @@ import {
     setupCamembertAnimation
 } from "../animation/DashboardAnimation.js";
 
-export const Dashboard = () => {
+const Dashboard = () => {
     // Vérifie l'authentification de l'utilisateur
     // const checkAuthentication = () => {
     //     const token = localStorage.getItem('accessToken');
@@ -56,4 +56,4 @@ export const Dashboard = () => {
 
 };
 
-export default Dashboard;
+export { Dashboard };

@@ -104,4 +104,4 @@ const Settings = () => {
         return form;
 };
 
-export default Settings;
+export { Settings };

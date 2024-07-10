@@ -224,4 +224,4 @@ const LogIn = () => {
     });
 };
 
-export default LogIn;
+export { LogIn };

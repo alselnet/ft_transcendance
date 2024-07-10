@@ -1,6 +1,6 @@
-import Leaderboard from "../pages/Leaderboard.js";
-import FriendList from "../components/FriendsList.js";
-import GameHistory from "../components/GameHistory.js";
+import { Leaderboard } from "../pages/Leaderboard.js";
+import { FriendList } from "../components/FriendsList.js";
+import { GameHistory } from "../components/GameHistory.js";
 
 export function showCircle(container, cx, cy, radius, callback) {
     let div = document.createElement('div');
