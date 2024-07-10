@@ -115,7 +115,7 @@ const DashStat = async () => {
                 const newStatus = item.getAttribute('data-status');
                 try {
                     const updateResponse = await fetch('https://localhost/api/users/update-status', {
-                        method: 'POST',
+                        method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
