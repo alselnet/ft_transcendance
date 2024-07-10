@@ -4,7 +4,7 @@ const DashStat = async () => {
     let form = document.createElement("div");
 
     try {
-        const response = await fetch('https://localhost/api/users/me', {
+        const response = await fetch('https://localhost/api/users/me/', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('accessToken')}`

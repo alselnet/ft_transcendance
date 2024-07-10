@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 import logging
 
-
 logger = logging.getLogger(__name__)
 
 class GameSummary(models.Model):
@@ -27,6 +26,11 @@ class Profile(models.Model):
     mail_confirmation_status = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to='avatars/', default='avatars/default.png')
     phone_number = PhoneNumberField(blank=True, null=True)
+    #nombre de points marqués
+    #nombre de points encaissés
+    #nombre de parties jouées
+    #nombre de parties gagnées
+    #nombre de perfect
     
     def __str__(self):
         return self.user.username

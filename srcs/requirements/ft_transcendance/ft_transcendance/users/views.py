@@ -46,7 +46,8 @@ class MyGameHistory(APIView):
             {
                 'winner': game.winner.username if game.winner else None,
                 'loser': game.loser.username if game.loser else None,
-                'score': game.score,
+                'score': game.score, #score j1 score j2
+                #local : bool
                 'date_time': game.date_time
             }
             for game in game_history
@@ -65,6 +66,7 @@ class MyGameHistory(APIView):
         if not all([winner_username, loser_username, score]):
             raise ValidationError('Winner, loser, and score fields are required.')
 
+		#add a locale check
         if winner_username != user.username:
             return Response({'error': 'You must be the winner to create a game summary.'}, status=status.HTTP_403_FORBIDDEN)
     
@@ -165,12 +167,9 @@ class UpdatePasswordView(APIView):
     
 class UpdateStatusView(APIView):
 
-    def put(self, request, username):
-        try:
-            profile = Profile.objects.get(user__username=username)
-        except Profile.DoesNotExist:
-            return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
-
+    def put(self, request):
+        user = request.user
+        profile = Profile.objects.get(user=user)
         serializer = ProfileSerializer(profile, data=request.data)
         if serializer.is_valid():
             serializer.save()
