@@ -11,28 +11,7 @@ import {
 } from "../animation/DashboardAnimation.js";
 
 const Dashboard = () => {
-    // Vérifie l'authentification de l'utilisateur
-    // const checkAuthentication = () => {
-    //     const token = localStorage.getItem('accessToken');
-    //     if (!token) {
-    //         window.location.href = '#/login'; // Redirige vers la page de login si pas de token
-    //         return false;
-    //     } else {
-    //         const payload = JSON.parse(atob(token.split('.')[1])); // Décodage du payload du token
-    //         const expiry = payload.exp * 1000; // Convertir le temps d'expiration en millisecondes
-    //         if (Date.now() >= expiry) {
-    //             // Si le token est expiré, supprimer et rediriger
-    //             localStorage.removeItem('accessToken');
-    //             localStorage.removeItem('refreshToken');
-    //             window.location.href = '#/login';
-    //             return false;
-    //         }
-    //     }
-    //     return true;
-    // };
-
-    // if (!checkAuthentication()) return; // Arrêter le chargement de la page si l'utilisateur n'est pas authentifié
-
+    
     let divRoot = document.querySelector("#root");
 
     divRoot.innerHTML = "";

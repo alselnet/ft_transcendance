@@ -40,9 +40,6 @@ export function animateBalls(section, whiteBall, orangeBall) {
     const toWhite = (section.clientHeight - whiteBall.clientHeight) / 2;
     const toOrange = (section.clientHeight - orangeBall.clientHeight) / 2;
 
-    console.log(section.clientHeight);
-    console.log(whiteBall.clientHeight);
-
     animate({
         duration: 2000,
         timing: makeEaseOut(bounce),

@@ -140,7 +140,7 @@
 // 	});
 // };
 
-// import { getCookie } from '../utils/cookies'
+import { getCookie } from '../utils/cookies'
 
 const SignIn = () => {
     let root = document.getElementById("root");

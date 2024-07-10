@@ -120,7 +120,7 @@
 
 // export default LogIn;
 
-// import { getCookie } from '../utils/cookies'
+import { getCookie } from '../utils/cookies'
 
 const LogIn = () => {
     let root = document.getElementById("root");
