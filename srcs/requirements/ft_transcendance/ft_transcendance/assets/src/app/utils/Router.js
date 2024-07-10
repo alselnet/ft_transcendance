@@ -12,7 +12,6 @@ import { TwoFactorAuth } from "../components/2FA.js"
 import { LogOutMsg } from "../components/LogOutMsg.js";
 import { FriendDashboard } from "../pages/FriendDashboard.js";
 import { DeleteFriendMsg } from "../components/DeleteFriendMsg.js";
-import { checkAuth } from "../services/Api.js"
 
 export const Router = () => {
     let { hash } = location;
@@ -24,8 +23,6 @@ export const Router = () => {
         return;
     }
 
-    const routeAsync = async () => {
-
         switch (hash) {
             case "#/":
                 Home();
@@ -35,49 +32,38 @@ export const Router = () => {
                 break;
             case "#/login":
                 LogIn();
-                break;
+                break;            
             case "#/game":
-                await checkAuth();
                 Game();
                 break;
             case "#/dashboard":
-                await checkAuth();
                 Dashboard();
                 break;
             case "#/leaderboard":
-                await checkAuth();
                 Leaderboard();
                 break;
             case "#/settings":
-                await checkAuth();
                 Settings();
                 break;
             case "#/aboutus":
-                await checkAuth();
                 AboutUs();
                 break;
             case "#/friendlist":
-                await checkAuth();
                 FriendList();
                 break;
             case "#/gamehistory":
-                await checkAuth();
                 GameHistory();
                 break;
             case "#/2fa":
-                await checkAuth();
                 TwoFactorAuth();
                 break;
             case "#/logout":
-                await checkAuth();
                 LogOutMsg();
                 break;
             case "#/frienddashboard":
-                await checkAuth();
                 FriendDashboard();
                 break;
             case "#/deletefriendmsg":
-                await checkAuth();
                 DeleteFriendMsg();
                 break;
 
@@ -85,10 +71,4 @@ export const Router = () => {
                 section.innerHTML = "<h1>Page not found</h1>";
                 break;
         }
-    };
-    /* Cette fonction interne est déclarée comme async pour 
-    pouvoir utiliser await à l'intérieur. Cela permet d'attendre
-    que checkAuth soit résolu avant de continuer avec le 
-    chargement de la page spécifique. */
-    routeAsync().catch(error => console.error('Error routing:', error));
 };
