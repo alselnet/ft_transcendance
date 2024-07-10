@@ -227,7 +227,7 @@ const SignIn = () => {
             alert("confirmation de mot de passe incorrect");
         } else {
 			const csrfToken = getCookie('csrftoken');
-            fetch('https://localhost/api/register', {
+            fetch('https://localhost/api/auth/register/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -242,8 +242,8 @@ const SignIn = () => {
                 return response.json();
             })
             .then(data => {
-                alert('User created successfully.');
-                window.location.href = '#/game';
+                alert(data.message);
+                window.location.href = '#/dashboard';
             })
             .catch(error => {
                 alert('User creation failed.');

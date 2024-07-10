@@ -26,7 +26,7 @@ const fetchWithAuth = async (url, options = {}) => {
     if (response.status === 401) {
         const refreshToken = localStorage.getItem('refreshToken');
         if (refreshToken) {
-            const refreshResponse = await fetch('https://localhost/api/token/refresh/', {  // Modification de l'URL
+            const refreshResponse = await fetch('st/api/auth/token/refresh/', {  // Modification de l'URL
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

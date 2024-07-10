@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'ft_transcendance',
-	'webserver',
+	'authentication',
+	'users',
 	'pong',
 ]
 
@@ -118,7 +119,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-APPEND_SLASH = True
+APPEND_SLASH = False
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -135,7 +136,7 @@ REST_FRAMEWORK = {
 CORS_ALLOW_ALL_ORIGINS = True
 
 # CORS_ORIGIN_WHITELIST = [
-#      'http://localhost:80',
+#      'https://localhost',
 # 	 'http://aselnet.42.fr'
 # ]
 
@@ -210,7 +211,12 @@ LOGGING = {
             'level': 'INFO',
             'propagate': True,
         },
-        'webserver': {
+		'authentication': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+		'users': {
             'handlers': ['console'],
             'level': 'INFO',
             'propagate': True,
@@ -222,7 +228,7 @@ CLIENT_ID = config('CLIENT_ID')
 CLIENT_SECRET = config('CLIENT_SECRET')
 REDIRECT_URI = config('REDIRECT_URI')
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:80']
+CSRF_TRUSTED_ORIGINS = ['https://localhost']
 
 CSRF_COOKIE_HTTPONLY = False
 

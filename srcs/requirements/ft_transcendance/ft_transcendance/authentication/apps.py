@@ -1,8 +1,8 @@
 from django.apps import AppConfig
 
-class WebserverConfig(AppConfig):
+class AuthenticationConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'webserver'
+    name = 'authentication'
     
     def ready(self):
-        import webserver.signals
+        import authentication.signals

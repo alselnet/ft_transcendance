@@ -78,7 +78,7 @@
 // // Ajoute le stockage des tokens JWT et CSRF dans le localStorage et redirige après une connexion réussie
 // const sendLogData = async (formData) => {
 //     try {
-//         const response = await fetch('https://localhost/api/signin/', {  // Modification de l'URL
+//         const response = await fetch('https://localhost/api/auth/signin/', {  // Modification de l'URL
 //             method: 'POST',
 //             headers: {
 //                 'Content-Type': 'application/json'
@@ -98,7 +98,7 @@
 //         localStorage.setItem('refreshToken', data.refresh);
 
 //         // Récupérer le token CSRF et le stocker dans les cookies
-//         const csrfResponse = await fetch('https://localhost/api/csrf_token', {
+//         const csrfResponse = await fetch('https://localhost/api/auth/csrf_token/', {
 //             method: 'GET',
 //             credentials: 'include'  // Important pour inclure les cookies dans la requête
 //         });
@@ -197,7 +197,7 @@ const LogIn = () => {
 
         // Envoi des données de connexion
 		const csrfToken = getCookie('csrftoken');
-        fetch('https://localhost/api/signin', {  // Modification de l'URL
+        fetch('https://localhost/api/auth/signin/', {  // Modification de l'URL
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
