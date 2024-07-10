@@ -1,12 +1,12 @@
-import { checkAuth } from "../services/Api.js"
+// import { checkAuth } from "../services/Api.js"
 
 const TwoFactorAuth = async () => {
 
-    const isAuthenticated = await checkAuth();
+    // const isAuthenticated = await checkAuth();
     
-    if (!isAuthenticated) {
-        return;
-    }
+    // if (!isAuthenticated) {
+    //     return;
+    // }
 
 	let section = document.querySelector("#section");
 
