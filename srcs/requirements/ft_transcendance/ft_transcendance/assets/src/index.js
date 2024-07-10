@@ -1,4 +1,4 @@
-// import './style.css';
+import './style.css';
 import { App } from "./app/App.js";
 
 /* Lorsque cet événement est déclenché, la fonction App
