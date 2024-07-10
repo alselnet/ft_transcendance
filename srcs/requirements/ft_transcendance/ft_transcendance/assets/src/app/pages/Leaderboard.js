@@ -1,4 +1,13 @@
-const Leaderboard = () => {
+import { checkAuth } from "../services/Api.js"
+
+const Leaderboard = async () => {
+    
+    const isAuthenticated = await checkAuth();
+    
+    if (!isAuthenticated) {
+        return;
+    }
+    
     let root = document.getElementById("root");
     if (!root) {
         console.error("#root not found in the DOM");

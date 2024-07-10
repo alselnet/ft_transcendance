@@ -1,6 +1,14 @@
-const AboutUs = () => {
+import { checkAuth } from "../services/Api.js"
 
-    let section = document.querySelector("#section");
+const AboutUs = async () => {
+
+	const isAuthenticated = await checkAuth();
+    
+    if (!isAuthenticated) {
+        return;
+    }
+
+	let section = document.querySelector("#section");
     if (section) {
         section.innerHTML = 
     `

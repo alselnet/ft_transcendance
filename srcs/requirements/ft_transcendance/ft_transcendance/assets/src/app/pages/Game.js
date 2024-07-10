@@ -1,4 +1,13 @@
-const Game = () => {
+import { checkAuth } from "../services/Api.js"
+
+const Game = async () => {
+    
+    const isAuthenticated = await checkAuth();
+    
+    if (!isAuthenticated) {
+        return;
+    }
+    
     let section = document.querySelector("#section");
     if (section) {
         section.innerHTML = 

@@ -1,4 +1,12 @@
-const LogOutMsg = () => {
+import { checkAuth } from "../services/Api.js"
+
+const LogOutMsg = async () => {
+
+    const isAuthenticated = await checkAuth();
+    
+    if (!isAuthenticated) {
+        return;
+    }
 
     let msg = document.querySelector("#section");
 

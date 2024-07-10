@@ -53,7 +53,7 @@ export const checkAuth = async () => {
         return false;
     }
 };
-    
+
 
 /* effectuer des requêtes sécurisées vers des API en ajoutant 
 automatiquement un en-tête d'autorisation avec un token JWT 

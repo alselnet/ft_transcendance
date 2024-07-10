@@ -1,3 +1,5 @@
+import { checkAuth } from "../services/Api.js"
+
 const translations = {};
 
 function loadLanguage(lang) {
@@ -28,11 +30,15 @@ function changeLanguage(lang) {
     }
 }
 
-const Settings = () => {
+const Settings = async () => {
+
+    const isAuthenticated = await checkAuth();
+    
+    if (!isAuthenticated) {
+        return;
+    }
+
     let form = document.createElement("div");
-
-    console.log("Settings component loaded");
-
     section.innerHTML = 
         `
         <div class="container">

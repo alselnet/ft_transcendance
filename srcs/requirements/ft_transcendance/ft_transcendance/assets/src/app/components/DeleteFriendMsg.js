@@ -1,4 +1,12 @@
-const DeleteFriendMsg = () => {
+import { checkAuth } from "../services/Api.js"
+
+const DeleteFriendMsg = async () => {
+
+    const isAuthenticated = await checkAuth();
+    
+    if (!isAuthenticated) {
+        return;
+    }
 
     let msg = document.querySelector("#section");
 
