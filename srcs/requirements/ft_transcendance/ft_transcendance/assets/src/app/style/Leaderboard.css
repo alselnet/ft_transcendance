@@ -80,7 +80,7 @@
 
 .one-ldb {
     color: rgb(201, 100, 100);
-    font-size: 500%;
+    font-size: 650%;
     margin-top: 10px;
     text-shadow:  2px 2px 3px rgba(0, 0, 0, 0.5);
     margin-bottom: 22vh;
@@ -96,7 +96,7 @@
 
 .two-ldb {
     color: rgb(201, 100, 100);
-    font-size: 300%;
+    font-size: 400%;
     margin-top: 10px;
     text-shadow:  2px 2px 3px rgba(0, 0, 0, 0.5);
     margin-bottom: 17vh;
@@ -112,7 +112,7 @@
 
 .three-ldb {
     color: rgb(201, 100, 100);
-    font-size: 270%;
+    font-size: 300%;
     margin-top: 10px;
     text-shadow:  2px 2px 3px rgba(0, 0, 0, 0.5);
     margin-bottom: 21vh;
@@ -123,9 +123,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 7vh;
-    margin-bottom: 2vh;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
     font-size: 10px;
+    /* color: silver; */
 }
 
 .pod-result-one-ldb {
@@ -133,9 +134,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 12vh;
+    margin-top: 7vh;
     margin-bottom: 2vh;
     font-size: 10px;
+    /* color: gold; */
+
 }
 
 .pod-result-third-ldb {
@@ -143,9 +146,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 11vh;
+    margin-top: 5vh;
     margin-bottom: 2vh;
     font-size: 10px;
+    /* color: rgb(172, 104, 15); */
+
 }
 
 .leaderboard-list-ldb {
@@ -153,7 +158,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 20px; 
+    margin-top: 40px; 
     margin-right: 5vw;
 }
 
@@ -167,7 +172,7 @@
 
 .rank-ldb {
     color: rgb(201, 100, 100);
-    font-size: 400%;
+    font-size: 250%;
     text-shadow:  2px 2px 3px rgba(0, 0, 0, 0.5);
     text-align: center;
 }
@@ -177,10 +182,26 @@
     text-shadow:  2px 2px 3px rgba(0, 0, 0, 0.5);
 }
 
+.username-ldb-pod {
+    color: white;
+    font-size: 250%;
+}
+
+.score-ldb-pod {
+    color: white;
+    font-size: 200%;
+}
+
 .profile-picture-ldb img {
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
+}
+
+.profile-picture-ldb-pod img {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
 }
 
 /* Animation for the leaderboard opening */
@@ -191,9 +212,9 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    opacity: 0; /* Initial state for animation */
-    transform: scale(0); /* Initial state for animation */
-    transform-origin: bottom left; /* Set the origin of the transform to the bottom left */
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: bottom left;
     transition: transform 0.5s ease, opacity 0.5s ease;
 }
 

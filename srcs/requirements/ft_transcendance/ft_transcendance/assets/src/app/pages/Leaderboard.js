@@ -27,16 +27,16 @@ const Leaderboard = async () => {
 	let section = document.querySelector("#section");
 	if (section) {
 		section.innerHTML = `
-        <div class="container-ldb">
+<       div class="container-ldb">
             <h1 class="title-ldb">Leaderboard</h1>
             <div class="frame-ldb">
                 <a class="nav-link" href="#/dashboard"><span class="close-btn-ldb">&times;</span></a>
                     <div class="podium-ldb">
                         <div class="second-ldb">
                             <div class="pod-result-ldb">
-                                <div class="profile-picture-ldb"><img src="./app/images/tmejri_avatar.png" alt="jcointre"></div>
-                                <div class="username-ldb">Jcointre</div>
-                                <div class="score-ldb">1234 pts</div>
+                                <div class="profile-picture-ldb-pod"><img src="./app/images/tmejri_avatar.png" alt="jcointre"></div>
+                                <div class="username-ldb-pod">Tmejri</div>
+                                <div class="score-ldb-pod">1234 pts</div>
                             </div>
 
                             <p class="two-ldb">2</p>
@@ -44,9 +44,9 @@ const Leaderboard = async () => {
 
                         <div class="first-ldb">
                             <div class="pod-result-one-ldb">
-                                <div class="profile-picture-ldb"><img src="./app/images/jecointr_avatar.png" alt="jcointre"></div>
-                                <div class="username-ldb">Jcointre</div>
-                                <div class="score-ldb">1234 pts</div>
+                                <div class="profile-picture-ldb-pod"><img src="./app/images/jecointr_avatar.png" alt="jcointre"></div>
+                                <div class="username-ldb-pod">Jcointre</div>
+                                <div class="score-ldb-pod">1234 pts</div>
                             </div>
 
                             <p class="one-ldb">1</p>
@@ -54,9 +54,9 @@ const Leaderboard = async () => {
 
                         <div class="third-ldb">
                             <div class="pod-result-third-ldb">
-                                <div class="profile-picture-ldb"><img src="./app/images/jecointr_avatar.png" alt="jcointre"></div>
-                                <div class="username-ldb">Jcointre</div>
-                                <div class="score-ldb">1234 pts</div>
+                                <div class="profile-picture-ldb-pod"><img src="./app/images/Jules.png" alt="jcointre"></div>
+                                <div class="username-ldb-pod">Jthuysba</div>
+                                <div class="score-ldb-pod">1234 pts</div>
                             </div>
                             <p class="three-ldb">3</p>
                         </div>
@@ -65,14 +65,14 @@ const Leaderboard = async () => {
                 <div class="leaderboard-list-ldb">
                     <div class="profil-ldb">
                         <div class="rank-ldb">4.</div>
-                        <div class="profile-picture-ldb"><img src="./app/images/tmejri_avatar.png" alt="jcointre"></div>
-                        <div class="username-ldb">Jcointre</div>
+                        <div class="profile-picture-ldb"><img src="./app/images/hugo.png" alt="jcointre"></div>
+                        <div class="username-ldb">Hcoulon</div>
                         <div class="score-ldb">1234 pts</div>
                     </div>
                     <div class="profil-ldb">
                         <div class="rank-ldb">5.</div>
-                        <div class="profile-picture-ldb"><img src="./app/images/jecointr_avatar.png" alt="jcointre"></div>
-                        <div class="username-ldb">Tmejri</div>
+                        <div class="profile-picture-ldb"><img src="./app/images/profile.png" alt="jcointre"></div>
+                        <div class="username-ldb">Aselnet</div>
                         <div class="score-ldb">1233 pts</div>
                     </div>
                     <div class="profil-ldb">
