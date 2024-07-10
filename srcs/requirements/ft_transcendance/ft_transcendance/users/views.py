@@ -1,14 +1,14 @@
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
-from rest_framework import viewsets, status
+from rest_framework import status
 from rest_framework.exceptions import ValidationError
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from .serializers import GameSummarySerializer, EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, PublicUserInfoSerializer, UserSerializer, ProfileSerializer
+from .serializers import EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, ProfileSerializer
 from .models import GameSummary, Profile, Friend
-from rest_framework.parsers import MultiPartParser, FormParser
 
 class MeView(APIView):
     authentication_classes = [JWTAuthentication]
@@ -108,116 +108,142 @@ class FriendListView(APIView):
         return Response(friendlist_data, status=200)
 	
 
-# class ChangeAvatarView(APIView):
-#     parser_classes = (MultiPartParser, FormParser) # Definit les parseurs utilises -> typiquement pour les DL de fichiers
+class UpdateAvatarView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    parser_classes = (MultiPartParser, FormParser) # Definit les parseurs utilises -> typiquement pour les DL de fichiers
 
-#     def post(self, request):
-#         profile = request.user.profile
+    def post(self, request):
+        profile = request.user.profile
 
-#         serializer = ProfileSerializer(profile, data=request.data)
+        serializer = ProfileSerializer(profile, data=request.data)
 
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_200_OK)
-#         else:
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# class PublicUserInfoView(APIView):
-#     permission_classes = [IsAuthenticated]
+class UpdateEmailView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request):
+        user = request.user
+        serializer = EmailUpdateSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UpdateUsernameView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request):
+        user = request.user
+        serializer = UsernameUpdateSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UpdatePasswordView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request):
+        user = request.user
+        serializer = PasswordUpdateSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-#     def get(self, request, username):
-#         try:
-#             user = User.objects.get(username=username)
-#         except User.DoesNotExist:
-#             return Response({"detail": "User not found."}, status=status.HTTP_404_NOT_FOUND)
+class UpdateStatusView(APIView):
+
+    def put(self, request, username):
+        try:
+            profile = Profile.objects.get(user__username=username)
+        except Profile.DoesNotExist:
+            return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = ProfileSerializer(profile, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class PublicUserInfoView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, username):
+        user = get_object_or_404(User, username=username)
+        profile = Profile.objects.get(user=user)
+        user_data = {
+            'username': user.username,
+            'status': profile.status,
+            'avatar': profile.avatar.url,
+        }
+
+        return Response(user_data, status=200)
+
+
+class PublicGameHistoryView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, username):
+        user = get_object_or_404(User, username=username)
+        won_games = GameSummary.objects.filter(winner=user)
+        lost_games = GameSummary.objects.filter(loser=user)
         
-#         serializer = PublicUserInfoSerializer(user)
-#         return Response(serializer.data, status=status.HTTP_200_OK)
+        game_history = list(won_games) + list(lost_games)
+        
+        game_history_data = [
+            {
+                'winner': game.winner.username if game.winner else None,
+                'loser': game.loser.username if game.loser else None,
+                'score': game.score,
+                'date_time': game.date_time
+            }
+            for game in game_history
+        ]
+
+        return Response(game_history_data, status=200)
+
+
+class AddFriendView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
     
-# class UpdateEmailView(APIView):
-#     permission_classes = [IsAuthenticated]
+    def post(self, request, username):
+        user = request.user
+        friend = get_object_or_404(User, username=username)
 
-#     def put(self, request):
-#         user = request.user
-#         serializer = EmailUpdateSerializer(user, data=request.data, partial=True)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_200_OK)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        if Friend.objects.filter(user=user, friend=friend).exists():
+            return Response({'detail': 'Already friends'}, status=status.HTTP_400_BAD_REQUEST)
 
-# class UpdateUsernameView(APIView):
-#     permission_classes = [IsAuthenticated]
+        Friend.objects.create(user=user, friend=friend)
+        return Response({'detail': 'Friend added'}, status=status.HTTP_201_CREATED)
 
-#     def put(self, request):
-#         user = request.user
-#         serializer = UsernameUpdateSerializer(user, data=request.data, partial=True)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_200_OK)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# class UpdatePasswordView(APIView):
-#     permission_classes = [IsAuthenticated]
-
-#     def put(self, request):
-#         user = request.user
-#         serializer = PasswordUpdateSerializer(user, data=request.data, partial=True)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_200_OK)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-# class AddFriendView(APIView):
-#     permission_classes = [IsAuthenticated]
+class RemoveFriendView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
     
-#     def post(self, request, username, friend_username):
-#         user = get_object_or_404(User, username=username)
-#         friend = get_object_or_404(User, username=friend_username)
+    def post(self, request, username):
+        user = request.user
+        friend = get_object_or_404(User, username=username)
 
-#         if Friend.objects.filter(user=user, friend=friend).exists():
-#             return Response({'detail': 'Already friends'}, status=status.HTTP_400_BAD_REQUEST)
+        friendship = Friend.objects.filter(user=user, friend=friend).first()
+        if not friendship:
+            return Response({'detail': 'Friendship does not exist'}, status=status.HTTP_400_BAD_REQUEST)
 
-#         Friend.objects.create(user=user, friend=friend)
-#         return Response({'detail': 'Friend added'}, status=status.HTTP_201_CREATED)
-
-# class RemoveFriendView(APIView):
-#     permission_classes = [IsAuthenticated]
-    
-#     def post(self, request, username, friend_username):
-#         user = get_object_or_404(User, username=username)
-#         friend = get_object_or_404(User, username=friend_username)
-
-#         friendship = Friend.objects.filter(user=user, friend=friend).first()
-#         if not friendship:
-#             return Response({'detail': 'Friendship does not exist'}, status=status.HTTP_400_BAD_REQUEST)
-
-#         friendship.delete()
-#         return Response({'detail': 'Friend removed'}, status=status.HTTP_204_NO_CONTENT)
-    
-    
-
-# class ProfileStatusUpdateView(APIView):
-
-#     def put(self, request, username):
-#         try:
-#             profile = Profile.objects.get(user__username=username)
-#         except Profile.DoesNotExist:
-#             return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
-
-#         serializer = ProfileSerializer(profile, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-
-# class ProfileView(APIView):
-    
-#     def get(self, request, username):
-#         try:
-#             profile = Profile.objects.get(user__username=username)
-#         except Profile.DoesNotExist:
-#             return Response({"error": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
-#         serializer = ProfileSerializer(profile)
-#         return Response(serializer.data, status=status.HTTP_200_OK)
+        friendship.delete()
+        return Response({'detail': 'Friend removed'}, status=status.HTTP_204_NO_CONTENT)
