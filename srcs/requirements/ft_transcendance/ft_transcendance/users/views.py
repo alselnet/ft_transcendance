@@ -1,9 +1,10 @@
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from rest_framework import viewsets, status
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from .serializers import GameSummarySerializer, EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, PublicUserInfoSerializer, UserSerializer, ProfileSerializer
 from .models import GameSummary, Profile, Friend
@@ -29,6 +30,62 @@ class MeView(APIView):
 
         return Response(user_data, status=200)
 
+
+class MyGameHistory(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        won_games = GameSummary.objects.filter(winner=user)
+        lost_games = GameSummary.objects.filter(loser=user)
+        
+        game_history = list(won_games) + list(lost_games)
+        
+        game_history_data = [
+            {
+                'winner': game.winner.username if game.winner else None,
+                'loser': game.loser.username if game.loser else None,
+                'score': game.score,
+                'date_time': game.date_time
+            }
+            for game in game_history
+        ]
+
+        return Response(game_history_data, status=200)
+
+    def post(self, request):
+        user = request.user
+        data = request.data
+        
+        winner_username = data.get('winner')
+        loser_username = data.get('loser')
+        score = data.get('score')
+        
+        if not all([winner_username, loser_username, score]):
+            raise ValidationError('Winner, loser, and score fields are required.')
+        
+        try:
+            winner = User.objects.get(username=winner_username)
+            loser = User.objects.get(username=loser_username)
+        except User.DoesNotExist:
+            return Response({'error': 'Winner or loser not found.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        game_summary = GameSummary.objects.create(
+            winner=winner,
+            loser=loser,
+            score=score
+        )
+        
+        game_summary_data = {
+            'winner': game_summary.winner.username if game_summary.winner else None,
+            'loser': game_summary.loser.username if game_summary.loser else None,
+            'score': game_summary.score,
+            'date_time': game_summary.date_time
+        }
+
+        return Response(game_summary_data, status=status.HTTP_201_CREATED)
+
 	
 # class ChangeAvatarView(APIView):
 #     parser_classes = (MultiPartParser, FormParser) # Definit les parseurs utilises -> typiquement pour les DL de fichiers
@@ -44,10 +101,6 @@ class MeView(APIView):
 #         else:
 #             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-# class GameSummaryView(viewsets.ModelViewSet):
-#     serializer_class = GameSummarySerializer
-#     queryset = GameSummary.objects.all()
 
 # class PublicUserInfoView(APIView):
 #     permission_classes = [IsAuthenticated]

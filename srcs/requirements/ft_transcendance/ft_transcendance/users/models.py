@@ -23,7 +23,7 @@ class Profile(models.Model):
     )
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='offline')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    game_history = models.ManyToManyField(GameSummary, blank=True, default=None, related_name='players')
+    # game_history = models.ManyToManyField(GameSummary, blank=True, default=None, related_name='players')
     two_factors_auth_status = models.BooleanField(default=False)
     mail_confirmation_status = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to='avatars/', default='avatars/default.png')

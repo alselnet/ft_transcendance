@@ -2,11 +2,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 # from .views import MeView, MyGameHistory, FriendListView, ChangeAvatarView, UpdateEmailView, UpdatePasswordView, UpdateUsernameView, UpdateStatus, PublicUserInfoView, PublicGameHistoryView, AddFriendView, RemoveFriendView
-from .views import MeView
+from .views import MeView, MyGameHistory
 
 urlpatterns = [
 	path('me/', MeView.as_view(), name='me'),
-	# path('game_history/', MyGameHistory.as_view(), name='my-history'),
+	path('game_history/', MyGameHistory.as_view(), name='my-history'),
 	# path('friendlist/', FriendListView.as_view(), name='friend-list'),
 	# path('update_avatar/', ChangeAvatarView.as_view(), name='change-avatar'),
 	# path('update_email/', UpdateEmailView.as_view(), name='email-update'),
