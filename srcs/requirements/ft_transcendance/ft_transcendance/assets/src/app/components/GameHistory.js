@@ -1,6 +1,4 @@
 const GameHistory = () => {
-    console.log("Game History component loaded");
-
     let root = document.getElementById("root");
     if (!root) {
         console.error("#root not found in the DOM");
@@ -79,19 +77,14 @@ const GameHistory = () => {
         </div>
         `; 
 
-        console.log("Section content:", section.innerHTML);
-
         const gameHistoryContainer = document.querySelector('.main-container2');
         if (gameHistoryContainer) {
             setTimeout(() => {
                 gameHistoryContainer.classList.add('ga-visible');
                 gameHistoryContainer.classList.remove('ga-hidden');
-            }, 0); // Delay to ensure the DOM has updated
+            }, 0);
         }
-    } else {
-        console.error("#section not found in the DOM");
     }
-
 };
 
 export default GameHistory;

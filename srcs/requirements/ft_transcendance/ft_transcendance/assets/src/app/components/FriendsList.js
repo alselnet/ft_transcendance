@@ -1,6 +1,4 @@
 const FriendList = () => {
-    console.log("Friend List component loaded");
-    
     let root = document.getElementById("root");
     if (!root) {
         console.error("#root not found in the DOM");
@@ -20,7 +18,6 @@ const FriendList = () => {
     let section = document.querySelector("#section");
     if (section) {
         section.innerHTML = `
-
         <div class="main-containerf fl-hidden">
         <div class="friends-containerf">
             <h2 class="titlef">FRIENDS LIST</h2>
@@ -60,18 +57,14 @@ const FriendList = () => {
         </div>
         `;
         
-        console.log("Section content:", section.innerHTML);
-
         const friendsListContainer = document.querySelector('.main-containerf');
         if (friendsListContainer) {
             setTimeout(() => {
                 friendsListContainer.classList.add('fl-visible');
                 friendsListContainer.classList.remove('fl-hidden');
-            }, 0); // Delay to ensure the DOM has updated
+            }, 0);
         }
-    } else {
-        console.error("#section not found in the DOM");
-    }
+    } 
 };
 
 export default FriendList;

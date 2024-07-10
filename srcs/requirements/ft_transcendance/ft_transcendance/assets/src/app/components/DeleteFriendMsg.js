@@ -34,10 +34,8 @@ const DeleteFriendMsg = () => {
             </div>
         </div>
     `; 
-    console.log("Section content:", section.innerHTML);
-    } else {
-        console.error("#section not found in the DOM");
     }
+    
 };
 
 export default DeleteFriendMsg;

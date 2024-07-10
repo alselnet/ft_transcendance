@@ -1,6 +1,6 @@
-const Home = () => {
-    console.log("Home component loaded");
+import { animateBalls } from "../animation/HomeAnimation.js";
 
+const Home = () => {
     let root = document.getElementById("root");
     if (!root) {
         console.error("#root not found in the DOM");
@@ -94,80 +94,15 @@ const Home = () => {
             </div>
         </div>
     `;
-        console.log("Section content:", section.innerHTML);
 
-        // Fonction de timing pour le rebond
-        function bounce(timeFraction) {
-            for (let a = 0, b = 1; 1; a += b, b /= 2) {
-                if (timeFraction >= (7 - 4 * a) / 11) {
-                    return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2);
-                }
-            }
-        }
+    const whiteBall = document.querySelector('.white-ball-home');
+    const orangeBall = document.querySelector('.orange-ball-home');
 
-        function makeEaseOut(timing) {
-            return function(timeFraction) {
-                return 1 - timing(1 - timeFraction);
-            };
-        }
-
-        function animate({timing, draw, duration}) {
-            let start = performance.now();
-
-            requestAnimationFrame(function animate(time) {
-                let timeFraction = (time - start) / duration;
-                if (timeFraction > 1) timeFraction = 1;
-
-                let progress = timing(timeFraction);
-
-                draw(progress);
-
-                if (timeFraction < 1) {
-                    requestAnimationFrame(animate);
-                }
-            });
-        }
-
-        // Animation des balles
-        const whiteBall = document.querySelector('.white-ball-home');
-        const orangeBall = document.querySelector('.orange-ball-home');
-
-        if (whiteBall && orangeBall) {
-
-            whiteBall.style.position = 'absolute';
-            orangeBall.style.position = 'absolute';
-
-            whiteBall.style.top = '0';
-            orangeBall.style.top = '0';
-
-            const toWhite = (section.clientHeight - whiteBall.clientHeight) / 2;
-            const toOrange = (section.clientHeight - orangeBall.clientHeight) / 2;
-
-            console.log(section.clientHeight);
-            console.log(whiteBall.clientHeight);
-
-            animate({
-                duration: 2000,
-                timing: makeEaseOut(bounce),
-                draw(progress) {
-                    whiteBall.style.transform = `translateY(${toWhite * progress}px)`;
-                }
-            });
-
-            setTimeout(() => {
-                animate({
-                    duration: 2000,
-                    timing: makeEaseOut(bounce),
-                    draw(progress) {
-                        orangeBall.style.transform = `translateY(${toOrange * progress}px)`;
-                    }
-                });
-            }, 1000); // Débuter l'animation de la balle orange après 1 seconde
-        } else {
-            console.error(".white-ball-home or .orange-ball-home not found in the DOM");
-        }
+    if (whiteBall && orangeBall) {
+        animateBalls(section, whiteBall, orangeBall);
     } else {
-        console.error("#section not found in the DOM");
+        console.error(".white-ball-home or .orange-ball-home not found in the DOM");
+    }
     }
 
 };

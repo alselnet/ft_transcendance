@@ -1,7 +1,5 @@
 const FriendsList = () => {
     let section = document.querySelector("#section");
-    console.log("Friends List component loaded");
-
         section.innerHTML = 
         `
         <div class="main-containerf">
@@ -40,7 +38,7 @@ const FriendsList = () => {
         </div>
         </div>
         `; 
-        return form;
+        return section;
 };
 
 export default FriendsList;

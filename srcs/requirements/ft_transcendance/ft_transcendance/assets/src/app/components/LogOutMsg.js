@@ -8,7 +8,6 @@ const LogOutMsg = () => {
         return;
     }
 
-    // Retirer Navbar et bouton logout
     let navbar = document.querySelector(".navbar-container");
     if (navbar) {
         navbar.remove();
@@ -35,9 +34,6 @@ const LogOutMsg = () => {
             </div>
         </div>
     `; 
-    console.log("Section content:", section.innerHTML);
-    } else {
-        console.error("#section not found in the DOM");
     }
 };
 

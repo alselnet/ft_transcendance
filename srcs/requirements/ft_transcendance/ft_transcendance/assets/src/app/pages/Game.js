@@ -1,5 +1,4 @@
 const Game = () => {
-    console.log("CanvaGame component loaded");
     let section = document.querySelector("#section");
     if (section) {
         section.innerHTML = 
@@ -373,8 +372,6 @@ const Game = () => {
         }
         
         gameLoop();
-    } else {
-        console.error("#section not found in the DOM");
     }
 };
 

@@ -1,6 +1,4 @@
 const Leaderboard = () => {
-	console.log("Leaderboard component loaded");
-
     let root = document.getElementById("root");
     if (!root) {
         console.error("#root not found in the DOM");
@@ -84,7 +82,6 @@ const Leaderboard = () => {
             </div>
         </div>
         `;
-		console.log("Section content:", section.innerHTML);
 
 		const leaderboardContainer = document.querySelector('.container-ldb');
 		if (leaderboardContainer) {
@@ -92,19 +89,7 @@ const Leaderboard = () => {
 				leaderboardContainer.classList.add('animate-ldb');
 			}, 0);
 		}
-	} else {
-		console.error("#section not found in the DOM");
 	}
 };
 
 export default Leaderboard;
-
-
-
-                        {/* <div class="pod-two"> */}
-                            {/* <div class="pod-result-ldb"> */}
-                                {/* <div class="profile-picture-ldb"><img src="./app/images/tmejri_avatar.png" alt="jcointre"></div> */}
-                                {/* <div class="username-ldb">Jcointre</div> */}
-                                {/* <div class="score-ldb">1234 pts</div> */}
-                            {/* </div> */}
-                        {/* </div> */}

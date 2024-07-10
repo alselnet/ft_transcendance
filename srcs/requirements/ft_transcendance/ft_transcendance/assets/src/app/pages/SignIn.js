@@ -140,11 +140,9 @@
 // 	});
 // };
 
-import { getCookie } from '../utils/cookies'
+// import { getCookie } from '../utils/cookies'
 
 const SignIn = () => {
-    console.log("SignIn component loaded");
-
     let root = document.getElementById("root");
     if (!root) {
         console.error("#root not found in the DOM");
@@ -197,11 +195,7 @@ const SignIn = () => {
         </div>
     </div>
         `;
-        console.log("Section content:", section.innerHTML);
-    } else {
-        console.error("#section not found in the DOM");
     }
-
     // Attacher l'événement submit au formulaire
     const form = document.getElementById("signin-form") || document.getElementById("signin-form-sm"); // Modifié pour attacher l'événement au formulaire
     form.addEventListener("submit", (event) => {

@@ -119,11 +119,10 @@
 // };
 
 // export default LogIn;
-import { getCookie } from '../utils/cookies'
+
+// import { getCookie } from '../utils/cookies'
 
 const LogIn = () => {
-    console.log("Login component loaded");
-
     let root = document.getElementById("root");
     if (!root) {
         console.error("#root not found in the DOM");
@@ -179,10 +178,7 @@ const LogIn = () => {
             </div>
         </div>
     `;
-        console.log("Section content:", section.innerHTML);
-    } else {
-        console.error("#section not found in the DOM");
-    }
+    } 
 
     // Attacher l'événement submit au formulaire
     const form = document.getElementById("login-form") || document.getElementById("login-form-sm"); // Modifié pour attacher l'événement au formulaire
