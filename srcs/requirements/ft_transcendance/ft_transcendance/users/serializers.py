@@ -12,13 +12,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-
-class GameSummarySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = GameSummary
-        fields = ('winner', 'loser', 'score', 'date_time')
-
-
 class PublicUserInfoSerializer(serializers.ModelSerializer):
 	
     class Meta:

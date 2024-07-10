@@ -9,6 +9,8 @@ up:
 	@mkdir -p /Users/alexandreselnet/Coding/Static_volume
 	@chmod -R 777 /Users/alexandreselnet/Coding/Postgres_volume
 	@chmod -R 777 /Users/alexandreselnet/Coding/Static_volume
+	@echo "Bundling frontend files..."
+	@cd srcs/requirements/ft_transcendance/ft_transcendance/assets/src && npm run build
 	@echo "Launching docker-compose..."
 	@docker-compose -f srcs/docker-compose.yml up --build
 

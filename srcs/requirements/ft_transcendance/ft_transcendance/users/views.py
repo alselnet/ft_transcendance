@@ -64,10 +64,14 @@ class MyGameHistory(APIView):
         
         if not all([winner_username, loser_username, score]):
             raise ValidationError('Winner, loser, and score fields are required.')
-        
+
+        if winner_username != user.username:
+            return Response({'error': 'You must be the winner to create a game summary.'}, status=status.HTTP_403_FORBIDDEN)
+    
         try:
             winner = User.objects.get(username=winner_username)
             loser = User.objects.get(username=loser_username)
+
         except User.DoesNotExist:
             return Response({'error': 'Winner or loser not found.'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -86,7 +90,24 @@ class MyGameHistory(APIView):
 
         return Response(game_summary_data, status=status.HTTP_201_CREATED)
 
+
+class FriendListView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, username):
+        user = request.user
+        friends = Friend.objects.filter(user=user)
+        friendsof = Friend.object.filter(friend=user)
+        friendlist_data = [
+            {'friend': friend.friend.username} for friend in friends
+        ] + [
+            {'friend': friend.user.username} for friend in friendsof
+        ]
+
+        return Response(friendlist_data, status=200)
 	
+
 # class ChangeAvatarView(APIView):
 #     parser_classes = (MultiPartParser, FormParser) # Definit les parseurs utilises -> typiquement pour les DL de fichiers
 
@@ -174,13 +195,6 @@ class MyGameHistory(APIView):
 #         friendship.delete()
 #         return Response({'detail': 'Friend removed'}, status=status.HTTP_204_NO_CONTENT)
     
-
-# class FriendListView(APIView):
-#     def get(self, request, username):
-#         user = get_object_or_404(User, username=username)
-#         friends = user.friends.all()
-#         serializer = UserSerializer(friends, many=True)
-#         return Response(serializer.data, status=status.HTTP_200_OK)
     
 
 # class ProfileStatusUpdateView(APIView):
