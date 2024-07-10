@@ -25,7 +25,6 @@ export const Router = () => {
     }
 
     const routeAsync = async () => {
-        await checkAuth();
 
         switch (hash) {
             case "#/":
@@ -38,36 +37,47 @@ export const Router = () => {
                 LogIn();
                 break;
             case "#/game":
+                await checkAuth();
                 Game();
                 break;
             case "#/dashboard":
+                await checkAuth();
                 Dashboard();
                 break;
             case "#/leaderboard":
+                await checkAuth();
                 Leaderboard();
                 break;
             case "#/settings":
+                await checkAuth();
                 Settings();
                 break;
             case "#/aboutus":
+                await checkAuth();
                 AboutUs();
                 break;
             case "#/friendlist":
+                await checkAuth();
                 FriendList();
                 break;
             case "#/gamehistory":
+                await checkAuth();
                 GameHistory();
                 break;
             case "#/2fa":
+                await checkAuth();
                 TwoFactorAuth();
                 break;
             case "#/logout":
+                await checkAuth();
                 LogOutMsg();
                 break;
             case "#/frienddashboard":
+                await checkAuth();
                 FriendDashboard();
                 break;
             case "#/deletefriendmsg":
+                await checkAuth();
                 DeleteFriendMsg();
                 break;
 
