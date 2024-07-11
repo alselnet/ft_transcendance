@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 from phonenumber_field.modelfields import PhoneNumberField
 import logging
 
@@ -8,7 +9,14 @@ logger = logging.getLogger(__name__)
 class GameSummary(models.Model):
     winner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='won_games') #cote user, user.won_games.all() retournerait toutes les games gagnées par l'utilisateur
     loser = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='lost_games')
-    score = models.CharField(max_length=100)
+    winner_score = models.IntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(9)]
+    )
+    loser_score = models.IntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(9)]
+    )
+    perfect = models.BooleanField(default=False)
+    local_game = models.BooleanField(default=False)
     date_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -18,19 +26,19 @@ class Profile(models.Model):
     STATUS_CHOICES = (
         ('online', 'Online'),
         ('offline', 'Offline'),
-        ('in_game', 'In Game'),
+        ('in game', 'in game'),
     )
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='offline')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     two_factors_auth_status = models.BooleanField(default=False)
     mail_confirmation_status = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to='avatars/', default='avatars/default.png')
-    phone_number = PhoneNumberField(blank=True, null=True)
-    #nombre de points marqués
-    #nombre de points encaissés
-    #nombre de parties jouées
-    #nombre de parties gagnées
-    #nombre de perfect
+    phone_number = PhoneNumberField(blank=True, null=True, default='+0000000000')
+    scored_points = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    conceded_points = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    played_games = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    won_games = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    perfect_wins = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     
     def __str__(self):
         return self.user.username

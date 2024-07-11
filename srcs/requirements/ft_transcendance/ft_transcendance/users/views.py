@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from .serializers import EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, ProfileSerializer
+from .serializers import EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, AvatarSerializer, StatusUpdateSerializer
 from .models import GameSummary, Profile, Friend
 
 class MeView(APIView):
@@ -46,8 +46,9 @@ class MyGameHistory(APIView):
             {
                 'winner': game.winner.username if game.winner else None,
                 'loser': game.loser.username if game.loser else None,
-                'score': game.score, #score j1 score j2
-                #local : bool
+                'winner_score': game.winner_score,
+                'loser_score': game.loser_score,
+               	'local_game': game.local_game,
                 'date_time': game.date_time
             }
             for game in game_history
@@ -61,32 +62,36 @@ class MyGameHistory(APIView):
         
         winner_username = data.get('winner')
         loser_username = data.get('loser')
-        score = data.get('score')
+        winner_score = data.get('winner_score')
+        loser_score = data.get('loser_score')
+        local_game = data.get('local_game')
         
-        if not all([winner_username, loser_username, score]):
-            raise ValidationError('Winner, loser, and score fields are required.')
+        if not all([winner_username, loser_username, winner_score, loser_score, local_game]):
+            raise ValidationError('Winner, loser, winner_score, loser_score, and local_game fields are required.')
 
-		#add a locale check
-        if winner_username != user.username:
-            return Response({'error': 'You must be the winner to create a game summary.'}, status=status.HTTP_403_FORBIDDEN)
-    
-        try:
-            winner = User.objects.get(username=winner_username)
-            loser = User.objects.get(username=loser_username)
-
-        except User.DoesNotExist:
-            return Response({'error': 'Winner or loser not found.'}, status=status.HTTP_400_BAD_REQUEST)
+        if local_game is False:
+            if winner_username != user.username:
+                return Response({'error': 'You must be the winner to create a game summary.'}, status=status.HTTP_403_FORBIDDEN)
+            try:
+                winner = User.objects.get(username=winner_username)
+                loser = User.objects.get(username=loser_username)
+            except User.DoesNotExist:
+                return Response({'error': 'Winner user or loser user not found.'}, status=status.HTTP_400_BAD_REQUEST)
 
         game_summary = GameSummary.objects.create(
-            winner=winner,
-            loser=loser,
-            score=score
+            winner = winner,
+            loser = loser,
+            winner_score = winner_score,
+            loser_score =  loser_score,
+            local_game = local_game
         )
         
         game_summary_data = {
             'winner': game_summary.winner.username if game_summary.winner else None,
             'loser': game_summary.loser.username if game_summary.loser else None,
-            'score': game_summary.score,
+            'winner_score': game_summary.winner_score,
+            'loser_score': game_summary.loser_score,
+            'local_Game': game_summary.local_game,
             'date_time': game_summary.date_time
         }
 
@@ -118,7 +123,7 @@ class UpdateAvatarView(APIView):
     def post(self, request):
         profile = request.user.profile
 
-        serializer = ProfileSerializer(profile, data=request.data)
+        serializer = AvatarSerializer(profile, data=request.data)
 
         if serializer.is_valid():
             serializer.save()
@@ -170,12 +175,12 @@ class UpdateStatusView(APIView):
     def put(self, request):
         user = request.user
         profile = Profile.objects.get(user=user)
-        serializer = ProfileSerializer(profile, data=request.data)
+        serializer = StatusUpdateSerializer(profile, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
 
 class PublicUserInfoView(APIView):
     authentication_classes = [JWTAuthentication]
