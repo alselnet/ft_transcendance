@@ -26,6 +26,11 @@ class MeView(APIView):
             'mail_confirmation_status': profile.mail_confirmation_status,
             'avatar': profile.avatar.url,
             'phone_number': str(profile.phone_number),
+            'scored_points': profile.scored_points,
+            'conceded_points': profile.conceded_points,
+            'played_games': profile.played_games,
+            'won_games': profile.won_games,
+            'perfect_wins': profile.perfect_wins
         }
 
         return Response(user_data, status=200)
@@ -229,6 +234,11 @@ class PublicUserInfoView(APIView):
             'username': user.username,
             'status': profile.status,
             'avatar': profile.avatar.url,
+            'scored_points': profile.scored_points,
+            'conceded_points': profile.conceded_points,
+            'played_games': profile.played_games,
+            'won_games': profile.won_games,
+            'perfect_wins': profile.perfect_wins
         }
 
         return Response(user_data, status=200)
