@@ -51,29 +51,7 @@ class Friend(models.Model):
     class Meta:
         unique_together = ('user', 'friend')
 
-
-
-
-# -------------------------
-# Logique pour creer un résumé de partie et le link aux utilisateurs concernés
-# 
-# from django.utils import timezone
-# 
-# user1 = MyUser.objects.get(username='username1')
-# user2 = MyUser.objects.get(username='username2')
-# 
-# game_summary = GameSummary.objects.create(
-#     winner=user1,
-#     loser=user2,
-#     score='10-8',
-#     date_time=timezone.now()
-# )
-# 
-# user1.games_played.add(game_summary)
-# user2.games_played.add(game_summary)
-# 
-# -------------------------------------------------
-# 
+ 
 # Implémentation de logique pour la suppression des résumés de partie, on veut que si les deux 
 #utilisateurs soient supprimés le résumé soit supprimé, mais pas si un seul des deux l'est. Cette fonction
 #est sensée être appelée au moment ou un utilisateur est supprimé.

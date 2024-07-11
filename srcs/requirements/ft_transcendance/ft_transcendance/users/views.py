@@ -30,7 +30,7 @@ class MeView(APIView):
 
         return Response(user_data, status=200)
 
-
+    
 class MyGameHistory(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
@@ -44,10 +44,11 @@ class MyGameHistory(APIView):
         
         game_history_data = [
             {
-                'winner': game.winner.username if game.winner else None,
-                'loser': game.loser.username if game.loser else None,
+                'winner': game.winner.username if game.winner else 'Guest',
+                'loser': game.loser.username if game.loser else 'Guest',
                 'winner_score': game.winner_score,
                 'loser_score': game.loser_score,
+                'perfect': game.perfect,
                	'local_game': game.local_game,
                 'date_time': game.date_time
             }
@@ -57,6 +58,7 @@ class MyGameHistory(APIView):
         return Response(game_history_data, status=200)
 
     def post(self, request):
+#GETTING DATA FROM FRONT
         user = request.user
         data = request.data
         
@@ -64,11 +66,13 @@ class MyGameHistory(APIView):
         loser_username = data.get('loser')
         winner_score = data.get('winner_score')
         loser_score = data.get('loser_score')
+        perfect = data.get('perfect')
         local_game = data.get('local_game')
         
-        if not all([winner_username, loser_username, winner_score, loser_score, local_game]):
-            raise ValidationError('Winner, loser, winner_score, loser_score, and local_game fields are required.')
+        if not all([winner_username, loser_username, winner_score, loser_score, perfect, local_game]):
+            raise ValidationError('Winner, loser, winner_score, loser_score, perfect and local_game fields are required.')
 
+# UPDATING GAME STATS
         if local_game is False:
             if winner_username != user.username:
                 return Response({'error': 'You must be the winner to create a game summary.'}, status=status.HTTP_403_FORBIDDEN)
@@ -77,20 +81,52 @@ class MyGameHistory(APIView):
                 loser = User.objects.get(username=loser_username)
             except User.DoesNotExist:
                 return Response({'error': 'Winner user or loser user not found.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+            winner_profile = winner.profile
+            loser_profile = loser.profile
+            winner_profile.scored_points += winner_score
+            winner_profile.conceded_points += loser_score
+            winner_profile.played_games += 1
+            if perfect:
+                winner_profile.perfect_wins += 1
+            winner_profile.save()
 
+            loser_profile.scored_points += loser_score
+            loser_profile.conceded_points += winner_score
+            loser_profile.played_games += 1
+            loser_profile.save()
+		
+        else:
+            if user.username == winner_username:
+                user.profile.scored_points += winner_score
+                user.profile.conceded_points += loser_score
+                user.profile.played_games += 1
+                if perfect:
+                    user.profile.perfect_wins += 1
+                user.profile.save()
+            else:
+                user.profile.scored_points += loser_score
+                user.profile.conceded_points += winner_score
+                user.profile.played_games += 1
+                user.profile.save()
+                
+#CREATING GAME SUMMARY INSTANCE
         game_summary = GameSummary.objects.create(
             winner = winner,
             loser = loser,
             winner_score = winner_score,
+            perfect = perfect,
             loser_score =  loser_score,
             local_game = local_game
         )
-        
+
+ #SENDING RELEVANT DATA BACK       
         game_summary_data = {
             'winner': game_summary.winner.username if game_summary.winner else None,
             'loser': game_summary.loser.username if game_summary.loser else None,
             'winner_score': game_summary.winner_score,
             'loser_score': game_summary.loser_score,
+            'perfect': game_summary.perfect,
             'local_Game': game_summary.local_game,
             'date_time': game_summary.date_time
         }
@@ -213,7 +249,10 @@ class PublicGameHistoryView(APIView):
             {
                 'winner': game.winner.username if game.winner else None,
                 'loser': game.loser.username if game.loser else None,
-                'score': game.score,
+                'winner_score': game.winner_score,
+                'loser_score': game.loser_score,
+                'perfect': game.perfect,
+               	'local_game': game.local_game,
                 'date_time': game.date_time
             }
             for game in game_history

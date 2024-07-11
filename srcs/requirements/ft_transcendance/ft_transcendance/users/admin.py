@@ -2,11 +2,11 @@ from django.contrib import admin
 from .models import GameSummary, Profile, Friend
 
 class GameSummaryAdmin(admin.ModelAdmin):
-    list_display = ('winner', 'loser', 'score', 'date_time')
+    list_display = ('winner', 'loser', 'winner_score', 'loser_score', 'perfect', 'local_game', 'date_time')
     
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('status', 'user', 'two_factors_auth_status', 'mail_confirmation_status', 'avatar', 'phone_number')
+    list_display = ('status', 'user', 'two_factors_auth_status', 'mail_confirmation_status', 'avatar', 'phone_number', 'scored_points', 'conceded_points', 'played_games', 'won_games', 'perfect_wins')
     def user(self, obj):
         return obj.user.username
     
