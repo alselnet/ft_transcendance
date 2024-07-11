@@ -69,8 +69,8 @@ class MyGameHistory(APIView):
         perfect = data.get('perfect')
         local_game = data.get('local_game')
         
-        if not all([winner_username, loser_username, winner_score, loser_score, perfect, local_game]):
-            raise ValidationError('Winner, loser, winner_score, loser_score, perfect and local_game fields are required.')
+        if not all(key in data for key in ['winner', 'loser', 'winner_score', 'loser_score', 'perfect', 'local_game']):
+            raise ValidationError('winner, loser, winner_score, loser_score, perfect and local_game fields are required.')
 
 # UPDATING GAME STATS
         if local_game is False:

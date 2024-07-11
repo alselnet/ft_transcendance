@@ -20,7 +20,7 @@ class GameSummary(models.Model):
     date_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Winner: {self.winner}, Loser: {self.loser}, Score: {self.score}, Date: {self.date_time}"
+        return f"Winner: {self.winner}, Loser: {self.loser}, Winner_score: {self.winner_score}, Loser_score: {self.loser_score}, Perfect: {self.perfect}, Local_game: {self.local_game}, Date: {self.date_time}"
 
 class Profile(models.Model):
     STATUS_CHOICES = (

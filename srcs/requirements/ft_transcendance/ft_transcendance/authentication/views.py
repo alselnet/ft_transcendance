@@ -9,12 +9,14 @@ from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.urls import reverse
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.views import APIView
 from twilio.rest import Client
 from ft_transcendance.settings import EMAIL_HOST_USER
-from users.models import Profile
+from users.models import Profile, GameSummary
 from .models import TwoFactorsCode
 from .utils import generate_token, verify_token
 from .serializers import UserRegistrationSerializer, TwoFactorsCodeSerializer
@@ -33,22 +35,62 @@ class UserRegistrationView(APIView):
 			}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class UserDeletionView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request):
+        try:
+            user = request.user
+            game_summaries = GameSummary.objects.filter(winner=user) | GameSummary.objects.filter(loser=user)
+            for game in game_summaries:
+                winner_exists = True if game.winner and User.objects.filter(username=game.winner.username).exists() else False
+                loser_exists = True if game.loser and User.objects.filter(username=game.loser.username).exists() else False
+                
+                if not winner_exists or not loser_exists:
+                     game.delete()
+
+            user.delete()
+            return Response({"message": "User and related game summaries deleted successfully"}, status=status.HTTP_200_OK)
+        
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+
 class UserSigninView(APIView):
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')
         user = authenticate(username=username, password=password)
 
-        if user is not None:
+        if user:
             refresh = RefreshToken.for_user(user)
+
             return Response({
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
                 'username': username,
                 'message':'successful login'
             }, status=status.HTTP_200_OK)
+
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
     
+class UserSignoutView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        profile = Profile.objects.get(user=user)
+        profile.status = 'offline'
+        profile.save()
+
+        return Response({"message": "Logout successful"}, status=status.HTTP_200_OK)
+        
+
 def FortyTwoLoginView(request):
     client_id = settings.CLIENT_ID
     redirect_uri = settings.REDIRECT_URI
