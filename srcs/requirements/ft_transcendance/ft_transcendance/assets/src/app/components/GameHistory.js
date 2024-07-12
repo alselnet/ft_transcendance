@@ -1,4 +1,5 @@
 import { checkAuth } from "../services/Api.js"
+import Jcointre from '../images/jecointr_avatar.png'
 
 const GameHistory = async () => {
 
@@ -47,35 +48,35 @@ const GameHistory = async () => {
                     <tbody>
                         <tr>
                             <td>12/05/2024</td>
-                            <td><img src="./app/images/jecointr_avatar.png" alt="jecointr"> jecointr</td>
+                            <td><img src="${Jcointre}" alt="jecointr"> jecointr</td>
                             <td>1 v 1</td>
                             <td class="defeat2s">Defeat</td>
                             <td>5 - 4</td>
                         </tr>
                         <tr>
                             <td>16/05/2024</td>
-                            <td><img src="./app/images/jecointr_avatar.png" alt="jecointr"> jecointr</td>
+                            <td><img src="${Jcointre}" alt="jecointr"> jecointr</td>
                             <td>1 v 1</td>
                             <td class="victory2">Victory</td>
                             <td>15 - 14</td>
                         </tr>
                         <tr>
                             <td>20/05/2024</td>
-                            <td><img src="./app/images/jecointr_avatar.png" alt="jecointr"> jecointr</td>
+                            <td><img src="${Jcointre}" alt="jecointr"> jecointr</td>
                             <td>1 v 1</td>
                             <td class="defeat2">Defeat</td>
                             <td>12 - 4</td>
                         </tr>
                         <tr>
                             <td>22/05/2024</td>
-                            <td><img src="./app/images/jecointr_avatar.png" alt="jecointr"> jecointr</td>
+                            <td><img src="${Jcointre}" alt="jecointr"> jecointr</td>
                             <td>1 v 1</td>
                             <td class="victory2">Victory</td>
                             <td>25 - 10</td>
                         </tr>
                         <tr>
                             <td>27/05/2024</td>
-                            <td><img src="./app/images/jecointr_avatar.png" alt="jecointr"> jecointr</td>
+                            <td><img src="${Jcointre}" alt="jecointr"> jecointr</td>
                             <td>1 v 1</td>
                             <td class="defeat2">Defeat</td>
                             <td>12 - 10</td>

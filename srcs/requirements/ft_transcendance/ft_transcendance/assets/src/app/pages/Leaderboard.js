@@ -1,4 +1,5 @@
 import { checkAuth } from "../services/Api.js"
+import Tmejri from '../images/Tasnim.jpg'
 
 const Leaderboard = async () => {
     
@@ -34,7 +35,7 @@ const Leaderboard = async () => {
                     <div class="podium-ldb">
                         <div class="second-ldb">
                             <div class="pod-result-ldb">
-                                <div class="profile-picture-ldb-pod"><img src="./app/images/tmejri_avatar.png" alt="jcointre"></div>
+                                <div class="profile-picture-ldb-pod"><img src="${Tmejri}" alt="tmejri"></div>
                                 <div class="username-ldb-pod">Tmejri</div>
                                 <div class="score-ldb-pod">1234 pts</div>
                             </div>
@@ -44,7 +45,7 @@ const Leaderboard = async () => {
 
                         <div class="first-ldb">
                             <div class="pod-result-one-ldb">
-                                <div class="profile-picture-ldb-pod"><img src="./app/images/jecointr_avatar.png" alt="jcointre"></div>
+                                <div class="profile-picture-ldb-pod"><img src="${Tmejri}" alt="tmejri"></div>
                                 <div class="username-ldb-pod">Jcointre</div>
                                 <div class="score-ldb-pod">1234 pts</div>
                             </div>
@@ -54,7 +55,7 @@ const Leaderboard = async () => {
 
                         <div class="third-ldb">
                             <div class="pod-result-third-ldb">
-                                <div class="profile-picture-ldb-pod"><img src="./app/images/Jules.png" alt="jcointre"></div>
+                                <div class="profile-picture-ldb-pod"><img src="${Tmejri}" alt="tmejri"></div>
                                 <div class="username-ldb-pod">Jthuysba</div>
                                 <div class="score-ldb-pod">1234 pts</div>
                             </div>
@@ -65,25 +66,25 @@ const Leaderboard = async () => {
                 <div class="leaderboard-list-ldb">
                     <div class="profil-ldb">
                         <div class="rank-ldb">4.</div>
-                        <div class="profile-picture-ldb"><img src="./app/images/hugo.png" alt="jcointre"></div>
+                        <div class="profile-picture-ldb"><img src="${Tmejri}" alt="tmejri"></div>
                         <div class="username-ldb">Hcoulon</div>
                         <div class="score-ldb">1234 pts</div>
                     </div>
                     <div class="profil-ldb">
                         <div class="rank-ldb">5.</div>
-                        <div class="profile-picture-ldb"><img src="./app/images/profile.png" alt="jcointre"></div>
+                        <div class="profile-picture-ldb"><img src="${Tmejri}" alt="tmejri"></div>
                         <div class="username-ldb">Aselnet</div>
                         <div class="score-ldb">1233 pts</div>
                     </div>
                     <div class="profil-ldb">
                         <div class="rank-ldb">6.</div>
-                        <div class="profile-picture-ldb"><img src="./app/images/jecointr_avatar.png" alt="jcointre"></div>
+                        <div class="profile-picture-ldb"><img src="${Tmejri}" alt="tmejri"></div>
                         <div class="username-ldb">Jcointre</div>
                         <div class="score-ldb">1232 pts</div>
                     </div>
                     <div class="profil-ldb">
                         <div class="rank-ldb">7.</div>
-                        <div class="profile-picture-ldb"><img src="./app/images/tmejri_avatar.png" alt="jcointre"></div>
+                        <div class="profile-picture-ldb"><img src="${Tmejri}" alt="tmejri"></div>
                         <div class="username-ldb">Tmejri</div>
                         <div class="score-ldb">1231 pts</div>
                     </div>

@@ -5,10 +5,10 @@ all: up
 
 up:
 	@echo "Creating DB volume..."
-	@mkdir -p /Users/alexandreselnet/Coding/Postgres_volume
-	@mkdir -p /Users/alexandreselnet/Coding/Static_volume
-	@chmod -R 777 /Users/alexandreselnet/Coding/Postgres_volume
-	@chmod -R 777 /Users/alexandreselnet/Coding/Static_volume
+	@mkdir -p /home/t/Postgres_volume
+	@mkdir -p /home/t/Static_volume
+	@chmod -R 777 /home/t/Postgres_volume
+	@chmod -R 777 /home/t/Static_volume
 	@echo "Bundling frontend files..."
 	@cd srcs/requirements/ft_transcendance/ft_transcendance/assets/src && npm run build
 	@echo "Launching docker-compose..."

@@ -1,4 +1,5 @@
 import { checkAuth } from "../services/Api.js"
+import Jcointre from '../images/jecointr_avatar.png'
 
 const FriendList = async () => {
 
@@ -36,27 +37,27 @@ const FriendList = async () => {
             <table class="friends-tablef">
                 <tbody>
                     <tr>
-                        <td><img src="./app/images/jecointr_avatar.png" alt="jecointr"> </td>
+                        <td><img src="${Jcointre}" alt="jecointr"> </td>
                         <td><span class="userf">jecointr</span></td>
                         <td><span class="remove-btnf">&times;</span></td>
                     </tr>
                     <tr>
-                        <td><img src="./app/images/jecointr_avatar.png" alt="jecointr"> </td>
+                        <td><img src="${Jcointre}" alt="jecointr"> </td>
                         <td><span class="userf">jecointr</span></td>
                         <td><span class="remove-btnf">&times;</span></td>
                     </tr>
                     <tr>
-                        <td><img src="./app/images/jecointr_avatar.png" alt="jecointr"> </td>
+                        <td><img src="${Jcointre}" alt="jecointr"> </td>
                         <td><span class="userf">jecointr</span></td>
                         <td><span class="remove-btnf">&times;</span></td>
                     </tr>
                     <tr>
-                        <td><img src="./app/images/jecointr_avatar.png" alt="jecointr"></td>
+                        <td><img src="${Jcointre}" alt="jecointr"></td>
                         <td><span class="userf">jecointr</span></td>
                         <td><span class="remove-btnf">&times;</span></td>
                     </tr>
                     <tr>
-                        <td><img src="./app/images/jecointr_avatar.png" alt="jecointr"></td>
+                        <td><img src="${Jcointre}" alt="jecointr"></td>
                         <td><span class="userf">jecointr</span></td>
                         <td><span class="remove-btnf">&times;</span></td>
                     </tr>

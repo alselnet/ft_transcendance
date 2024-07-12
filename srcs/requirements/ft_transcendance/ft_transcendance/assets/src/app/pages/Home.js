@@ -1,5 +1,6 @@
 import { animateBalls } from "../animation/HomeAnimation.js";
 import { FortyTwoSignIn } from "./42SignIn.js";
+import img42 from '../images/42.png';
 
 const Home = () => {
     let root = document.getElementById("root");
@@ -53,7 +54,7 @@ const Home = () => {
             <div class="btn-container-home">
                 <button id="fortyTwoSignInBtn" class="btn-42-home">
                     <p class="co-42-home">connexion avec</p>
-                    <img src="./app/images/42.png" class="img-42-home" alt="button-42">
+                    <img src="${img42}" class="img-42-home" alt="button-42">
                 </button>
             </div>
         </div>
@@ -90,7 +91,7 @@ const Home = () => {
             <div class="btn-container-home">
                 <button id="fortyTwoSignInBtn" class="btn-42-home">
                     <p class="co-42-home">connexion avec</p>
-                    <img src="./app/images/42.png" class="img-42-home" alt="button-42">
+                    <img src="${img42}" class="img-42-home" alt="button-42">
                 </button>
             </div>
         </div>

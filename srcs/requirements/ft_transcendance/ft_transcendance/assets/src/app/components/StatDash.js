@@ -20,7 +20,7 @@ const DashStat = async () => {
         form.innerHTML = `
         <div class="left-side-stat">
             <div class="id-stat">
-                <div><img src="./app/images/tmejri_avatar.png" alt="profile-pic" class="profile-picture-stat"></div>
+                <div><img src="${userData.avatar}" alt="profile-pic" class="profile-picture-stat"></div>
                 
                 <div class="text-stat">
                     <div class="name-and-settings">

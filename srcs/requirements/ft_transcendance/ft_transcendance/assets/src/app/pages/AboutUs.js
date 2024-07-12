@@ -1,4 +1,9 @@
 import { checkAuth } from "../services/Api.js"
+import Jcointre from '../images/jecointr_avatar.png'
+import Hucoulon from '../images/hugo.png'
+import Tmejri from '../images/Tasnim.jpg'
+import Aselnet from '../images/profile.png'
+import Jthuysba from '../images/Jules.png'
 
 const AboutUs = async () => {
 
@@ -20,35 +25,35 @@ const AboutUs = async () => {
 	    		<div id="block1" class="col-md-6 col-lg-4 mb-3">
 	    			<div class="frame-aboutus">
 	    				<h1 class="name-cube">Jéremy COINTRE</h1>
-	    				<img class="img-us" src="./app/images/profile.png" alt="img-jeremy">
+	    				<img class="img-us" src="${Jcointre}" alt="img-jeremy">
 	    				<p>Développement du frontend</p>
 	    			</div>
 	    		</div>
 	    		<div id="block2" class="col-md-6 col-lg-4 mb-3">
 	    			<div class="frame-aboutus">
 	    				<h1 class="name-cube">Hugo COULON</h1>
-	    				<img class="img-us" src="./app/images/hugo.png" alt="img-hugo">
+	    				<img class="img-us" src="${Hucoulon}" alt="img-hugo">
 	    				<p>Développement du jeu</p>
 	    			</div>
 	    		</div>
 	    		<div id="block3" class="col-md-6 col-lg-4 mb-3">
 	    			<div class="frame-aboutus">
 	    				<h1 class="name-cube">Tasnim MEJRI</h1>
-	    				<img class="img-us" src="./app/images/Tasnim.jpg" alt="img-tasnim">
+	    				<img class="img-us" src="${Tmejri}" alt="img-tasnim">
 	    				<p>Développement du frontend</p>
 	    			</div>
 	    		</div>
 	    		<div id="block4" class="col-md-6 col-lg-4 mb-3">
 	    			<div class="frame-aboutus">
 	    				<h1 class="name-cube">Alexandre SELNET</h1>
-	    				<img class="img-us" src="./app/images/profile.png" alt="img-alex">
+	    				<img class="img-us" src="${Aselnet}" alt="img-alex">
 	    				<p>Développement du Backend</p>
 	    			</div>
 	    		</div>
 	    		<div id="block5" class="col-md-6 col-lg-4 mb-3">
 	    			<div class="frame-aboutus">
 	    				<h1 class="name-cube">Jules THUYSBAERT</h1>
-	    				<img class="img-us" src="./app/images/Jules.png" alt="img-jules">
+	    				<img class="img-us" src="${Jthuysba}" alt="img-jules">
 	    				<p>Développement du backend</p>
 	    			</div>
 	    		</div>
