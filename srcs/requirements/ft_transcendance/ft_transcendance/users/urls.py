@@ -9,6 +9,7 @@ urlpatterns = [
 	path('game_history/', MyGameHistory.as_view(), name='my-history'),
 	path('update_avatar/', UpdateAvatarView.as_view(), name='avatar-update'),
 	path('update_email/', UpdateEmailView.as_view(), name='email-update'),
+	path('update_status/', UpdateStatusView.as_view(), name='status-update'),
 	path('update_password/', UpdatePasswordView.as_view(), name='password-update'),
 	path('update_username/', UpdateUsernameView.as_view(), name='username-update'),
 	path('<str:username>/', PublicUserInfoView.as_view(), name='public_user_info'),

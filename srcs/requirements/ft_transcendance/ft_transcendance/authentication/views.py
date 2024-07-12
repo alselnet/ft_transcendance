@@ -97,6 +97,7 @@ def FortyTwoLoginView(request):
     auth_url = f"https://api.intra.42.fr/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
     return redirect(auth_url)
 
+
 class Callback(APIView):
     def get(self, request):
         code = request.GET.get('code')
@@ -129,18 +130,17 @@ class Callback(APIView):
                 user.email = email
                 user.save()
             refresh = RefreshToken.for_user(user)
-            return Response({
-                'refresh': str(refresh),
-                'access': str(refresh.access_token),
-                'message': 'User registered successfully',
-                'username': username
-                }, status=status.HTTP_200_OK)
+            redirect_url = f"https://localhost/#/callback?access={refresh.access_token}&refresh={refresh}&message=User registered successfully&username={username}"
+            return redirect(redirect_url)
         except requests.exceptions.RequestException as e:
             return Response({'error': 'Failed to obtain access token', 'details': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 def CsrfTokenView(request):
     csrf_token = get_token(request)
     return JsonResponse({'csrfToken': csrf_token})
+
 
 class ConfirmEmailView(APIView):
     def get(self, request, token):
@@ -172,6 +172,7 @@ class SendConfirmationEmailView(APIView):
             return Response({'message': 'Confirmation email sent'}, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response({'error': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
 
 class Generate2FACodeView(APIView):
     def post(self, request):

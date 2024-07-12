@@ -1,4 +1,5 @@
 import { animateBalls } from "../animation/HomeAnimation.js";
+import { FortyTwoSignIn } from "./42SignIn.js";
 
 const Home = () => {
     let root = document.getElementById("root");
@@ -15,7 +16,7 @@ const Home = () => {
     let logoutbutton = document.querySelector(".logout-container");
     if (logoutbutton) {
         logoutbutton.remove();
-    }    
+    }
 
     let section = document.querySelector("#section");
     if (section) {
@@ -50,7 +51,7 @@ const Home = () => {
                 </a>
             </div>
             <div class="btn-container-home">
-                <button onclick="window.location='https://localhost/api/auth/42login/';" class="btn-42-home">
+                <button id="fortyTwoSignInBtn" class="btn-42-home">
                     <p class="co-42-home">connexion avec</p>
                     <img src="./app/images/42.png" class="img-42-home" alt="button-42">
                 </button>
@@ -87,13 +88,14 @@ const Home = () => {
                 </a>
             </div>
             <div class="btn-container-home">
-                <button onclick="window.location='https://localhost/api/auth/42login/';" class="btn-42-home">
+                <button id="fortyTwoSignInBtn" class="btn-42-home">
                     <p class="co-42-home">connexion avec</p>
                     <img src="./app/images/42.png" class="img-42-home" alt="button-42">
                 </button>
             </div>
         </div>
-    `;
+        `; // Closing backtick here
+    }
 
     const whiteBall = document.querySelector('.white-ball-home');
     const orangeBall = document.querySelector('.orange-ball-home');
@@ -103,8 +105,13 @@ const Home = () => {
     } else {
         console.error(".white-ball-home or .orange-ball-home not found in the DOM");
     }
-    }
 
+    // MARCHE PAS ???
+    const signInButton = document.getElementById('fortyTwoSignInBtn');
+    signInButton.addEventListener('click', () => {
+        FortyTwoSignIn();
+    });
 };
 
 export { Home };
+
