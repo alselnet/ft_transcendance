@@ -67,14 +67,14 @@ volumes:
     driver_opts:
       type: volumes
       o: bind
-      device: /home/t/Postgres_volume
+      device: /Users/jeremycointre/Postgres_volume
 
   STATIC:
     driver: local
     driver_opts:
       type: volumes
       o: bind
-      device: /home/t/Static_volume
+      device: /Users/jeremycointre/Static_volume
       
 networks:
   transcendance:

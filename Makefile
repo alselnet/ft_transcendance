@@ -1,18 +1,20 @@
 PYTHON := python3
 PIP := pip3
 
+DOCKER_COMPOSE := $(shell if command -v docker-compose &> /dev/null; then echo docker-compose; else echo docker compose; fi)
+
 all: up
 
 up:
 	@echo "Creating DB volume..."
-	@mkdir -p /home/t/Postgres_volume
-	@mkdir -p /home/t/Static_volume
-	@chmod -R 777 /home/t/Postgres_volume
-	@chmod -R 777 /home/t/Static_volume
+	@mkdir -p /Users/jeremycointre/Postgres_volume
+	@mkdir -p /Users/jeremycointre/Static_volume
+	@chmod -R 777 /Users/jeremycointre/Postgres_volume
+	@chmod -R 777 /Users/jeremycointre/Static_volume
 	@echo "Bundling frontend files..."
 	@cd srcs/requirements/ft_transcendance/ft_transcendance/assets/src && npm run build
-	@echo "Launching docker-compose..."
-	@docker-compose -f srcs/docker-compose.yml up --build
+	@echo "Launching docker compose..."
+	@$(DOCKER_COMPOSE) -f srcs/docker-compose.yml up --build
 
 superuser:
 	@echo "Please enter a valid username and password for the new superuser (email field can stay blank): "
@@ -20,7 +22,7 @@ superuser:
 
 stop:
 	@echo "Stopping containers..."
-	@docker-compose -f srcs/docker-compose.yml down
+	@$(DOCKER_COMPOSE) -f srcs/docker-compose.yml down
     
 clean: stop
 	@echo "Deleting database image..."
