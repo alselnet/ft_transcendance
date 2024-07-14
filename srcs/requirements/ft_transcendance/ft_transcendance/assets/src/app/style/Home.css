@@ -33,7 +33,7 @@ a {
     height: 40vw;
     max-width: 60vh;
     max-height: 60vh;
-    margin-top: 6%;
+    margin-top: 3%;
     border-radius: 50%;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
     display: flex;
@@ -72,7 +72,7 @@ span:nth-child(2) { transform: rotate(9deg); top: 50.5%; left: 35%; }
 span:nth-child(3) { transform: rotate(6deg); top: 51.1%; left: 39%; }
 span:nth-child(4) { transform: rotate(4deg); top: 51.3%; left: 42%; }
 span:nth-child(5) { transform: rotate(2deg); top: 51.5%; left: 46%; }
-span:nth-child(6) { transform: rotate(0deg); top: 51.5%; left: 50%; }
+span:nth-child(6) { transform: rotate(0deg); top: 51.5%; left: 49.5%; }
 span:nth-child(7) { transform: rotate(-2deg); top: 51.5%; left: 52%; }
 span:nth-child(8) { transform: rotate(-4deg); top: 51.3%; left: 56%; }
 span:nth-child(9) { transform: rotate(-6deg); top: 51.1%; left: 59%; }
@@ -86,7 +86,7 @@ span:nth-child(1) { transform: rotate(9deg); top: 50%; left: 35%; }
 span:nth-child(2) { transform: rotate(6deg); top: 50.5%; left: 38%; }
 span:nth-child(3) { transform: rotate(4deg); top: 51%; left: 42%; }
 span:nth-child(4) { transform: rotate(2deg); top: 51.1%; left: 46%; }
-span:nth-child(5) { transform: rotate(0deg); top: 51.3%; left: 50%; }
+span:nth-child(5) { transform: rotate(0deg); top: 51.3%; left: 49.5%; }
 span:nth-child(6) { transform: rotate(-2deg); top: 51.2%; left: 53%; }
 span:nth-child(7) { transform: rotate(-4deg); top: 51%; left: 56%; }
 span:nth-child(8) { transform: rotate(-6deg); top: 50.5%; left: 58%; }
