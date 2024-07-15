@@ -1,16 +1,15 @@
 PYTHON := python3
 PIP := pip3
-
-DOCKER_COMPOSE := $(shell if command -v docker-compose &> /dev/null; then echo docker-compose; else echo docker compose; fi)
+DOCKER_COMPOSE := docker compose
 
 all: up
 
 up:
 	@echo "Creating DB volume..."
-	@mkdir -p /Users/jeremycointre/Postgres_volume
-	@mkdir -p /Users/jeremycointre/Static_volume
-	@chmod -R 777 /Users/jeremycointre/Postgres_volume
-	@chmod -R 777 /Users/jeremycointre/Static_volume
+	@mkdir -p /Users/jeremycointre/Coding/Postgres_volume
+	@mkdir -p /Users/jeremycointre/Coding/Static_volume
+	@chmod -R 777 /Users/jeremycointre/Coding/Postgres_volume
+	@chmod -R 777 /Users/jeremycointre/Coding/Static_volume
 	@echo "Bundling frontend files..."
 	@cd srcs/requirements/ft_transcendance/ft_transcendance/assets/src && npm run build
 	@echo "Launching docker compose..."
