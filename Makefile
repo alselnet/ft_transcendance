@@ -1,15 +1,16 @@
 PYTHON := python3
 PIP := pip3
 DOCKER_COMPOSE := docker compose
+VOLUMES_PATH := /home/jules/
 
 all: up
 
 up:
 	@echo "Creating DB volume..."
-	@mkdir -p /Users/jeremycointre/Coding/Postgres_volume
-	@mkdir -p /Users/jeremycointre/Coding/Static_volume
-	@chmod -R 777 /Users/jeremycointre/Coding/Postgres_volume
-	@chmod -R 777 /Users/jeremycointre/Coding/Static_volume
+	@mkdir -p $(VOLUMES_PATH)Postgres_volume
+	@mkdir -p $(VOLUMES_PATH)Static_volume
+	@chmod -R 777 $(VOLUMES_PATH)Postgres_volume
+	@chmod -R 777 $(VOLUMES_PATH)Static_volume
 	@echo "Bundling frontend files..."
 	@cd srcs/requirements/ft_transcendance/ft_transcendance/assets/src && npm run build
 	@echo "Launching docker compose..."
