@@ -1,16 +1,22 @@
+container-s {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .img-settings {
     width: 100px;
     height: 100px;
     border-radius: 50%;
 }
- 
+
 .profile-section {
     display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
-    position: relative;
-    top: -140px;
     margin: 0;
 }
 
@@ -29,12 +35,8 @@
 
 .info-section {
     display: flex;
-    display: flex;
     justify-content: space-between;
-    margin-right: 200px;
-    margin-left: 200px;
-    position: relative;
-    top: -100px;
+    margin: 20px 200px;
 }
 
 .info {
@@ -66,21 +68,18 @@
 .item1 {
     display: flex;
     flex-direction: column;
-    position: relative;
-    left: 200px;
+    margin-left: 200px;
 }
 
 .item2 {
     display: flex;
     flex-direction: column;
-    position: relative;
-    right: 190px;
+    margin-right: 190px;
 }
 
 .setting {
     text-align: left;
     margin-right: 20px;
-    position: relative;
 }
 
 .setting-label, .setting-description {
@@ -141,38 +140,18 @@ input:checked + .slider.red {
     background-color: #ff3e3e;
 }
 
-.color-theme {
+.color-theme-s {
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rosybrown;
     position: relative;
-    bottom: -150px;
+    margin-top: 20px;
 }
 
-.color-theme span {
-    margin-right: 10px;
-}
-
-.close-btn-settings {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 24px;
-    color: rgba(255, 255, 255, 0.7);
-    cursor: pointer;
-    text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
-    transition: color 0.3s, text-shadow 0.3s;
-}
-
-.close-btn-settings:hover {
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
-}
-
-.title-settings {
+.title-settings-s {
     display: flex;
     align-items: center;
-    position: relative;
-    top: -150px;
     justify-content: center;
+    margin-top: 20px;
 }

@@ -106,6 +106,8 @@ const SignIn = () => {
         .then(data => {
             console.log('Response data:', data);
             alert(data.message);
+            localStorage.setItem('accessToken', data.access);   //test
+            localStorage.setItem('refreshToken', data.refresh); //test
             console.log('Redirecting to dashboard...');
             window.location.href = '#/dashboard';
             console.log('Current hash:', window.location.hash);

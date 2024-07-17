@@ -8,6 +8,7 @@
     transform: scale(0);
     transform-origin: center bottom;
     transition: transform 0.5s ease, opacity 0.5s ease;
+    margin-top: 100px;
 }
 
 .fl-hidden {
@@ -80,7 +81,7 @@
 }
 
 .userf {
-    margin-left: -210px;
+    margin-left: -180px;
     text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.5);
 }
 

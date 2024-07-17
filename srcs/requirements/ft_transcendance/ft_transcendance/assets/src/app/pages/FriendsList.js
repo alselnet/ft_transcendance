@@ -42,6 +42,31 @@ const FriendsList = async () => {
                         <td><span class="userf">jecointr</span></td>
                         <td><span class="remove-btnf">&times;</span></td>
                     </tr>
+                    <tr>
+                        <td><img src="../images/jecointr_avatar.png" alt="jecointr"> </td>
+                        <td><span class="userf">jecointr</span></td>
+                        <td><span class="remove-btnf">&times;</span></td>
+                    </tr>
+                    <tr>
+                        <td><img src="../images/jecointr_avatar.png" alt="jecointr"> </td>
+                        <td><span class="userf">jecointr</span></td>
+                        <td><span class="remove-btnf">&times;</span></td>
+                    </tr>
+                    <tr>
+                        <td><img src="../images/jecointr_avatar.png" alt="jecointr"> </td>
+                        <td><span class="userf">jecointr</span></td>
+                        <td><span class="remove-btnf">&times;</span></td>
+                    </tr>
+                    <tr>
+                        <td><img src="../images/jecointr_avatar.png" alt="jecointr"></td>
+                        <td><span class="userf">jecointr</span></td>
+                        <td><span class="remove-btnf">&times;</span></td>
+                    </tr>
+                    <tr>
+                        <td><img src="../images/jecointr_avatar.png" alt="jecointr"></td>
+                        <td><span class="userf">jecointr</span></td>
+                        <td><span class="remove-btnf">&times;</span></td>
+                    </tr>
                 </tbody>
             </table>
         </div>

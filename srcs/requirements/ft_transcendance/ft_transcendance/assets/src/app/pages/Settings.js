@@ -42,9 +42,8 @@ const Settings = async () => {
     let form = document.createElement("div");
     section.innerHTML = 
         `
-        <div class="container">
+        <div class="container-s">
             <h2 class="title-settings">SETTINGS</h2>
-            <span class="close-btn-settings">&times;</span>
             <div class="profile-section">
                 <img class="img-settings" src="${Jcointre}" alt="jecointr"> 
                 <a href="#" class="edit-link">edit</a>
