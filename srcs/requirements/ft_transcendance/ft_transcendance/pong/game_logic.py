@@ -3,8 +3,8 @@ import math
 
 class PongGame:
     def __init__(self):
-        self.screen_width = 1200
-        self.screen_height = 700
+        self.screen_width = 0
+        self.screen_height = 0
         self.ball_size = 10
         self.player_height = 70
         self.player_width = 10
@@ -13,8 +13,8 @@ class PongGame:
         self.reset_game()
 
     def reset_game(self):
-        self.player1_y_position = self.screen_height / 2
-        self.player2_y_position = self.screen_height / 2
+        self.player1_y_position = 0
+        self.player2_y_position = 0
         self.start_ball()
         self.score_player1 = 0
         self.score_player2 = 0
@@ -28,16 +28,17 @@ class PongGame:
         start_direction = 1 if start_angle > 0 else -1 if start_angle < 0 else 1
         self.ball_x_speed = self.ball_speed * start_direction * math.cos(start_angle)
         self.ball_y_speed = self.ball_speed * start_direction * math.sin(start_angle)
-        self.ball_x_position = self.screen_width / 2
-        self.ball_y_position = self.screen_height / 2
+        self.ball_x_position = 0
+        self.ball_y_position = 0
+
 
     def update_player_position(self, player, direction):
         if player == 1:
             self.player1_y_position += self.player_speed * direction
-            self.player1_y_position = max(0, min(self.screen_height - self.player_height, self.player1_y_position))
+            self.player1_y_position = max(-self.screen_height / 2 + self.player_height / 2, min(self.screen_height / 2 - self.player_height / 2, self.player1_y_position))
         elif player == 2:
             self.player2_y_position += self.player_speed * direction
-            self.player2_y_position = max(0, min(self.screen_height - self.player_height, self.player2_y_position))
+            self.player2_y_position = max(-self.screen_height / 2 + self.player_height / 2, min(self.screen_height / 2 - self.player_height / 2, self.player2_y_position))
 
     def map_value(self, value, leftMin, leftMax, rightMin, rightMax):
         leftSpan = leftMax - leftMin
@@ -50,36 +51,38 @@ class PongGame:
             self.ball_x_position += self.ball_x_speed
             self.ball_y_position += self.ball_y_speed
 
-            if self.ball_y_position <= 0 + self.ball_size or self.ball_y_position >= self.screen_height - self.ball_size:
+            if self.ball_y_position <= -self.screen_height / 2 + self.ball_size or self.ball_y_position >= self.screen_height / 2 - self.ball_size:
                 self.ball_y_speed = -self.ball_y_speed
-
-            if (self.ball_y_position + self.ball_size > self.player1_y_position and
-                self.ball_y_position < self.player1_y_position + self.player_height and
-                self.ball_x_position <= 20 + self.player_width):
-                diff = self.ball_y_position - self.player1_y_position
+            
+            # Ball collision with player 1 paddle
+            if (self.ball_x_position - self.ball_size <= -self.screen_width / 2 + self.player_width and
+                self.ball_y_position >= self.player1_y_position - self.player_height / 2 and
+                self.ball_y_position <= self.player1_y_position + self.player_height / 2):
+                diff = (self.ball_y_position - (self.player1_y_position - self.player_height / 2)) / self.player_height
                 rad = math.radians(45)
-                angle = self.map_value(diff, 0, self.player_height, -rad, rad)
+                angle = self.map_value(diff, 0, 1, -rad, rad)
                 self.ball_x_speed = self.ball_speed * math.cos(angle)
                 self.ball_y_speed = self.ball_speed * math.sin(angle)
-                self.ball_x_position = 20 + self.player_width
+                self.ball_x_position = -self.screen_width / 2 + self.player_width + self.ball_size
 
-            if (self.ball_y_position + self.ball_size > self.player2_y_position and
-                self.ball_y_position < self.player2_y_position + self.player_height and
-                self.ball_x_position + self.ball_size >= self.screen_width - 20):
-                diff = self.ball_y_position - self.player2_y_position
+            # Ball collision with player 2 paddle
+            if (self.ball_x_position + self.ball_size >= self.screen_width / 2 - self.player_width and
+                self.ball_y_position >= self.player2_y_position - self.player_height / 2 and
+                self.ball_y_position <= self.player2_y_position + self.player_height / 2):
+                diff = (self.ball_y_position - (self.player2_y_position - self.player_height / 2)) / self.player_height
                 rad = math.radians(45)
-                angle = self.map_value(diff, 0, self.player_height, -rad, rad)
+                angle = self.map_value(diff, 0, 1, -rad, rad)
                 self.ball_x_speed = -self.ball_speed * math.cos(angle)
                 self.ball_y_speed = self.ball_speed * math.sin(angle)
-                self.ball_x_position = self.screen_width - 20 - self.ball_size
+                self.ball_x_position = self.screen_width / 2 - self.player_width - self.ball_size
 
-            if self.ball_x_position <= 0:
+            if self.ball_x_position <= -self.screen_width / 2:
                 self.score_player2 += 1
                 self.ball_waiting = True
                 self.waiting_player = 1
                 self.check_game_over()
 
-            if self.ball_x_position >= self.screen_width:
+            if self.ball_x_position >= self.screen_width / 2:
                 self.score_player1 += 1
                 self.ball_waiting = True
                 self.waiting_player = 2
@@ -89,11 +92,11 @@ class PongGame:
 
     def reset_ball_position(self):
         if self.waiting_player == 1:
-            self.ball_x_position = 20 + self.ball_size
-            self.ball_y_position = self.player1_y_position + self.player_height / 2 - self.ball_size / 2
+            self.ball_x_position = -self.screen_width / 2 + self.player_width + self.ball_size
+            self.ball_y_position = self.player1_y_position
         else:
-            self.ball_x_position = self.screen_width - 20 - self.ball_size
-            self.ball_y_position = self.player2_y_position + self.player_height / 2 - self.ball_size / 2
+            self.ball_x_position = self.screen_width / 2 - self.player_width - self.ball_size
+            self.ball_y_position = self.player2_y_position
 
     def start_ball_movement(self):
         if (self.ball_waiting == True):

@@ -5,6 +5,9 @@
     "start": "webpack serve --mode development",
     "build": "webpack --mode production"
   },
+  "dependencies": {
+    "three": "^0.128.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.24.5",
     "@babel/preset-env": "^7.24.5",

@@ -34,8 +34,10 @@ class PongConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         data = json.loads(text_data)
         if data['type'] == 'config':
-            self.pong_game.ball_speed = int(data['ball_speed'])
-            self.pong_game.player_speed = int(data['paddle_speed'])
+            self.pong_game.ball_speed = float(data['ball_speed'])
+            self.pong_game.player_speed = float(data['paddle_speed'])
+            self.pong_game.screen_width = int(data['table_width'])
+            self.pong_game.screen_height = int(data['table_height'])
         elif data['type'] == 'move':
             player = data['player']
             direction = 1 if data['direction'] == 'down' else -1
