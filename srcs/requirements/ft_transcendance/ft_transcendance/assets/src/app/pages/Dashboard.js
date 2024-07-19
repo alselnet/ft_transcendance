@@ -31,7 +31,7 @@ const Dashboard = async () => {
     dashboardContainer.className = "dashboard-container";
 
     dashboardContainer.append(DashStat());
-    dashboardContainer.append(HistoryDash());
+    // dashboardContainer.append(HistoryDash());
 
     divRoot.append(dashboardContainer);
 

@@ -676,8 +676,8 @@ input[type="text"], input[type="password"], input[type="email"] {
     box-sizing: border-box;
     margin-left: 10vw;
     margin-top: 6vh;
-    width: 45vw;
-    height: 20vw;
+    width: 80vw;
+    height: 30vw;
     padding-bottom: 25vw;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -865,12 +865,12 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 .right-side-stat-stat {
-    margin-left: 5vw;
+    margin-left: 1vw;
     margin-top: 1vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: right;
+    text-align: right;
 }
 
 .stat-rubric-stat-stat {
@@ -881,8 +881,8 @@ input[type="text"], input[type="password"], input[type="email"] {
 .stat-data-stat {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: right;
+    justify-content: right;
 }
 
 .stat-text-stat {

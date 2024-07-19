@@ -21,7 +21,7 @@ const FriendDashStat = () => {
         <div class="statistics-stat">
             <div class="left-side-stat-stat">
                 <div class="stat-title-stat">Statistiques du joueur :</div>
-                <div class="camambert-stat"></div>
+                <div class="camembert-stat"></div>
             </div>
             <div class="right-side-stat-stat">
                 <div class="stat-data-stat">

@@ -669,21 +669,21 @@ input[type="text"], input[type="password"], input[type="email"] {
 
 .statistics-stat {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    width: 100%;
+	align-items: flex-start;
     padding: 20px;
     box-sizing: border-box;
-    margin-left: 10vw;
-    margin-top: 6vh;
-    width: 45vw;
-    height: 20vw;
+	margin: 15vh auto;
+    width: 90vw;
+	max-width: 1500px;
+    height: 30vw;
     padding-bottom: 25vw;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    justify-content: flex-start;
+	z-index: 10;
+	position: fixed;
+	bottom: 5vw;
 }
 
 .profile-picture-stat {
@@ -777,8 +777,10 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 .friends-and-leaderboard-stat {
-    margin-left: 13vw;
-    margin-top: 3vw;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 100;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -854,8 +856,6 @@ input[type="text"], input[type="password"], input[type="email"] {
 
 /* ANIMATION DASHBOARD ELEMENT */
 .camembert-stat {
-    width: 0;
-    height: 0;
     background-color: green;
     border-radius: 50%;
     position: absolute;
@@ -865,32 +865,32 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 .right-side-stat-stat {
-    margin-left: 5vw;
-    margin-top: 1vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    flex-direction: column; /* Stacks child elements vertically */
+    align-items: flex-end;  /* Aligns items to the right */
+    margin: 10px;
+    box-sizing: border-box;
 }
 
 .stat-rubric-stat-stat {
     display: flex;
-    flex-direction: column;
+	justify-content: space-between;
+    align-items: center;
+	margin-bottom: 10px;
 }
 
 .stat-data-stat {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: right;
+    justify-content: right;
 }
 
 .stat-text-stat {
-    margin-left: 3vw;
     color: white;
+	flex: 1;
     text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
-    margin-top: 3vh;
-    font-size: 100%;
+    font-size: 120%;
 }
 
 /* PARTIE GAME HISTORY (right component) */
@@ -917,10 +917,10 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 .stat-number-stat {
-    font-size: 250%;
+    font-size: 350%;
     color: rgb(201, 100, 100);
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
-    margin-left: 3vw;
+	text-align: right;
     transition: all 0.5s ease-out;
 }
 

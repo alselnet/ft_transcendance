@@ -123,9 +123,9 @@ export function setupGameHistoryAnimation(divRoot) {
 }
 
 export function setupCamembertAnimation(dashboardContainer) {
-    const camambertStat = document.querySelector('.camambert-stat');
-    if (camambertStat) {
-        const { left, top } = camambertStat.getBoundingClientRect();
+    const camembertStat = document.querySelector('.camembert-stat');
+    if (camembertStat) {
+        const { left, top } = camembertStat.getBoundingClientRect();
         const radius = 100;
 
         const adjustedLeft = left - dashboardContainer.getBoundingClientRect().left;
@@ -135,7 +135,7 @@ export function setupCamembertAnimation(dashboardContainer) {
             console.log('Circle animation complete');
         });
     } else {
-        console.error('camambert-stat element not found');
+        console.error('camembert-stat element not found');
     }
 }
 

@@ -1,7 +1,7 @@
 PYTHON := python3
 PIP := pip3
 DOCKER_COMPOSE := docker-compose
-VOLUMES_PATH := /home/hucoulon/code/transcendance_repo_gh/
+VOLUMES_PATH := /Users/alexandreselnet/Coding/transcendance_repo_gh/
 
 all: up
 
