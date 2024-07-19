@@ -87,7 +87,6 @@ const SignIn = () => {
         }
 
         const csrfToken = getCookie('csrftoken');
-        console.log('CSRF Token:', csrfToken);
         fetch('https://localhost/api/auth/register/', {
             method: 'POST',
             headers: {

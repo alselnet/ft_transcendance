@@ -28,8 +28,12 @@ class UserRegistrationView(APIView):
         serializer = UserRegistrationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            user = authenticate(username=request.data.get('username'), password=request.data.get('password'))
+            refresh = RefreshToken.for_user(user)
             return Response({
                 'message': 'User created successfully',
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
                 'username': serializer.data['username'],
                 'email': serializer.data['email'],
 			}, status=status.HTTP_201_CREATED)
@@ -70,10 +74,10 @@ class UserSigninView(APIView):
             refresh = RefreshToken.for_user(user)
 
             return Response({
+                'message':'successful login',
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
-                'username': username,
-                'message':'successful login'
+                'username': username
             }, status=status.HTTP_200_OK)
 
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
