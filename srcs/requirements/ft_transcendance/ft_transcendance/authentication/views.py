@@ -29,6 +29,9 @@ class UserRegistrationView(APIView):
         if serializer.is_valid():
             serializer.save()
             user = authenticate(username=request.data.get('username'), password=request.data.get('password'))
+            profile = Profile.objects.get(user=user)
+            profile.status = 'online'
+            profile.save()
             refresh = RefreshToken.for_user(user)
             return Response({
                 'message': 'User created successfully',
@@ -71,8 +74,10 @@ class UserSigninView(APIView):
         user = authenticate(username=username, password=password)
 
         if user:
+            profile = Profile.objects.get(user=user)
+            profile.status = 'online'
+            profile.save()
             refresh = RefreshToken.for_user(user)
-
             return Response({
                 'message':'successful login',
                 'refresh': str(refresh),
@@ -133,6 +138,10 @@ class Callback(APIView):
             if not created:
                 user.email = email
                 user.save()
+
+            profile = Profile.objects.get(user=user)
+            profile.status = 'online'
+            profile.save()
             refresh = RefreshToken.for_user(user)
             redirect_url = f"https://localhost/callback#access={refresh.access_token}&refresh={refresh}"
             return redirect(redirect_url)
