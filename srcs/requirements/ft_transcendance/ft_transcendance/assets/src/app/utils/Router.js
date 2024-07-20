@@ -6,21 +6,20 @@ import { Dashboard } from "../pages/Dashboard.js";
 import { Leaderboard } from "../pages/Leaderboard.js";
 import { Settings } from "../pages/Settings.js";
 import { AboutUs } from "../pages/AboutUs.js";
+import { handleCallback } from '../pages/42SignIn.js';
+import { FriendProfile } from "../pages/FriendProfile.js";
 import { FriendList } from "../components/FriendsList.js";
 import { GameHistory } from "../components/GameHistory.js";
 import { TwoFactorAuth } from "../components/2FA.js"
 import { LogOutMsg } from "../components/LogOutMsg.js";
-import { FriendProfile } from "../pages/FriendProfile.js";
 import { DeleteFriendMsg } from "../components/DeleteFriendMsg.js";
 
 export const Router = () => {
-    let { hash } = location;
+    const hash = window.location.hash;
+    const section = document.getElementById('section');
 
-    let section = document.getElementById("section");
-
-    if (!section) {
-        console.error("#section not found in the DOM");
-        return;
+    if (window.location.hash.includes('access') && window.location.hash.includes('refresh')) {
+        handleCallback();
     }
 
     switch (hash) {

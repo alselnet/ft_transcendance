@@ -23,7 +23,8 @@ export const App = () => {
 
     if (!window.location.hash) {
         window.location.href = '#/';
-    } else {
+    }
+	else {
         Router();
     }
 };

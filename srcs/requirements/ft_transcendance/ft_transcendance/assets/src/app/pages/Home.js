@@ -1,5 +1,5 @@
 import { animateBalls } from "../animation/HomeAnimation.js";
-import { FortyTwoSignIn } from "./42SignIn.js";
+import { FortyTwoSignIn, handleCallback } from "./42SignIn.js";
 import img42 from '../images/42.png';
 
 const Home = () => {
@@ -95,7 +95,7 @@ const Home = () => {
                 </button>
             </div>
         </div>
-        `; // Closing backtick here
+        `;
     }
 
     const whiteBall = document.querySelector('.white-ball-home');
@@ -107,12 +107,11 @@ const Home = () => {
         console.error(".white-ball-home or .orange-ball-home not found in the DOM");
     }
 
-    // MARCHE PAS ???
     const signInButton = document.getElementById('fortyTwoSignInBtn');
     signInButton.addEventListener('click', () => {
         FortyTwoSignIn();
     });
+
 };
 
 export { Home };
-

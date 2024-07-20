@@ -134,7 +134,7 @@ class Callback(APIView):
                 user.email = email
                 user.save()
             refresh = RefreshToken.for_user(user)
-            redirect_url = f"https://localhost/#/callback?access={refresh.access_token}&refresh={refresh}&message=User registered successfully&username={username}"
+            redirect_url = f"https://localhost/callback#access={refresh.access_token}&refresh={refresh}"
             return redirect(redirect_url)
         except requests.exceptions.RequestException as e:
             return Response({'error': 'Failed to obtain access token', 'details': str(e)}, status=status.HTTP_400_BAD_REQUEST)
