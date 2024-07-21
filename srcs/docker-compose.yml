@@ -74,6 +74,13 @@ volumes:
       type: volumes
       o: bind
       device: /home/jules/Static_volume
+
+  MEDIA:
+    driver: local
+    driver_opts:
+      type:volumes
+      o: bind
+      device: /home/jules/Media_volume
       
 networks:
   transcendance:
