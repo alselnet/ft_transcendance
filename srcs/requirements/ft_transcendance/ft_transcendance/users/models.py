@@ -32,7 +32,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     two_factors_auth_status = models.BooleanField(default=False)
     mail_confirmation_status = models.BooleanField(default=False)
-    avatar = models.ImageField(upload_to='avatars/', default='avatars/default.png')
+    avatar = models.ImageField(upload_to='/home/ft_transcendance/avatars', default='/home/ft_transcendance/avatars/default.png')
     phone_number = PhoneNumberField(blank=True, null=True, default='+0000000000')
     scored_points = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     conceded_points = models.IntegerField(default=0, validators=[MinValueValidator(0)])
