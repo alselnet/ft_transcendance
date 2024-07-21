@@ -41,6 +41,7 @@ services:
       - ./requirements/NGINX/conf/server.crt:/etc/nginx/ssl/server.crt
       - ./requirements/NGINX/conf/server.key:/etc/nginx/ssl/server.key
       - STATIC:/static
+      - MEDIA:/usr/share/nginx/media
     depends_on:
       - webapp
     ports:
