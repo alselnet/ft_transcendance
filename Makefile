@@ -1,6 +1,6 @@
 PYTHON := python3
 PIP := pip3
-DOCKER_COMPOSE := docker-compose
+DOCKER_COMPOSE := docker compose
 VOLUMES_PATH := /home/jules/
 
 all: up
@@ -13,7 +13,7 @@ up:
 	@chmod -R 777 $(VOLUMES_PATH)Postgres_volume
 	@chmod -R 777 $(VOLUMES_PATH)Static_volume
 	@chmod -R 777 $(VOLUMES_PATH)Media_volume
-	@cp /srcs/requirements/ft_transcendance/ft_transcendance/users/avatars/* $(VOLUMES_PATH)Media_volume
+	@cp ./srcs/requirements/ft_transcendance/ft_transcendance/users/avatars/* $(VOLUMES_PATH)Media_volume
 	@echo "Bundling frontend files..."
 	@cd srcs/requirements/ft_transcendance/ft_transcendance/assets/src && npm run build
 	@echo "Launching docker compose..."
