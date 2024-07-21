@@ -37,9 +37,9 @@ prune:
 	@echo "Deleting docker data..."
 	@docker system prune -af
 
-wipedb: stop prune
+wipe: stop prune
 	@echo "Deleting docker volume..."
-	@docker volume rm srcs_DB
+	@docker volume rm srcs_DB srcs_MEDIA
 	@docker volume prune -f
 
 show:
@@ -49,4 +49,4 @@ show:
 
 re: prune all
 
-.PHONY: all up stop clean fclean prune wipedb show logs re
+.PHONY: all up stop clean fclean prune wipe show logs re
