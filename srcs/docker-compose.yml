@@ -18,6 +18,7 @@ services:
     build: ./requirements/ft_transcendance/
     volumes:
       - STATIC:/home/ft_transcendance/static/
+      - MEDIA:/home/ft_transcendance/media/
     env_file:
       - ./requirements/ft_transcendance/.env
     depends_on:
@@ -41,7 +42,7 @@ services:
       - ./requirements/NGINX/conf/server.crt:/etc/nginx/ssl/server.crt
       - ./requirements/NGINX/conf/server.key:/etc/nginx/ssl/server.key
       - STATIC:/static
-      - MEDIA:/media/avatars/
+      - MEDIA:/media/
     depends_on:
       - webapp
     ports:

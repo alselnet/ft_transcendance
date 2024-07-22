@@ -254,7 +254,7 @@ TWILIO_AUTH_TOKEN = '570c1f1b2033c8b736d883771ed4b2d3'
 TWILIO_PHONE_NUMBER = 'your_twilio_phone_number'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = '/home/ft_transcendance/media/'
 
 CHANNEL_LAYERS = {
     "default": {
