@@ -5,7 +5,7 @@ from .models import GameSummary, Profile, Friend
 class AvatarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('avatar')
+        fields = ('avatar',)
 
     def update(self, instance, validated_data):
         instance.avatar = validated_data.get('avatar', instance.avatar)
