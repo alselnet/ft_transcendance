@@ -13,6 +13,9 @@ RUN mkdir home/ft_transcendance
 COPY ft_transcendance home/ft_transcendance/
 COPY requirements.txt home/ft_transcendance/
 COPY start.sh home/ft_transcendance/
+
+COPY ft_transcendance/users/avatars /media/ft_transcendance/avatars
+
 WORKDIR /home/ft_transcendance/
 
 RUN python3 -m venv env

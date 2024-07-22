@@ -1,10 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.files.storage import default_storage
 from phonenumber_field.modelfields import PhoneNumberField
+from PIL import Image
+from django.core.files.base import ContentFile
+from io import BytesIO
 import logging
+import os
 
 logger = logging.getLogger(__name__)
+
 
 class GameSummary(models.Model):
     winner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='won_games') #cote user, user.won_games.all() retournerait toutes les games gagnées par l'utilisateur
@@ -22,7 +28,32 @@ class GameSummary(models.Model):
     def __str__(self):
         return f"Winner: {self.winner}, Loser: {self.loser}, Winner_score: {self.winner_score}, Loser_score: {self.loser_score}, Perfect: {self.perfect}, Local_game: {self.local_game}, Date: {self.date_time}"
 
+
+def resize_image(image, size=(300, 300)):
+    img = Image.open(image)
+    img = img.resize(size, Image.ANTIALIAS)
+    return img
+
+
 class Profile(models.Model):
+
+    def user_avatar_path(instance, filename):
+        # Extract the file extension
+        ext = filename.split('.')[-1]
+        # Define the directory and file name based on the username
+        filename = f'{instance.user.username}.{ext}'
+        # Return the full path
+        return os.path.join("avatars", filename)
+
+    def save(self, *args, **kwargs):
+        if self.avatar:
+            img = resize_image(self.avatar, size=(300, 300))
+            buffer = BytesIO()
+            img.save(fp=buffer, format='PNG')
+            filebuffer = ContentFile(buffer.getvalue())
+            self.avatar.save(f"{self.user.username}.png", filebuffer, save=False)
+        super(Profile, self).save(*args, **kwargs)
+
     STATUS_CHOICES = (
         ('online', 'Online'),
         ('offline', 'Offline'),
@@ -32,7 +63,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     two_factors_auth_status = models.BooleanField(default=False)
     mail_confirmation_status = models.BooleanField(default=False)
-    avatar = models.ImageField(upload_to='avatars/', default='avatars/default.png')
+    avatar = models.ImageField(upload_to=user_avatar_path, default='avatars/default.png')
     phone_number = PhoneNumberField(blank=True, null=True, default='+0000000000')
     scored_points = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     conceded_points = models.IntegerField(default=0, validators=[MinValueValidator(0)])
@@ -42,6 +73,7 @@ class Profile(models.Model):
     
     def __str__(self):
         return self.user.username
+    
 
 
 class Friend(models.Model):
