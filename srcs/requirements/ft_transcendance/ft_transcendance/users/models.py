@@ -1,7 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.files.storage import default_storage
 from phonenumber_field.modelfields import PhoneNumberField
+from PIL import Image
+from django.core.files.base import ContentFile
+from io import BytesIO
 import logging
 import os
 
@@ -25,6 +29,12 @@ class GameSummary(models.Model):
         return f"Winner: {self.winner}, Loser: {self.loser}, Winner_score: {self.winner_score}, Loser_score: {self.loser_score}, Perfect: {self.perfect}, Local_game: {self.local_game}, Date: {self.date_time}"
 
 
+def resize_image(image, size=(300, 300)):
+    img = Image.open(image)
+    img = img.resize(size, Image.ANTIALIAS)
+    return img
+
+
 class Profile(models.Model):
 
     def user_avatar_path(instance, filename):
@@ -34,7 +44,16 @@ class Profile(models.Model):
         filename = f'{instance.user.username}.{ext}'
         # Return the full path
         return os.path.join("avatars", filename)
-    
+
+    def save(self, *args, **kwargs):
+        if self.avatar:
+            img = resize_image(self.avatar, size=(300, 300))
+            buffer = BytesIO()
+            img.save(fp=buffer, format='PNG')
+            filebuffer = ContentFile(buffer.getvalue())
+            self.avatar.save(f"{self.user.username}.png", filebuffer, save=False)
+        super(Profile, self).save(*args, **kwargs)
+
     STATUS_CHOICES = (
         ('online', 'Online'),
         ('offline', 'Offline'),
@@ -55,6 +74,7 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
     
+
 
 class Friend(models.Model):
     user = models.ForeignKey(User, related_name='friends', on_delete=models.CASCADE)
