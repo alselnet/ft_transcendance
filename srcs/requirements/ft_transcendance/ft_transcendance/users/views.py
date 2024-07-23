@@ -300,3 +300,19 @@ class RemoveFriendView(APIView):
 
         friendship.delete()
         return Response({'detail': 'Friend removed'}, status=status.HTTP_204_NO_CONTENT)
+    
+
+class Activate2FAView(APIView):
+    def post(self, request):
+        user = request.user
+        if not user.is_authenticated:
+            return Response({'error': 'User not authenticated'}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        profile = Profile.objects.get(user=user)
+        if not profile.mail_confirmation_status:
+            return Response({'error': 'Email not verified'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        profile.two_factors_auth_status = True
+        profile.save()
+
+        return Response({'message': 'Two-factor authentication enabled'}, status=status.HTTP_200_OK)

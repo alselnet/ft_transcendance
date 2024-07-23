@@ -9,10 +9,10 @@ up:
 	@echo "Creating DB volume..."
 	@mkdir -p $(VOLUMES_PATH)Postgres_volume
 	@mkdir -p $(VOLUMES_PATH)Static_volume
-	@mkdir -p $(VOLUMES_PATH)Media_volume
+	@mkdir -p $(VOLUMES_PATH)Media_volume/avatars
 	@chmod -R 777 $(VOLUMES_PATH)Postgres_volume
 	@chmod -R 777 $(VOLUMES_PATH)Static_volume
-	@chmod -R 777 $(VOLUMES_PATH)Media_volume
+	@chmod -R 777 $(VOLUMES_PATH)Media_volume/avatars
 	@cp ./srcs/requirements/ft_transcendance/ft_transcendance/users/avatars/* $(VOLUMES_PATH)Media_volume/avatars/
 	@echo "Bundling frontend files..."
 	@cd srcs/requirements/ft_transcendance/ft_transcendance/assets/src && npm run build

@@ -202,15 +202,18 @@ class Generate2FACodeView(APIView):
         if not user.is_authenticated:
             return Response({'error': 'User not authenticated'}, status=status.HTTP_401_UNAUTHORIZED)
 
-        method = request.data.get('method')
+        profile = Profile.objects.get(user=user)
+        if not profile.two_factors_auth_status:
+            return Response({'error': 'Two-factor authentification is not enabled'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # code = ''.join(random.choices('0123456789', k=5))
+        method = request.data.get('method')
+        if not method:
+            return Response({'error': 'No method provided'}, status=status.HTTP_400_BAD_REQUEST)
+
         two_factors_code, created = TwoFactorsCode.objects.get_or_create(user=user)
-        # two_factors_code.number = code
         two_factors_code.save()
 
         if method == 'sms':
-            profile = Profile.objects.get(user=user)
             phone_number = profile.phone_number
             if not phone_number:
                 return Response({'error': 'No phone number provided'}, status=status.HTTP_400_BAD_REQUEST)
@@ -218,7 +221,7 @@ class Generate2FACodeView(APIView):
             try:
                 phone_number = '0652453352'
                 client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
-                message = client.message.create(
+                message = client.messages.create(
                     body=f'Your 2FA code is {two_factors_code.number}',
                     from_=settings.TWILIO_PHONE_NUMBER,
                     to=phone_number
@@ -226,7 +229,7 @@ class Generate2FACodeView(APIView):
                 logger.info(f"2FA code sent to {phone_number}")
 
                 serializer = TwoFactorsCodeSerializer(two_factors_code)
-                return Response(serializer, status=status.HTTP_200_OK)
+                return Response(serializer.data, status=status.HTTP_200_OK)
             except Exception as e:
                 logger.error(f"Error sending SMS: {str(e)}")
                 return Response({'error': 'Failed to send 2FA code via SMS'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -241,7 +244,7 @@ class Generate2FACodeView(APIView):
                 logger.info(f"2FA code sent to {user.email}")
 
                 serializer = TwoFactorsCodeSerializer(two_factors_code)
-                return Response(serializer, status=status.HTTP_200_OK)
+                return Response(serializer.data, status=status.HTTP_200_OK)
             except Exception as e:
                 logger.error(f"Error sending email: {str(e)}")
                 return Response({'error': 'Failed to send 2FA code via email'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -45,7 +45,7 @@ class Profile(models.Model):
         # Return the full path
         return os.path.join("avatars", filename)
 
-    def save(self, *args, **kwargs):
+    def save_avatar(self, *args, **kwargs):
         if self.avatar:
             img = resize_image(self.avatar, size=(300, 300))
             buffer = BytesIO()
