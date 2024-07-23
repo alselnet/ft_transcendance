@@ -176,10 +176,19 @@ class SendConfirmationEmailView(APIView):
         try:
             user = User.objects.get(email=email)
             token = generate_token(email)
-            confirm_url = request.build_absolute_uri(reverse('confirm-email', args=[token])) # construit l'url de confirmation
+            confirm_url = request.build_absolute_uri(reverse('confirm-email', args=[token]))
 
             subject = 'Email Confirmation'
-            message = render_to_string('confirmation_email.html', {'confirm_url': confirm_url})
+            message = f"""
+            Bonjour,
+
+            Merci de vous être inscrit. Veuillez confirmer votre adresse email en cliquant sur le lien ci-dessous :
+            
+            {confirm_url}
+            
+            Merci,
+            L'équipe
+            """
             send_mail(subject, message, settings.EMAIL_HOST_USER, [email])
 
             return Response({'message': 'Confirmation email sent'}, status=status.HTTP_200_OK)
