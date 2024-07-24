@@ -61,7 +61,7 @@ class Profile(models.Model):
     )
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='offline')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    two_factors_auth_status = models.BooleanField(default=False)
+    two_factors_auth_status = models.BooleanField(default=True)
     mail_confirmation_status = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to=user_avatar_path, default='avatars/default.png')
     phone_number = PhoneNumberField(blank=True, null=True, default='+0000000000')
@@ -70,6 +70,7 @@ class Profile(models.Model):
     played_games = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     won_games = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     perfect_wins = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    totp_secret = models.CharField(max_length=32, blank=True, null=True)
     
     def __str__(self):
         return self.user.username

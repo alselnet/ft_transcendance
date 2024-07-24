@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import TwoFactorsCode
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -30,9 +29,3 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     
         user.save()
         return user
-    
-class TwoFactorsCodeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TwoFactorsCode
-        fields = ['number', 'user']
-        read_only_fields = ['number', 'user']

@@ -2,7 +2,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from .views import FortyTwoLoginView, UserRegistrationView, UserSigninView, UserSignoutView, UserDeletionView, Callback, CsrfTokenView, Generate2FACodeView, SendConfirmationEmailView, ConfirmEmailView
+from .views import FortyTwoLoginView, UserRegistrationView, UserSigninView, UserSignoutView, UserDeletionView, Callback, CsrfTokenView, Generate2FACodeView, Validate2FACodeView, SendConfirmationEmailView, ConfirmEmailView
 
 urlpatterns = [
 	path('42login/', FortyTwoLoginView, name='forty-two-login'),
@@ -11,6 +11,7 @@ urlpatterns = [
 	path('csrf_token/', CsrfTokenView, name='csrf_token_view'),
 	path('delete_user/', UserDeletionView.as_view(), name='user-deletion'),
 	path('generate-2fa-code/', Generate2FACodeView.as_view(), name='generate-2fa-code'),
+    path('validate-2fa-code/', Validate2FACodeView.as_view(), name='validate-2fa-code'),
 	path('register/', UserRegistrationView.as_view(), name='user-registration'),
     path('send-confirmation-email/', SendConfirmationEmailView.as_view(), name='send-confirmation-email'),
 	path('signin/', UserSigninView.as_view(), name='user-signin'),

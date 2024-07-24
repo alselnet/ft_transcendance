@@ -251,7 +251,7 @@ EMAIL_USE_SSL = False
 
 TWILIO_ACCOUNT_SID = 'ACf8363ddbe2a27c756f7dc1f5c2a3f774'
 TWILIO_AUTH_TOKEN = '570c1f1b2033c8b736d883771ed4b2d3'
-TWILIO_PHONE_NUMBER = 'your_twilio_phone_number'
+TWILIO_PHONE_NUMBER = '+33652453352'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/home/ft_transcendance/media/'

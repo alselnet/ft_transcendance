@@ -9,6 +9,10 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from .serializers import EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, AvatarSerializer, StatusUpdateSerializer
 from .models import GameSummary, Profile, Friend
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 class MeView(APIView):
     authentication_classes = [JWTAuthentication]
@@ -300,15 +304,24 @@ class RemoveFriendView(APIView):
 
         friendship.delete()
         return Response({'detail': 'Friend removed'}, status=status.HTTP_204_NO_CONTENT)
-    
+
 
 class Activate2FAView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         user = request.user
         if not user.is_authenticated:
             return Response({'error': 'User not authenticated'}, status=status.HTTP_401_UNAUTHORIZED)
         
-        profile = Profile.objects.get(user=user)
+        logger.info("User authenticated !")
+
+        try:
+            profile = Profile.objects.get(user=user)
+        except Profile.DoesNotExist:
+            return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)
+        
         if not profile.mail_confirmation_status:
             return Response({'error': 'Email not verified'}, status=status.HTTP_400_BAD_REQUEST)
         

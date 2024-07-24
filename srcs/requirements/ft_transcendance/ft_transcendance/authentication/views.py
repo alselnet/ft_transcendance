@@ -14,12 +14,14 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.views import APIView
-from twilio.rest import Client
 from ft_transcendance.settings import EMAIL_HOST_USER
 from users.models import Profile, GameSummary
-from .models import TwoFactorsCode
 from .utils import generate_token, verify_token
-from .serializers import UserRegistrationSerializer, TwoFactorsCodeSerializer
+from .serializers import UserRegistrationSerializer 
+import pyotp
+import qrcode
+from io import BytesIO
+from django.http import HttpResponse
 
 logger = logging.getLogger(__name__)
 
@@ -204,48 +206,74 @@ class Generate2FACodeView(APIView):
 
         profile = Profile.objects.get(user=user)
         if not profile.two_factors_auth_status:
-            return Response({'error': 'Two-factor authentification is not enabled'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Two-factor authentication is not enabled'}, status=status.HTTP_400_BAD_REQUEST)
 
         method = request.data.get('method')
         if not method:
             return Response({'error': 'No method provided'}, status=status.HTTP_400_BAD_REQUEST)
 
-        two_factors_code, created = TwoFactorsCode.objects.get_or_create(user=user)
-        two_factors_code.save()
+        if method == 'authenticator':
+            if not profile.totp_secret:
+                # Génère une nouvelle clé secrète TOTP si elle n'existe pas
+                profile.totp_secret = pyotp.random_base32()
+                profile.save()
 
-        if method == 'sms':
-            phone_number = profile.phone_number
-            if not phone_number:
-                return Response({'error': 'No phone number provided'}, status=status.HTTP_400_BAD_REQUEST)
-            
-            try:
-                phone_number = '0652453352'
-                client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
-                message = client.messages.create(
-                    body=f'Your 2FA code is {two_factors_code.number}',
-                    from_=settings.TWILIO_PHONE_NUMBER,
-                    to=phone_number
-                )
-                logger.info(f"2FA code sent to {phone_number}")
+            interval = 120
+            totp = pyotp.TOTP(profile.totp_secret, interval=interval)
+            uri = totp.provisioning_uri(user.username, issuer_name="YourAppName")
+            qr = qrcode.make(uri)
 
-                serializer = TwoFactorsCodeSerializer(two_factors_code)
-                return Response(serializer.data, status=status.HTTP_200_OK)
-            except Exception as e:
-                logger.error(f"Error sending SMS: {str(e)}")
-                return Response({'error': 'Failed to send 2FA code via SMS'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            # Convertit le code QR en un flux de bytes
+            buffer = BytesIO()
+            qr.save(buffer, format="PNG")
+            buffer.seek(0)
+
+            response = HttpResponse(buffer, content_type="image/png")
+            return response
         
         elif method == 'email':
+            if not profile.totp_secret:
+                # Génère une nouvelle clé secrète TOTP si elle n'existe pas
+                profile.totp_secret = pyotp.random_base32()
+                profile.save()
+
+            interval = 120
+            totp = pyotp.TOTP(profile.totp_secret, interval=interval)
+            totp_code = totp.now()
+
             subject = 'Your 2FA Code'
-            message = f'Your 2FA code is {two_factors_code.number}'
+            message = f'Your 2FA code is {totp_code}'
             recipient_list = [user.email]
 
             try:
                 send_mail(subject, message, EMAIL_HOST_USER, recipient_list)
                 logger.info(f"2FA code sent to {user.email}")
 
-                serializer = TwoFactorsCodeSerializer(two_factors_code)
-                return Response(serializer.data, status=status.HTTP_200_OK)
+                return Response({'message': '2FA code sent via email'}, status=status.HTTP_200_OK)
             except Exception as e:
                 logger.error(f"Error sending email: {str(e)}")
                 return Response({'error': 'Failed to send 2FA code via email'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+        else:
+            return Response({'error': 'Invalid method provided'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class Validate2FACodeView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        profile = Profile.objects.get(user=user)
+
+        if not profile.two_factors_auth_status:
+            return Response({'error': 'Two-factor authentication is not enabled'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        interval = 120
+        totp = pyotp.TOTP(profile.totp_secret, interval=interval)
+        code = request.data.get('code')
+
+        if totp.verify(code):
+            return Response({'message': '2FA code is valid'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'Invalid 2FA code'}, status=status.HTTP_400_BAD_REQUEST)
