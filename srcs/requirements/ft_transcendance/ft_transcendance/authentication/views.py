@@ -218,8 +218,7 @@ class Generate2FACodeView(APIView):
                 profile.totp_secret = pyotp.random_base32()
                 profile.save()
 
-            interval = 120
-            totp = pyotp.TOTP(profile.totp_secret, interval=interval)
+            totp = pyotp.TOTP(profile.totp_secret)
             uri = totp.provisioning_uri(user.username, issuer_name="YourAppName")
             qr = qrcode.make(uri)
 
@@ -237,8 +236,7 @@ class Generate2FACodeView(APIView):
                 profile.totp_secret = pyotp.random_base32()
                 profile.save()
 
-            interval = 120
-            totp = pyotp.TOTP(profile.totp_secret, interval=interval)
+            totp = pyotp.TOTP(profile.totp_secret)
             totp_code = totp.now()
 
             subject = 'Your 2FA Code'
@@ -268,9 +266,8 @@ class Validate2FACodeView(APIView):
 
         if not profile.two_factors_auth_status:
             return Response({'error': 'Two-factor authentication is not enabled'}, status=status.HTTP_400_BAD_REQUEST)
-        
-        interval = 120
-        totp = pyotp.TOTP(profile.totp_secret, interval=interval)
+
+        totp = pyotp.TOTP(profile.totp_secret)
         code = request.data.get('code')
 
         if totp.verify(code):

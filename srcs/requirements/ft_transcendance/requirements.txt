@@ -40,7 +40,5 @@ urllib3==2.2.1
 zope.interface==6.4.post2
 PyJWT==1.7.1
 Pillow==9.0.1
-twilio==6.60.0
-django-phonenumber-field[phonenumberslite]==7.0.0
 pyotp==2.6.0
 qrcode==7.3.1

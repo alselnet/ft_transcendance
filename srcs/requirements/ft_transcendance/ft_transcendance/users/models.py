@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.files.storage import default_storage
-from phonenumber_field.modelfields import PhoneNumberField
 from PIL import Image
 from django.core.files.base import ContentFile
 from io import BytesIO
@@ -64,7 +63,6 @@ class Profile(models.Model):
     two_factors_auth_status = models.BooleanField(default=True)
     mail_confirmation_status = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to=user_avatar_path, default='avatars/default.png')
-    phone_number = PhoneNumberField(blank=True, null=True, default='+0000000000')
     scored_points = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     conceded_points = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     played_games = models.IntegerField(default=0, validators=[MinValueValidator(0)])
@@ -75,7 +73,6 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
     
-
 
 class Friend(models.Model):
     user = models.ForeignKey(User, related_name='friends', on_delete=models.CASCADE)

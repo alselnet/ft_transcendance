@@ -29,7 +29,6 @@ class MeView(APIView):
             'two_factors_auth_status': profile.two_factors_auth_status,
             'mail_confirmation_status': profile.mail_confirmation_status,
             'avatar': profile.avatar.url,
-            'phone_number': str(profile.phone_number),
             'scored_points': profile.scored_points,
             'conceded_points': profile.conceded_points,
             'played_games': profile.played_games,
