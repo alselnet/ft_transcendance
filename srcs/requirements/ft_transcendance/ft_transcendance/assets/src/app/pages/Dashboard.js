@@ -1,10 +1,8 @@
 import { Navbar } from "../components/Navbar.js";
 import { Main } from "../utils/Main.js";
 import { DashStat } from "../components/StatDash.js";
-import { HistoryDash } from "../components/HistoryDash.js";
 import { LogOut } from "../components/LogOut.js";
 import {
-    setupLeaderboardAnimation,
     setupFriendListAnimation,
     setupGameHistoryAnimation,
     setupCamembertAnimation
@@ -31,11 +29,9 @@ const Dashboard = async () => {
     dashboardContainer.className = "dashboard-container";
 
     dashboardContainer.append(DashStat());
-    // dashboardContainer.append(HistoryDash());
 
     divRoot.append(dashboardContainer);
 
-    setupLeaderboardAnimation(divRoot);
     setupFriendListAnimation(divRoot);
     setupGameHistoryAnimation(divRoot);
     setupCamembertAnimation(dashboardContainer);

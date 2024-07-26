@@ -1,35 +1,5 @@
 import { checkAuth } from "../services/Api.js"
-import Jcointre from '../images/jecointr_avatar.png'
-
-const translations = {};
-
-function loadLanguage(lang) {
-    fetch(`languages/${lang}.json`)
-        .then(response => response.json())
-        .then(data => {
-            translations[lang] = data;
-            applyTranslations(lang);
-        })
-        .catch(error => console.error('Error loading language:', error));
-}
-
-function applyTranslations(lang) {
-    const elements = document.querySelectorAll('[data-translate]');
-    elements.forEach(element => {
-        const key = element.getAttribute('data-translate');
-        if (translations[lang] && translations[lang][key]) {
-            element.textContent = translations[lang][key];
-        }
-    });
-}
-
-function changeLanguage(lang) {
-    if (translations[lang]) {
-        applyTranslations(lang);
-    } else {
-        loadLanguage(lang);
-    }
-}
+import Tmejri from '../images/Tasnim.jpg'
 
 const Settings = async () => {
 
@@ -45,7 +15,7 @@ const Settings = async () => {
         <div class="container-s">
             <h2 class="title-settings">SETTINGS</h2>
             <div class="profile-section">
-                <img class="img-settings" src="${Jcointre}" alt="jecointr"> 
+                <img class="img-settings" src="${Tmejri}" alt="Tmejri"> 
                 <a href="#" class="edit-link">edit</a>
             </div>
             <div class="info-section">

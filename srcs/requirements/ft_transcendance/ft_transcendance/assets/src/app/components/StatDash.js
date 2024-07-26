@@ -84,13 +84,7 @@ const DashStat = () => {
                 </div>
             </div>
 
-            <div class="friends-and-leaderboard-stat">
-                <a class="nav-link" href="#/leaderboard">
-                    <div class="leaderboard-stat" id="leaderboard-stat">
-                        <i class="bi bi-trophy-fill trophy-icon"></i>
-                        <p class="leader-text-stat">Leaderboard</p>
-                    </div>
-                </a>
+            <div class="footer-link">
                 <a class="nav-link" href="#/friendlist">         
                     <div class="friends-list-stat" id="list-stat">
                         <i class="bi bi-list-task list-icon"></i>

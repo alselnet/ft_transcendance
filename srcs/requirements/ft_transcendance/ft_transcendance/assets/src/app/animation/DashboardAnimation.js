@@ -1,4 +1,3 @@
-import { Leaderboard } from "../pages/Leaderboard.js";
 import { FriendList } from "../components/FriendsList.js";
 import { GameHistory } from "../components/GameHistory.js";
 
@@ -24,38 +23,6 @@ export function showCircle(container, cx, cy, radius, callback) {
             callback(div);
         });
     }, 0);
-}
-
-export function setupLeaderboardAnimation(divRoot) {
-    const leaderboardLink = document.querySelector('.leaderboard-stat .nav-link');
-    if (leaderboardLink) {
-        leaderboardLink.addEventListener('click', (event) => {
-            event.preventDefault();
-            let section = document.createElement('div');
-            section.id = 'section';
-            divRoot.append(section);
-
-            // Get the position of the leaderboard link
-            const rect = leaderboardLink.getBoundingClientRect();
-            section.style.position = 'absolute';
-            section.style.left = `${rect.left}px`;
-            section.style.top = `${rect.top}px`;
-
-            Leaderboard();
-
-            // After the Leaderboard is loaded, update the position and animation
-            const leaderboardElement = section.querySelector('.container-ldb');
-            setTimeout(() => {
-                section.style.position = 'relative';
-                section.style.left = '0';
-                section.style.top = '0';
-                leaderboardElement.classList.remove('leaderboard-hidden');
-                leaderboardElement.classList.add('leaderboard-visible');
-            }, 10); // Small delay to ensure the CSS transition applies
-        });
-    } else {
-        console.error('Leaderboard link not found');
-    }
 }
 
 export function setupFriendListAnimation(divRoot) {

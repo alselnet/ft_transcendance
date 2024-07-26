@@ -3,7 +3,6 @@ import { LogIn } from "../pages/LogIn.js";
 import { SignIn } from "../pages/SignIn.js";
 import { Game } from "../pages/Game.js";
 import { Dashboard } from "../pages/Dashboard.js";
-import { Leaderboard } from "../pages/Leaderboard.js";
 import { Settings } from "../pages/Settings.js";
 import { AboutUs } from "../pages/AboutUs.js";
 import { handleCallback } from '../pages/42SignIn.js';
@@ -37,9 +36,6 @@ export const Router = () => {
             break;
         case "#/dashboard":
             Dashboard();
-            break;
-        case "#/leaderboard":
-            Leaderboard();
             break;
         case "#/settings":
             Settings();
