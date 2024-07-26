@@ -37,11 +37,8 @@ def resize_image(image, size=(300, 300)):
 class Profile(models.Model):
 
     def user_avatar_path(instance, filename):
-        # Extract the file extension
         ext = filename.split('.')[-1]
-        # Define the directory and file name based on the username
         filename = f'{instance.user.username}.{ext}'
-        # Return the full path
         return os.path.join("avatars", filename)
 
     def save_avatar(self, *args, **kwargs):
@@ -58,9 +55,17 @@ class Profile(models.Model):
         ('offline', 'Offline'),
         ('in game', 'in game'),
     )
+
+    TWO_FA_METHOD_CHOICES = (
+        ('none', 'None'),
+        ('email', 'Email'),
+        ('authenticator', 'Authenticator'),
+    )
+
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='offline')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    two_factors_auth_status = models.BooleanField(default=True)
+    # two_fa_status = models.BooleanField(default=True)
+    two_fa_method = models.CharField(max_length=20, choices=TWO_FA_METHOD_CHOICES, default='none')
     mail_confirmation_status = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to=user_avatar_path, default='avatars/default.png')
     scored_points = models.IntegerField(default=0, validators=[MinValueValidator(0)])

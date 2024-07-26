@@ -18,7 +18,7 @@ from rest_framework.views import APIView
 from ft_transcendance.settings import EMAIL_HOST_USER
 from users.models import Profile, GameSummary
 from .utils import generate_token, verify_token, resize_image, crop_to_square
-from .serializers import UserRegistrationSerializer
+from .serializers import UserRegistrationSerializer, Update2FAStatusSerializer
 from io import BytesIO
 from PIL import Image
 
@@ -215,30 +215,26 @@ class SendConfirmationEmailView(APIView):
 
 
 class Generate2FACodeView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         user = request.user
-        if not user.is_authenticated:
-            return Response({'error': 'User not authenticated'}, status=status.HTTP_401_UNAUTHORIZED)
-
         profile = Profile.objects.get(user=user)
-        if not profile.two_factors_auth_status:
+        
+        if profile.two_fa_method == 'none':
             return Response({'error': 'Two-factor authentication is not enabled'}, status=status.HTTP_400_BAD_REQUEST)
 
-        method = request.data.get('method')
-        if not method:
-            return Response({'error': 'No method provided'}, status=status.HTTP_400_BAD_REQUEST)
+        method = profile.two_fa_method
 
         if method == 'authenticator':
             if not profile.totp_secret:
-                # Génère une nouvelle clé secrète TOTP si elle n'existe pas
                 profile.totp_secret = pyotp.random_base32()
                 profile.save()
 
             totp = pyotp.TOTP(profile.totp_secret)
-            uri = totp.provisioning_uri(user.username, issuer_name="YourAppName")
+            uri = totp.provisioning_uri(user.username, issuer_name="Pong")
             qr = qrcode.make(uri)
 
-            # Convertit le code QR en un flux de bytes
             buffer = BytesIO()
             qr.save(buffer, format="PNG")
             buffer.seek(0)
@@ -247,8 +243,10 @@ class Generate2FACodeView(APIView):
             return response
         
         elif method == 'email':
+            if not profile.mail_confirmation_status:
+                return Response({'error': 'Email is not confirmed'}, status=status.HTTP_400_BAD_REQUEST)
+
             if not profile.totp_secret:
-                # Génère une nouvelle clé secrète TOTP si elle n'existe pas
                 profile.totp_secret = pyotp.random_base32()
                 profile.save()
 
@@ -260,7 +258,7 @@ class Generate2FACodeView(APIView):
             recipient_list = [user.email]
 
             try:
-                send_mail(subject, message, EMAIL_HOST_USER, recipient_list)
+                send_mail(subject, message, settings.EMAIL_HOST_USER, recipient_list)
                 logger.info(f"2FA code sent to {user.email}")
 
                 return Response({'message': '2FA code sent via email'}, status=status.HTTP_200_OK)
@@ -269,7 +267,7 @@ class Generate2FACodeView(APIView):
                 return Response({'error': 'Failed to send 2FA code via email'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         else:
-            return Response({'error': 'Invalid method provided'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Invalid 2FA method in profile'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class Validate2FACodeView(APIView):
@@ -280,7 +278,7 @@ class Validate2FACodeView(APIView):
         user = request.user
         profile = Profile.objects.get(user=user)
 
-        if not profile.two_factors_auth_status:
+        if profile.two_fa_method == 'none':
             return Response({'error': 'Two-factor authentication is not enabled'}, status=status.HTTP_400_BAD_REQUEST)
 
         totp = pyotp.TOTP(profile.totp_secret)
@@ -290,3 +288,29 @@ class Validate2FACodeView(APIView):
             return Response({'message': '2FA code is valid'}, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid 2FA code'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class Update2FAStatusView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+
+        logger.info("POST request received")
+        logger.info(f"Request data: {request.data}")
+        
+        user = request.user
+        profile = Profile.objects.get(user=user)
+        
+        serializer = Update2FAStatusSerializer(data=request.data)
+        if serializer.is_valid():
+            two_fa_method = serializer.validated_data['two_fa_method']
+        
+            if two_fa_method == 'email' and not profile.mail_confirmation_status:
+                return Response({'error': 'Email is not confirmed'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            profile.two_fa_method = two_fa_method
+            profile.save()
+            
+            return Response({'message': '2FA method updated successfully'}, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

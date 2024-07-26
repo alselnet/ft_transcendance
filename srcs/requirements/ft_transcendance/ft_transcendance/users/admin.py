@@ -6,7 +6,7 @@ class GameSummaryAdmin(admin.ModelAdmin):
     
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('status', 'user', 'two_factors_auth_status', 'mail_confirmation_status', 'avatar', 'scored_points', 'conceded_points', 'played_games', 'won_games', 'perfect_wins')
+    list_display = ('status', 'user', 'mail_confirmation_status', 'two_fa_method', 'avatar', 'scored_points', 'conceded_points', 'played_games', 'won_games', 'perfect_wins')
     def user(self, obj):
         return obj.user.username
     

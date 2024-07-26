@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from .serializers import EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, AvatarSerializer, StatusUpdateSerializer, Update2FAStatusSerializer
+from .serializers import EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, AvatarSerializer, StatusUpdateSerializer
 from .models import GameSummary, Profile, Friend
 import logging
 
@@ -26,7 +26,7 @@ class MeView(APIView):
             'username': user.username,
             'email': user.email,
             'status': profile.status,
-            'two_factors_auth_status': profile.two_factors_auth_status,
+            'two_fa_method': profile.two_fa_method,
             'mail_confirmation_status': profile.mail_confirmation_status,
             'avatar': profile.avatar.url,
             'scored_points': profile.scored_points,
@@ -214,6 +214,7 @@ class UpdatePasswordView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+
 class UpdateStatusView(APIView):
 
     def put(self, request):
@@ -303,19 +304,4 @@ class RemoveFriendView(APIView):
 
         friendship.delete()
         return Response({'detail': 'Friend removed'}, status=status.HTTP_204_NO_CONTENT)
-
-
-class Update2FAStatusView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request):
-        user = request.user
-        profile = Profile.objects.get(user=user)
-        
-        serializer = Update2FAStatusSerializer(data=request.data)
-        if serializer.is_valid():
-            profile.two_factors_auth_status = serializer.validated_data['2fa_status']
-            profile.save()
-            return Response({'message': '2FA status updated successfully'}, status=status.HTTP_200_OK)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    

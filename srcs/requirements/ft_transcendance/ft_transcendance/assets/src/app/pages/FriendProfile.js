@@ -31,7 +31,7 @@ const FriendProfile = async () => {
     dashboardContainer.className = "dashboard-container";
 
     dashboardContainer.append(FriendDashStat());
-    dashboardContainer.append(FriendHistoryDash());
+    // dashboardContainer.append(FriendHistoryDash());
 
     divRoot.append(dashboardContainer);
 
