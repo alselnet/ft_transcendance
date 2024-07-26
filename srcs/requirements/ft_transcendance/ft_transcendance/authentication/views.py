@@ -1,9 +1,10 @@
-import logging, requests
+import logging, requests, qrcode, json, pyotp
 from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
-from django.http import JsonResponse
+from django.core.files.base import ContentFile
+from django.http import JsonResponse, HttpResponse
 from django.middleware.csrf import get_token
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
@@ -16,14 +17,13 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.views import APIView
 from ft_transcendance.settings import EMAIL_HOST_USER
 from users.models import Profile, GameSummary
-from .utils import generate_token, verify_token
-from .serializers import UserRegistrationSerializer 
-import pyotp
-import qrcode
+from .utils import generate_token, verify_token, resize_image, crop_to_square
+from .serializers import UserRegistrationSerializer
 from io import BytesIO
-from django.http import HttpResponse
+from PIL import Image
 
 logger = logging.getLogger(__name__)
+
 
 class UserRegistrationView(APIView):
     def post(self, request):
@@ -43,6 +43,7 @@ class UserRegistrationView(APIView):
                 'email': serializer.data['email'],
 			}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class UserDeletionView(APIView):
     authentication_classes = [JWTAuthentication]
@@ -81,7 +82,7 @@ class UserSigninView(APIView):
             profile.save()
             refresh = RefreshToken.for_user(user)
             return Response({
-                'message':'successful login',
+                'message': 'successful login',
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
                 'username': username
@@ -89,6 +90,7 @@ class UserSigninView(APIView):
 
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
     
+
 class UserSignoutView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
@@ -133,8 +135,12 @@ class Callback(APIView):
             user_info_response = requests.get(user_info_url, headers=headers)
             user_info_response.raise_for_status()
             user_info = user_info_response.json()
+            # logger.info("Réponse de l'intra 42: %s", json.dumps(user_info, indent=4))
             username = user_info['login']
             email = user_info['email']
+            avatar_url = user_info['image']['versions']['small']
+            logger.info("Link de l'intra 42: %s", avatar_url)
+            
             user, created = User.objects.get_or_create(username=username, defaults={'email': email})
             
             if not created:
@@ -142,14 +148,24 @@ class Callback(APIView):
                 user.save()
 
             profile = Profile.objects.get(user=user)
+
+            response = requests.get(avatar_url)
+            response.raise_for_status()
+            img = Image.open(BytesIO(response.content))
+            img = crop_to_square(img)
+            img = resize_image(img, size=(300, 300))
+            buffer = BytesIO()
+            img.save(buffer, format='PNG')
+            filebuffer = ContentFile(buffer.getvalue())
+            profile.avatar.save(f"{user.username}.png", filebuffer, save=False)
             profile.status = 'online'
             profile.save()
+
             refresh = RefreshToken.for_user(user)
             redirect_url = f"https://localhost/callback#access={refresh.access_token}&refresh={refresh}"
             return redirect(redirect_url)
         except requests.exceptions.RequestException as e:
             return Response({'error': 'Failed to obtain access token', 'details': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-
 
 
 def CsrfTokenView(request):

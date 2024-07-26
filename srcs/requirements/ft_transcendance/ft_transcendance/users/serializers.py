@@ -75,3 +75,7 @@ class FriendSerializer(serializers.ModelSerializer):
     class Meta:
         model = Friend
         fields = ['user', 'friend']
+
+
+class Update2FAStatusSerializer(serializers.Serializer):
+    two_factors_auth_status = serializers.BooleanField()

@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from .serializers import EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, AvatarSerializer, StatusUpdateSerializer
+from .serializers import EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, AvatarSerializer, StatusUpdateSerializer, Update2FAStatusSerializer
 from .models import GameSummary, Profile, Friend
 import logging
 
@@ -305,26 +305,17 @@ class RemoveFriendView(APIView):
         return Response({'detail': 'Friend removed'}, status=status.HTTP_204_NO_CONTENT)
 
 
-class Activate2FAView(APIView):
-    authentication_classes = [JWTAuthentication]
+class Update2FAStatusView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
         user = request.user
-        if not user.is_authenticated:
-            return Response({'error': 'User not authenticated'}, status=status.HTTP_401_UNAUTHORIZED)
+        profile = Profile.objects.get(user=user)
         
-        logger.info("User authenticated !")
-
-        try:
-            profile = Profile.objects.get(user=user)
-        except Profile.DoesNotExist:
-            return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)
-        
-        if not profile.mail_confirmation_status:
-            return Response({'error': 'Email not verified'}, status=status.HTTP_400_BAD_REQUEST)
-        
-        profile.two_factors_auth_status = True
-        profile.save()
-
-        return Response({'message': 'Two-factor authentication enabled'}, status=status.HTTP_200_OK)
+        serializer = Update2FAStatusSerializer(data=request.data)
+        if serializer.is_valid():
+            profile.two_factors_auth_status = serializer.validated_data['2fa_status']
+            profile.save()
+            return Response({'message': '2FA status updated successfully'}, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

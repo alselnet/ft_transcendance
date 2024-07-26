@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
-from .views import MeView, MyGameHistory, FriendListView, UpdateAvatarView, UpdateEmailView, UpdatePasswordView, UpdateUsernameView, UpdateStatusView, PublicUserInfoView, PublicGameHistoryView, AddFriendView, RemoveFriendView, Activate2FAView
+from .views import MeView, MyGameHistory, FriendListView, UpdateAvatarView, UpdateEmailView, UpdatePasswordView, UpdateUsernameView, UpdateStatusView, PublicUserInfoView, PublicGameHistoryView, AddFriendView, RemoveFriendView, Update2FAStatusView
 
 urlpatterns = [
 	path('me/', MeView.as_view(), name='me'),
@@ -16,7 +16,7 @@ urlpatterns = [
 	path('<str:username>/game_history/', PublicGameHistoryView.as_view(), name='profile'),
 	path('addfriend/<str:friend_username>/', AddFriendView.as_view(), name='add-friend'),
     path('unfriend/<str:friend_username>/', RemoveFriendView.as_view(), name='remove-friend'),
-    path('activate-2fa/', Activate2FAView.as_view(), name='activate-2fa')
+    path('update_2fa/', Update2FAStatusView.as_view(), name='2fa-update')
    ]
 
 if settings.DEBUG:
