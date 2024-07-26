@@ -13,7 +13,7 @@ def verify_token(token):
         return signer.unsign(token, max_age=3600) # token valide pendant une heure
     except:
         return None
-    
+ 
 
 def resize_image(image, size=(300, 300)):
     img = image.resize(size, Image.ANTIALIAS)
