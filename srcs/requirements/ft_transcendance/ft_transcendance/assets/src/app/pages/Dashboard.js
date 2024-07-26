@@ -26,7 +26,7 @@ const Dashboard = async () => {
     divRoot.append(Main());
 
     let dashboardContainer = document.createElement("div");
-    dashboardContainer.className = "dashboard-container";
+    // dashboardContainer.className = "dashboard-container";
 
     dashboardContainer.append(DashStat());
 

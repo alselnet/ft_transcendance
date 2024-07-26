@@ -12,6 +12,7 @@ import { GameHistory } from "../components/GameHistory.js";
 import { TwoFactorAuth } from "../components/2FA.js"
 import { LogOutMsg } from "../components/LogOutMsg.js";
 import { DeleteFriendMsg } from "../components/DeleteFriendMsg.js";
+import { CharteMsg } from "../components/CharteMsg.js";
 
 export const Router = () => {
     const hash = window.location.hash;
@@ -60,6 +61,9 @@ export const Router = () => {
             break;
         case "#/deletefriendmsg":
             DeleteFriendMsg();
+            break;
+        case "#/chartemsg":
+            CharteMsg();
             break;
 
         default:
