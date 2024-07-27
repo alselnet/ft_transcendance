@@ -38,7 +38,7 @@ const AboutUs = async () => {
 	    			<div class="frame-aboutus">
 	    				<h1 class="name-cube">Alexandre SELNET</h1>
 	    				<img class="img-us" src="${Aselnet}" alt="img-alex">
-	    				<p>Développement du Backend</p>
+	    				<p>Développement Fullstack</p>
 	    			</div>
 	    		</div>
 	    		<div id="block5" class="col-md-6 col-lg-6 mb-3">

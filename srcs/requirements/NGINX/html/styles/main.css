@@ -1182,6 +1182,15 @@ input[type="text"] {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.friend-count {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    text-align: center;
+}
+
 .close-btnf {
     position: absolute;
     top: 5px;

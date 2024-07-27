@@ -51,7 +51,7 @@ export const checkAuth = async () => {
 	}
 	const data = await response.json();
 	localStorage.setItem('accessToken', data.access);
-		return true;
+	return true;
 
 };
 

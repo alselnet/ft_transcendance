@@ -146,10 +146,10 @@ class FriendListView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     
-    def get(self, request, username):
+    def get(self, request):
         user = request.user
         friends = Friend.objects.filter(user=user)
-        friendsof = Friend.object.filter(friend=user)
+        friendsof = Friend.objects.filter(friend=user)
         friendlist_data = [
             {'friend': friend.friend.username} for friend in friends
         ] + [
