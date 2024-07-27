@@ -2,9 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.files.storage import default_storage
-from phonenumber_field.modelfields import PhoneNumberField
-from PIL import Image
 from django.core.files.base import ContentFile
+from authentication.utils import resize_image, crop_to_square
+from PIL import Image
 from io import BytesIO
 import logging
 import os
@@ -29,25 +29,25 @@ class GameSummary(models.Model):
         return f"Winner: {self.winner}, Loser: {self.loser}, Winner_score: {self.winner_score}, Loser_score: {self.loser_score}, Perfect: {self.perfect}, Local_game: {self.local_game}, Date: {self.date_time}"
 
 
-def resize_image(image, size=(300, 300)):
-    img = Image.open(image)
-    img = img.resize(size, Image.ANTIALIAS)
-    return img
-
-
 class Profile(models.Model):
 
     def user_avatar_path(instance, filename):
-        # Extract the file extension
         ext = filename.split('.')[-1]
-        # Define the directory and file name based on the username
         filename = f'{instance.user.username}.{ext}'
-        # Return the full path
         return os.path.join("avatars", filename)
 
-    def save(self, *args, **kwargs):
+    def save_avatar(self, *args, **kwargs):
+        try:
+            old_avatar = Profile.objects.get(pk=self.pk).avatar
+            if old_avatar and old_avatar.name != 'default.png' and old_avatar != self.avatar:
+                old_avatar.delete(save=False)
+        except Profile.DoesNotExist:
+            pass
+
         if self.avatar:
-            img = resize_image(self.avatar, size=(300, 300))
+            img = Image.open(self.avatar)
+            img = crop_to_square(img)
+            img = resize_image(img, size=(300, 300))
             buffer = BytesIO()
             img.save(fp=buffer, format='PNG')
             filebuffer = ContentFile(buffer.getvalue())
@@ -59,22 +59,29 @@ class Profile(models.Model):
         ('offline', 'Offline'),
         ('in game', 'in game'),
     )
+
+    TWO_FA_METHOD_CHOICES = (
+        ('none', 'None'),
+        ('email', 'Email'),
+        ('authenticator', 'Authenticator'),
+    )
+
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='offline')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    two_factors_auth_status = models.BooleanField(default=False)
+    # two_fa_status = models.BooleanField(default=True)
+    two_fa_method = models.CharField(max_length=20, choices=TWO_FA_METHOD_CHOICES, default='none')
     mail_confirmation_status = models.BooleanField(default=False)
-    avatar = models.ImageField(upload_to=user_avatar_path, default='avatars/default.png')
-    phone_number = PhoneNumberField(blank=True, null=True, default='+0000000000')
+    avatar = models.ImageField(upload_to=user_avatar_path, default='default.png')
     scored_points = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     conceded_points = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     played_games = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     won_games = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     perfect_wins = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    totp_secret = models.CharField(max_length=32, blank=True, null=True)
     
     def __str__(self):
         return self.user.username
     
-
 
 class Friend(models.Model):
     user = models.ForeignKey(User, related_name='friends', on_delete=models.CASCADE)

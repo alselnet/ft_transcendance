@@ -9,6 +9,10 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from .serializers import EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, AvatarSerializer, StatusUpdateSerializer
 from .models import GameSummary, Profile, Friend
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 class MeView(APIView):
     authentication_classes = [JWTAuthentication]
@@ -22,10 +26,9 @@ class MeView(APIView):
             'username': user.username,
             'email': user.email,
             'status': profile.status,
-            'two_factors_auth_status': profile.two_factors_auth_status,
+            'two_fa_method': profile.two_fa_method,
             'mail_confirmation_status': profile.mail_confirmation_status,
             'avatar': profile.avatar.url,
-            'phone_number': str(profile.phone_number),
             'scored_points': profile.scored_points,
             'conceded_points': profile.conceded_points,
             'played_games': profile.played_games,
@@ -211,6 +214,7 @@ class UpdatePasswordView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+
 class UpdateStatusView(APIView):
 
     def put(self, request):
@@ -300,3 +304,4 @@ class RemoveFriendView(APIView):
 
         friendship.delete()
         return Response({'detail': 'Friend removed'}, status=status.HTTP_204_NO_CONTENT)
+    
