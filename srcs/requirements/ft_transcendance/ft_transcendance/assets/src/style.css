@@ -4,7 +4,6 @@
 @import url('./app/style/Navbar.css');
 @import url('./app/style/Game.css');
 @import url('./app/style/Dashboard.css');
-@import url('./app/style/Leaderboard.css');
 @import url('./app/style/Settings.css');
 @import url('./app/style/2FA.css');
 @import url('./app/style/GameHistory.css');
@@ -13,7 +12,7 @@
 @import url('./app/style/DeleteFriendMsg.css');
 @import url('./app/style/CanvaGame.css');
 @import url('./app/style/AboutUs.css');
-/* @import url('./app/style/test.css'); */
+@import url('./app/style/CharteMsg.css');
 
 @font-face {
     font-family: 'JuliusSansOne';

@@ -1,12 +1,12 @@
 PYTHON := python3
 PIP := pip3
 DOCKER_COMPOSE := docker compose
-VOLUMES_PATH := /home/jules/
+VOLUMES_PATH := /Users/alexandreselnet/Coding/
 
 all: up
 
 up:
-	@echo "Creating DB volume..."
+	@echo "Creating DB volume test..."
 	@mkdir -p $(VOLUMES_PATH)Postgres_volume
 	@mkdir -p $(VOLUMES_PATH)Static_volume
 	@mkdir -p $(VOLUMES_PATH)Media_volume/avatars
@@ -14,6 +14,7 @@ up:
 	@chmod -R 777 $(VOLUMES_PATH)Static_volume
 	@chmod -R 777 $(VOLUMES_PATH)Media_volume/avatars
 	@cp ./srcs/requirements/ft_transcendance/ft_transcendance/users/avatars/* $(VOLUMES_PATH)Media_volume/
+
 	@echo "Bundling frontend files..."
 	@cd srcs/requirements/ft_transcendance/ft_transcendance/assets/src && npm run build
 	@echo "Launching docker compose..."
@@ -32,6 +33,7 @@ clean: stop
 	@docker rmi srcs-postgresdb
 	@docker rmi srcs-webapp
 	@docker rmi srcs-nginx
+	@docker rmi srcs-redis
 
 prune:
 	@echo "Deleting docker data..."
@@ -47,6 +49,6 @@ show:
 	@docker volume ls -q
 	@docker image ls -q
 
-re: prune all
+re: clean all
 
 .PHONY: all up stop clean fclean prune wipe show logs re

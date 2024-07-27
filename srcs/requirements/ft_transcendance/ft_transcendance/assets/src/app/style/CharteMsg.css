@@ -1,0 +1,33 @@
+.charte-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.charte-title {
+    color: white;
+    margin-bottom: 4vh;
+}
+
+.charte-text {
+    color: white;
+    margin-bottom: 4vh;
+}
+
+.charte-msg {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    margin-left: 2vw;
+    width: 50vw;
+    height: 70vh;
+    margin: 10;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}

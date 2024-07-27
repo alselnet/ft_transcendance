@@ -1,12 +1,4 @@
-import { checkAuth } from "../services/Api.js"
-
 const FriendsList = async () => {
-    
-    const isAuthenticated = await checkAuth();
-    
-    if (!isAuthenticated) {
-        return;
-    }
 
     let section = document.querySelector("#section");
         section.innerHTML = 

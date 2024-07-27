@@ -1,16 +1,8 @@
-import { checkAuth } from "../services/Api.js";
-import { getCookie } from '../utils/cookies';
+import { post } from "../services/Api.js"
 
 const LogOutUser = async () => {
     try {
-        const response = await fetch('https://localhost/api/auth/signout/', {
-            method: 'POST', 
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken'),
-                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-            }
-        });
+        const response = await post('https://localhost/api/auth/signout/');
 
         if (!response.ok) {
             throw new Error('Failed to logout');
@@ -27,11 +19,6 @@ const LogOutUser = async () => {
 };
 
 const LogOutMsg = async () => {
-    const isAuthenticated = await checkAuth();
-
-    if (!isAuthenticated) {
-        return;
-    }
 
     let msg = document.querySelector("#section");
 

@@ -86,12 +86,11 @@ const SignIn = () => {
             return;
         }
 
-        const csrfToken = getCookie('csrftoken');
         fetch('https://localhost/api/auth/register/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken
+                'X-CSRFToken': getCookie('csrftoken')
             },
             body: JSON.stringify(formData)
         })
@@ -107,7 +106,7 @@ const SignIn = () => {
             alert(data.message);
             localStorage.setItem('accessToken', data.access);   //test
             localStorage.setItem('refreshToken', data.refresh); //test
-            console.log('Redirecting to dashboard...');
+            console.log('Redirecting to dashboard from signin...');
             window.location.href = '#/dashboard';
             console.log('Current hash:', window.location.hash);
         })

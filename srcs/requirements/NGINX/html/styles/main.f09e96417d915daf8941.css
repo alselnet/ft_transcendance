@@ -776,7 +776,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     color: white;
 }
 
-.friends-and-leaderboard-stat {
+.footer-link {
 	position: fixed;
 	bottom: 0;
 	width: 100%;

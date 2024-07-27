@@ -1,23 +1,16 @@
 import { Navbar } from "../components/Navbar.js";
 import { Main } from "../utils/Main.js";
 import { DashStat } from "../components/StatDash.js";
-import { HistoryDash } from "../components/HistoryDash.js";
 import { LogOut } from "../components/LogOut.js";
 import {
-    setupLeaderboardAnimation,
     setupFriendListAnimation,
     setupGameHistoryAnimation,
     setupCamembertAnimation
 } from "../animation/DashboardAnimation.js";
-import { checkAuth } from "../services/Api.js"
 
-const Dashboard = async () => {
+import { checkAuth } from "../services/Api.js";
 
-    const isAuthenticated = await checkAuth();
-    
-    if (!isAuthenticated) {
-        return;
-    }
+export const Dashboard = () => {
 
     let divRoot = document.querySelector("#root");
 
@@ -28,17 +21,13 @@ const Dashboard = async () => {
     divRoot.append(Main());
 
     let dashboardContainer = document.createElement("div");
-    dashboardContainer.className = "dashboard-container";
+    // dashboardContainer.className = "dashboard-container";
 
     dashboardContainer.append(DashStat());
-    // dashboardContainer.append(HistoryDash());
 
     divRoot.append(dashboardContainer);
 
-    setupLeaderboardAnimation(divRoot);
     setupFriendListAnimation(divRoot);
     setupGameHistoryAnimation(divRoot);
     setupCamembertAnimation(dashboardContainer);
 };
-
-export { Dashboard };

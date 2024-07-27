@@ -1,13 +1,6 @@
-import { checkAuth } from "../services/Api.js"
-import Jcointre from '../images/jecointr_avatar.png'
+import Tmejri from '../images/Tasnim.jpg'
 
 const FriendList = async () => {
-
-    const isAuthenticated = await checkAuth();
-    
-    if (!isAuthenticated) {
-        return;
-    }
     
     let root = document.getElementById("root");
     if (!root) {
@@ -37,28 +30,28 @@ const FriendList = async () => {
             <table class="friends-tablef">
                 <tbody>
                     <tr>
-                        <td><img src="${Jcointre}" alt="jecointr"> </td>
-                        <td><span class="userf">jecointr</span></td>
+                        <td><img src="${Tmejri}" alt="tmejri"> </td>
+                        <td><span class="userf">tmejri</span></td>
                         <td><span class="remove-btnf">&times;</span></td>
                     </tr>
                     <tr>
-                        <td><img src="${Jcointre}" alt="jecointr"> </td>
-                        <td><span class="userf">jecointr</span></td>
+                        <td><img src="${Tmejri}" alt="tmejri"> </td>
+                        <td><span class="userf">tmejri</span></td>
                         <td><span class="remove-btnf">&times;</span></td>
                     </tr>
                     <tr>
-                        <td><img src="${Jcointre}" alt="jecointr"> </td>
-                        <td><span class="userf">jecointr</span></td>
+                        <td><img src="${Tmejri}" alt="tmejri"> </td>
+                        <td><span class="userf">tmejri</span></td>
                         <td><span class="remove-btnf">&times;</span></td>
                     </tr>
                     <tr>
-                        <td><img src="${Jcointre}" alt="jecointr"></td>
-                        <td><span class="userf">jecointr</span></td>
+                        <td><img src="${Tmejri}" alt="tmejri"></td>
+                        <td><span class="userf">tmejri</span></td>
                         <td><span class="remove-btnf">&times;</span></td>
                     </tr>
                     <tr>
-                        <td><img src="${Jcointre}" alt="jecointr"></td>
-                        <td><span class="userf">jecointr</span></td>
+                        <td><img src="${Tmejri}" alt="tmejri"></td>
+                        <td><span class="userf">tmejri</span></td>
                         <td><span class="remove-btnf">&times;</span></td>
                     </tr>
                 </tbody>

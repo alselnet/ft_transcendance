@@ -25,30 +25,12 @@ const Home = () => {
         <div class="balls-home d-none d-md-flex">
             <div class="orange-ball-home">
                 <a href="#/signin" data-hash="signin">
-                    <span>I</span>
-                    <span>n</span>
-                    <span>s</span>
-                    <span>c</span>
-                    <span>r</span>
-                    <span>i</span>
-                    <span>p</span>
-                    <span>t</span>
-                    <span>i</span>
-                    <span>o</span>
-                    <span>n</span>
+                    Inscription
                 </a>
             </div>
             <div class="white-ball-home">
                 <a href="#/login" data-hash="login">
-                    <span>c</span>
-                    <span>o</span>
-                    <span>n</span>
-                    <span>n</span>
-                    <span>e</span>
-                    <span>x</span>
-                    <span>i</span>
-                    <span>o</span>
-                    <span>n</span>
+                    Connexion
                 </a>
             </div>
             <div class="btn-container-home">
@@ -62,30 +44,12 @@ const Home = () => {
         <div class="balls-home-sm d-none d-sm-flex d-md-none">
             <div class="orange-ball-home-sm">
                 <a href="#/signin" data-hash="signin">
-                    <span>I</span>
-                    <span>n</span>
-                    <span>s</span>
-                    <span>c</span>
-                    <span>r</span>
-                    <span>i</span>
-                    <span>p</span>
-                    <span>t</span>
-                    <span>i</span>
-                    <span>o</span>
-                    <span>n</span>
+                    Incsription
                 </a>
             </div>
             <div class="white-ball-home-sm">
                 <a href="#/login" data-hash="login">
-                    <span>c</span>
-                    <span>o</span>
-                    <span>n</span>
-                    <span>n</span>
-                    <span>e</span>
-                    <span>x</span>
-                    <span>i</span>
-                    <span>o</span>
-                    <span>n</span>
+                    Connexion
                 </a>
             </div>
             <div class="btn-container-home">
