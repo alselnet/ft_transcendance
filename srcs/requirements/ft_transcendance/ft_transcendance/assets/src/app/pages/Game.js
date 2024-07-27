@@ -1,15 +1,8 @@
 import * as THREE from 'three';
 // import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 // import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-import { checkAuth } from "../services/Api.js"
 
 const Game = async () => {
-    
-    const isAuthenticated = await checkAuth();
-    
-    if (!isAuthenticated) {
-        return;
-    }
     
     let section = document.querySelector("#section");
     if (section) {

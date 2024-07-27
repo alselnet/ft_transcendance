@@ -1,13 +1,4 @@
-import { checkAuth } from "../services/Api.js";
-import { getCookie } from '../utils/cookies';
-
 const CharteMsg = async () => {
-    const isAuthenticated = await checkAuth();
-
-    if (!isAuthenticated) {
-        return;
-    }
-
     let msg = document.querySelector("#section");
 
     let root = document.getElementById("root");

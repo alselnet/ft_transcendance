@@ -14,12 +14,17 @@ import { LogOutMsg } from "../components/LogOutMsg.js";
 import { DeleteFriendMsg } from "../components/DeleteFriendMsg.js";
 import { CharteMsg } from "../components/CharteMsg.js";
 
-export const Router = () => {
-    const hash = window.location.hash;
+import { DashStat } from "../components/StatDash.js";
+
+export const Router = async () => {
+	const hash = window.location.hash;
+	console.log('current hash: ', hash);
     const section = document.getElementById('section');
 
     if (window.location.hash.includes('access') && window.location.hash.includes('refresh')) {
-        handleCallback();
+		console.log('handling callback');
+        await handleCallback();
+		return ;
     }
 
     switch (hash) {
@@ -35,9 +40,9 @@ export const Router = () => {
         case "#/game":
             Game();
             break;
-        case "#/dashboard":
-            Dashboard();
-            break;
+		case "#/dashboard":
+			Dashboard();
+			break;
         case "#/settings":
             Settings();
             break;

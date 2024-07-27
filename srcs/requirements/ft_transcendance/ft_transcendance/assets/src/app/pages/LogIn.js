@@ -71,12 +71,11 @@ const LogIn = () => {
         };
 
         // Envoi des données de connexion
-		const csrfToken = getCookie('csrftoken');
         fetch('https://localhost/api/auth/signin/', {  // Modification de l'URL
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-				'X-CSRFToken': csrfToken
+				'X-CSRFToken': getCookie('csrftoken')
             },
             body: JSON.stringify(logData)
         })
@@ -94,6 +93,7 @@ const LogIn = () => {
             localStorage.setItem('refreshToken', data.refresh);
 
             // Rediriger vers le tableau de bord
+            console.log('Redirecting to dashboard from login...');
             window.location.href = '#/dashboard';
         })
         .catch(error => {

@@ -1,13 +1,6 @@
-import { checkAuth } from "../services/Api.js"
 import Tmejri from '../images/Tasnim.jpg'
 
 const Settings = async () => {
-
-    const isAuthenticated = await checkAuth();
-    
-    if (!isAuthenticated) {
-        return;
-    }
 
     let form = document.createElement("div");
     section.innerHTML = 

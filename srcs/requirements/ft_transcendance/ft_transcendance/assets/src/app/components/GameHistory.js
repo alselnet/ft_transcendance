@@ -1,14 +1,7 @@
-import { checkAuth } from "../services/Api.js"
 import Tmejri from '../images/Tasnim.jpg'
 
 
 const GameHistory = async () => {
-
-    const isAuthenticated = await checkAuth();
-    
-    if (!isAuthenticated) {
-        return;
-    }
 
     let root = document.getElementById("root");
     if (!root) {

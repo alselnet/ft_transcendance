@@ -62,8 +62,4 @@ const FriendDashStat = () => {
     return form;
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById('root').appendChild(FriendDashStat());
-});
-
 export { FriendDashStat };

@@ -7,16 +7,9 @@ import {
     setupGameHistoryAnimation,
     setupCamembertAnimation
 } from "../animation/DashboardAnimation.js";
-import { checkAuth } from "../services/Api.js"
 
 const FriendProfile = async () => {
-    
-    const isAuthenticated = await checkAuth();
-    
-    if (!isAuthenticated) {
-        return;
-    }
-    
+
     let divRoot = document.querySelector("#root");
 
     divRoot.innerHTML = "";

@@ -1,16 +1,9 @@
-import { checkAuth } from "../services/Api.js"
 import Hucoulon from '../images/hugo.png'
 import Tmejri from '../images/Tasnim.jpg'
 import Aselnet from '../images/Alex.png'
 import Jthuysba from '../images/Jules.png'
 
 const AboutUs = async () => {
-
-	const isAuthenticated = await checkAuth();
-    
-    if (!isAuthenticated) {
-        return;
-    }
 
 	let section = document.querySelector("#section");
     if (section) {

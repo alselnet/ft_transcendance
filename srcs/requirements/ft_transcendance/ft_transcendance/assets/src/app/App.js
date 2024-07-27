@@ -3,7 +3,7 @@ import { Navbar } from "./components/Navbar.js";
 import { Main } from "./utils/Main.js";
 import { Router } from "./utils/Router.js";
 
-export const App = () => {
+export const App = async () => {
     let root = document.getElementById("root");
 
     if (!root) {
@@ -21,10 +21,11 @@ export const App = () => {
 
     root.append(Main());
 
-    if (!window.location.hash) {
-        window.location.href = '#/';
-    }
+	if (!window.location.hash){
+		window.location.hash = '#/'
+		await Router();
+	}
 	else {
-        Router();
-    }
+		await Router();
+	}
 };

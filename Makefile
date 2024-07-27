@@ -1,7 +1,7 @@
 PYTHON := python3
 PIP := pip3
 DOCKER_COMPOSE := docker compose
-VOLUMES_PATH := /Users/macbook/Documents/Tasnim/
+VOLUMES_PATH := /Users/alexandreselnet/Coding/
 
 all: up
 
@@ -32,6 +32,7 @@ clean: stop
 	@docker rmi srcs-postgresdb
 	@docker rmi srcs-webapp
 	@docker rmi srcs-nginx
+	@docker rmi srcs-redis
 
 prune:
 	@echo "Deleting docker data..."
@@ -47,6 +48,6 @@ show:
 	@docker volume ls -q
 	@docker image ls -q
 
-re: prune all
+re: clean all
 
 .PHONY: all up stop clean fclean prune wipe show logs re

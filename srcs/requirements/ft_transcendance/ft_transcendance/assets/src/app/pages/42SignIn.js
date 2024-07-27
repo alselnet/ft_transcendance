@@ -5,6 +5,7 @@ export function FortyTwoSignIn() {
 
 export function handleCallback() {
     // Extract tokens from the URL fragment
+	console.log('handleCallback()');
     const fragment = window.location.hash.substring(1);
     console.log("Fragment part of URL:", fragment);
     const urlParams = new URLSearchParams(fragment);

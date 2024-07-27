@@ -7,15 +7,10 @@ import {
     setupGameHistoryAnimation,
     setupCamembertAnimation
 } from "../animation/DashboardAnimation.js";
-import { checkAuth } from "../services/Api.js"
 
-const Dashboard = async () => {
+import { checkAuth } from "../services/Api.js";
 
-    const isAuthenticated = await checkAuth();
-    
-    if (!isAuthenticated) {
-        return;
-    }
+export const Dashboard = () => {
 
     let divRoot = document.querySelector("#root");
 
@@ -36,5 +31,3 @@ const Dashboard = async () => {
     setupGameHistoryAnimation(divRoot);
     setupCamembertAnimation(dashboardContainer);
 };
-
-export { Dashboard };
