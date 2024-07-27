@@ -8,8 +8,8 @@ urlpatterns = [
 	path('42login/', FortyTwoLoginView, name='forty-two-login'),
 	path('callback/', Callback.as_view(), name='callback'),
     path('confirm-email/<str:token>/', ConfirmEmailView.as_view(), name='confirm-email'),
-	path('csrf_token/', CsrfTokenView, name='csrf_token_view'),
-	path('delete_user/', UserDeletionView.as_view(), name='user-deletion'),
+	path('csrf-token/', CsrfTokenView, name='csrf_token_view'),
+	path('delete-user/', UserDeletionView.as_view(), name='user-deletion'),
 	path('generate-2fa-code/', Generate2FACodeView.as_view(), name='generate-2fa-code'),
     path('validate-2fa-code/', Validate2FACodeView.as_view(), name='validate-2fa-code'),
 	path('register/', UserRegistrationView.as_view(), name='user-registration'),
@@ -18,7 +18,7 @@ urlpatterns = [
 	path('signout/', UserSignoutView.as_view(), name='user-signout'),
 	path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('update_2fa/', Update2FAStatusView.as_view(), name='2fa-update')
+    path('update-2fa/', Update2FAStatusView.as_view(), name='2fa-update')
 ]
 
 if settings.DEBUG:

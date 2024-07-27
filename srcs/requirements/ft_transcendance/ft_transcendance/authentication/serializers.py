@@ -32,4 +32,4 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
 
 class Update2FAStatusSerializer(serializers.Serializer):
-    two_fa_method = serializers.ChoiceField(choices=[('none', 'None'), ('email', 'Email'), ('authenticator', 'Authenticator')])
+    method = serializers.ChoiceField(choices=[('none', 'None'), ('email', 'Email'), ('authenticator', 'Authenticator')])

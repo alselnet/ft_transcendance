@@ -120,7 +120,7 @@ const DashStat = () => {
         form.querySelectorAll('.dropdown-item').forEach(item => {
             item.addEventListener('click', () => {
                 const newStatus = item.getAttribute('data-status');
-                put('https://localhost/api/users/update_status/', { status: newStatus })
+                put('https://localhost/api/users/update-status/', { status: newStatus })
                 .then(updateResponse => {
                     if (!updateResponse.ok) {
                         throw new Error('Failed to update user status');
