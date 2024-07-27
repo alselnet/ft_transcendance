@@ -303,7 +303,7 @@ class Update2FAStatusView(APIView):
         
         serializer = Update2FAStatusSerializer(data=request.data)
         if serializer.is_valid():
-            two_fa_method = serializer.validated_data['two_fa_method']
+            two_fa_method = serializer.validated_data['method']
         
             if two_fa_method == 'email' and not profile.mail_confirmation_status:
                 return Response({'error': 'Email is not confirmed'}, status=status.HTTP_400_BAD_REQUEST)
