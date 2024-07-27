@@ -1,7 +1,11 @@
 import Tmejri from '../images/Tasnim.jpg'
+import { checkAuth } from "../services/Api.js";
 
 const Settings = async () => {
-
+    const isAuthenticated = await checkAuth();
+    if (!isAuthenticated) {
+        throw new Error('User is not authenticated');
+    }
     let form = document.createElement("div");
     section.innerHTML = 
         `

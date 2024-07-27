@@ -2,8 +2,14 @@ import Hucoulon from '../images/hugo.png'
 import Tmejri from '../images/Tasnim.jpg'
 import Aselnet from '../images/Alex.png'
 import Jthuysba from '../images/Jules.png'
+import { checkAuth } from "../services/Api.js";
 
 const AboutUs = async () => {
+
+    const isAuthenticated = await checkAuth();
+    if (!isAuthenticated) {
+        throw new Error('User is not authenticated');
+    }
 
 	let section = document.querySelector("#section");
     if (section) {

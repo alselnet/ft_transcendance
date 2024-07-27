@@ -10,7 +10,12 @@ import {
 
 import { checkAuth } from "../services/Api.js";
 
-export const Dashboard = () => {
+export const Dashboard = async () => {
+
+    const isAuthenticated = await checkAuth();
+    if (!isAuthenticated) {
+        throw new Error('User is not authenticated');
+    }
 
     let divRoot = document.querySelector("#root");
 

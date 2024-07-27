@@ -1,9 +1,13 @@
+import { checkAuth } from "../services/Api.js";
 import * as THREE from 'three';
 // import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 // import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 
 const Game = async () => {
-    
+    const isAuthenticated = await checkAuth();
+    if (!isAuthenticated) {
+        throw new Error('User is not authenticated');
+    }
     let section = document.querySelector("#section");
     if (section) {
         section.innerHTML = 

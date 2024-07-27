@@ -38,7 +38,7 @@ module.exports = {
 		inject: 'body',
 	  }),
     new MiniCssExtractPlugin({
-      filename: 'styles/[name].[contenthash].css',
+      filename: 'styles/[name].css',
     }),
   ],
   devServer: {

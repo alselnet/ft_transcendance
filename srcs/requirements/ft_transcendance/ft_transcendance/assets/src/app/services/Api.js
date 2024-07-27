@@ -2,7 +2,7 @@ import { getCookie } from '../utils/cookies';
 
 export const isTokenExpired = (token) => {
 	const payload = JSON.parse(atob(token.split('.')[1]));
-	return (payload.exp < Date.now() / 1000);
+	return payload.exp < Date.now() / 1000;
 };
 
 const getHeaders = () => ({
@@ -23,6 +23,7 @@ export const checkAuth = async () => {
 
     if (!isTokenExpired(accessToken)) {
         // Access token is not expired
+		console.log('Token is valid');
         return true;
     }
 
@@ -33,7 +34,7 @@ export const checkAuth = async () => {
     }
 
 	const response = await fetch('https://localhost/api/auth/token/refresh/', {
-		method: 'GET',
+		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 			'X-CSRFToken': getCookie('csrftoken')
