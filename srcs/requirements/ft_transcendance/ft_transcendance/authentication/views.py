@@ -159,6 +159,7 @@ class Callback(APIView):
             filebuffer = ContentFile(buffer.getvalue())
             profile.avatar.save(f"{user.username}.png", filebuffer, save=False)
             profile.status = 'online'
+            profile.fortytwo_account = True
             profile.save()
 
             refresh = RefreshToken.for_user(user)
@@ -174,7 +175,7 @@ def CsrfTokenView(request):
 
 
 class ConfirmEmailView(APIView):
-    def get(self, request, token):
+    def get(self, token):
         email = verify_token(token)
         if email:
             try:

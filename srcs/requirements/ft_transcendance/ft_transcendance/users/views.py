@@ -33,7 +33,8 @@ class MeView(APIView):
             'conceded_points': profile.conceded_points,
             'played_games': profile.played_games,
             'won_games': profile.won_games,
-            'perfect_wins': profile.perfect_wins
+            'perfect_wins': profile.perfect_wins,
+            'fortytwo_account': profile.fortytwo_account
         }
 
         return Response(user_data, status=200)
@@ -166,7 +167,9 @@ class UpdateAvatarView(APIView):
 
     def post(self, request):
         profile = request.user.profile
-
+        if(profile.fortytwo_account == True):
+            return Response({'error': '42 accounts data can only be edited on intra.42.fr'}, status=status.HTTP_401_UNAUTHORIZED)
+        
         serializer = AvatarSerializer(profile, data=request.data)
 
         if serializer.is_valid():
@@ -182,6 +185,9 @@ class UpdateEmailView(APIView):
 
     def put(self, request):
         user = request.user
+        profile = request.user.profile
+        if(profile.fortytwo_account == True):
+            return Response({'error': '42 accounts data can only be edited on intra.42.fr'}, status=status.HTTP_401_UNAUTHORIZED)
         serializer = EmailUpdateSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
@@ -195,6 +201,9 @@ class UpdateUsernameView(APIView):
 
     def put(self, request):
         user = request.user
+        profile = request.user.profile
+        if(profile.fortytwo_account == True):
+            return Response({'error': '42 accounts data can only be edited on intra.42.fr'}, status=status.HTTP_401_UNAUTHORIZED)
         serializer = UsernameUpdateSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
@@ -208,6 +217,9 @@ class UpdatePasswordView(APIView):
 
     def put(self, request):
         user = request.user
+        profile = request.user.profile
+        if(profile.fortytwo_account == True):
+            return Response({'error': '42 accounts data can only be edited on intra.42.fr'}, status=status.HTTP_401_UNAUTHORIZED)
         serializer = PasswordUpdateSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
@@ -242,7 +254,8 @@ class PublicUserInfoView(APIView):
             'conceded_points': profile.conceded_points,
             'played_games': profile.played_games,
             'won_games': profile.won_games,
-            'perfect_wins': profile.perfect_wins
+            'perfect_wins': profile.perfect_wins,
+            'fortytwo_account': profile.fortytwo_account
         }
 
         return Response(user_data, status=200)
