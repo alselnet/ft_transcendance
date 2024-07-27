@@ -39,7 +39,7 @@ class Profile(models.Model):
     def save_avatar(self, *args, **kwargs):
         try:
             old_avatar = Profile.objects.get(pk=self.pk).avatar
-            if old_avatar and old_avatar.name != 'avatars/default.png' and old_avatar != self.avatar:
+            if old_avatar and old_avatar.name != 'default.png' and old_avatar != self.avatar:
                 old_avatar.delete(save=False)
         except Profile.DoesNotExist:
             pass
