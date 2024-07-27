@@ -23,16 +23,16 @@ export const checkAuth = async () => {
 
     if (!isTokenExpired(accessToken)) {
         // Access token is not expired
-		console.log('Token is valid');
         return true;
     }
-
+	
     // Access token is expired and no refresh token in local storage
     if (!refreshToken) {
-        window.location.hash = '#/';
+		window.location.hash = '#/';
         return false;
     }
-
+	
+	console.log('Refreshing token');
 	const response = await fetch('https://localhost/api/auth/token/refresh/', {
 		method: 'POST',
 		headers: {
@@ -49,12 +49,10 @@ export const checkAuth = async () => {
 		window.location.hash = '#/';
 		return false;
 	}
-	else 
-	{
-		const data = response.json();
-		localStorage.setItem('accessToken', data.access);
+	const data = await response.json();
+	localStorage.setItem('accessToken', data.access);
 		return true;
-	}
+
 };
 
 export const get = async (url, options = {}) => {
