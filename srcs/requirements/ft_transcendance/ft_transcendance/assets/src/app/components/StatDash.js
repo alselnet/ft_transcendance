@@ -77,6 +77,14 @@ const DashStat = () => {
 				</div>
 
 				<div class="footer-link">
+					<div class="search-container">
+            			<div class="search-barre">
+                			<input type="text" id="login-search" placeholder="Entrez le nom de l'utilisateur">
+            			</div>
+            			<button type="button" id="search-button">
+                			<i class="bi bi-search search-icon"></i>
+            			</button>
+        			</div>
 					<a class="nav-link" href="#/friendlist">         
 						<div class="footer" id="list-stat">
 							<i class="bi bi-list-task footer-icon"></i>
@@ -89,21 +97,8 @@ const DashStat = () => {
 							<p class="footer-text">Historique des parties</p>
 						</div>
 					</a>
-					<a class="nav-link" href="#/chartemsg">         
-						<div class="footer" id="list-stat">
-							<i class="bi bi-file-earmark-lock footer-icon"></i>
-							<p class="footer-text">Charte de confidentialite</p>
-						</div>
-					</a>
-					<a class="nav-link" href="#/searchuser">         
-						<div class="footer" id="list-stat">
-							<i class="bi bi-search footer-icon"></i>
-							<p class="footer-text">Rechercher un utilisateur</p>
-						</div>
-					</a>
 				</div>
 			</div>
-
         `;
         console.log('Form innerHTML set');
 
@@ -116,11 +111,10 @@ const DashStat = () => {
             console.log('Animation set');
         }, 500);
 
-        // Handle dropdown item click
         form.querySelectorAll('.dropdown-item').forEach(item => {
             item.addEventListener('click', () => {
                 const newStatus = item.getAttribute('data-status');
-                put('https://localhost/api/users/update-status/', { status: newStatus })
+                put('https://localhost/api/users/update_status/', { status: newStatus })
                 .then(updateResponse => {
                     if (!updateResponse.ok) {
                         throw new Error('Failed to update user status');
@@ -128,7 +122,6 @@ const DashStat = () => {
                     return updateResponse.json();
                 })
                 .then(() => {
-                    // Update the UI with the new status
                     userData.status = newStatus;
                     const statusText = form.querySelector('.status-text');
                     const statusPastille = form.querySelector('.status-pastille');
@@ -143,16 +136,29 @@ const DashStat = () => {
             });
         });
         console.log('Event listeners set');
+
+		form.querySelector('#search-button').addEventListener('click', () => {
+			const username = document.getElementById("login-search").value;
+			if (username) {
+				if (isUserSelf(username, userData.username)) {
+                    alert("Vous ne pouvez pas accéder à votre propre profil.");
+                } else {
+                    console.log("CHANGING TO USER PROFILE");
+                    console.log(username);
+                    window.location.href = `#/friendprofile/${username}`;
+                }
+			}
+		});
     })
     .catch(error => {
         console.error('Error fetching user profile:', error);
         form.innerHTML = '<p>Failed to load user profile</p>';
     });
 
+
     return form;
 };
 
-// Function to get appropriate status color
 function getStatusColor(status) {
     switch (status) {
         case 'online':
@@ -163,5 +169,9 @@ function getStatusColor(status) {
             return 'grey';
     }
 }
+
+const isUserSelf = (searchedUsername, currentUsername) => {
+    return searchedUsername === currentUsername;
+};
 
 export { DashStat };

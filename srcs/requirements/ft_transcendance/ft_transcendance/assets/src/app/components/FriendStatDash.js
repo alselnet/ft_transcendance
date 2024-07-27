@@ -1,65 +1,111 @@
 import { animateNumbers } from "../animation/DashboardAnimation.js";
+import { get } from "../services/Api.js";
 
 const FriendDashStat = () => {
+    console.log("enter in friendprofile component")
     let form = document.createElement("div");
-    form.innerHTML = `
-    <div class="left-side-stat">
-        <div class="id-stat">
-            <div><img src="./app/images/tmejri_avatar.png" alt="profile-pic" class="profile-picture-stat"></div>
-            <div class="text-stat">
-                <div class="name-and-settings">
-                    <div class="username-stat">Tmejri</div>
-                    <a class="nav-link" href="#/deletefriendmsg"><i class="bi bi-person-dash gear-icon"></i></a>
-                </div>
-                <div class="status-stat">
-                    <div class="pastille-stat"></div>
-                    <div class="status-text-stat">en ligne</div>
-                </div>
-            </div>
-        </div>
- 
-        <div class="statistics-stat">
-            <div class="left-side-stat-stat">
-                <div class="stat-title-stat">Statistiques du joueur :</div>
-                <div class="camembert-stat"></div>
-            </div>
-            <div class="right-side-stat-stat">
-                <div class="stat-data-stat">
-                    <div class="stat-rubric-stat">
-                        <p class="stat-text-stat">Partie(s) jouée(s)</p>
-                        <p class="stat-number-stat" data-target="7">0</p>
-                    </div>
-                    <div class="stat-rubric-stat">
-                        <p class="stat-text-stat">Adversaire(s) rencontré(s)</p>
-                        <p class="stat-number-stat" data-target="6">0</p>
-                    </div>
-                    <div class="stat-rubric-stat">
-                        <p class="stat-text-stat">Temps de jeu (s)</p>
-                        <p class="stat-number-stat" data-target="124">0</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-link">
-            <a class="nav-link" href="#/friendlist">         
-                <div class="friends-list-stat" id="list-stat">
-                    <i class="bi bi-list-task list-icon"></i>
-                    <p class="list-text-stat">Liste d'amis</p>
-                </div>
-            </a>
-        </div>
-    </div>
-    `;
 
-    setTimeout(() => {
-        const numbers = form.querySelectorAll('.stat-number-stat');
-        numbers.forEach(number => {
-            const target = +number.getAttribute('data-target');
-            animateNumbers(number, target);
+    const path = window.location.hash.split('/');
+    const username = path[path.length - 1];
+
+    get(`https://localhost/api/users/${username}/`)
+        .then(response => {
+            return response.json();
+        })
+        .then(userData => {
+            if (userData.detail === "No User matches the given query.") {
+                throw new Error("L'utilisateur n'existe pas");
+            }
+            console.log('Fetched user data:', userData);
+
+            form.innerHTML = `
+            <div class="stat-container">
+				<div class="id">
+					<div><img src="${userData.avatar}" alt="profile-pic" class="profile-picture"></div>
+					
+					<div class="text-stat">
+						<div class="friend-name">
+	                        <p class="profile-text">profile de</p>
+							<div class="friend-username-stat">${userData.username}</div>
+						</div>
+						<div class="status">
+							<div class="status-pastille" style="background-color: ${getStatusColor(userData.status)};"></div>
+								<div class="friend-status-text">${userData.status}</div>
+								<a class="nav-link" href="#/deletefriendmsg"><i class="bi bi-person-dash-fill person-icon delete-icon"></i></a>
+                        		<i class="bi bi-person-plus-fill person-icon"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="statistics-box">
+					<div class="left-side">
+						<div class="stat-title">Statistiques du joueur :</div>
+						<div class="camembert-stat"></div>
+					</div>
+					<div class="right-side">
+						<div class="stat-data">
+							<div class="stat-rubric-stat">
+								<p class="stat-text">Points concédés :</p>
+								<p class="stat-number" data-target="${userData.conceded_points}">0</p>
+							</div>
+							<div class="stat-rubric-stat">
+								<p class="stat-text">Points marqués :</p>
+								<p class="stat-number" data-target="${userData.conceded_points}">0</p>
+							</div>
+							<div class="stat-rubric-stat">
+								<p class="stat-text">Victoires parfaites :</p>
+								<p class="stat-number" data-target="${userData.conceded_points}">0</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="footer-friend-link">
+					<a class="nav-link" href="#/friendlist">         
+						<div class="footer-friend" id="list-stat-friend">
+							<i class="bi bi-list-task footer-friend-icon"></i>
+							<p class="footer-friend-text">Liste d'amis</p>
+						</div>
+					</a>
+					<a class="nav-link" href="#/gamehistory">         
+						<div class="footer-friend" id="list-stat-friend">
+							<i class="bi bi-clock-history footer-friend-icon"></i>
+							<p class="footer-friend-text">Historique des parties</p>
+						</div>
+					</a>
+				</div>
+			</div>
+            `;
+
+            setTimeout(() => {
+                const numbers = form.querySelectorAll('.stat-number-stat');
+                numbers.forEach(number => {
+                    const target = +number.getAttribute('data-target');
+                    animateNumbers(number, target);
+                });
+            }, 500);
+        })
+        .catch(error => {
+            console.error('Error fetching user profile:', error);
+            alert("L'utilisateur n'existe pas");
+            form.innerHTML = '<p>Failed to load user profile</p>';
         });
-    }, 500);
 
-    return form;
+    const section = document.getElementById('section');
+    section.innerHTML = '';
+    section.appendChild(form);
 };
+
+function getStatusColor(status) {
+    switch (status) {
+        case 'online':
+            return 'green';
+        case 'offline':
+            return 'red';
+        default:
+            return 'grey';
+    }
+}
 
 export { FriendDashStat };

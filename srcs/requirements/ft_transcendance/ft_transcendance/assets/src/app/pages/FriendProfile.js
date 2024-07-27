@@ -23,18 +23,14 @@ const FriendProfile = async () => {
     divRoot.append(Main());
 
     let dashboardContainer = document.createElement("div");
-    dashboardContainer.className = "dashboard-container";
 
     dashboardContainer.append(FriendDashStat());
-    // dashboardContainer.append(FriendHistoryDash());
-
 
     divRoot.append(dashboardContainer);
 
     setupFriendListAnimation(divRoot);
     setupGameHistoryAnimation(divRoot);
     setupCamembertAnimation(dashboardContainer);
-
 };
 
 export { FriendProfile };

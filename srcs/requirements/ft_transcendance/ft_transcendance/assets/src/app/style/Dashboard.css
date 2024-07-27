@@ -203,3 +203,146 @@
     }
 
 }
+
+
+/* search pad */
+.search-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.search-barre {
+    width: 30vw;
+    height: 7vh;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
+	z-index: 2;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#search-button {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0; 
+    margin-left: 10px;
+    position: relative;
+}
+
+.search-icon {
+    color: white;
+    font-size: 2rem;
+    margin-right: 4vw;
+}
+
+#search-button:hover .search-icon {
+    color: #245070;
+}
+
+#login-search {
+    border: none;
+    background-color: transparent;
+    width: calc(100% - 20px);
+    outline: none;
+    color: white;
+}
+
+
+.profile-text {
+    position: fixed;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-left: 2vw;
+    width: 6vw;
+    height: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    font-size: 70%;
+    color: black;
+}
+
+
+.footer-friend-link {
+	position: fixed;
+	bottom: 5vh;
+	width: 75%;
+	z-index: 100;
+    margin-left: 17vw;
+    display: flex;
+	align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.footer-friend-icon {
+    font-size: 2rem;
+    color: white;
+}
+
+.footer-friend-icon:hover {
+    color: gold;
+}
+
+.footer-friend {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.footer-friend-text {
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-right: 10vw;
+    color: white;
+    font-size: 1vw;
+}
+
+.footer-friend-text:hover {
+    color: gold;
+}
+
+.person-icon {
+    display: flex;
+    font-size: 2vw;
+    color: rgba(255, 255, 255, 0.2);
+    margin-left: 1vw;
+    color: rgb(71, 136, 71);
+}
+
+.person-icon:hover {
+    color: white;
+}
+
+.friend-status-text {
+    color: white;
+    margin-left: 7px;
+    margin-right: 45vw;
+    font-size: 1vw;
+}
+
+.delete-icon {
+    color: rgb(195, 103, 103);
+}
+
+.friend-name {
+    display: flex;
+    flex-direction: column;
+}
+
+.friend-username-stat {
+    color: white;
+    text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
+    margin-top: 2vh;
+    margin-left: 1vw;
+    font-size: 2.5vw;
+}
