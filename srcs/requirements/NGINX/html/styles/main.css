@@ -678,6 +678,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     font-size: 1vw;
 }
 
+
 .text-stat {
     display: flex;
     flex-direction: column;
@@ -687,7 +688,6 @@ input[type="text"], input[type="password"], input[type="email"] {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 7px;
 }
 
 .status-pastille {
@@ -768,13 +768,25 @@ input[type="text"], input[type="password"], input[type="email"] {
     font-size: 2vw;
 }
 
-.camembert-stat {
+/* .camembert-stat {
+    width: 25vw;
+    height: 10vh;
     background-color: green;
     border-radius: 50%;
     position: absolute;
     transition: width 0.5s ease, height 0.5s ease;
-    margin-top: 7vh;
-    margin-left: 5vw;
+    margin-top: 10vh;
+    margin-left: 15vw;
+} */
+
+.camembert-stat {
+    width: 20vw;
+    height: 20vw;
+    border-radius: 50%;
+    position: absolute;
+    transition: width 0.5s ease, height 0.5s ease;
+    margin-top: 15vh;
+    margin-left: 8vw;
 }
 
 .left-side {

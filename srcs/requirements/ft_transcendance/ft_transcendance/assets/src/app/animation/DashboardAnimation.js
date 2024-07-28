@@ -1,121 +1,136 @@
 import { FriendList } from "../components/FriendsList.js";
 import { GameHistory } from "../components/GameHistory.js";
 
+export function setupFriendListAnimation(dashboardContainer) {
+    const listButton = dashboardContainer.querySelector('#list-stat');
+    if (!listButton) {
+        console.error('List button not found');
+        return;
+    }
+
+    listButton.addEventListener('click', () => {
+        let container = document.createElement('div');
+        container.style.position = 'fixed';
+        container.style.left = 0;
+        container.style.top = 0;
+        container.style.width = '100%';
+        container.style.height = '100%';
+        container.style.zIndex = 1000;
+        document.body.append(container);
+
+        let rect = listButton.getBoundingClientRect();
+        let cx = rect.left + rect.width / 2;
+        let cy = rect.top + rect.height / 2;
+        let radius = Math.max(window.innerWidth, window.innerHeight);
+
+        showCircle(container, cx, cy, radius, (div) => {
+            let friendsList = FriendList();
+            friendsList.style.opacity = 0;
+            friendsList.style.transition = 'opacity 0.5s';
+            div.append(friendsList);
+
+            setTimeout(() => {
+                friendsList.style.opacity = 1;
+            }, 0);
+
+            friendsList.querySelector('.close-button').addEventListener('click', () => {
+                friendsList.style.opacity = 0;
+                friendsList.addEventListener('transitionend', function onTransitionEnd() {
+                    friendsList.removeEventListener('transitionend', onTransitionEnd);
+                    hideCircle(div, () => container.remove());
+                });
+            });
+        });
+    });
+}
+
+export function setupGameHistoryAnimation(dashboardContainer) {
+    const historyButton = dashboardContainer.querySelector('#history-stat');
+    if (!historyButton) {
+        console.error('History button not found');
+        return;
+    }
+
+    historyButton.addEventListener('click', () => {
+        let container = document.createElement('div');
+        container.style.position = 'fixed';
+        container.style.left = 0;
+        container.style.top = 0;
+        container.style.width = '100%';
+        container.style.height = '100%';
+        container.style.zIndex = 1000;
+        document.body.append(container);
+
+        let rect = historyButton.getBoundingClientRect();
+        let cx = rect.left + rect.width / 2;
+        let cy = rect.top + rect.height / 2;
+        let radius = Math.max(window.innerWidth, window.innerHeight);
+
+        showCircle(container, cx, cy, radius, (div) => {
+            let gameHistory = GameHistory();
+            gameHistory.style.opacity = 0;
+            gameHistory.style.transition = 'opacity 0.5s';
+            div.append(gameHistory);
+
+            setTimeout(() => {
+                gameHistory.style.opacity = 1;
+            }, 0);
+
+            gameHistory.querySelector('.close-button').addEventListener('click', () => {
+                gameHistory.style.opacity = 0;
+                gameHistory.addEventListener('transitionend', function onTransitionEnd() {
+                    gameHistory.removeEventListener('transitionend', onTransitionEnd);
+                    hideCircle(div, () => container.remove());
+                });
+            });
+        });
+    });
+}
+
+export function setupCamembertAnimation(dashboardContainer) {
+    console.log('Setting up camembert animation');
+    const camembertContainer = dashboardContainer.querySelector('.camembert-stat');
+    if (!camembertContainer) {
+        console.error('Camembert container not found');
+        return;
+    }
+
+    console.log('Camembert container found', camembertContainer);
+
+    // Clear previous circles if any
+    camembertContainer.innerHTML = '';
+
+    // Display a circle in the camembert container
+    const containerRect = camembertContainer.getBoundingClientRect();
+    const cx = containerRect.width / 2;
+    const cy = containerRect.height / 2;
+    const radius = containerRect.width / 2;
+
+    showCircle(camembertContainer, cx, cy, radius, (div) => {
+        console.log('Circle shown:', div);
+        // Here you can add more code to handle the animation completion
+    });
+}
+
 export function showCircle(container, cx, cy, radius, callback) {
     let div = document.createElement('div');
     div.style.width = 0;
     div.style.height = 0;
     div.style.left = cx + 'px';
     div.style.top = cy + 'px';
-    div.style.position = 'absolute';
-    div.style.backgroundColor = 'green';
     div.style.borderRadius = '50%';
-    div.style.transition = 'width 0.5s ease, height 0.5s ease';
+    div.style.position = 'absolute';
+    div.style.backgroundColor = 'yellow';
+    div.style.transition = 'width 0.5s ease, height 0.5s ease, left 0.5s ease, top 0.5s ease';
 
-    container.append(div);
+    container.appendChild(div);
 
+    // Delay the animation to ensure the element is added to the DOM
     setTimeout(() => {
-        div.style.width = radius * 3 + 'px';
-        div.style.height = radius * 3 + 'px';
-
-        div.addEventListener('transitionend', function handler() {
-            div.removeEventListener('transitionend', handler);
-            callback(div);
-        });
-    }, 0);
-}
-
-export function setupFriendListAnimation(divRoot) {
-    const friendlistLink = document.querySelector('.list-stat .nav-link');
-    if (friendlistLink) {
-        friendlistLink.addEventListener('click', (event) => {
-            event.preventDefault();
-            let section = document.createElement('div');
-            section.id = 'section';
-            divRoot.append(section);
-
-            // Get the position of the friendlist link
-            const rect = friendlistLink.getBoundingClientRect();
-            section.style.position = 'absolute';
-            section.style.left = `${rect.left}px`;
-            section.style.top = `${rect.top}px`;
-
-            FriendList();
-
-            // After the Friend List is loaded, update the position and animation
-            const friendlistElement = section.querySelector('.main-containerf');
-            setTimeout(() => {
-                section.style.position = 'relative';
-                section.style.left = '0';
-                section.style.top = '0';
-                friendlistElement.classList.remove('fl-hidden');
-                friendlistElement.classList.add('fl-visible');
-            }, 10); // Small delay to ensure the CSS transition applies
-        });
-    } else {
-        console.error('Friends list link not found');
-    }
-}
-
-export function setupGameHistoryAnimation(divRoot) {
-    const gameHistoryLink = document.querySelector('.game-history .nav-link');
-    if (gameHistoryLink) {
-        gameHistoryLink.addEventListener('click', (event) => {
-            event.preventDefault();
-            let section = document.createElement('div');
-            section.id = 'section';
-            divRoot.append(section);
-
-            // Get the position of the game history link
-            const rect = gameHistoryLink.getBoundingClientRect();
-            section.style.position = 'absolute';
-            section.style.left = `${rect.left}px`;
-            section.style.top = `${rect.top}px`;
-
-            GameHistory();
-
-            // After the Game History is loaded, update the position and animation
-            const gameHistoryElement = section.querySelector('.main-container2');
-            setTimeout(() => {
-                section.style.position = 'relative';
-                section.style.left = '0';
-                section.style.top = '0';
-                gameHistoryElement.classList.remove('fl-hidden');
-                gameHistoryElement.classList.add('fl-visible');
-            }, 10); // Small delay to ensure the CSS transition applies
-        });
-    } else {
-        console.error('Game History link not found');
-    }
-}
-
-export function setupCamembertAnimation(dashboardContainer) {
-    const camembertStat = document.querySelector('.camembert-stat');
-    if (camembertStat) {
-        const { left, top } = camembertStat.getBoundingClientRect();
-        const radius = 100;
-
-        const adjustedLeft = left - dashboardContainer.getBoundingClientRect().left;
-        const adjustedTop = top - dashboardContainer.getBoundingClientRect().top;
-
-        showCircle(dashboardContainer, adjustedLeft, adjustedTop, radius, () => {
-            console.log('Circle animation complete');
-        });
-    } else {
-        console.error('camembert-stat element not found');
-    }
-}
-
-export const animateNumbers = (element, target) => {
-    let start = 0;
-    const duration = 1000;
-    const increment = target / (duration / 10);
-    const timer = setInterval(() => {
-        start += increment;
-        if (start >= target) {
-            clearInterval(timer);
-            start = target;
-        }
-        element.textContent = Math.floor(start);
+        div.style.width = radius * 2 + 'px';
+        div.style.height = radius * 2 + 'px';
+        div.style.left = (cx - radius) + 'px';
+        div.style.top = (cy - radius) + 'px';
+        callback(div);
     }, 10);
-};
+}

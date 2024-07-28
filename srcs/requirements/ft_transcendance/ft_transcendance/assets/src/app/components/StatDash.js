@@ -1,5 +1,6 @@
 import { animateNumbers } from "../animation/DashboardAnimation.js";
 import { get, put } from "../services/Api.js"
+import { setupCamembertAnimation } from "../animation/DashboardAnimation.js";
 
 const DashStat = () => {
     let form = document.createElement("div");
@@ -143,12 +144,17 @@ const DashStat = () => {
 				if (isUserSelf(username, userData.username)) {
                     alert("Vous ne pouvez pas accéder à votre propre profil.");
                 } else {
-                    console.log("CHANGING TO USER PROFILE");
-                    console.log(username);
                     window.location.href = `#/friendprofile/${username}`;
                 }
 			}
 		});
+
+		setupCamembertAnimation(form);
+
+		window.addEventListener('resize', () => {
+            setupCamembertAnimation(form);
+        });
+		
     })
     .catch(error => {
         console.error('Error fetching user profile:', error);
