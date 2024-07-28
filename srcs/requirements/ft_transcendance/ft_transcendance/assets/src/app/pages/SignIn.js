@@ -1,4 +1,6 @@
 import { getCookie } from '../utils/cookies';
+import { FortyTwoSignIn, handleCallback } from "./42SignIn.js";
+import img42 from '../images/42.png';
 
 const SignIn = () => {
     let root = document.getElementById("root");
@@ -34,7 +36,15 @@ const SignIn = () => {
                         <button type="submit" class="button-signin">s'inscrire</button>
                     </form>
                 </div>
+
+                <div class="btn-container-home">
+                    <button id="fortyTwoSignInBtn" class="btn-42-home">
+                        <p class="co-42-home">connexion avec</p>
+                        <img src="${img42}" class="img-42-home" alt="button-42">
+                    </button>
+                </div>
             </div>
+
             <div class="balls-signin d-none d-sm-flex d-md-none">
                 <a class="nav-link" href="#/">
                     <div class="arrow-s-sm"><i class="bi bi-arrow-left-circle-fill"></i></div>
@@ -125,6 +135,11 @@ const SignIn = () => {
         const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.+[a-zA-Z]{2,}$/;
         return regex.test(email);
     };
+
+    const signInButton = document.getElementById('fortyTwoSignInBtn');
+    signInButton.addEventListener('click', () => {
+        FortyTwoSignIn();
+    });
 };
 
 export { SignIn };

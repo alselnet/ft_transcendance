@@ -25,6 +25,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'PressStart2P'
 }
 
 .white-ball-home {
@@ -39,6 +40,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'PressStart2P';
 }
 
 .orange-ball-home {
@@ -134,7 +136,7 @@ a {
     background-color: white;
     border-radius: 50%;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
-    z-index: 2;   
+    z-index: 2;
 }
 
 .btn-container-sm-home {
@@ -294,6 +296,7 @@ a {
     align-items: center;
     position: absolute;
     overflow: hidden;
+    font-family: 'Play';
 }
 
 input[type="text"], input[type="password"], input[type="email"] {
@@ -416,6 +419,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     align-items: center;
     position: relative;
     overflow: hidden;
+    font-family: 'Play';
 }
 
 .login-form-login::before {
@@ -1697,6 +1701,16 @@ input[type="text"] {
 @font-face {
     font-family: 'JuliusSansOne';
     src: url( /fonts/2de04709e76a8c3a838d.ttf);
+}
+
+@font-face {
+    font-family: 'Play';
+    src: url( /fonts/e0424c5771f87080b05e.ttf);
+}
+
+@font-face {
+    font-family: 'PressStart2P';
+    src: url( /fonts/21503c6a5385ab41dde9.ttf);
 }
 
 body {

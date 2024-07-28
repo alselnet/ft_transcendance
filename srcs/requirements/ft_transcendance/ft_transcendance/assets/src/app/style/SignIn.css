@@ -82,6 +82,7 @@
     align-items: center;
     position: absolute;
     overflow: hidden;
+    font-family: 'Play';
 }
 
 input[type="text"], input[type="password"], input[type="email"] {
