@@ -14,7 +14,7 @@ const fetchUserData = async () => {
     }
 };
 
-const renderSettings = async () => {
+const Settings = async () => {
     const isAuthenticated = await checkAuth();
     if (!isAuthenticated) {
         throw new Error('User is not authenticated');
@@ -60,15 +60,6 @@ const renderSettings = async () => {
             </div>
         </div>
         `;
-};
-
-// Ensure only one instance of settings page is rendered
-const Settings = async () => {
-    const existingSection = document.querySelector("#settings-section");
-    if (existingSection) {
-        existingSection.remove();
-    }
-    await renderSettings();
 };
 
 export { Settings };
