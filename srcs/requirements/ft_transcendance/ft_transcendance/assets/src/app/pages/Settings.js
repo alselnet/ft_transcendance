@@ -9,70 +9,79 @@ const Settings = async () => {
     let form = document.createElement("div");
     section.innerHTML = 
         `
-        <div class="container-s">
-            <h2 class="title-settings">SETTINGS</h2>
-            <div class="profile-section">
-                <img class="img-settings" src="${Tmejri}" alt="Tmejri"> 
-                <a href="#" class="edit-link">edit</a>
-            </div>
-            <div class="info-section">
-                <div class="info">
-                    <label class="info-label">NICKNAME :</label>
-                    <input type="text" class="info-input">
-                    <a href="#" class="edit-link">edit</a>
+        <div class="settings-container">
+            <h1 class="settings-title">Parametre du compte</h1>
+            <div class="settings-box">
+                <div class="editting">
+                    <img src="${Tmejri}" class="settings-picture" alt="settings-pic">
+                    <p class="edit-pp">modifier</p>
                 </div>
-                <div class="info">
-                    <label class="info-label">PASSWORD :</label>
-                    <input type="password" class="info-input">
-                    <a href="#" class="edit-link">edit</a>
+                <div class="modif-username">
+                    <p>username</p>
+                    <button type="button" class="btn btn-light">modifier username</button>
                 </div>
-            </div>
-            <div class="settings-section">
-                <div class="item1">
-                    <div class="setting">
-                        <span class="setting-label">ON</span>
-                        <label class="switch">
-                            <input type="checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
-                        <span class="setting-description">Sound</span>
-                    </div>
-                    <div class="setting">
-                        <span class="setting-label">OFF</span>
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                        <span class="setting-description">Dark mode</span>
-                    </div>
+                <div class="modif-username">
+                    <p>email</p>
+                    <button type="button" class="btn btn-light">modifier adresse mail</button>
                 </div>
-                <div class="item2">
-                    <div class="setting">
-                        <span class="setting-label">OFF</span>
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                        <span class="setting-description">Music</span>
-                    </div>
-                    <div class="setting">
-                        <span class="setting-label">OFF</span>
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                        <span class="setting-description">Mode secret</span>
-                    </div>
+                <div class="modif-username">
+                    <p>********</p>
+                    <button type="button" class="btn btn-light">modifier mot de passe</button>
                 </div>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    methode 2fa
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">aucune</a></li>
+                    <li><a class="dropdown-item" href="#">mail</a></li>
+                    <li><a class="dropdown-item" href="#">sms</a></li>
+                    </ul>
+                </div>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    couleur de l'arriere plan
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">Nagoya</a></li>
+                    <li><a class="dropdown-item" href="#">Roland Garros</a></li>
+                    <li><a class="dropdown-item" href="#">Le chenet</a></li>
+                    </ul>
+                </div>
+                
+                <button type="button" class="btn btn-danger delet-account">supprimer le compte</button>
+
             </div>
-            <div class="color-theme">
-                <span>Color theme</span>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider red"></span>
-                </label>
+
+            <div class="settings-footer">
+                
+                <div class="search-container">
+                    <div class="search-barre">
+                        <input type="text" id="login-search" placeholder="Entrez le nom de l'utilisateur">
+                    </div>
+                    <button type="button" id="search-button">
+                        <i class="bi bi-search search-icon"></i>
+                    </button>
+                </div>
+
+                <a class="nav-link" href="#/confidentalite">         
+                    <div class="settings-footer" id="list-stat">
+                        <i class="bi bi-file-earmark-lock settings-footer-icon"></i>
+                        <p class="settings-footer-text">Charte de confidentialite</p>
+                    </div>
+                </a>
             </div>
+
+            <div class="confirm-email">
+                votre adresse mail doit etre verifiee : 
+                <a href="">renvoyer un mail de verification</a>
+            </div>
+
         </div>
+
+
         `; 
         return form;
 };
