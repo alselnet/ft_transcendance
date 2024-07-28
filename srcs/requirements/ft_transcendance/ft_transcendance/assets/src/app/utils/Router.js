@@ -26,56 +26,6 @@ export const Router = async () => {
 		return ;
     }
 
-    // switch (hash) {
-    //     case "#/":
-    //         Home();
-    //         break;
-    //     case "#/signin":
-    //         SignIn();
-    //         break;
-    //     case "#/login":
-    //         LogIn();
-    //         break;
-    //     case "#/game":
-    //         Game();
-    //         break;
-	// 	case "#/dashboard":
-	// 		Dashboard();
-	// 		break;
-    //     case "#/settings":
-    //         Settings();
-    //         break;
-    //     case "#/aboutus":
-    //         AboutUs();
-    //         break;
-        // case "#/friendlist":
-        //     FriendList();
-        //     break;
-        // case "#/gamehistory":
-        //     GameHistory();
-        //     break;
-        // case "#/2fa":
-        //     TwoFactorAuth();
-        //     break;
-        // case "#/logout":
-        //     LogOutMsg();
-        //     break;
-        // case hash.startsWith("#/friendprofile/"):
-        //     FriendProfile();
-        //     break;
-        // case "#/deletefriendmsg":
-        //     DeleteFriendMsg();
-        //     break;
-        // case "#/chartemsg":
-        //     CharteMsg();
-        //     break;
-
-        // default:
-        //     section.innerHTML = "<h1>Page not found</h1>";
-        //     break;
-    // }
-
-
     if (hash === "#/") {
         Home();
     } else if (hash === "#/signin") {
