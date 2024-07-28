@@ -1,80 +1,74 @@
-import Tmejri from '../images/Tasnim.jpg'
-import { checkAuth } from "../services/Api.js";
+import { checkAuth, get } from "../services/Api.js";
 
-const Settings = async () => {
+const fetchUserData = async () => {
+    try {
+        const response = await get('https://localhost/api/users/me/');
+        if (!response.ok) {
+            throw new Error('Failed to fetch user data');
+        }
+        const userData = await response.json();
+        return userData;
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        return null;
+    }
+};
+
+const renderSettings = async () => {
     const isAuthenticated = await checkAuth();
     if (!isAuthenticated) {
         throw new Error('User is not authenticated');
     }
-    let form = document.createElement("div");
+
+    const userData = await fetchUserData();
+    if (!userData) {
+        return;
+    }
+
+    // Clear the previous content of the settings section
+    let section = document.querySelector("#settings-section");
+    if (!section) {
+        section = document.createElement("div");
+        section.id = "settings-section";
+        document.body.appendChild(section);
+    } else {
+        section.innerHTML = '';
+    }
+
     section.innerHTML = 
         `
         <div class="container-s">
             <h2 class="title-settings">SETTINGS</h2>
             <div class="profile-section">
-                <img class="img-settings" src="${Tmejri}" alt="Tmejri"> 
-                <a href="#" class="edit-link">edit</a>
+                <img class="img-settings" src="${userData.avatar}" alt="User Avatar"> 
             </div>
             <div class="info-section">
                 <div class="info">
-                    <label class="info-label">NICKNAME :</label>
-                    <input type="text" class="info-input">
-                    <a href="#" class="edit-link">edit</a>
+                    <label class="info-label">USERNAME :</label>
+                    <span class="info-value">${userData.username}</span>
+                </div>
+                <div class="info">
+                    <label class="info-label">EMAIL :</label>
+                    <span class="info-value">${userData.email}</span>
                 </div>
                 <div class="info">
                     <label class="info-label">PASSWORD :</label>
-                    <input type="password" class="info-input">
-                    <a href="#" class="edit-link">edit</a>
+                    <span class="info-value">********</span>
                 </div>
             </div>
             <div class="settings-section">
-                <div class="item1">
-                    <div class="setting">
-                        <span class="setting-label">ON</span>
-                        <label class="switch">
-                            <input type="checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
-                        <span class="setting-description">Sound</span>
-                    </div>
-                    <div class="setting">
-                        <span class="setting-label">OFF</span>
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                        <span class="setting-description">Dark mode</span>
-                    </div>
-                </div>
-                <div class="item2">
-                    <div class="setting">
-                        <span class="setting-label">OFF</span>
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                        <span class="setting-description">Music</span>
-                    </div>
-                    <div class="setting">
-                        <span class="setting-label">OFF</span>
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                        <span class="setting-description">Mode secret</span>
-                    </div>
-                </div>
-            </div>
-            <div class="color-theme">
-                <span>Color theme</span>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider red"></span>
-                </label>
             </div>
         </div>
-        `; 
-        return form;
+        `;
+};
+
+// Ensure only one instance of settings page is rendered
+const Settings = async () => {
+    const existingSection = document.querySelector("#settings-section");
+    if (existingSection) {
+        existingSection.remove();
+    }
+    await renderSettings();
 };
 
 export { Settings };

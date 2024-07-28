@@ -65,6 +65,17 @@ export const get = async (url, options = {}) => {
     return fetch(url, options);
 };
 
+// export const post = async (url, data, options = {}) => {
+//     const isAuthenticated = await checkAuth();
+//     if (!isAuthenticated) {
+//         throw new Error('User is not authenticated');
+//     }
+//     options.method = 'POST';
+//     options.headers = { ...getHeaders(), ...options.headers };
+//     options.body = JSON.stringify(data);
+//     return fetch(url, options);
+// };
+
 export const post = async (url, data, options = {}) => {
     const isAuthenticated = await checkAuth();
     if (!isAuthenticated) {
@@ -72,7 +83,13 @@ export const post = async (url, data, options = {}) => {
     }
     options.method = 'POST';
     options.headers = { ...getHeaders(), ...options.headers };
-    options.body = JSON.stringify(data);
+
+    if (!(data instanceof FormData)) {
+        options.body = JSON.stringify(data);
+    } else {
+        options.body = data;
+    }
+
     return fetch(url, options);
 };
 
