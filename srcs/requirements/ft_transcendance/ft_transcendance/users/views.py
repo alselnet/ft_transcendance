@@ -71,15 +71,15 @@ class MyGameHistory(APIView):
         user = request.user
         data = request.data
         
-        winner_username = data.get('winner')
-        loser_username = data.get('loser')
+        winner_username = data.get('winner_username')
+        loser_username = data.get('loser_username')
         winner_score = data.get('winner_score')
         loser_score = data.get('loser_score')
         perfect = data.get('perfect')
         local_game = data.get('local_game')
         
-        if not all(key in data for key in ['winner', 'loser', 'winner_score', 'loser_score', 'perfect', 'local_game']):
-            raise ValidationError('winner, loser, winner_score, loser_score, perfect and local_game fields are required.')
+        if not all(key in data for key in ['winner_username', 'loser_username', 'winner_score', 'loser_score', 'perfect', 'local_game']):
+            raise ValidationError('winner_username, loser_username, winner_score, loser_score, perfect and local_game fields are required.')
 
 # UPDATING GAME STATS
         if local_game is False:
@@ -150,12 +150,14 @@ class FriendListView(APIView):
     def get(self, request):
         user = request.user
         friends = Friend.objects.filter(user=user)
-        friendsof = Friend.objects.filter(friend=user)
         friendlist_data = [
-            {'friend': friend.friend.username} for friend in friends
-        ] + [
-            {'friend': friend.user.username} for friend in friendsof
-        ]
+				{
+					'username': friend.friend.username,
+					'status': friend.friend.profile.status,
+					'avatar': friend.friend.profile.avatar.url
+				} 
+				for friend in friends
+			]
 
         return Response(friendlist_data, status=200)
 	
@@ -265,7 +267,7 @@ class PublicGameHistoryView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, username):
+    def get(self, username):
         user = get_object_or_404(User, username=username)
         won_games = GameSummary.objects.filter(winner=user)
         lost_games = GameSummary.objects.filter(loser=user)
@@ -307,7 +309,7 @@ class RemoveFriendView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     
-    def post(self, request, username):
+    def delete(self, request, username):
         user = request.user
         friend = get_object_or_404(User, username=username)
 
@@ -316,5 +318,5 @@ class RemoveFriendView(APIView):
             return Response({'detail': 'Friendship does not exist'}, status=status.HTTP_400_BAD_REQUEST)
 
         friendship.delete()
-        return Response({'detail': 'Friend removed'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'detail': 'Friend removed'}, status=status.HTTP_200_OK)
     

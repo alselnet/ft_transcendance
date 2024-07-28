@@ -13,8 +13,8 @@ urlpatterns = [
 	path('update-username/', UpdateUsernameView.as_view(), name='username-update'),
 	path('<str:username>/', PublicUserInfoView.as_view(), name='public_user_info'),
 	path('<str:username>/game-history/', PublicGameHistoryView.as_view(), name='profile'),
-	path('add-friend/<str:friend_username>/', AddFriendView.as_view(), name='add-friend'),
-    path('unfriend/<str:friend_username>/', RemoveFriendView.as_view(), name='remove-friend'),
+	path('add-friend/<str:username>/', AddFriendView.as_view(), name='add-friend'),
+    path('unfriend/<str:username>/', RemoveFriendView.as_view(), name='remove-friend'),
    ]
 
 if settings.DEBUG:

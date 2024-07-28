@@ -68,17 +68,23 @@
 }
 
 .friends-tablef {
-    width: 150%;
+    width: 100%;
     margin-top: 50px;
     table-layout: fixed;
 }
 
+.friend-row {
+    display: flex;
+    align-items: center;
+}
+
 .friends-tablef td {
-    padding: 13px;
-    text-align: center;
+    padding: 10px;
+    text-align: left;
     font-size: 16px;
-    margin-left: 10px;
-    margin-top: 50px;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
 }
 
 .friends-tablef td img {
@@ -86,27 +92,23 @@
     height: 35px;
     border-radius: 50%;
     vertical-align: middle;
-    margin-left: 100px;
+    margin-right: 10px;
 }
 
 .userf {
-    margin-left: -180px;
     text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.5);
 }
 
 .remove-btnf {
     cursor: pointer;
     color: #ff0000;
-    font-size: 25px;
-    border: none;
+    font-size: 20px;
     background-color: transparent;
-    margin-right: 220px;
-    margin-left: -220px;
     text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.4);
+    margin-left: auto;
 }
 
 .remove-btnf:hover {
     color: #ff0000;
     text-shadow: 0 3px 3px rgba(255, 0, 0, 0.7); 
-    border: none;
 }

@@ -1,7 +1,7 @@
 import { animateNumbers } from "../animation/DashboardAnimation.js";
-import { get } from "../services/Api.js";
+import { get, post, del } from "../services/Api.js";
 
-const FriendDashStat = () => {
+export const FriendDashStat = () => {
     console.log("enter in friendprofile component")
     let form = document.createElement("div");
 
@@ -28,13 +28,12 @@ const FriendDashStat = () => {
 	                        <p class="profile-text">profile de</p>
 							<div class="friend-username-stat">${userData.username}</div>
 						</div>
-						<div class="status">
-							<div class="status-pastille" style="background-color: ${getStatusColor(userData.status)};"></div>
-								<div class="friend-status-text">${userData.status}</div>
-								<a class="nav-link" href="#/deletefriendmsg"><i class="bi bi-person-dash-fill person-icon delete-icon"></i></a>
-                        		<i class="bi bi-person-plus-fill person-icon"></i>
-							</div>
-						</div>
+                        <div class="status">
+                            <div class="status-pastille" style="background-color: ${getStatusColor(userData.status)};"></div>
+                            <div class="friend-status-text">${userData.status}</div>
+                            <a class="nav-link" href="#" id="delete-friend-btn"><i class="bi bi-person-dash-fill person-icon delete-icon"></i></a>
+                            <a class="nav-link" href="#" id="add-friend-btn"><i class="bi bi-person-plus-fill person-icon"></i></a>
+                        </div>
 					</div>
 				</div>
 
@@ -85,6 +84,16 @@ const FriendDashStat = () => {
                     animateNumbers(number, target);
                 });
             }, 500);
+
+			document.getElementById('delete-friend-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                deleteFriend(username);
+            });
+
+            document.getElementById('add-friend-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                addFriend(username);
+            });
         })
         .catch(error => {
             console.error('Error fetching user profile:', error);
@@ -108,4 +117,42 @@ function getStatusColor(status) {
     }
 }
 
-export { FriendDashStat };
+function addFriend(username) {
+
+	const url = `https://localhost/api/users/add-friend/${username}/`;
+    post(url)
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(data => { throw new Error(data.detail || 'Failed to add friend'); });
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        alert('Friend added successfully');
+    })
+    .catch(error => {
+        console.error('Error adding friend:', error);
+        alert(error.message || 'Failed to add friend');
+    });
+}
+
+function deleteFriend(username) {
+
+	const url = `https://localhost/api/users/unfriend/${username}/`;
+    del(url)
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(data => { throw new Error(data.detail || 'Failed to remove friend'); });
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        alert('Friend removed successfully');
+    })
+    .catch(error => {
+        console.error('Error removing friend:', error);
+        alert(error.message || 'Failed to remove friend');
+    });
+}
