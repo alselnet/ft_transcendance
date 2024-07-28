@@ -136,7 +136,7 @@ class MyGameHistory(APIView):
             'winner_score': game_summary.winner_score,
             'loser_score': game_summary.loser_score,
             'perfect': game_summary.perfect,
-            'local_Game': game_summary.local_game,
+            'local_game': game_summary.local_game,
             'date_time': game_summary.date_time
         }
 
