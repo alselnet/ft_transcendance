@@ -1,15 +1,16 @@
 import random
 import math
+import asyncio
 
 class PongGame:
-    def __init__(self):
-        self.screen_width = 0
-        self.screen_height = 0
+    def __init__(self, ball_speed, player_speed):
+        self.screen_width = 1200
+        self.screen_height = 700
         self.ball_size = 10
         self.player_height = 70
         self.player_width = 10
-        self.player_speed = 7
-        self.ball_speed = 20
+        self.player_speed = player_speed
+        self.ball_speed = ball_speed / 2
         self.reset_game()
 
     def reset_game(self):
@@ -77,15 +78,19 @@ class PongGame:
                 self.ball_x_position = self.screen_width / 2 - self.player_width - self.ball_size
 
             if self.ball_x_position <= -self.screen_width / 2:
+                print(self.ball_x_position, self.ball_y_position)
                 self.score_player2 += 1
                 self.ball_waiting = True
                 self.waiting_player = 1
+                self.reset_ball_position()
                 self.check_game_over()
 
             if self.ball_x_position >= self.screen_width / 2:
+                print(self.ball_x_position, self.ball_y_position)
                 self.score_player1 += 1
                 self.ball_waiting = True
                 self.waiting_player = 2
+                self.reset_ball_position()
                 self.check_game_over()
         else:
             self.reset_ball_position()
