@@ -149,12 +149,27 @@ const DashStat = () => {
 			}
 		});
 
-		setupCamembertAnimation(form);
+		// setupCamembertAnimation(form);
+
+		// window.addEventListener('resize', () => {
+        //     setupCamembertAnimation(form);
+        // });
+		
+		// 25     ->     100
+		// 7
+
+		// (7 x 100) / 25
+
+		console.log("valeurs");
+		console.log("win:", userData.won_games);
+		console.log("played:", userData.played_games);
+		const percentage = 75; // ( (${userData.won_games} - ${userData.played_games}) * 100) / ${userData.played_games}
+		setupCamembertAnimation(form, percentage);
 
 		window.addEventListener('resize', () => {
-            setupCamembertAnimation(form);
+            setupCamembertAnimation(form, percentage);
         });
-		
+
     })
     .catch(error => {
         console.error('Error fetching user profile:', error);

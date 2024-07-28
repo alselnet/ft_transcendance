@@ -87,7 +87,7 @@ export function setupGameHistoryAnimation(dashboardContainer) {
     });
 }
 
-export function setupCamembertAnimation(dashboardContainer) {
+/*export function setupCamembertAnimation(dashboardContainer) {
     console.log('Setting up camembert animation');
     const camembertContainer = dashboardContainer.querySelector('.camembert-stat');
     if (!camembertContainer) {
@@ -110,7 +110,7 @@ export function setupCamembertAnimation(dashboardContainer) {
         console.log('Circle shown:', div);
         // Here you can add more code to handle the animation completion
     });
-}
+}*/
 
 export function showCircle(container, cx, cy, radius, callback) {
     let div = document.createElement('div');
@@ -134,3 +134,106 @@ export function showCircle(container, cx, cy, radius, callback) {
         callback(div);
     }, 10);
 }
+
+
+
+export function setupCamembertAnimation(dashboardContainer, percentage) {
+    console.log('Setting up camembert animation');
+    const camembertContainer = dashboardContainer.querySelector('.camembert-stat');
+    if (!camembertContainer) {
+        console.error('Camembert container not found');
+        return;
+    }
+
+    console.log('Camembert container found', camembertContainer);
+
+    // Clear previous circles if any
+    camembertContainer.innerHTML = '';
+
+    // Display a sector graph in the camembert container
+    const containerRect = camembertContainer.getBoundingClientRect();
+    const size = containerRect.width;
+    const radius = size / 2;
+
+    showSectorGraph(camembertContainer, size, percentage);
+}
+
+function showSectorGraph(container, size, percentage) {
+    const radius = size / 2;
+    const center = radius;
+    const endAngle = (percentage / 100) * 360;
+    const radians = (endAngle * Math.PI) / 180;
+    const largeArc = endAngle <= 180 ? "0" : "1";
+
+    const x = center + radius * Math.cos(radians);
+    const y = center - radius * Math.sin(radians);
+
+    const sectorPath = `
+        M ${center},${center}
+        L ${center + radius},${center}
+        A ${radius},${radius} 0 ${largeArc} 1 ${x},${y}
+        Z
+    `;
+
+    const svg = `
+        <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="${center}" cy="${center}" r="${radius}" fill="lightgray"/>
+            <path d="${sectorPath}" fill="pink"/>
+        </svg>
+    `;
+
+    container.innerHTML = svg;
+}
+
+
+
+// export function setupCamembertAnimation(dashboardContainer) {
+//     console.log('Setting up camembert animation');
+//     const camembertContainer = dashboardContainer.querySelector('.camembert-stat');
+//     if (!camembertContainer) {
+//         console.error('Camembert container not found');
+//         return;
+//     }
+
+//     console.log('Camembert container found', camembertContainer);
+
+//     // Clear previous circles if any
+//     camembertContainer.innerHTML = '';
+
+//     // Example percentage (should be dynamically set)
+//     const percentage = 75; // for demonstration, change it to the actual value you want to show
+
+//     // Display a sector graph in the camembert container
+//     const containerRect = camembertContainer.getBoundingClientRect();
+//     const size = containerRect.width;
+//     const radius = size / 2;
+
+//     showSectorGraph(camembertContainer, size, percentage);
+// }
+
+// function showSectorGraph(container, size, percentage) {
+//     const radius = size / 2;
+//     const center = radius;
+//     const endAngle = (percentage / 100) * 360;
+//     const radians = (endAngle * Math.PI) / 180;
+//     const largeArc = endAngle <= 180 ? "0" : "1";
+
+//     const x = center + radius * Math.cos(radians);
+//     const y = center - radius * Math.sin(radians);
+
+//     const sectorPath = `
+//         M ${center},${center}
+//         L ${center + radius},${center}
+//         A ${radius},${radius} 0 ${largeArc} 1 ${x},${y}
+//         Z
+//     `;
+
+//     const svg = `
+//         <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+//             <circle cx="${center}" cy="${center}" r="${radius}" fill="lightgray"/>
+//             <path d="${sectorPath}" fill="green"/>
+//         </svg>
+//     `;
+
+//     container.innerHTML = svg;
+// }
