@@ -1,7 +1,5 @@
-import { checkAuth } from "../services/Api.js";
 import * as THREE from 'three';
-// import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
-// import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
+import { checkAuth, post, get } from "../services/Api.js"
 
 const Game = async () => {
     const isAuthenticated = await checkAuth();
@@ -13,6 +11,10 @@ const Game = async () => {
         section.innerHTML = 
     `   
         <div class="game-container" id="game-container">
+            <div class="score-container">
+                <span id="score-player1">Player 1: 0</span>
+                <span id="score-player2">Player 2: 0</span>
+            </div>
             <canvas id="game-canvas" width="1200" height="700"></canvas>
         <div class="button-container" id="initial-buttons">
             <button class="game-button" id="local-mode">Local</button>
@@ -69,13 +71,16 @@ const Game = async () => {
         }
         
         let player1Y, player2Y, ballX, ballY, socket, keys, playerNames, renderer, scene, camera, paddle1, paddle2, ball, tableWidth, tableHeight, scorePlayer1, scorePlayer2;
-        let scorePlayer1Text, scorePlayer2Text, font;
+        // let scorePlayer1Text, scorePlayer2Text, font;
+        let Player1_name;
+        const delay = 200;
+        let gameEnd = false
 
         initializeGameVariables();
         showInitialMenu();
         // loadFontAndStart();
 
-        function initializeGameVariables() {
+        async function initializeGameVariables() {
             player1Y = 0;
             player2Y = 0;
             ballX = 0;
@@ -85,6 +90,11 @@ const Game = async () => {
             playerNames = [];
             scorePlayer1 = 0;
             scorePlayer2 = 0;
+            const response = await get('https://localhost/api/users/me/')
+            const result = await response.json();
+            console.log(result);
+            Player1_name = result.username;
+            console.log(Player1_name)
         }
 
         // function loadFontAndStart() {
@@ -119,7 +129,7 @@ const Game = async () => {
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             renderer = new THREE.WebGLRenderer({ canvas: canvas });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setClearColor(0x000000);
+            renderer.setClearColor(0x4790c5);
 
             // Lumière ambiante
             const ambientLight = new THREE.AmbientLight(0xffffff, 0.2); // Couleur blanche, faible intensité
@@ -208,28 +218,6 @@ const Game = async () => {
                 points.push(point);
                 scene.add(point);
             }
-
-            // const textMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff });
-
-            // const scorePlayer1Geometry = new TextGeometry('0', {
-            //     font: font,
-            //     size: 40,
-            //     height: 5,
-            // });
-            // scorePlayer1Text = new THREE.Mesh(scorePlayer1Geometry, textMaterial);
-            // scorePlayer1Text.position.set(-tableWidth / 4, 50, 0);
-            // // scorePlayer1Text.rotation.x = -Math.PI / 4; // Incliner le texte vers la caméra
-            // scene.add(scorePlayer1Text);
-
-            // const scorePlayer2Geometry = new TextGeometry('0', {
-            //     font: font,
-            //     size: 40,
-            //     height: 5,
-            // });
-            // scorePlayer2Text = new THREE.Mesh(scorePlayer2Geometry, textMaterial);
-            // scorePlayer2Text.position.set(tableWidth / 4, 50, 0);
-            // // scorePlayer2Text.rotation.x = -Math.PI / 4; // Incliner le texte vers la caméra
-            // scene.add(scorePlayer2Text);
 
             // Position de la caméra
             camera.position.set(0, 600, 500);
@@ -323,6 +311,8 @@ const Game = async () => {
                 socket.close();
             }
 
+            gameEnd = false
+
             socket = new WebSocket(`wss://localhost/ws/pong/${roomName}/`);
 
             socket.onopen = function(event) {
@@ -331,15 +321,13 @@ const Game = async () => {
                     'type': 'config',
                     'ball_speed': ballSpeed,
                     'paddle_speed': paddleSpeed,
-                    'table_width': tableWidth,
-                    'table_height': tableHeight,
                 }));
                 socket.send(JSON.stringify({
                     'type': 'start_ball'
                 }))
             };
 
-            socket.onmessage = function(event) {
+            socket.onmessage = async function(event) {
                 const data = JSON.parse(event.data);
                 if (data.type === 'game_state') {
                     updateGame(data);
@@ -348,9 +336,52 @@ const Game = async () => {
                     console.log('The game has started!');
                 } else if (data.type === 'game_over') {
                     console.log("Fin de game");
+                    gameEnd = true
                     alert(`Player ${data.winner} wins!`);
-                    socket.close();
-                    socket = null;
+                    let fecth_data_history = {
+                        winner_username: '',
+                        loser_username: '',
+                        winner_score: 0,
+                        loser_score: 0,
+                        perfect: false,
+                        local_game: true
+                    };
+                    console.log(data);
+                    if (data.winner == 1) {
+                        fecth_data_history.winner_username = Player1_name
+                        fecth_data_history.loser_username = "Player2"
+                        fecth_data_history.winner_score = data.score_player1
+                        fecth_data_history.loser_score = data.score_player2
+                        if (data.score_player2 == 0) {
+                            fecth_data_history.perfect = true
+                        }
+                    }
+                    else {
+                        fecth_data_history.winner_username  = "Player2"
+                        fecth_data_history.loser_username = Player1_name
+                        fecth_data_history.winner_score = data.score_player2
+                        fecth_data_history.loser_score = data.score_player1
+                        if (data.score_player1 == 0) {
+                            fecth_data_history.perfect = true
+                        }
+                    }
+                    console.log(fecth_data_history)
+                    try {
+                        const response = await post('https://localhost/api/users/game-history/', fecth_data_history);
+                
+                        const result = await response.json();
+                
+                        if (response.ok) {
+                            console.log('Game history updated successfully:', result);
+                        } else {
+                            console.error('Error updating game history:', result);
+                        }
+                    } catch (error) {
+                        console.error('Fetch error:', error);
+                    }
+
+                    closeSocketWithDelay(500)
+
                     hideAll();
                     showInitialMenu();
                 }
@@ -374,11 +405,21 @@ const Game = async () => {
             });
         }
 
+        function closeSocketWithDelay(delay = 500) {
+            if (socket) {
+                setTimeout(() => {
+                    socket.close();
+                    socket = null;
+                }, delay);
+            }
+        }
+
         function connectWebSocketTournoi(roomName, player1_name, player2_name, nextRoundParticipants, ballSpeed, paddleSpeed) {
             if (socket) {
                 socket.close();
             }
 
+            gameEnd = false
             return new Promise((resolve, reject) => {
                 socket = new WebSocket(`wss://localhost/ws/pong/${roomName}/`);
 
@@ -388,8 +429,6 @@ const Game = async () => {
                         'type': 'config',
                         'ball_speed': ballSpeed,
                         'paddle_speed': paddleSpeed,
-                        'table_width': tableWidth,
-                        'table_height': tableHeight,
                     }));
                 };
 
@@ -402,6 +441,7 @@ const Game = async () => {
                         console.log('The game has started!');
                     } else if (data.type === 'game_over') {
                         console.log("Fin de game");
+                        gameEnd = true
                         let winner;
                         if (data.winner == 1) {
                             winner = player1_name;
@@ -438,7 +478,7 @@ const Game = async () => {
         }
 
         function handleKeys() {
-            if (socket && socket.readyState === WebSocket.OPEN) {
+            if (socket && socket.readyState === WebSocket.OPEN && gameEnd === false) {
                 if (keys['ArrowUp']) {
                     socket.send(JSON.stringify({ 'type': 'move', 'player': 2, 'direction': 'up' }));
                 }
@@ -481,30 +521,8 @@ const Game = async () => {
 
         function updateScores(score1, score2) {
             // Mettre à jour les scores
-            // scene.remove(scorePlayer1Text);
-            // scene.remove(scorePlayer2Text);
-
-            // const textMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff });
-
-            // const scorePlayer1Geometry = new TextGeometry(score1.toString(), {
-            //     font: font,
-            //     size: 40,
-            //     height: 5,
-            // });
-            // scorePlayer1Text = new THREE.Mesh(scorePlayer1Geometry, textMaterial);
-            // scorePlayer1Text.position.set(-tableWidth / 4, 50, 0);
-            // // scorePlayer1Text.rotation.x = -Math.PI / 4;
-            // scene.add(scorePlayer1Text);
-
-            // const scorePlayer2Geometry = new TextGeometry(score2.toString(), {
-            //     font: font,
-            //     size: 40,
-            //     height: 5,
-            // });
-            // scorePlayer2Text = new THREE.Mesh(scorePlayer2Geometry, textMaterial);
-            // scorePlayer2Text.position.set(tableWidth / 4, 50, 0);
-            // // scorePlayer2Text.rotation.x = -Math.PI / 4;
-            // scene.add(scorePlayer2Text);
+            document.getElementById('score-player1').textContent = `Player 1: ${score1}`;
+            document.getElementById('score-player2').textContent = `Player 2: ${score2}`;
         }
 
         function drawGameTournoi(player1_name, player2_name) {
@@ -537,31 +555,3 @@ const Game = async () => {
 };  
 
 export { Game };
-
-// const Game = () => {
-// 
-    // console.log("Game component loaded");
-    // let section = document.querySelector("#section");
-    // if (section) {
-        // section.innerHTML = 
-    // `   <div class="frame-game-container d-none d-lg-flex">
-            // <div class="frame-game">
-                // <h1 class="title-game">Jeu du pong</h1>
-            // </div>
-        // </div>
-// 
-        // <div class="frame-game-container d-flex d-lg-none">
-            // <div class="frame-game-sm">
-                // <h1 class="title-game-sm">Jeu du pong</h1>
-            // </div>
-        // </div>
-    // `; 
-    // console.log("Section content:", section.innerHTML);
-    // } else {
-        // console.error("#section not found in the DOM");
-    // }
-// 
-// };
-// 
-// export default Game;
-// 
