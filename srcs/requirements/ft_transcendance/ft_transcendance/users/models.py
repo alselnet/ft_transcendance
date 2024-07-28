@@ -82,7 +82,6 @@ class Profile(models.Model):
     
     def __str__(self):
         return self.user.username
-    
 
 class Friend(models.Model):
     user = models.ForeignKey(User, related_name='friends', on_delete=models.CASCADE)

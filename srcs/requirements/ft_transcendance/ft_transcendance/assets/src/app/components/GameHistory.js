@@ -1,8 +1,6 @@
-import Tmejri from '../images/Tasnim.jpg'
+import { get } from "../services/Api.js";
 
-
-const GameHistory = async () => {
-
+export const GameHistory = async () => {
     let root = document.getElementById("root");
     if (!root) {
         console.error("#root not found in the DOM");
@@ -13,82 +11,77 @@ const GameHistory = async () => {
     if (navbar) {
         navbar.remove();
     }
-    
+
     let logoutbutton = document.querySelector(".logout-container");
     if (logoutbutton) {
         logoutbutton.remove();
     }
 
-    let section = document.querySelector("#section");
-    if (section) {
-        section.innerHTML = 
-        `
-          <div class="main-container2 ga-hidden">
-            <h1 class="title2">Match History</h1>
-            <div class="history-container2">
-                <a class="nav-link" href="#/dashboard">
-                    <span class="close-btn2">&times;</span>
-                </a>
-                <table class="history-table2">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Opponent</th>
-                            <th>Game Mode</th>
-                            <th>Result</th>
-                            <th>Score</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>12/05/2024</td>
-                            <td><img src="${Tmejri}" alt="tmejri"> tmejri</td>
-                            <td>1 v 1</td>
-                            <td class="defeat2s">Defeat</td>
-                            <td>5 - 4</td>
-                        </tr>
-                        <tr>
-                            <td>16/05/2024</td>
-                            <td><img src="${Tmejri}" alt="tmejri"> tmejri</td>
-                            <td>1 v 1</td>
-                            <td class="victory2">Victory</td>
-                            <td>15 - 14</td>
-                        </tr>
-                        <tr>
-                            <td>20/05/2024</td>
-                            <td><img src="${Tmejri}" alt="tmejri"> tmejri</td>
-                            <td>1 v 1</td>
-                            <td class="defeat2">Defeat</td>
-                            <td>12 - 4</td>
-                        </tr>
-                        <tr>
-                            <td>22/05/2024</td>
-                            <td><img src="${Tmejri}" alt="tmejri"> tmejri</td>
-                            <td>1 v 1</td>
-                            <td class="victory2">Victory</td>
-                            <td>25 - 10</td>
-                        </tr>
-                        <tr>
-                            <td>27/05/2024</td>
-                            <td><img src="${Tmejri}" alt="tmejri"> tmejri</td>
-                            <td>1 v 1</td>
-                            <td class="defeat2">Defeat</td>
-                            <td>12 - 10</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        `; 
-
-        const gameHistoryContainer = document.querySelector('.main-container2');
-        if (gameHistoryContainer) {
-            setTimeout(() => {
-                gameHistoryContainer.classList.add('ga-visible');
-                gameHistoryContainer.classList.remove('ga-hidden');
-            }, 0);
+    try {
+        const response = await get('https://localhost/api/users/game-history/');
+        if (!response.ok) {
+            throw new Error('Failed to fetch game history');
         }
+        const data = await response.json();
+        const games = Array.isArray(data) ? data : [];
+        const currentUsername = data.length > 0 ? data[0].user : '';
+
+        const rows = games.map(game => {
+            const winnerAvatar = game.winner_avatar;
+            const loserAvatar = game.loser_avatar;
+            const gameMode = game.local_game ? 'Locale' : 'Online';
+            const result = game.winner === currentUsername ? 'Victory' : 'Defeat';
+            const resultClass = game.winner === currentUsername ? 'victory2' : 'defeat2';
+
+            return `
+                <tr>
+                    <td>${new Date(game.date_time).toLocaleDateString()}</td>
+                    <td><img src="${winnerAvatar}" alt="${game.winner}" class="avatar"> ${game.winner}</td>
+                    <td><img src="${loserAvatar}" alt="${game.loser}" class="avatar"> ${game.loser}</td>
+                    <td class="${resultClass}">${result}</td>
+                    <td>${gameMode}</td>
+                    <td>${game.winner_score} - ${game.loser_score}</td>
+                </tr>
+            `;
+        }).join('');
+
+        let section = document.querySelector("#section");
+        if (section) {
+            section.innerHTML = `
+                <div class="main-container2 ga-hidden">
+                    <h1 class="title2">Match History</h1>
+                    <div class="history-container2">
+                        <a class="nav-link" href="#/dashboard">
+                            <span class="close-btn2">&times;</span>
+                        </a>
+                        <table class="history-table2">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Winner</th>
+                                    <th>Loser</th>
+                                    <th>Result</th>
+                                    <th>Game Mode</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rows}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `; 
+
+            const gameHistoryContainer = document.querySelector('.main-container2');
+            if (gameHistoryContainer) {
+                setTimeout(() => {
+                    gameHistoryContainer.classList.add('ga-visible');
+                    gameHistoryContainer.classList.remove('ga-hidden');
+                }, 0);
+            }
+        }
+    } catch (error) {
+        console.error('Error fetching game history:', error);
     }
 };
-
-export { GameHistory };
