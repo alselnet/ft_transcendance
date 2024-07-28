@@ -31,20 +31,20 @@ const DashStat = () => {
 								<button class="btn btn-secondary dropdown-toggle transparent-dropdown d-flex align-items-center" type="button"
 									id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 									<div class="status-dropdown">
-									<div class="status-pastille" style="background-color: ${getStatusColor(userData.status)};"></div>
+										<div class="status-pastille" style="background-color: ${getStatusColor(userData.status)};"></div>
 										<div class="status-text">${userData.status}</div>
 									</div>
 								</button>
 								<ul class="dropdown-menu transparent-dropdown" aria-labelledby="dropdownMenuButton1">
 									<li class="dropdown-item" data-status="online">
 										<div class="status-dropdown">
-											<div class="status-pastille" style="background-color: green;></div>
+											<div class="status-pastille" style="background-color: green; margin-right: 8vw"></div>
 											<div class="status-text">Online</div>
 										</div>
 									</li>
 									<li class="dropdown-item" data-status="offline">
 										<div class="status-dropdown">
-											<div class="status-pastille" style="background-color: red;></div>
+											<div class="status-pastille" style="background-color: red; margin-right: 8vw"></div>
 											<div class="status-text">Offline</div>
 										</div>
 									</li>
@@ -155,15 +155,11 @@ const DashStat = () => {
         //     setupCamembertAnimation(form);
         // });
 		
-		// 25     ->     100
-		// 7
-
-		// (7 x 100) / 25
 
 		console.log("valeurs");
 		console.log("win:", userData.won_games);
 		console.log("played:", userData.played_games);
-		const percentage = 75; // ( (${userData.won_games} - ${userData.played_games}) * 100) / ${userData.played_games}
+		const percentage = 25; // ( (${userData.won_games} - ${userData.played_games}) * 100) / ${userData.played_games}
 		setupCamembertAnimation(form, percentage);
 
 		window.addEventListener('resize', () => {
