@@ -236,8 +236,8 @@ a {
 
 .arrow-s {
     color: white;
-    margin-bottom: 31vh;
-    margin-right: 35vw;
+    margin-bottom: 55vh;
+    margin-right: 30vw;
     font-size: 2rem;
 }
 
@@ -271,7 +271,7 @@ a {
     align-items: center;
     position: absolute;
     margin-left: 25%;
-    margin-top: 12%;
+    margin-top: 6%;
     width: 40vw;
     height: 40vw;
     max-width: 60vh;
@@ -395,7 +395,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     margin: 0;
     position: absolute;
     margin-left: 25%;
-    margin-top: 12%;
+    margin-top: 6%;
     width: 40vw;
     height: 40vw;
     max-width: 60vh;
