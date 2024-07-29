@@ -9,6 +9,7 @@ import { handleCallback } from '../pages/42SignIn.js';
 import { FriendProfile } from "../pages/FriendProfile.js";
 import { FriendList } from "../components/FriendsList.js";
 import { GameHistory } from "../components/GameHistory.js";
+import { PublicGameHistory } from "../components/PublicGameHistory.js";
 import { TwoFactorAuth } from "../components/2FA.js"
 import { LogOutMsg } from "../components/LogOutMsg.js";
 import { DeleteFriendMsg } from "../components/DeleteFriendMsg.js";
@@ -44,6 +45,8 @@ export const Router = async () => {
         FriendList();
     } else if (hash === "#/gamehistory") {
         GameHistory();
+	} else if (hash.startsWith ("#/publicgamehistory")) {
+		PublicGameHistory();
     } else if (hash === "#/2fa") {
         TwoFactorAuth();
     } else if (hash === "#/logout") {

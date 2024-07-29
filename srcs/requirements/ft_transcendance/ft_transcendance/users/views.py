@@ -273,7 +273,7 @@ class PublicGameHistoryView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def get(self, username):
+    def get(self, request, username):
         user = get_object_or_404(User, username=username)
         won_games = GameSummary.objects.filter(winner=user)
         lost_games = GameSummary.objects.filter(loser=user)
@@ -282,8 +282,11 @@ class PublicGameHistoryView(APIView):
         
         game_history_data = [
             {
-                'winner': game.winner.username if game.winner else None,
-                'loser': game.loser.username if game.loser else None,
+                'user': user.username,
+                'winner': game.winner.username if game.winner else 'Guest',
+                'winner_avatar': game.winner.profile.avatar.url if game.winner else 'https://localhost/media/default.png',
+				'loser': game.loser.username if game.loser else 'Guest',
+                'loser_avatar': game.loser.profile.avatar.url if game.loser else 'https://localhost/media/default.png',
                 'winner_score': game.winner_score,
                 'loser_score': game.loser_score,
                 'perfect': game.perfect,

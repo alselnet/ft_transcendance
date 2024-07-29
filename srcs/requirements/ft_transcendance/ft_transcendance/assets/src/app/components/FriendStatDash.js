@@ -67,7 +67,7 @@ export const FriendDashStat = () => {
 							<p class="footer-friend-text">Liste d'amis</p>
 						</div>
 					</a>
-					<a class="nav-link" href="#/gamehistory">         
+					<a class="nav-link" href="#/publicgamehistory/${username}">         
 						<div class="footer-friend" id="list-stat-friend">
 							<i class="bi bi-clock-history footer-friend-icon"></i>
 							<p class="footer-friend-text">Historique des parties</p>
@@ -98,7 +98,7 @@ export const FriendDashStat = () => {
         .catch(error => {
             console.error('Error fetching user profile:', error);
             alert("L'utilisateur n'existe pas");
-            form.innerHTML = '<p>Failed to load user profile</p>';
+			window.location.href = '#/dashboard';
         });
 
     const section = document.getElementById('section');
