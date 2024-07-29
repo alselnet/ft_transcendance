@@ -14,12 +14,28 @@ import { TwoFactorAuth } from "../components/2FA.js"
 import { LogOutMsg } from "../components/LogOutMsg.js";
 import { DeleteFriendMsg } from "../components/DeleteFriendMsg.js";
 import { CharteMsg } from "../components/CharteMsg.js";
+import { post } from "../services/Api.js"
 
+const exactMatches = ['#/game', '#/dashboard', '#/settings', '#/aboutus', '#/deletefriendmsg', '#/chartemsg', '#/friendlist', '#/gamehistory'];
+const prefixMatches = ['#/friendprofile', '#/publicgamehistory'];
 
 export const Router = async () => {
 	const hash = window.location.hash;
 	console.log('current hash: ', hash);
     const section = document.getElementById('section');
+	
+	window.isInternalNavigation = true;
+
+    const isExactMatch = exactMatches.includes(hash);
+    const isPrefixMatch = prefixMatches.some(prefix => hash.startsWith(prefix));
+
+    if (isExactMatch || isPrefixMatch){
+        window.onbeforeunload = function (event) {
+			post('https://localhost/api/auth/signout/');
+        };
+    } else {
+        window.onbeforeunload = null;
+    }
 
     if (window.location.hash.includes('access') && window.location.hash.includes('refresh')) {
 		console.log('handling callback');
@@ -60,4 +76,6 @@ export const Router = async () => {
     } else {
         section.innerHTML = "<h1>Page not found</h1>";
     }
+
+	window.isInternalNavigation = false;
 };
