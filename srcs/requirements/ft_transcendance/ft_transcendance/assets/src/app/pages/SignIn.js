@@ -23,11 +23,8 @@ const SignIn = () => {
     if (section) {
         section.innerHTML = `
             <div class="balls-signin d-none d-md-flex">
-                <div class="white-ball-signin">
-                    <a class="nav-link" href="#/">
-                        <div class="arrow"><i class="bi bi-arrow-left-circle-fill"></i></div>
-                    </a>
-                </div>
+                <div class="white-ball-signin"></div>
+                    
                 <div class="orange-ball-signin">
                     <form id="signin-form" class="login-form-signin">
                         <input type="text" id="username" placeholder="nom d'utilisateur">
@@ -36,6 +33,11 @@ const SignIn = () => {
                         <input type="password" id="confirmPassword" placeholder="confirmer mdp">
                         <button type="submit" class="button-signin">s'inscrire</button>
                     </form>
+                    
+                    <a class="nav-link" href="#/">
+                        <div class="arrow-s"><i class="bi bi-arrow-left-circle-fill"></i></div>
+                    </a>
+
                 </div>
 
                 <div class="btn-container-home">
