@@ -68,21 +68,21 @@ volumes:
     driver_opts:
       type: volumes
       o: bind
-      device: /Users/alexandreselnet/Coding/Postgres_volume
+      device: /home/hucoulon/code/transcendance_merge_new_last/Postgres_volume
 
   STATIC:
     driver: local
     driver_opts:
       type: volumes
       o: bind
-      device: /Users/alexandreselnet/Coding/Static_volume
+      device: /home/hucoulon/code/transcendance_merge_new_last/Static_volume
     
   MEDIA:
     driver: local
     driver_opts:
       type: volumes
       o: bind
-      device: /Users/alexandreselnet/Coding/Media_volume
+      device: /home/hucoulon/code/transcendance_merge_new_last/Media_volume
       
 networks:
   transcendance:

@@ -95,6 +95,8 @@ const Game = async () => {
             console.log(result);
             Player1_name = result.username;
             console.log(Player1_name)
+
+            updateScores(scorePlayer1, scorePlayer2)
         }
 
         // function loadFontAndStart() {
@@ -335,8 +337,8 @@ const Game = async () => {
                 } else if (data.type === 'start_game') {
                     console.log('The game has started!');
                 } else if (data.type === 'game_over') {
-                    console.log("Fin de game");
                     gameEnd = true
+                    console.log("Fin de game");
                     alert(`Player ${data.winner} wins!`);
                     let fecth_data_history = {
                         winner_username: '',
@@ -383,7 +385,8 @@ const Game = async () => {
                     closeSocketWithDelay(500)
 
                     hideAll();
-                    showInitialMenu();
+                    initializeGameVariables();
+                    showInitialMenu()
                 }
             };
 
@@ -521,8 +524,8 @@ const Game = async () => {
 
         function updateScores(score1, score2) {
             // Mettre à jour les scores
-            document.getElementById('score-player1').textContent = `Player 1: ${score1}`;
-            document.getElementById('score-player2').textContent = `Player 2: ${score2}`;
+            document.getElementById('score-player1').textContent = `${Player1_name}: ${score1}`;
+            document.getElementById('score-player2').textContent = `Invité: ${score2}`;
         }
 
         function drawGameTournoi(player1_name, player2_name) {
@@ -551,6 +554,38 @@ const Game = async () => {
         }
 
         gameLoop();
+
+        function resetGameState() {
+            player1Y = 0;
+            player2Y = 0;
+            ballX = 0;
+            ballY = 0;
+            scorePlayer1 = 0;
+            scorePlayer2 = 0;
+            gameEnd = false;
+            updateScores(scorePlayer1, scorePlayer2);
+        }
+
+        window.addEventListener('popstate', function() {
+            console.log("fermeture de la socket")
+            if (socket) {
+                socket.close();
+                socket = null;
+                resetGameState()
+            }
+        });
+
+        window.addEventListener('hashchange', function() {
+            if (location.hash === "#/game") {
+                Game();
+            } else {
+                if (socket) {
+                    socket.close();
+                    socket = null;
+                    resetGameState();
+                }
+            }
+        });
     }
 };  
 
