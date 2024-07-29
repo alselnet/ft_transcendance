@@ -23,10 +23,11 @@ const SignIn = () => {
     if (section) {
         section.innerHTML = `
             <div class="balls-signin d-none d-md-flex">
-                <div class="white-ball-signin"></div>
-                <a class="nav-link" href="#/">
-                    <div class="arrow"><i class="bi bi-arrow-left-circle-fill"></i></div>
-                </a>
+                <div class="white-ball-signin">
+                    <a class="nav-link" href="#/">
+                        <div class="arrow"><i class="bi bi-arrow-left-circle-fill"></i></div>
+                    </a>
+                </div>
                 <div class="orange-ball-signin">
                     <form id="signin-form" class="login-form-signin">
                         <input type="text" id="username" placeholder="nom d'utilisateur">

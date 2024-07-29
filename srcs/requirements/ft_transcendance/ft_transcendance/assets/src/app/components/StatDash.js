@@ -38,13 +38,13 @@ const DashStat = () => {
 								<ul class="dropdown-menu transparent-dropdown" aria-labelledby="dropdownMenuButton1">
 									<li class="dropdown-item" data-status="online">
 										<div class="status-dropdown">
-											<div class="status-pastille" style="background-color: green; margin-right: 8vw"></div>
+											<div class="status-pastille" style="background-color: green; margin-right: 1vw"></div>
 											<div class="status-text">Online</div>
 										</div>
 									</li>
 									<li class="dropdown-item" data-status="offline">
 										<div class="status-dropdown">
-											<div class="status-pastille" style="background-color: red; margin-right: 8vw"></div>
+											<div class="status-pastille" style="background-color: red; margin-right: 1vw"></div>
 											<div class="status-text">Offline</div>
 										</div>
 									</li>

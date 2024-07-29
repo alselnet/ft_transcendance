@@ -1,12 +1,12 @@
 PYTHON := python3
 PIP := pip3
 DOCKER_COMPOSE := docker compose
-VOLUMES_PATH := /Users/macbook/Documents/Tasnim/
+VOLUMES_PATH := /home/tas/sgoinfre/THE-ONE/
 
 all: up
 
 up:
-	@echo "Creating DB volume test..."
+	@echo "Creating DB volume..."
 	@mkdir -p $(VOLUMES_PATH)Postgres_volume
 	@mkdir -p $(VOLUMES_PATH)Static_volume
 	@mkdir -p $(VOLUMES_PATH)Media_volume/avatars

@@ -68,21 +68,21 @@ volumes:
     driver_opts:
       type: volumes
       o: bind
-      device: /Users/macbook/Documents/Tasnim/Postgres_volume
+      device: /home/tas/sgoinfre/THE-ONE/Postgres_volume
 
   STATIC:
     driver: local
     driver_opts:
       type: volumes
       o: bind
-      device: /Users/macbook/Documents/Tasnim/Static_volume
+      device: /home/tas/sgoinfre/THE-ONE/Static_volume
     
   MEDIA:
     driver: local
     driver_opts:
       type: volumes
       o: bind
-      device: /Users/macbook/Documents/Tasnim/Media_volume
+      device: /home/tas/sgoinfre/THE-ONE/Media_volume
       
 networks:
   transcendance:
