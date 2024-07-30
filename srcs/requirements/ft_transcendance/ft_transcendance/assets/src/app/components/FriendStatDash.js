@@ -101,6 +101,19 @@ export const FriendDashStat = () => {
                 setupCamembertAnimation(form, percentage, color);
             });
 
+            form.querySelector('#search-button').addEventListener('click', () => {
+                const loginSearchInput = document.getElementById("login-search");
+                const username = loginSearchInput.value;
+                if (username) {
+                    if (isUserSelf(username, userData.username)) {
+                        alert("Vous ne pouvez pas accéder à votre propre profil.");
+                    } else {
+                        window.location.href = `#/friendprofile/${username}`;
+                    }
+                    loginSearchInput.value = "";
+                }
+            });
+
 			document.getElementById('delete-friend-btn').addEventListener('click', (e) => {
                 e.preventDefault();
                 deleteFriend(username);
@@ -137,6 +150,10 @@ function getStatusColor(status) {
             return 'red';
     }
 }
+
+const isUserSelf = (searchedUsername, currentUsername) => {
+    return searchedUsername === currentUsername;
+};
 
 function addFriend(username) {
 
@@ -177,3 +194,4 @@ function deleteFriend(username) {
         alert(error.message || 'Failed to remove friend');
     });
 }
+
