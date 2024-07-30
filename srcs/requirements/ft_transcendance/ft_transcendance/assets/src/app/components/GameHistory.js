@@ -59,8 +59,8 @@ export const GameHistory = async () => {
                 <div class="main-container2 ga-hidden">
                     <h1 class="title2">Match History</h1>
                     <div class="history-container2">
-                        <a class="nav-link" href="#/dashboard">
-                            <span class="close-btn2">&times;</span>
+                        <a class="nav-link" href="#/dashboard" id="game-history-button">
+                            <span class="close-btn2" id="close-btn">&times;</span>
                         </a>
                         <table class="history-table2">
                             <thead>
@@ -79,7 +79,7 @@ export const GameHistory = async () => {
                         </table>
                     </div>
                 </div>
-            `; 
+            `;
 
             const gameHistoryContainer = document.querySelector('.main-container2');
             if (gameHistoryContainer) {
@@ -88,6 +88,8 @@ export const GameHistory = async () => {
                     gameHistoryContainer.classList.remove('ga-hidden');
                 }, 10);
             }
+
+            
         }
     } catch (error) {
         console.error('Error fetching game history:', error);

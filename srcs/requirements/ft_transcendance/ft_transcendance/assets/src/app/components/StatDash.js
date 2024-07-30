@@ -62,15 +62,16 @@ const DashStat = () => {
 						<div class="stat-data">
 							<div class="stat-rubric-stat">
 								<p class="stat-text">Points marqués</p>
-								<p class="stat-number"> ${userData.scored_points}</p>
+								<p class="stat-number" data-target="${userData.scored_points}">0</p>
 							</div>
 							<div class="stat-rubric-stat">
 								<p class="stat-text">Points concédés</p>
-								<p class="stat-number"> ${userData.conceded_points}</p>
+								<p class="stat-number" data-target="${userData.conceded_points}">0</p>
+
 							</div>
 							<div class="stat-rubric-stat">
 								<p class="stat-text">Victoires parfaites</p>
-								<p class="stat-number"> ${userData.perfect_wins}</p>
+								<p class="stat-number" data-target="${userData.perfect_wins}">0</p>
 							</div>
 						</div>
 					</div>
@@ -92,7 +93,7 @@ const DashStat = () => {
 						</div>
 					</a>
 					<a class="nav-link" href="#/gamehistory">         
-						<div class="footer" id="list-stat">
+						<div class="footer" id="history-stat">
 							<i class="bi bi-clock-history footer-icon"></i>
 							<p class="footer-text">Historique des parties</p>
 						</div>
@@ -103,7 +104,7 @@ const DashStat = () => {
         console.log('Form innerHTML set');
 
         setTimeout(() => {
-            const numbers = form.querySelectorAll('.stat-number-stat');
+            const numbers = form.querySelectorAll('.stat-number');
             numbers.forEach(number => {
                 const target = +number.getAttribute('data-target');
                 animateNumbers(number, target);

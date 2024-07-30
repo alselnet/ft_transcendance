@@ -46,15 +46,15 @@ export const FriendDashStat = () => {
 						<div class="stat-data">
 							<div class="stat-rubric-stat">
 								<p class="stat-text">Points marqués :</p>
-								<p class="stat-number"> ${userData.scored_points}</p>
+								<p class="stat-number" data-target="${userData.scored_points}">0</p>
 							</div>
 							<div class="stat-rubric-stat">
 								<p class="stat-text">Points concédés :</p>
-								<p class="stat-number"> ${userData.conceded_points}</p>
+								<p class="stat-number" data-target="${userData.conceded_points}">0</p>
 							</div>
 							<div class="stat-rubric-stat">
 								<p class="stat-text">Victoires parfaites :</p>
-								<p class="stat-number"> ${userData.perfect_wins}</p>
+								<p class="stat-number" data-target="${userData.perfect_wins}">0</p>
 							</div>
 						</div>
 					</div>
@@ -70,7 +70,7 @@ export const FriendDashStat = () => {
             			</button>
         			</div>
 					<a class="nav-link" href="#/publicgamehistory/${username}">         
-						<div class="footer-friend" id="list-stat-friend">
+						<div class="footer-friend" id="history-stat">
 							<i class="bi bi-clock-history footer-friend-icon"></i>
 							<p class="footer-friend-text">Historique des parties de ${username}</p>
 						</div>
@@ -80,7 +80,7 @@ export const FriendDashStat = () => {
             `;
 
             setTimeout(() => {
-                const numbers = form.querySelectorAll('.stat-number-stat');
+                const numbers = form.querySelectorAll('.stat-number');
                 numbers.forEach(number => {
                     const target = +number.getAttribute('data-target');
                     animateNumbers(number, target);

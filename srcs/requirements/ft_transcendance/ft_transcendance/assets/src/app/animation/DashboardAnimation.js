@@ -44,6 +44,7 @@ export function setupFriendListAnimation(dashboardContainer) {
     });
 }
 
+
 export function setupGameHistoryAnimation(dashboardContainer) {
     const historyButton = dashboardContainer.querySelector('#history-stat');
     if (!historyButton) {
