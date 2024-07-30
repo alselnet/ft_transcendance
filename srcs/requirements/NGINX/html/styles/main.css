@@ -657,6 +657,7 @@ input[type="text"], input[type="password"], input[type="email"] {
 
 .statistics-box {
     display: flex;
+<<<<<<< HEAD
     margin-left: 19vw;
     margin-top: 8vh;
     width: 65vw;
@@ -666,6 +667,17 @@ input[type="text"], input[type="password"], input[type="email"] {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.2);
     z-index: 10;
+=======
+    margin-left: 16vw;
+    margin-top: 6vh;
+    width: 70vw;
+	max-width: 1500px;
+    height: 55vh;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
+	z-index: 10;
+>>>>>>> 043bf6645716cafb30148d54255bdb5f5bbb2d15
 }
 
 .profile-picture {
@@ -811,8 +823,13 @@ input[type="text"], input[type="password"], input[type="email"] {
 .right-side {
     display: flex;
     flex-direction: column;
+<<<<<<< HEAD
     text-align: center;
     justify-content: space-around;
+=======
+    justify-content: center;
+    text-align: center;
+>>>>>>> 043bf6645716cafb30148d54255bdb5f5bbb2d15
 }
 
 .stat-data {

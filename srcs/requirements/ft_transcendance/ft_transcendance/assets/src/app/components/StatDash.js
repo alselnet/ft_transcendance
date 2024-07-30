@@ -138,13 +138,15 @@ const DashStat = () => {
         console.log('Event listeners set');
 
 		form.querySelector('#search-button').addEventListener('click', () => {
-			const username = document.getElementById("login-search").value;
+			const loginSearchInput = document.getElementById("login-search");
+			const username = loginSearchInput.value;
 			if (username) {
 				if (isUserSelf(username, userData.username)) {
-                    alert("Vous ne pouvez pas accéder à votre propre profil.");
-                } else {
-                    window.location.href = `#/friendprofile/${username}`;
-                }
+					alert("Vous ne pouvez pas accéder à votre propre profil.");
+				} else {
+					window.location.href = `#/friendprofile/${username}`;
+				}
+				loginSearchInput.value = "";
 			}
 		});
 	
