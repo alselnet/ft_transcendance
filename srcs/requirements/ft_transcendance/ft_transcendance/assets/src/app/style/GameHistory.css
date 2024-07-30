@@ -23,19 +23,21 @@
 .history-container2 {
     margin-top: 10px;
     width: 85%;
-    height: 70%;
+    max-height: 80vh;
+	min-width: 900px;
     padding: 20px;
     border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.2);
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow-y: auto;
 }
     
 .close-btn2 {
-    position: absolute;
-    top: 5px;
-    right: 20px;
+    position: fixed;
+    top: -70px;
+    right: 40px;
     font-size: 40px;
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
@@ -91,3 +93,4 @@
 .game-historic-history:hover {
     color: gold;
 }
+

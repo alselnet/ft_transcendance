@@ -8,7 +8,7 @@
     transform: scale(0);
     transform-origin: center bottom;
     transition: transform 0.5s ease, opacity 0.5s ease;
-    margin-top: 100px;
+    margin-top: 30px;
 }
 
 .fl-hidden {
@@ -22,10 +22,16 @@
 }
 
 .friends-containerf {
-    margin-top: 10px;
-    width: 31%;
-    height: 80%;
+	margin-top: 30px;
+    margin-bottom: 30px;
+    margin-right: 30px;
+    width: auto;
+    max-width: 35%;
+    min-width: 250px;
+    height: max-content;
+    min-height: 20%;
     padding: 20px;
+    padding-top: 10px;
     border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.2);
@@ -34,18 +40,19 @@
 }
 
 .friend-count {
-    position: absolute;
-    bottom: 10px;
+	position: absolute;
     left: 50%;
     transform: translateX(-50%);
     font-weight: bold;
+    opacity: 0.6;
+    font-size: 0.85em;
     text-align: center;
 }
 
 .close-btnf {
-    position: absolute;
-    top: 5px;
-    right: 20px;
+    position: fixed;
+    top: -20px;
+    right: 40px;
     font-size: 40px;
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
@@ -61,38 +68,44 @@
 .titlef {
     color: white;
     text-align: center;
+	overflow: hidden;
     text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
-    margin-top: 10px;
+    margin-top: 0px 0 5px 0;
     font-size: 20px;
     font-weight: 300;
 }
 
 .friends-tablef {
     width: 100%;
-    margin-top: 50px;
+    margin-top: 5px;
     table-layout: fixed;
 }
 
 .friend-row {
+    overflow-x: hidden;
+    overflow-y: auto;
     display: flex;
+    justify-content: left;
     align-items: center;
+    flex-direction: row;
 }
 
+
 .friends-tablef td {
-    padding: 10px;
-    text-align: left;
-    font-size: 16px;
+    text-align: center;
     vertical-align: middle;
+    padding: 5px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .friends-tablef td img {
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    vertical-align: middle;
-    margin-right: 10px;
+    margin-right: 2px;
+    display: inline-block;
 }
 
 .userf {
@@ -100,16 +113,17 @@
 }
 
 .remove-btnf {
-    cursor: pointer;
+	cursor: pointer;
     color: #ff0000;
     font-size: 20px;
+    position: absolute;
+    left: 10px;
     background-color: transparent;
     text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.4);
-    margin-left: auto;
 }
 
 .remove-btnf:hover {
-    color: #ff0000;
+    color: #6a0c0c;
     text-shadow: 0 3px 3px rgba(255, 0, 0, 0.7); 
 }
 
@@ -118,11 +132,9 @@
     width: 10px;
     border-radius: 50%;
     display: inline-block;
-    margin-right: 5px;
     position: relative;
 }
 
-/* Tooltip container */
 .status-circle::after {
     content: attr(data-tooltip);
     position: absolute;
@@ -141,4 +153,22 @@
 
 .status-circle:hover::after {
     opacity: 1;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0);
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(231, 231, 231, 0.2);
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(67, 66, 66, 0.6);
 }
