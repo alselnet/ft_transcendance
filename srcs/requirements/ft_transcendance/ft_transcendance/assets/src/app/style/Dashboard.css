@@ -117,10 +117,11 @@
 .footer-icon {
     font-size: 2rem;
     color: white;
+    margin-top: 0.5vh;
 }
 
 .footer-icon:hover {
-    color: gold;
+    color: #245070;
 }
 
 .footer {
@@ -130,15 +131,15 @@
 }
 
 .footer-text {
-    margin-left: 15px;
-    margin-top: 15px;
+    margin-left: 1vw;
+    margin-top: 1.5vh;
     margin-right: 3vw;
     color: white;
     font-size: 1vw;
 }
 
 .footer-text:hover {
-    color: gold;
+    color: #245070;
 }
 
 .stat-title {
@@ -288,10 +289,11 @@
 .footer-friend-icon {
     font-size: 2rem;
     color: white;
+    margin-top: 0.5vh;
 }
 
 .footer-friend-icon:hover {
-    color: gold;
+    color: #245070;
 }
 
 .footer-friend {
@@ -309,7 +311,7 @@
 }
 
 .footer-friend-text:hover {
-    color: gold;
+    color: #245070;
 }
 
 .person-icon {

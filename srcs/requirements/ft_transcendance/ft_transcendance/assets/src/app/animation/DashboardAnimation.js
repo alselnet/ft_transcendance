@@ -173,3 +173,16 @@ function showSectorGraph(container, size, percentage, color) {
     }, 510);
 }
 
+export const animateNumbers = (element, target) => {
+    let start = 0;
+    const duration = 1000;
+    const increment = target / (duration / 10);
+    const timer = setInterval(() => {
+        start += increment;
+        if (start >= target) {
+            clearInterval(timer);
+            start = target;
+        }
+        element.textContent = Math.floor(start);
+    }, 10);
+}
