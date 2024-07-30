@@ -87,8 +87,7 @@ export function setupGameHistoryAnimation(dashboardContainer) {
     });
 }
 
-//animation qui fonctionne...enfin je crois
-/*export function setupCamembertAnimation(dashboardContainer) {
+export function setupCamembertAnimation(dashboardContainer, percentage, color) {
     console.log('Setting up camembert animation');
     const camembertContainer = dashboardContainer.querySelector('.camembert-stat');
     if (!camembertContainer) {
@@ -98,116 +97,15 @@ export function setupGameHistoryAnimation(dashboardContainer) {
 
     console.log('Camembert container found', camembertContainer);
 
-    // Clear previous circles if any
     camembertContainer.innerHTML = '';
 
-    // Display a circle in the camembert container
-    const containerRect = camembertContainer.getBoundingClientRect();
-    const cx = containerRect.width / 2;
-    const cy = containerRect.height / 2;
-    const radius = containerRect.width / 2;
-
-    showCircle(camembertContainer, cx, cy, radius, (div) => {
-        console.log('Circle shown:', div);
-        // Here you can add more code to handle the animation completion
-    });
-}*/
-
-/*
-export function showCircle(container, cx, cy, radius, callback) {
-    let div = document.createElement('div');
-    div.style.width = 0;
-    div.style.height = 0;
-    div.style.left = cx + 'px';
-    div.style.top = cy + 'px';
-    div.style.borderRadius = '50%';
-    div.style.position = 'absolute';
-    div.style.backgroundColor = 'yellow';
-    div.style.transition = 'width 0.5s ease, height 0.5s ease, left 0.5s ease, top 0.5s ease';
-
-    container.appendChild(div);
-
-    // Delay the animation to ensure the element is added to the DOM
-    setTimeout(() => {
-        div.style.width = radius * 2 + 'px';
-        div.style.height = radius * 2 + 'px';
-        div.style.left = (cx - radius) + 'px';
-        div.style.top = (cy - radius) + 'px';
-        callback(div);
-    }, 10);
-}
-
-//last one
-export function setupCamembertAnimation(dashboardContainer, percentage) {
-    console.log('Setting up camembert animation');
-    const camembertContainer = dashboardContainer.querySelector('.camembert-stat');
-    if (!camembertContainer) {
-        console.error('Camembert container not found');
-        return;
-    }
-
-    console.log('Camembert container found', camembertContainer);
-
-    // Clear previous circles if any
-    camembertContainer.innerHTML = '';
-
-    // Display a sector graph in the camembert container    
-    const containerRect = camembertContainer.getBoundingClientRect();
-    const size = containerRect.width;
-    const radius = size / 2;
-
-    showSectorGraph(camembertContainer, size, percentage);
-}
-
-function showSectorGraph(container, size, percentage) {
-    const radius = size / 2;
-    const center = radius;
-    const endAngle = (percentage / 100) * 360;
-    const radians = (endAngle * Math.PI) / 180;
-    const largeArc = endAngle > 180 ? 1 : 0;
-
-    const x = center + radius * Math.cos(radians - Math.PI / 2);
-    const y = center + radius * Math.sin(radians - Math.PI / 2);
-
-    const sectorPath = `
-        M ${center},${center}
-        L ${center},${center - radius}
-        A ${radius},${radius} 0 ${largeArc} 1 ${x},${y}
-        Z
-    `;
-
-    const svg = `
-        <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="${center}" cy="${center}" r="${radius}" fill="lightgray"/>
-            <path d="${sectorPath}" fill="pink"/>
-        </svg>
-    `;
-
-    container.innerHTML = svg;
-}
-*/
-export function setupCamembertAnimation(dashboardContainer, percentage) {
-    console.log('Setting up camembert animation');
-    const camembertContainer = dashboardContainer.querySelector('.camembert-stat');
-    if (!camembertContainer) {
-        console.error('Camembert container not found');
-        return;
-    }
-
-    console.log('Camembert container found', camembertContainer);
-
-    // Clear previous circles if any
-    camembertContainer.innerHTML = '';
-
-    // Display a sector graph in the camembert container
     const containerRect = camembertContainer.getBoundingClientRect();
     const size = containerRect.width;
     const radius = size / 2;
 
     showCircle(camembertContainer, radius, radius, radius, (div) => {
-        // Ensure the circle is fully expanded before drawing the sector
         setTimeout(() => {
-            showSectorGraph(div, size, percentage);
+            showSectorGraph(div, size, percentage, color);
         }, 500);
     });
 }
@@ -220,13 +118,11 @@ export function showCircle(container, cx, cy, radius, callback) {
     div.style.top = cy + 'px';
     div.style.borderRadius = '50%';
     div.style.position = 'absolute';
-    div.style.backgroundColor = 'green';
     div.style.transition = 'width 0.5s ease, height 0.5s ease, left 0.5s ease, top 0.5s ease';
 
     container.appendChild(div);
     console.log('Circle div added to DOM:', div);
 
-    // Delay the animation to ensure the element is added to the DOM
     setTimeout(() => {
         div.style.width = radius * 2 + 'px';
         div.style.height = radius * 2 + 'px';
@@ -237,7 +133,7 @@ export function showCircle(container, cx, cy, radius, callback) {
     }, 10);
 }
 
-function showSectorGraph(container, size, percentage) {
+function showSectorGraph(container, size, percentage, color) {
     const radius = size / 2;
     const center = radius;
     const endAngle = (percentage / 100) * 360;
@@ -256,17 +152,24 @@ function showSectorGraph(container, size, percentage) {
 
     const svg = `
         <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="${center}" cy="${center}" r="${radius}" fill="green"/>
-            <path d="${sectorPath}" fill="red" style="transform-origin: ${center}px ${center}px; transform: scale(0); transition: transform 0.5s ease;"/>
+            <circle cx="${center}" cy="${center}" r="${radius}" fill="transparent"/>
+            <circle cx="${center}" cy="${center}" r="${radius}" fill="${color}" style="transform-origin: ${center}px ${center}px; transform: scale(0); transition: transform 0.5s ease;"/>
+            <path d="${sectorPath}" fill="#b26969" style="transform-origin: ${center}px ${center}px; transform: scale(0); transition: transform 0.5s ease 0.5s;"/>
         </svg>
     `;
 
     container.innerHTML = svg;
 
-    // Trigger the sector animation
+    setTimeout(() => {
+        const circle = container.querySelector('circle:nth-of-type(2)');
+        circle.style.transform = 'scale(1)';
+        console.log('Full circle animation started');
+    }, 10);
+
     setTimeout(() => {
         const path = container.querySelector('path');
         path.style.transform = 'scale(1)';
         console.log('Sector animation started');
-    }, 10);
+    }, 510);
 }
+

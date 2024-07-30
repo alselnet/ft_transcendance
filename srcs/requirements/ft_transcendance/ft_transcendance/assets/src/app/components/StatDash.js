@@ -1,6 +1,5 @@
-import { animateNumbers } from "../animation/DashboardAnimation.js";
+import { animateNumbers, setupCamembertAnimation } from "../animation/DashboardAnimation.js";
 import { get, put } from "../services/Api.js"
-import { setupCamembertAnimation } from "../animation/DashboardAnimation.js";
 
 const DashStat = () => {
     let form = document.createElement("div");
@@ -149,14 +148,23 @@ const DashStat = () => {
 			}
 		});
 
+
 		console.log("valeurs");
 		console.log("win:", userData.won_games);
 		console.log("played:", userData.played_games);
-		const percentage = 62; // ( (${userData.won_games} - ${userData.played_games}) * 100) / ${userData.played_games}
-		setupCamembertAnimation(form, percentage);
+
+		let percentage = 0;
+        let color = "#63aa63";
+        if (userData.played_games !== 0) {
+            percentage = ((userData.won_games - userData.played_games) * 100) / userData.played_games;
+        } else {
+            color = "yellow";
+        }
+
+		setupCamembertAnimation(form, percentage, color);
 
 		window.addEventListener('resize', () => {
-            setupCamembertAnimation(form, percentage);
+            setupCamembertAnimation(form, percentage, color);
         });
 
     })

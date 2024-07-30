@@ -149,17 +149,6 @@
     font-size: 2vw;
 }
 
-/* .camembert-stat {
-    width: 25vw;
-    height: 10vh;
-    background-color: green;
-    border-radius: 50%;
-    position: absolute;
-    transition: width 0.5s ease, height 0.5s ease;
-    margin-top: 10vh;
-    margin-left: 15vw;
-} */
-
 .camembert-stat {
     width: 20vw;
     height: 20vw;
