@@ -1,4 +1,22 @@
-import { checkAuth, get, put } from "../services/Api.js";
+import { checkAuth, get, put, post } from "../services/Api.js";
+
+const sendConfirmationEmail = (email) => {
+    console.log("Send Mail");
+    post('https://localhost/api/auth/send-confirmation-email/', { email })
+        .then(response => {
+            if (response.ok) {
+                alert('Confirmation email sent');
+            } else {
+                return response.json().then(errorData => {
+                    alert(`Error: ${errorData.error || 'Failed to send confirmation email'}`);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error sending confirmation email:', error);
+            alert('An error occurred while sending the confirmation email');
+        });
+};
 
 const updateUsername = (newUsername) => {
     console.log("Update Username");
@@ -109,12 +127,17 @@ const Settings = async () => {
 
                 <div class="confirm-email">
                     votre adresse mail doit etre verifiee : 
-                    <a href="">renvoyer un mail de verification</a>
+                    <a href="#" id="resend-verification-email">renvoyer un mail de verification</a>
                 </div>
 
             </div>
 
         `;
+
+		section.querySelector('#resend-verification-email').addEventListener('click', (event) => {
+            event.preventDefault();
+            sendConfirmationEmail(userData.email);
+        });
 
         section.querySelector('#edit-username').addEventListener('click', (event) => {
             const newUsername = prompt(`Entrez le nouveau nom d'utilisateur :`, userData.username);
