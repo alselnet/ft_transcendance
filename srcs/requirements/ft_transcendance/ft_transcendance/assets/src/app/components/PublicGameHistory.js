@@ -90,7 +90,7 @@ export const PublicGameHistory = async () => {
                 setTimeout(() => {
                     gameHistoryContainer.classList.add('ga-visible');
                     gameHistoryContainer.classList.remove('ga-hidden');
-                }, 0);
+                }, 10);
             }
         }
     } catch (error) {
