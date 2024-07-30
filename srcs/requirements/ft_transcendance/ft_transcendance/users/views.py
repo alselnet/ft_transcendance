@@ -55,9 +55,9 @@ class MyGameHistory(APIView):
         game_history_data = [
             {
                 'user': user.username,
-                'winner': game.winner.username if game.winner else 'Guest',
+                'winner': game.winner.username if game.winner else 'Invité',
                 'winner_avatar': game.winner.profile.avatar.url if game.winner else 'https://localhost/media/default.png',
-				'loser': game.loser.username if game.loser else 'Guest',
+				'loser': game.loser.username if game.loser else 'Invité',
                 'loser_avatar': game.loser.profile.avatar.url if game.loser else 'https://localhost/media/default.png',
                 'winner_score': game.winner_score,
                 'loser_score': game.loser_score,
@@ -98,6 +98,7 @@ class MyGameHistory(APIView):
             winner_profile.scored_points += winner_score
             winner_profile.conceded_points += loser_score
             winner_profile.played_games += 1
+            winner_profile.won_games +=1
             if perfect:
                 winner_profile.perfect_wins += 1
             winner_profile.save()
@@ -115,6 +116,7 @@ class MyGameHistory(APIView):
             if user.username == winner_username:
                 user.profile.scored_points += winner_score
                 user.profile.conceded_points += loser_score
+                user.profile.won_games +=1
                 user.profile.played_games += 1
                 if perfect:
                     user.profile.perfect_wins += 1
@@ -283,9 +285,9 @@ class PublicGameHistoryView(APIView):
         game_history_data = [
             {
                 'user': user.username,
-                'winner': game.winner.username if game.winner else 'Guest',
+                'winner': game.winner.username if game.winner else 'Invité',
                 'winner_avatar': game.winner.profile.avatar.url if game.winner else 'https://localhost/media/default.png',
-				'loser': game.loser.username if game.loser else 'Guest',
+				'loser': game.loser.username if game.loser else 'Invité',
                 'loser_avatar': game.loser.profile.avatar.url if game.loser else 'https://localhost/media/default.png',
                 'winner_score': game.winner_score,
                 'loser_score': game.loser_score,
