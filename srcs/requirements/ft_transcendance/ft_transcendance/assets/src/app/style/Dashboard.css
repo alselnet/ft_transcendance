@@ -15,15 +15,15 @@
 
 .statistics-box {
     display: flex;
-    margin-left: 16vw;
-    margin-top: 6vh;
-    width: 70vw;
-	max-width: 1500px;
-    height: 55vh;
+    margin-left: 18vw;
+    margin-top: 9vh;
+    width: 65vw;
+    max-width: 1500px;
+    height: 49vh;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.2);
-	z-index: 10;
+    z-index: 10;
 }
 
 .profile-picture {
@@ -168,9 +168,11 @@
 
 .right-side {
     display: flex;
+    margin-left: -30px;
     flex-direction: column;
-    justify-content: center;
+    margin-top: 50px;
     text-align: center;
+    justify-content: space-around;
 }
 
 .stat-data {

@@ -61,15 +61,15 @@ const DashStat = () => {
 					<div class="right-side">
 						<div class="stat-data">
 							<div class="stat-rubric-stat">
-								<p class="stat-text">Points marqués :</p>
+								<p class="stat-text">Points marqués</p>
 								<p class="stat-number"> ${userData.scored_points}</p>
 							</div>
 							<div class="stat-rubric-stat">
-								<p class="stat-text">Points concédés :</p>
+								<p class="stat-text">Points concédés</p>
 								<p class="stat-number"> ${userData.conceded_points}</p>
 							</div>
 							<div class="stat-rubric-stat">
-								<p class="stat-text">Victoires parfaites :</p>
+								<p class="stat-text">Victoires parfaites</p>
 								<p class="stat-number"> ${userData.perfect_wins}</p>
 							</div>
 						</div>
