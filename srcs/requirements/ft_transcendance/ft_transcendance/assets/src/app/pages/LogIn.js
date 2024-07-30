@@ -1,5 +1,6 @@
 import { getCookie } from '../utils/cookies'
 import img42 from '../images/42.png';
+import { FortyTwoSignIn, handleCallback } from "./42SignIn.js";
 
 const LogIn = () => {
     let root = document.getElementById("root");
@@ -29,7 +30,7 @@ const LogIn = () => {
                 </a>
             </div>
             <div class="white-ball-login">
-                <form id="login-form" class="login-form-login"> <!-- Ajout de la balise form -->
+                <form id="login-form" class="login-form-login">
                     <input type="text" id="username" placeholder="Username">
                     <input type="password" id="password" placeholder="Password">
                     <button type="submit" class="button-login">se connecter</button>
@@ -37,7 +38,7 @@ const LogIn = () => {
             </div>
 
             <div class="btn-container-home">
-                <button onclick="window.location='https://42.fr/';" class="btn-42-home">
+                <button id="fortyTwoSignInBtn" class="btn-42-home">
                     <p class="co-42-home">connexion avec</p>
                     <img src="${img42}" class="img-42-home" alt="button-42">
                 </button>
@@ -100,6 +101,11 @@ const LogIn = () => {
             console.error('Erreur:', error);
             alert('Nom d utilisateur ou mot de passe incorrect');
         });
+    });
+
+    const signInButton = document.getElementById('fortyTwoSignInBtn');
+    signInButton.addEventListener('click', () => {
+        FortyTwoSignIn();
     });
 };
 

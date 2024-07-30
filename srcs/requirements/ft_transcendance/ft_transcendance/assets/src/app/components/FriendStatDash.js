@@ -1,4 +1,4 @@
-import { animateNumbers } from "../animation/DashboardAnimation.js";
+import { animateNumbers, setupCamembertAnimation } from "../animation/DashboardAnimation.js";
 import { get, post, del } from "../services/Api.js";
 
 export const FriendDashStat = () => {
@@ -85,6 +85,24 @@ export const FriendDashStat = () => {
                 });
             }, 500);
 
+            console.log("valeurs");
+		    console.log("win:", userData.won_games);
+		    console.log("played:", userData.played_games);
+
+		    let percentage = 60;
+            let color = "#63aa63";
+            if (userData.played_games !== 0) {
+                percentage = ((userData.won_games - userData.played_games) * 100) / userData.played_games;
+            } else {
+                color = "purple";
+            }
+
+		    setupCamembertAnimation(form, percentage, color);
+
+		    window.addEventListener('resize', () => {
+                setupCamembertAnimation(form, percentage, color);
+            });
+
 			document.getElementById('delete-friend-btn').addEventListener('click', (e) => {
                 e.preventDefault();
                 deleteFriend(username);
@@ -94,6 +112,8 @@ export const FriendDashStat = () => {
                 e.preventDefault();
                 addFriend(username);
             });
+
+            
         })
         .catch(error => {
             console.error('Error fetching user profile:', error);
@@ -104,6 +124,7 @@ export const FriendDashStat = () => {
     const section = document.getElementById('section');
     section.innerHTML = '';
     section.appendChild(form);
+    
 };
 
 function getStatusColor(status) {

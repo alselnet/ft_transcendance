@@ -21,8 +21,8 @@
 
 .arrow-s {
     color: white;
-    margin-bottom: 31vh;
-    margin-right: 35vw;
+    margin-bottom: 55vh;
+    margin-right: 30vw;
     font-size: 2rem;
 }
 
@@ -56,7 +56,7 @@
     align-items: center;
     position: absolute;
     margin-left: 25%;
-    margin-top: 12%;
+    margin-top: 6%;
     width: 40vw;
     height: 40vw;
     max-width: 60vh;
@@ -82,6 +82,7 @@
     align-items: center;
     position: absolute;
     overflow: hidden;
+    font-family: 'Play';
 }
 
 input[type="text"], input[type="password"], input[type="email"] {
@@ -145,3 +146,4 @@ input[type="text"], input[type="password"], input[type="email"] {
 .arrow-s-sm:hover {
     color: white;
 }
+
