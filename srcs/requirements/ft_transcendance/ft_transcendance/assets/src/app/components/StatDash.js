@@ -61,16 +61,16 @@ const DashStat = () => {
 					<div class="right-side">
 						<div class="stat-data">
 							<div class="stat-rubric-stat">
-								<p class="stat-text">Points concédés :</p>
-								<p class="stat-number" data-target="${userData.conceded_points}">0</p>
+								<p class="stat-text">Points marqués :</p>
+								<p class="stat-number"> ${userData.scored_points}</p>
 							</div>
 							<div class="stat-rubric-stat">
-								<p class="stat-text">Points marqués :</p>
-								<p class="stat-number" data-target="${userData.conceded_points}">0</p>
+								<p class="stat-text">Points concédés :</p>
+								<p class="stat-number"> ${userData.conceded_points}</p>
 							</div>
 							<div class="stat-rubric-stat">
 								<p class="stat-text">Victoires parfaites :</p>
-								<p class="stat-number" data-target="${userData.conceded_points}">0</p>
+								<p class="stat-number"> ${userData.perfect_wins}</p>
 							</div>
 						</div>
 					</div>
@@ -114,7 +114,7 @@ const DashStat = () => {
         form.querySelectorAll('.dropdown-item').forEach(item => {
             item.addEventListener('click', () => {
                 const newStatus = item.getAttribute('data-status');
-                put('https://localhost/api/users/update_status/', { status: newStatus })
+                put('https://localhost/api/users/update-status/', { status: newStatus })
                 .then(updateResponse => {
                     if (!updateResponse.ok) {
                         throw new Error('Failed to update user status');
@@ -182,9 +182,11 @@ function getStatusColor(status) {
         case 'online':
             return 'green';
         case 'offline':
-            return 'red';
-        default:
             return 'grey';
+		case 'in game':
+			return 'orange';
+        default:
+            return 'red';
     }
 }
 

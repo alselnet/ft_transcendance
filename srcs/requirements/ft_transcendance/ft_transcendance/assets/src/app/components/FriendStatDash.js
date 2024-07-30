@@ -25,7 +25,7 @@ export const FriendDashStat = () => {
 					
 					<div class="text-stat">
 						<div class="friend-name">
-	                        <p class="profile-text">profile de</p>
+	                        <p class="profile-text">Profil de</p>
 							<div class="friend-username-stat">${userData.username}</div>
 						</div>
                         <div class="status">
@@ -45,16 +45,16 @@ export const FriendDashStat = () => {
 					<div class="right-side">
 						<div class="stat-data">
 							<div class="stat-rubric-stat">
-								<p class="stat-text">Points concédés :</p>
-								<p class="stat-number" data-target="${userData.conceded_points}">0</p>
+								<p class="stat-text">Points marqués :</p>
+								<p class="stat-number"> ${userData.scored_points}</p>
 							</div>
 							<div class="stat-rubric-stat">
-								<p class="stat-text">Points marqués :</p>
-								<p class="stat-number" data-target="${userData.conceded_points}">0</p>
+								<p class="stat-text">Points concédés :</p>
+								<p class="stat-number"> ${userData.conceded_points}</p>
 							</div>
 							<div class="stat-rubric-stat">
 								<p class="stat-text">Victoires parfaites :</p>
-								<p class="stat-number" data-target="${userData.conceded_points}">0</p>
+								<p class="stat-number"> ${userData.perfect_wins}</p>
 							</div>
 						</div>
 					</div>
@@ -67,7 +67,7 @@ export const FriendDashStat = () => {
 							<p class="footer-friend-text">Liste d'amis</p>
 						</div>
 					</a>
-					<a class="nav-link" href="#/gamehistory">         
+					<a class="nav-link" href="#/publicgamehistory/${username}">         
 						<div class="footer-friend" id="list-stat-friend">
 							<i class="bi bi-clock-history footer-friend-icon"></i>
 							<p class="footer-friend-text">Historique des parties</p>
@@ -118,7 +118,7 @@ export const FriendDashStat = () => {
         .catch(error => {
             console.error('Error fetching user profile:', error);
             alert("L'utilisateur n'existe pas");
-            form.innerHTML = '<p>Failed to load user profile</p>';
+			window.location.href = '#/dashboard';
         });
 
     const section = document.getElementById('section');
@@ -132,9 +132,11 @@ function getStatusColor(status) {
         case 'online':
             return 'green';
         case 'offline':
-            return 'red';
-        default:
             return 'grey';
+		case 'in game':
+				return 'orange';
+        default:
+            return 'red';
     }
 }
 

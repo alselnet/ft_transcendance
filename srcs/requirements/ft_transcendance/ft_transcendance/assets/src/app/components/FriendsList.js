@@ -1,4 +1,4 @@
-import { get } from "../services/Api.js";
+import { get, del } from "../services/Api.js";
 
 export const FriendList = async () => {
     let root = document.getElementById("root");
@@ -27,9 +27,20 @@ export const FriendList = async () => {
         
         const rows = friends.map(friend => `
             <tr class="friend-row">
-                <td><img src="${friend.avatar}" alt="${friend.username}"></td>
-                <td><span class="userf">${friend.username}</span></td>
-                <td><span class="remove-btnf">&times;</span></td>
+                <td>
+                    <a href="#/friendprofile/${friend.username}">
+                        <img src="${friend.avatar}" alt="${friend.username}">
+                    </a>
+                </td>
+                <td>
+                    <span class="status-circle" style="background-color: ${getStatusColor(friend.status)};" data-tooltip="${getStatusTooltip(friend.status)}"></span>
+                </td>
+                <td>
+                    <a href="#/friendprofile/${friend.username}" class="userf">${friend.username}</a>
+                </td>
+                <td>
+                    <span class="remove-btnf" data-username="${friend.username}">&times;</span>
+                </td>
             </tr>
         `).join('');
 
@@ -62,7 +73,60 @@ export const FriendList = async () => {
                 friendsListContainer.classList.add('fl-visible');
             }, 10);
         }
+
+        const deleteButtons = document.querySelectorAll('.remove-btnf');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', async (e) => {
+                const username = button.getAttribute('data-username');
+                await deleteFriend(username);
+                FriendList();
+            });
+        });
+
     } catch (error) {
         console.error('Error fetching friend list:', error);
     }
 };
+
+function getStatusColor(status) {
+    switch (status) {
+        case 'online':
+            return 'green';
+        case 'offline':
+            return 'grey';
+        case 'in-game':
+            return 'orange';
+        default:
+            return 'grey';
+    }
+}
+
+function getStatusTooltip(status) {
+    switch (status) {
+        case 'online':
+            return 'En ligne';
+        case 'offline':
+            return 'Déconnecté';
+        case 'in-game':
+            return 'En partie';
+        default:
+            return 'Unknown Status';
+    }
+}
+
+async function deleteFriend(username) {
+    const url = `https://localhost/api/users/unfriend/${username}/`;
+    try {
+        const response = await del(url);
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.detail || 'Failed to remove friend');
+        }
+        const data = await response.json();
+        console.log(data);
+        alert('Friend removed successfully');
+    } catch (error) {
+        console.error('Error removing friend:', error);
+        alert(error.message || 'Failed to remove friend');
+    }
+}

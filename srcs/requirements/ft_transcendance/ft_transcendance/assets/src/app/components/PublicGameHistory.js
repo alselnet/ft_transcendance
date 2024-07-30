@@ -1,6 +1,10 @@
 import { get } from "../services/Api.js";
 
-export const GameHistory = async () => {
+export const PublicGameHistory = async () => {
+
+	const path = window.location.hash.split('/');
+    const username = path[path.length - 1];
+
     let root = document.getElementById("root");
     if (!root) {
         console.error("#root not found in the DOM");
@@ -18,7 +22,7 @@ export const GameHistory = async () => {
     }
 
     try {
-        const response = await get('https://localhost/api/users/game-history/');
+        const response = await get(`https://localhost/api/users/${username}/game-history/`);
         if (!response.ok) {
             throw new Error('Failed to fetch game history');
         }

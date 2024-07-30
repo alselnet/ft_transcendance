@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from .serializers import EmailUpdateSerializer, PasswordUpdateSerializer, UsernameUpdateSerializer, AvatarSerializer, StatusUpdateSerializer
 from .models import GameSummary, Profile, Friend
+from .utils import get_object_or_none
 import logging
 
 logger = logging.getLogger(__name__)
@@ -53,8 +54,11 @@ class MyGameHistory(APIView):
         
         game_history_data = [
             {
+                'user': user.username,
                 'winner': game.winner.username if game.winner else 'Guest',
-                'loser': game.loser.username if game.loser else 'Guest',
+                'winner_avatar': game.winner.profile.avatar.url if game.winner else 'https://localhost/media/default.png',
+				'loser': game.loser.username if game.loser else 'Guest',
+                'loser_avatar': game.loser.profile.avatar.url if game.loser else 'https://localhost/media/default.png',
                 'winner_score': game.winner_score,
                 'loser_score': game.loser_score,
                 'perfect': game.perfect,
@@ -85,12 +89,10 @@ class MyGameHistory(APIView):
         if local_game is False:
             if winner_username != user.username:
                 return Response({'error': 'You must be the winner to create a game summary.'}, status=status.HTTP_403_FORBIDDEN)
-            try:
-                winner = User.objects.get(username=winner_username)
-                loser = User.objects.get(username=loser_username)
-            except User.DoesNotExist:
+            winner = get_object_or_none(User, username=winner_username)
+            loser = get_object_or_none(User, username=loser_username)
+            if (winner is None or loser is None):
                 return Response({'error': 'Winner user or loser user not found.'}, status=status.HTTP_400_BAD_REQUEST)
-        
             winner_profile = winner.profile
             loser_profile = loser.profile
             winner_profile.scored_points += winner_score
@@ -106,6 +108,10 @@ class MyGameHistory(APIView):
             loser_profile.save()
 		
         else:
+            winner = get_object_or_none(User, username=winner_username)
+            loser = get_object_or_none(User, username=loser_username)
+            if (winner is None and loser is None):
+                return Response({'error': 'Winner user or loser user not found.'}, status=status.HTTP_400_BAD_REQUEST)
             if user.username == winner_username:
                 user.profile.scored_points += winner_score
                 user.profile.conceded_points += loser_score
@@ -267,7 +273,7 @@ class PublicGameHistoryView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def get(self, username):
+    def get(self, request, username):
         user = get_object_or_404(User, username=username)
         won_games = GameSummary.objects.filter(winner=user)
         lost_games = GameSummary.objects.filter(loser=user)
@@ -276,8 +282,11 @@ class PublicGameHistoryView(APIView):
         
         game_history_data = [
             {
-                'winner': game.winner.username if game.winner else None,
-                'loser': game.loser.username if game.loser else None,
+                'user': user.username,
+                'winner': game.winner.username if game.winner else 'Guest',
+                'winner_avatar': game.winner.profile.avatar.url if game.winner else 'https://localhost/media/default.png',
+				'loser': game.loser.username if game.loser else 'Guest',
+                'loser_avatar': game.loser.profile.avatar.url if game.loser else 'https://localhost/media/default.png',
                 'winner_score': game.winner_score,
                 'loser_score': game.loser_score,
                 'perfect': game.perfect,
