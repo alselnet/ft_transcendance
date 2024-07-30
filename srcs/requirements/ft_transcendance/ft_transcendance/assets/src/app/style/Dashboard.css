@@ -10,7 +10,7 @@
     justify-content: flex-start;
     align-items: center;
     margin-top: 9vh;
-    margin-left: 16vw;
+    margin-left: 18vw;
 }
 
 .statistics-box {
@@ -107,7 +107,7 @@
 	bottom: 5vh;
 	width: 100%;
 	z-index: 100;
-    margin-left: 17vw;
+    margin-left: 18vw;
     display: flex;
 	align-items: center;
     flex-direction: row;
@@ -281,7 +281,7 @@
 	bottom: 5vh;
 	width: 75%;
 	z-index: 100;
-    margin-left: 17vw;
+    margin-left: 18vw;
     display: flex;
 	align-items: center;
     flex-direction: row;

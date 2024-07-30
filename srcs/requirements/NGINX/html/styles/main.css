@@ -652,7 +652,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     justify-content: flex-start;
     align-items: center;
     margin-top: 9vh;
-    margin-left: 16vw;
+    margin-left: 18vw;
 }
 
 .statistics-box {
@@ -749,7 +749,7 @@ input[type="text"], input[type="password"], input[type="email"] {
 	bottom: 5vh;
 	width: 100%;
 	z-index: 100;
-    margin-left: 17vw;
+    margin-left: 18vw;
     display: flex;
 	align-items: center;
     flex-direction: row;
@@ -923,7 +923,7 @@ input[type="text"], input[type="password"], input[type="email"] {
 	bottom: 5vh;
 	width: 75%;
 	z-index: 100;
-    margin-left: 17vw;
+    margin-left: 18vw;
     display: flex;
 	align-items: center;
     flex-direction: row;
