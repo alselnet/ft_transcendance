@@ -47,11 +47,6 @@ a {
     z-index: 1;
 }
 
-/* a voir si je garde*/
-.orange-ball-home:hover {
-    z-index: 200;
-}
-
 .white-ball-home {
     background-color: white;
     margin-left: 25%;
@@ -764,10 +759,11 @@ input[type="text"], input[type="password"], input[type="email"] {
 .footer-icon {
     font-size: 2rem;
     color: white;
+    margin-top: 0.5vh;
 }
 
 .footer-icon:hover {
-    color: gold;
+    color: #245070;
 }
 
 .footer {
@@ -777,15 +773,15 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 .footer-text {
-    margin-left: 15px;
-    margin-top: 15px;
+    margin-left: 1vw;
+    margin-top: 1.5vh;
     margin-right: 3vw;
     color: white;
     font-size: 1vw;
 }
 
 .footer-text:hover {
-    color: gold;
+    color: #245070;
 }
 
 .stat-title {
@@ -935,10 +931,11 @@ input[type="text"], input[type="password"], input[type="email"] {
 .footer-friend-icon {
     font-size: 2rem;
     color: white;
+    margin-top: 0.5vh;
 }
 
 .footer-friend-icon:hover {
-    color: gold;
+    color: #245070;
 }
 
 .footer-friend {
@@ -956,7 +953,7 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 .footer-friend-text:hover {
-    color: gold;
+    color: #245070;
 }
 
 .person-icon {

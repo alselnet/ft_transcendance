@@ -44,7 +44,7 @@ const Home = () => {
         <div class="balls-home-sm d-none d-sm-flex d-md-none">
             <div class="orange-ball-home-sm">
                 <a href="#/signin" data-hash="signin">
-                    Incsription
+                    Inscription
                 </a>
             </div>
             <div class="white-ball-home-sm">

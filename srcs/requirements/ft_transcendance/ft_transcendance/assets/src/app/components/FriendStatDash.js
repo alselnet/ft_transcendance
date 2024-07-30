@@ -29,7 +29,7 @@ export const FriendDashStat = () => {
 							<div class="friend-username-stat">${userData.username}</div>
 						</div>
                         <div class="status">
-                            <div class="status-pastille" style="background-color: ${getStatusColor(userData.status)};"></div>
+                            <div class="status-pastille" style="background-color: ${getStatusColor(userData.status)}; margin-top: 0.5vh;"></div>
                             <div class="friend-status-text">${userData.status}</div>
                             <a class="nav-link" href="#" id="delete-friend-btn"><i class="bi bi-person-dash-fill person-icon delete-icon"></i></a>
                             <a class="nav-link" href="#" id="add-friend-btn"><i class="bi bi-person-plus-fill person-icon"></i></a>
@@ -61,16 +61,18 @@ export const FriendDashStat = () => {
 				</div>
 
 				<div class="footer-friend-link">
-					<a class="nav-link" href="#/friendlist">         
-						<div class="footer-friend" id="list-stat-friend">
-							<i class="bi bi-list-task footer-friend-icon"></i>
-							<p class="footer-friend-text">Liste d'amis</p>
-						</div>
-					</a>
+					<div class="search-container">
+            			<div class="search-barre">
+                			<input type="text" id="login-search" placeholder="Entrez le nom de l'utilisateur">
+            			</div>
+            			<button type="button" id="search-button">
+                			<i class="bi bi-search search-icon"></i>
+            			</button>
+        			</div>
 					<a class="nav-link" href="#/publicgamehistory/${username}">         
 						<div class="footer-friend" id="list-stat-friend">
 							<i class="bi bi-clock-history footer-friend-icon"></i>
-							<p class="footer-friend-text">Historique des parties</p>
+							<p class="footer-friend-text">Historique des parties de ${username}</p>
 						</div>
 					</a>
 				</div>
@@ -85,16 +87,12 @@ export const FriendDashStat = () => {
                 });
             }, 500);
 
-            console.log("valeurs");
-		    console.log("win:", userData.won_games);
-		    console.log("played:", userData.played_games);
-
-		    let percentage = 60;
+		    let percentage = 0;
             let color = "#63aa63";
             if (userData.played_games !== 0) {
-                percentage = ((userData.won_games - userData.played_games) * 100) / userData.played_games;
+                percentage = ((userData.played_games - userData.won_games) * 100) / userData.played_games;
             } else {
-                color = "purple";
+                color = "#fef86c";
             }
 
 		    setupCamembertAnimation(form, percentage, color);

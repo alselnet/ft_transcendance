@@ -43,7 +43,7 @@ const DashStat = () => {
 									</li>
 									<li class="dropdown-item" data-status="offline">
 										<div class="status-dropdown">
-											<div class="status-pastille" style="background-color: red; margin-right: 0.3vw"></div>
+											<div class="status-pastille" style="background-color: grey; margin-right: 0.3vw"></div>
 											<div class="status-text">Offline</div>
 										</div>
 									</li>
@@ -147,18 +147,13 @@ const DashStat = () => {
                 }
 			}
 		});
-
-
-		console.log("valeurs");
-		console.log("win:", userData.won_games);
-		console.log("played:", userData.played_games);
-
+	
 		let percentage = 0;
         let color = "#63aa63";
         if (userData.played_games !== 0) {
-            percentage = ((userData.won_games - userData.played_games) * 100) / userData.played_games;
+            percentage = ((userData.played_games - userData.won_games) * 100) / userData.played_games;
         } else {
-            color = "yellow";
+            color = "#fef86c";
         }
 
 		setupCamembertAnimation(form, percentage, color);
