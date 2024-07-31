@@ -1382,6 +1382,8 @@ input[type="text"] {
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
     text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
+    background-color: transparent;
+    border: transparent;
 }
 
 .close-btn2:hover {
