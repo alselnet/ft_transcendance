@@ -198,8 +198,8 @@ const Settings = async () => {
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="#">Nagoya</a></li>
-                        <li><a class="dropdown-item" href="#">Roland Garros</a></li>
-                        <li><a class="dropdown-item" href="#">Le chenet</a></li>
+                        <li><a class="dropdown-item" href="#">Roland</a></li>
+                        <li><a class="dropdown-item" href="#">Wimbledon</a></li>
                         </ul>
                     </div>
                     
