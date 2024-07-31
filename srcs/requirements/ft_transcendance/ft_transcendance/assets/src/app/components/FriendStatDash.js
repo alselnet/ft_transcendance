@@ -1,7 +1,7 @@
 import { animateNumbers, setupCamembertAnimation } from "../animation/DashboardAnimation.js";
 import { get, post, del } from "../services/Api.js";
 
-export const FriendDashStat = () => {
+const FriendDashStat = () => {
     console.log("enter in friendprofile component")
     let form = document.createElement("div");
 
@@ -156,9 +156,7 @@ export const FriendDashStat = () => {
 			window.location.href = '#/dashboard';
         });
 
-    const section = document.getElementById('section');
-    section.innerHTML = '';
-    section.appendChild(form);
+    return form;
     
 };
 
@@ -219,3 +217,4 @@ function deleteFriend(username) {
     });
 }
 
+export { FriendDashStat };
