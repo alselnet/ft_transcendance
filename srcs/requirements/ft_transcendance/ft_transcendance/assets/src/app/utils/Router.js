@@ -12,11 +12,10 @@ import { GameHistory } from "../components/GameHistory.js";
 import { PublicGameHistory } from "../components/PublicGameHistory.js";
 import { TwoFactorAuth } from "../components/2FA.js"
 import { LogOutMsg } from "../components/LogOutMsg.js";
-import { DeleteFriendMsg } from "../components/DeleteFriendMsg.js";
 import { CharteMsg } from "../components/CharteMsg.js";
 import { post } from "../services/Api.js"
 
-const exactMatches = ['#/game', '#/dashboard', '#/settings', '#/aboutus', '#/deletefriendmsg', '#/chartemsg', '#/friendlist', '#/gamehistory'];
+const exactMatches = ['#/game', '#/dashboard', '#/settings', '#/aboutus', '#/chartemsg', '#/friendlist', '#/gamehistory'];
 const prefixMatches = ['#/friendprofile', '#/publicgamehistory'];
 
 export const Router = async () => {
@@ -67,8 +66,6 @@ export const Router = async () => {
         TwoFactorAuth();
     } else if (hash === "#/logout") {
         LogOutMsg();
-    } else if (hash === "#/deletefriendmsg") {
-        DeleteFriendMsg();
     } else if (hash === "#/chartemsg") {
         CharteMsg();
     } else if (hash.startsWith("#/friendprofile/")) {

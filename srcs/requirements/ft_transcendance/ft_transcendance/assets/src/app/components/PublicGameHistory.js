@@ -63,9 +63,9 @@ export const PublicGameHistory = async () => {
                 <div class="main-container2 ga-hidden">
                     <h1 class="title2">Match History</h1>
                     <div class="history-container2">
-                        <a class="nav-link" href="#/dashboard">
-                            <span class="close-btn2">&times;</span>
-                        </a>
+                        <button id="close-btn-pgh" class="close-btn2">
+                            &times;
+                        </button> 
                         <table class="history-table2">
                             <thead>
                                 <tr>
@@ -92,6 +92,11 @@ export const PublicGameHistory = async () => {
                     gameHistoryContainer.classList.remove('ga-hidden');
                 }, 10);
             }
+
+            document.getElementById('close-btn-pgh').addEventListener('click', () => {
+                window.history.back();
+            });
+
         }
     } catch (error) {
         console.error('Error fetching game history:', error);

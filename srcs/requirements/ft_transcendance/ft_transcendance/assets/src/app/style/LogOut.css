@@ -44,17 +44,31 @@
 }
 
 .msg-confirmation {
-    font-size: larger;
+    font-size: 1.3vw;
     margin-top: 2vh;
 }
 
 .btn-success {
-    margin-right: 6vh;
+    margin-right: 6vw; 
     margin-top: 2vh;
+    width: 3.5vw;
+    height: 3.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1vw;
+    border-radius: 6px;
 }
 
 .btn-danger {
     margin-top: 2vh;
+    width: 3.5vw;
+    height: 3.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1vw;
+    border-radius: 6px;
 }
 
 .button-logout {
