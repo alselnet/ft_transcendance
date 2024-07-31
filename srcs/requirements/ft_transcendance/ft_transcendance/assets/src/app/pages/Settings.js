@@ -1,4 +1,4 @@
-import { checkAuth, get, put, post } from "../services/Api.js";
+import { checkAuth, get, put, post, del } from "../services/Api.js";
 
 const sendConfirmationEmail = (email) => {
     console.log("Send Mail");
@@ -118,6 +118,28 @@ const updateEmail = (newEmail) => {
         });
 };
 
+const deleteAccount = () => {
+    if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+        del('https://localhost/api/auth/delete-user/')
+            .then(response => {
+                if (response.ok) {
+                    alert('Account deleted successfully');
+                    localStorage.removeItem('accessToken');
+                    localStorage.removeItem('refreshToken');
+                    window.location.hash = '#/';
+                } else {
+                    return response.json().then(errorData => {
+                        alert(`Error: ${errorData.error || 'Failed to delete account'}`);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting account:', error);
+                alert('An error occurred while deleting the account');
+            });
+    }
+};
+
 const Settings = async () => {
     let form = document.createElement("div");
 
@@ -181,7 +203,7 @@ const Settings = async () => {
                         </ul>
                     </div>
                     
-                    <button type="button" class="btn btn-danger delete-account">supprimer le compte</button>
+                    <button type="button" href="#" class="btn btn-danger delete-account">supprimer le compte</button>
 
                 </div>
 
@@ -254,6 +276,10 @@ const Settings = async () => {
 
         section.querySelector('#tfa-authenticator').addEventListener('click', () => {
             update2FA('authenticator');
+        });
+
+        section.querySelector('.delete-account').addEventListener('click', () => {
+            deleteAccount();
         });
 
         update2FAActiveClass(userData.two_fa_method);
