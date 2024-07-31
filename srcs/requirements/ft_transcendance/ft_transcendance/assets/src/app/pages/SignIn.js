@@ -79,10 +79,16 @@ const SignIn = () => {
 
         console.log('Form data:', formData);
 
+        const usernameValide = checkUsername(formData.username);
         const emailValid = checkEmail(formData.email);
         const passwordValid = checkPassword(formData.password);
         const passwordMatch = formData.password === formData.confirmPassword;
 
+        if (!usernameValide) {
+            alert("Le nom d'utilisateur peut avoir maximum 8 caractères");
+            console.log('Invalid email');
+            return;
+        }
         if (!emailValid) {
             alert("email non conforme");
             console.log('Invalid email');
@@ -117,8 +123,8 @@ const SignIn = () => {
         .then(data => {
             console.log('Response data:', data);
             alert(data.message);
-            localStorage.setItem('accessToken', data.access);   //test
-            localStorage.setItem('refreshToken', data.refresh); //test
+            localStorage.setItem('accessToken', data.access);
+            localStorage.setItem('refreshToken', data.refresh);
             console.log('Redirecting to dashboard from signin...');
             window.location.href = '#/dashboard';
             console.log('Current hash:', window.location.hash);
@@ -128,6 +134,11 @@ const SignIn = () => {
             alert('User creation failed.');
         });
     });
+
+    const checkUsername= (username) => {
+        const regex = /^[a-zA-Z0-9]{1,8}$/;
+        return regex.test(username);
+    };
 
     const checkPassword = (password) => {
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$/;
