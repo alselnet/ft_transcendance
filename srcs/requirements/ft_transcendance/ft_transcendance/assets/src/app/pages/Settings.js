@@ -175,7 +175,7 @@ const Settings = async () => {
 
                 <div class="confirm-email">
                     votre adresse mail doit etre verifiee : 
-                    <a id="resend-verification-email">renvoyer un mail de verification</a>
+                    <a href="" id="resend-verification-email">renvoyer un mail de verification</a>
                 </div>
 
             </div>
