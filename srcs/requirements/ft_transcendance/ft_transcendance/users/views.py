@@ -177,7 +177,7 @@ class UpdateAvatarView(APIView):
 
     def post(self, request):
         profile = request.user.profile
-        if(profile.fortytwo_account == True):
+        if (profile.fortytwo_account is True):
             return Response({'error': '42 accounts data can only be edited on intra.42.fr'}, status=status.HTTP_401_UNAUTHORIZED)
         
         serializer = AvatarSerializer(profile, data=request.data)
@@ -196,7 +196,7 @@ class UpdateEmailView(APIView):
     def put(self, request):
         user = request.user
         profile = request.user.profile
-        if(profile.fortytwo_account == True):
+        if (profile.fortytwo_account is True):
             return Response({'error': '42 accounts data can only be edited on intra.42.fr'}, status=status.HTTP_401_UNAUTHORIZED)
         serializer = EmailUpdateSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
@@ -212,7 +212,7 @@ class UpdateUsernameView(APIView):
     def put(self, request):
         user = request.user
         profile = request.user.profile
-        if(profile.fortytwo_account == True):
+        if (profile.fortytwo_account is True):
             return Response({'error': '42 accounts data can only be edited on intra.42.fr'}, status=status.HTTP_401_UNAUTHORIZED)
         serializer = UsernameUpdateSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
@@ -228,7 +228,7 @@ class UpdatePasswordView(APIView):
     def put(self, request):
         user = request.user
         profile = request.user.profile
-        if(profile.fortytwo_account == True):
+        if (profile.fortytwo_account is True):
             return Response({'error': '42 accounts data can only be edited on intra.42.fr'}, status=status.HTTP_401_UNAUTHORIZED)
         serializer = PasswordUpdateSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():

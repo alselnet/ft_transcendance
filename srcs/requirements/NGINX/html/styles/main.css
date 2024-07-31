@@ -1000,6 +1000,10 @@ input[type="text"], input[type="password"], input[type="email"] {
     font-size: 2.5vw;
 }
 
+.active-2fa {
+    background-color: #007bff;
+    color: #fff;
+}
 
 @media (min-width: 768px) and (max-width: 1278px) {
 
@@ -1152,6 +1156,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     }
 
 }
+
 .settings-container {
     display: flex;
     flex-direction: column;
