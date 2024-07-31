@@ -41,6 +41,7 @@ const updateAvatar = (file) => {
     .then(data => {
         document.querySelector('.settings-picture').src = data.avatar;
         alert('Avatar updated successfully');
+        window.location.reload();
     })
     .catch(error => {
         console.error('Error updating avatar:', error);
@@ -55,7 +56,7 @@ const update2FA = (newMethod) => {
             if (response.ok) {
                 return response.json().then(updateData => {
                     alert('2FA method updated successfully');
-                    update2FAActiveClass(newMethod);
+                    window.location.reload();
                 });
             } else {
                 return response.json().then(errorData => {
@@ -84,6 +85,7 @@ const updateUsername = (newUsername) => {
                 return response.json().then(updateData => {
                     document.querySelector('#username-display').textContent = updateData.username;
                     alert('Username updated successfully');
+                    window.location.reload();
                 });
             } else {
                 return response.json().then(errorData => {
@@ -105,6 +107,7 @@ const updateEmail = (newEmail) => {
                 return response.json().then(updateData => {
                     document.querySelector('#email-display').textContent = updateData.email;
                     alert('Email updated successfully');
+                    window.location.reload();
                 });
             } else {
                 return response.json().then(errorData => {
