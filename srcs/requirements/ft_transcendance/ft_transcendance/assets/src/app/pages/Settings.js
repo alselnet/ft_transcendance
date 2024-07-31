@@ -18,6 +18,36 @@ const sendConfirmationEmail = (email) => {
         });
 };
 
+const updateAvatar = (file) => {
+    const formData = new FormData();
+    formData.append('avatar', file);
+
+    fetch('https://localhost/api/users/update-avatar/', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        },
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            return response.json().then(errorData => {
+                throw new Error(errorData.error || 'Failed to update avatar');
+            });
+        }
+    })
+    .then(data => {
+        document.querySelector('.settings-picture').src = data.avatar;
+        alert('Avatar updated successfully');
+    })
+    .catch(error => {
+        console.error('Error updating avatar:', error);
+        alert('An error occurred while updating the avatar');
+    });
+};
+
 const update2FA = (newMethod) => {
 	console.log("Update 2FA Method");
     post('https://localhost/api/auth/update-2fa/', { method: newMethod })
@@ -113,7 +143,8 @@ const Settings = async () => {
                 <div class="settings-box">
                     <div class="editting">
                         <img src="${userData.avatar}" class="settings-picture" alt="settings-pic">
-                        <p class="edit-pp">modifier</p>
+                        <a href="#" class="edit-pp">modifier</a>
+                        <input type="file" id="avatar-input" style="display: none;" accept="image/*">
                     </div>
                     <div class="modif-username">
                         <p id="username-display">${userData.username}</p>
@@ -181,6 +212,18 @@ const Settings = async () => {
             </div>
 
         `;
+
+        section.querySelector('.edit-pp').addEventListener('click', (event) => {
+            event.preventDefault();
+            section.querySelector('#avatar-input').click();
+        });
+
+        section.querySelector('#avatar-input').addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                updateAvatar(file);
+            }
+        });
 
 		section.querySelector('#resend-verification-email').addEventListener('click', (event) => {
             event.preventDefault();
