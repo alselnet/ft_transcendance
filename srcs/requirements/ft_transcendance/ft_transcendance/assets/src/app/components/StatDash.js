@@ -138,19 +138,30 @@ const DashStat = () => {
         });
         console.log('Event listeners set');
 
-		form.querySelector('#search-button').addEventListener('click', () => {
-			const loginSearchInput = document.getElementById("login-search");
-			const username = loginSearchInput.value;
-			if (username) {
-				if (isUserSelf(username, userData.username)) {
-					alert("Vous ne pouvez pas accéder à votre propre profil.");
-				} else {
-					window.location.href = `#/friendprofile/${username}`;
-				}
-				loginSearchInput.value = "";
-			}
-		});
-	
+
+		const loginSearchInput = form.querySelector("#login-search");
+        const searchButton = form.querySelector("#search-button");
+
+        const searchLogin = () => {
+            const username = loginSearchInput.value;
+            if (username) {
+                if (isUserSelf(username, userData.username)) {
+                    alert("Vous ne pouvez pas accéder à votre propre profil.");
+                } else {
+                    window.location.href = `#/friendprofile/${username}`;
+                }
+                loginSearchInput.value = "";
+            }
+        };
+
+        searchButton.addEventListener('click', searchLogin);
+
+        loginSearchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                searchLogin();
+            }
+        });
+
 		let percentage = 0;
         let color = "#63aa63";
         if (userData.played_games !== 0) {

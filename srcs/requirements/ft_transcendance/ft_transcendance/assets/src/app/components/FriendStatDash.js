@@ -101,8 +101,11 @@ export const FriendDashStat = () => {
                 setupCamembertAnimation(form, percentage, color);
             });
 
-            form.querySelector('#search-button').addEventListener('click', () => {
-                const loginSearchInput = document.getElementById("login-search");
+
+            const loginSearchInput = form.querySelector("#login-search");
+            const searchButton = form.querySelector("#search-button");
+
+            const searchLogin = () => {
                 const username = loginSearchInput.value;
                 if (username) {
                     if (isUserSelf(username, userData.username)) {
@@ -112,7 +115,15 @@ export const FriendDashStat = () => {
                     }
                     loginSearchInput.value = "";
                 }
-            });
+            };
+
+        searchButton.addEventListener('click', searchLogin);
+
+        loginSearchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                searchLogin();
+            }
+        });
 
 			document.getElementById('delete-friend-btn').addEventListener('click', (e) => {
                 e.preventDefault();
