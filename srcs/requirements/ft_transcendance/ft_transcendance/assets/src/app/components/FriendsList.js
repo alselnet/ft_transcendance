@@ -69,8 +69,8 @@ export const FriendList = async () => {
         const friendsListContainer = document.querySelector('.main-containerf');
         if (friendsListContainer) {
             setTimeout(() => {
-                friendsListContainer.classList.remove('fl-hidden');
                 friendsListContainer.classList.add('fl-visible');
+                friendsListContainer.classList.remove('fl-hidden');
             }, 10);
         }
 

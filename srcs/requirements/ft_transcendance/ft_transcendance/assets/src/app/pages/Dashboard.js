@@ -1,44 +1,27 @@
-import { Navbar } from "../components/Navbar.js";
-import { Main } from "../utils/Main.js";
 import { DashStat } from "../components/StatDash.js";
-import { LogOut } from "../components/LogOut.js";
-// import {
-    // setupFriendListAnimation,
-    // setupGameHistoryAnimation,
-    // setupCamembertAnimation
-// } from "../animation/DashboardAnimation.js";
-
+import {
+    setupFriendListAnimation,
+    setupGameHistoryAnimation,
+} from "../animation/DashboardAnimation.js";
 import { checkAuth } from "../services/Api.js";
 
-export const Dashboard = async () => {
+const Dashboard = async () => {
 
     const isAuthenticated = await checkAuth();
     if (!isAuthenticated) {
         throw new Error('User is not authenticated');
     }
 
-    let divRoot = document.querySelector("#root");
+    let section = document.querySelector("#section");
 
-    divRoot.innerHTML = "";
-
-    divRoot.append(Navbar());
-    divRoot.append(LogOut());
-    divRoot.append(Main());
-
-    let dashboardContainer = document.createElement("div");
-
-    dashboardContainer.append(DashStat());
-
-    divRoot.append(dashboardContainer);
-
-    // setupFriendListAnimation(divRoot);
-    // setupGameHistoryAnimation(divRoot);
-
-    // console.log("Dashboard container:", dashboardContainer);
-    // console.log("Dashboard container innerHTML:", dashboardContainer.innerHTML);
+    section.innerHTML = "";
+    section.append(DashStat());
 
     // setTimeout(() => {
-    //     setupCamembertAnimation(dashboardContainer);
-    // }, 500); 
-    // setupCamembertAnimation(dashboardContainer);
+        setupFriendListAnimation(section);
+        setupGameHistoryAnimation(section);
+    // }, 100);
+    
 };
+
+export { Dashboard };

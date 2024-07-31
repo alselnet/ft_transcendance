@@ -10,20 +10,20 @@
     justify-content: flex-start;
     align-items: center;
     margin-top: 9vh;
-    margin-left: 16vw;
+    margin-left: 18vw;
 }
 
 .statistics-box {
     display: flex;
-    margin-left: 16vw;
-    margin-top: 6vh;
-    width: 70vw;
-	max-width: 1500px;
-    height: 55vh;
+    margin-left: 18vw;
+    margin-top: 9vh;
+    width: 65vw;
+    max-width: 1500px;
+    height: 49vh;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.2);
-	z-index: 10;
+    z-index: 10;
 }
 
 .profile-picture {
@@ -107,7 +107,7 @@
 	bottom: 5vh;
 	width: 100%;
 	z-index: 100;
-    margin-left: 17vw;
+    margin-left: 18vw;
     display: flex;
 	align-items: center;
     flex-direction: row;
@@ -117,10 +117,11 @@
 .footer-icon {
     font-size: 2rem;
     color: white;
+    margin-top: 0.5vh;
 }
 
 .footer-icon:hover {
-    color: gold;
+    color: #245070;
 }
 
 .footer {
@@ -130,15 +131,15 @@
 }
 
 .footer-text {
-    margin-left: 15px;
-    margin-top: 15px;
+    margin-left: 1vw;
+    margin-top: 1.5vh;
     margin-right: 3vw;
     color: white;
     font-size: 1vw;
 }
 
 .footer-text:hover {
-    color: gold;
+    color: #245070;
 }
 
 .stat-title {
@@ -150,8 +151,8 @@
 }
 
 .camembert-stat {
-    width: 20vw;
-    height: 20vw;
+    width: 15vw;
+    height: 15vw;
     border-radius: 50%;
     position: absolute;
     transition: width 0.5s ease, height 0.5s ease;
@@ -162,14 +163,31 @@
 .left-side {
     display: flex;
     flex-direction: column;
-    margin-right: 20vw;
+    margin-right: 2vw;
+}
+
+.middle {
+    display: flex;
+    flex-direction: column;
+    margin-right: 12vw;
+    margin-left: -5vw;
+    justify-content: center;
+    margin-top: 20vh;
+}
+
+.legend-stat {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin-left: 1vw;
 }
 
 .right-side {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    margin-top: 50px;
     text-align: center;
+    justify-content: space-around;
 }
 
 .stat-data {
@@ -194,16 +212,7 @@
 }
 
 
-@media (max-width: 768px) {
-    .footer-text {
-        display: none;
-    }
 
-    .footer-icon {
-        margin-right: 10vw;
-    }
-
-}
 
 
 /* search pad */
@@ -278,7 +287,7 @@
 	bottom: 5vh;
 	width: 75%;
 	z-index: 100;
-    margin-left: 17vw;
+    margin-left: 18vw;
     display: flex;
 	align-items: center;
     flex-direction: row;
@@ -288,10 +297,11 @@
 .footer-friend-icon {
     font-size: 2rem;
     color: white;
+    margin-top: 0.5vh;
 }
 
 .footer-friend-icon:hover {
-    color: gold;
+    color: #245070;
 }
 
 .footer-friend {
@@ -309,7 +319,7 @@
 }
 
 .footer-friend-text:hover {
-    color: gold;
+    color: #245070;
 }
 
 .person-icon {
@@ -346,4 +356,157 @@
     margin-top: 2vh;
     margin-left: 1vw;
     font-size: 2.5vw;
+}
+
+
+@media (min-width: 768px) and (max-width: 1278px) {
+
+    .middle {
+        display: none;
+    }
+
+    .left-side {
+        margin-right: 22vw;
+    }
+
+    .camembert-stat {
+        width: 22vw;
+        height: 22vw;
+        margin-top: 11vh;
+    }
+
+    .stat-title {
+        font-size: 1.5vw;
+    }
+
+    .footer-text {
+        display: none;
+    }
+
+    .footer{
+        margin-left: 9vw;
+    }
+
+    .profile-picture {
+        width: 10vw;
+    }
+
+    .username-stat  {
+        font-size: 3vw;
+        margin-left: 4vw;
+    }
+
+    .gear-icon {
+        font-size: 3vw;
+    }
+
+    .status-text {
+        margin-left: 7px;
+        font-size: 1.5vw;
+    }
+
+    .stat-text {
+        font-size: 70%;
+    }
+
+    .person-icon {
+        font-size: 3vw;
+    }
+
+    .friend-status-text {
+        margin-right: 35vw;
+        font-size: 1.5vw;
+        margin-top: 0.1vh;
+    }
+
+    .profile-text {
+        font-size: 1.5vw;
+        margin-left: 4vw;
+        width: 10vw;
+        height: 2vw;
+        
+    }
+
+    .friend-username-stat {
+        font-size: 3vw;
+        margin-left: 4vw;
+    }
+    
+}
+
+
+@media (max-width: 768px) {
+    .footer-text {
+        display: none;
+    }
+
+    .right-side {
+        display: none;
+    }
+
+    .middle {
+        display: none;
+    }
+
+    .stat-title {
+        display: none;
+    }
+
+    .camembert-stat {
+        width: 35vw;
+        height: 35vw;
+        margin-top: 8vh;
+        margin-left: 14vw;
+    }
+
+    .footer-icon {
+        margin-right: 4vw;
+    }
+
+    .profile-picture {
+        width: 12vw;
+    }
+
+    .username-stat  {
+        font-size: 4vw;
+        margin-left: 4vw;
+    }
+
+    .gear-icon {
+        font-size: 3vw;
+    }
+
+    .status-text {
+        margin-left: 7px;
+        font-size: 2vw;
+    }
+
+    .friend-status-text {
+        margin-right: 25vw;
+        font-size: 2vw;
+    }
+
+    .footer-friend-text {
+        display: none;
+    }
+
+    .profile-text {
+        font-size: 1.5vw;
+        margin-left: 4vw;
+        width: 10vw;
+        height: 2vw;
+    }
+
+    .friend-username-stat {
+        margin-left: 2vw;
+    }
+
+    .person-icon {
+        font-size: 3vw;
+    }
+
+    .footer-friend-icon {
+        margin-left: 3vw;
+    }
+
 }

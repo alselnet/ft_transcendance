@@ -44,6 +44,7 @@ export function setupFriendListAnimation(dashboardContainer) {
     });
 }
 
+
 export function setupGameHistoryAnimation(dashboardContainer) {
     const historyButton = dashboardContainer.querySelector('#history-stat');
     if (!historyButton) {
@@ -84,29 +85,6 @@ export function setupGameHistoryAnimation(dashboardContainer) {
                 });
             });
         });
-    });
-}
-
-export function setupCamembertAnimation(dashboardContainer, percentage, color) {
-    console.log('Setting up camembert animation');
-    const camembertContainer = dashboardContainer.querySelector('.camembert-stat');
-    if (!camembertContainer) {
-        console.error('Camembert container not found');
-        return;
-    }
-
-    console.log('Camembert container found', camembertContainer);
-
-    camembertContainer.innerHTML = '';
-
-    const containerRect = camembertContainer.getBoundingClientRect();
-    const size = containerRect.width;
-    const radius = size / 2;
-
-    showCircle(camembertContainer, radius, radius, radius, (div) => {
-        setTimeout(() => {
-            showSectorGraph(div, size, percentage, color);
-        }, 500);
     });
 }
 
@@ -173,3 +151,74 @@ function showSectorGraph(container, size, percentage, color) {
     }, 510);
 }
 
+
+
+
+export function setupCamembertAnimation(dashboardContainer, percentage, color, message = '') {
+    console.log('Setting up camembert animation');
+    const camembertContainer = dashboardContainer.querySelector('.camembert-stat');
+    if (!camembertContainer) {
+        console.error('Camembert container not found');
+        return;
+    }
+
+    console.log('Camembert container found', camembertContainer);
+
+    camembertContainer.innerHTML = '';
+
+    const containerRect = camembertContainer.getBoundingClientRect();
+    const size = containerRect.width;
+    const radius = size / 2;
+
+    showCircle(camembertContainer, radius, radius, radius, (div) => {
+        if (message) {
+            showMessageInCircle(div, size, message);
+        } else {
+            setTimeout(() => {
+                showSectorGraph(div, size, percentage, color);
+            }, 500);
+        }
+    });
+}
+
+function showMessageInCircle(container, size, message) {
+    const radius = size / 2;
+    const center = radius;
+
+    const svg = `
+        <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="${center}" cy="${center}" r="${radius}" fill="#fef86c" style="transform-origin: ${center}px ${center}px; transform: scale(0); transition: transform 0.5s ease;"/>
+            <text x="${center}" y="${center}" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="#9e9d9d" style="opacity: 0; transition: opacity 0.5s ease 0.5s;">
+                ${message}
+            </text>
+        </svg>
+    `;
+
+    container.innerHTML = svg;
+
+    setTimeout(() => {
+        const circle = container.querySelector('circle');
+        const text = container.querySelector('text');
+        circle.style.transform = 'scale(1)';
+        console.log('Full circle animation started');
+
+        setTimeout(() => {
+            text.style.opacity = 1;
+            console.log('Text animation started');
+        }, 510);
+    }, 10);
+}
+
+export const animateNumbers = (element, target) => {
+    let start = 0;
+    const duration = 1000;
+    const increment = target / (duration / 10);
+    const timer = setInterval(() => {
+        start += increment;
+        if (start >= target) {
+            clearInterval(timer);
+            start = target;
+        }
+        element.textContent = Math.floor(start);
+    }, 10);
+}

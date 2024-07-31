@@ -47,11 +47,6 @@ a {
     z-index: 1;
 }
 
-/* a voir si je garde*/
-.orange-ball-home:hover {
-    z-index: 200;
-}
-
 .white-ball-home {
     background-color: white;
     margin-left: 25%;
@@ -657,20 +652,20 @@ input[type="text"], input[type="password"], input[type="email"] {
     justify-content: flex-start;
     align-items: center;
     margin-top: 9vh;
-    margin-left: 16vw;
+    margin-left: 18vw;
 }
 
 .statistics-box {
     display: flex;
-    margin-left: 16vw;
-    margin-top: 6vh;
-    width: 70vw;
-	max-width: 1500px;
-    height: 55vh;
+    margin-left: 18vw;
+    margin-top: 9vh;
+    width: 65vw;
+    max-width: 1500px;
+    height: 49vh;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.2);
-	z-index: 10;
+    z-index: 10;
 }
 
 .profile-picture {
@@ -754,7 +749,7 @@ input[type="text"], input[type="password"], input[type="email"] {
 	bottom: 5vh;
 	width: 100%;
 	z-index: 100;
-    margin-left: 17vw;
+    margin-left: 18vw;
     display: flex;
 	align-items: center;
     flex-direction: row;
@@ -764,10 +759,11 @@ input[type="text"], input[type="password"], input[type="email"] {
 .footer-icon {
     font-size: 2rem;
     color: white;
+    margin-top: 0.5vh;
 }
 
 .footer-icon:hover {
-    color: gold;
+    color: #245070;
 }
 
 .footer {
@@ -777,15 +773,15 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 .footer-text {
-    margin-left: 15px;
-    margin-top: 15px;
+    margin-left: 1vw;
+    margin-top: 1.5vh;
     margin-right: 3vw;
     color: white;
     font-size: 1vw;
 }
 
 .footer-text:hover {
-    color: gold;
+    color: #245070;
 }
 
 .stat-title {
@@ -797,8 +793,8 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 .camembert-stat {
-    width: 20vw;
-    height: 20vw;
+    width: 15vw;
+    height: 15vw;
     border-radius: 50%;
     position: absolute;
     transition: width 0.5s ease, height 0.5s ease;
@@ -809,14 +805,31 @@ input[type="text"], input[type="password"], input[type="email"] {
 .left-side {
     display: flex;
     flex-direction: column;
-    margin-right: 20vw;
+    margin-right: 2vw;
+}
+
+.middle {
+    display: flex;
+    flex-direction: column;
+    margin-right: 12vw;
+    margin-left: -5vw;
+    justify-content: center;
+    margin-top: 20vh;
+}
+
+.legend-stat {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin-left: 1vw;
 }
 
 .right-side {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    margin-top: 50px;
     text-align: center;
+    justify-content: space-around;
 }
 
 .stat-data {
@@ -841,16 +854,7 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 
-@media (max-width: 768px) {
-    .footer-text {
-        display: none;
-    }
 
-    .footer-icon {
-        margin-right: 10vw;
-    }
-
-}
 
 
 /* search pad */
@@ -925,7 +929,7 @@ input[type="text"], input[type="password"], input[type="email"] {
 	bottom: 5vh;
 	width: 75%;
 	z-index: 100;
-    margin-left: 17vw;
+    margin-left: 18vw;
     display: flex;
 	align-items: center;
     flex-direction: row;
@@ -935,10 +939,11 @@ input[type="text"], input[type="password"], input[type="email"] {
 .footer-friend-icon {
     font-size: 2rem;
     color: white;
+    margin-top: 0.5vh;
 }
 
 .footer-friend-icon:hover {
-    color: gold;
+    color: #245070;
 }
 
 .footer-friend {
@@ -956,7 +961,7 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 .footer-friend-text:hover {
-    color: gold;
+    color: #245070;
 }
 
 .person-icon {
@@ -994,9 +999,162 @@ input[type="text"], input[type="password"], input[type="email"] {
     margin-left: 1vw;
     font-size: 2.5vw;
 }
+
 .active-2fa {
     background-color: #007bff;
     color: #fff;
+}
+
+@media (min-width: 768px) and (max-width: 1278px) {
+
+    .middle {
+        display: none;
+    }
+
+    .left-side {
+        margin-right: 22vw;
+    }
+
+    .camembert-stat {
+        width: 22vw;
+        height: 22vw;
+        margin-top: 11vh;
+    }
+
+    .stat-title {
+        font-size: 1.5vw;
+    }
+
+    .footer-text {
+        display: none;
+    }
+
+    .footer{
+        margin-left: 9vw;
+    }
+
+    .profile-picture {
+        width: 10vw;
+    }
+
+    .username-stat  {
+        font-size: 3vw;
+        margin-left: 4vw;
+    }
+
+    .gear-icon {
+        font-size: 3vw;
+    }
+
+    .status-text {
+        margin-left: 7px;
+        font-size: 1.5vw;
+    }
+
+    .stat-text {
+        font-size: 70%;
+    }
+
+    .person-icon {
+        font-size: 3vw;
+    }
+
+    .friend-status-text {
+        margin-right: 35vw;
+        font-size: 1.5vw;
+        margin-top: 0.1vh;
+    }
+
+    .profile-text {
+        font-size: 1.5vw;
+        margin-left: 4vw;
+        width: 10vw;
+        height: 2vw;
+        
+    }
+
+    .friend-username-stat {
+        font-size: 3vw;
+        margin-left: 4vw;
+    }
+    
+}
+
+
+@media (max-width: 768px) {
+    .footer-text {
+        display: none;
+    }
+
+    .right-side {
+        display: none;
+    }
+
+    .middle {
+        display: none;
+    }
+
+    .stat-title {
+        display: none;
+    }
+
+    .camembert-stat {
+        width: 35vw;
+        height: 35vw;
+        margin-top: 8vh;
+        margin-left: 14vw;
+    }
+
+    .footer-icon {
+        margin-right: 4vw;
+    }
+
+    .profile-picture {
+        width: 12vw;
+    }
+
+    .username-stat  {
+        font-size: 4vw;
+        margin-left: 4vw;
+    }
+
+    .gear-icon {
+        font-size: 3vw;
+    }
+
+    .status-text {
+        margin-left: 7px;
+        font-size: 2vw;
+    }
+
+    .friend-status-text {
+        margin-right: 25vw;
+        font-size: 2vw;
+    }
+
+    .footer-friend-text {
+        display: none;
+    }
+
+    .profile-text {
+        font-size: 1.5vw;
+        margin-left: 4vw;
+        width: 10vw;
+        height: 2vw;
+    }
+
+    .friend-username-stat {
+        margin-left: 2vw;
+    }
+
+    .person-icon {
+        font-size: 3vw;
+    }
+
+    .footer-friend-icon {
+        margin-left: 3vw;
+    }
+
 }
 
 .settings-container {
@@ -1200,20 +1358,21 @@ input[type="text"] {
 
 .history-container2 {
     margin-top: 10px;
-    width: 85%;
-    height: 70%;
+    width: 85vw;
+    height: 75vh;
     padding: 20px;
     border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.2);
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow-y: auto;
 }
     
 .close-btn2 {
-    position: absolute;
-    top: 5px;
-    right: 20px;
+    position: fixed;
+    top: -70px;
+    right: 40px;
     font-size: 40px;
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
@@ -1230,45 +1389,53 @@ input[type="text"] {
     text-align: center;
     text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
     margin-top: -10px;
-    font-size: 30px;
+    font-size: 2.7vw;
 }
 
 .history-table2 {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 1vh;
     table-layout: fixed;
 }
     
 .history-table2 th, .history-table2 td {
-    padding: 10px;
+    padding: 1%;
     text-shadow: 0px 5px 9px rgba(0, 0, 0, 0.5);
     text-align: center;
 }
 
 .history-table2 th {
-    font-size: 20px;
+    font-size: 1.2vw;
     color: white;
 }
 
 .history-table2 td img {
-    width: 30px;
-    height: 30px;
+    width: 2.5vw;
+    height: 2.5vw;
     border-radius: 50%;
     vertical-align: middle;
 }
 
-.defeat2 {
+tbody, td, tfoot, th, thead, tr {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+    font-size: 1vw;
+}
+
+.defeat {
     color: #C20D0D;
 }
 
-.victory2 {
+.victory {
     color: #2B6E25;
 }
 
 .game-historic-history:hover {
     color: gold;
 }
+
 
 .main-containerf {
     display: flex;
@@ -1280,7 +1447,7 @@ input[type="text"] {
     transform: scale(0);
     transform-origin: center bottom;
     transition: transform 0.5s ease, opacity 0.5s ease;
-    margin-top: 100px;
+    margin-top: 30px;
 }
 
 .fl-hidden {
@@ -1294,10 +1461,15 @@ input[type="text"] {
 }
 
 .friends-containerf {
-    margin-top: 10px;
-    width: 31%;
-    height: 80%;
+	margin-top: 30px;
+    margin-bottom: 30px;
+    margin-right: 30px;
+    width: auto;
+    max-width: 35vw;
+    height: max-content;
+    min-height: 20%;
     padding: 20px;
+    padding-top: 10px;
     border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.2);
@@ -1306,18 +1478,19 @@ input[type="text"] {
 }
 
 .friend-count {
-    position: absolute;
-    bottom: 10px;
+	position: absolute;
     left: 50%;
     transform: translateX(-50%);
     font-weight: bold;
+    opacity: 0.6;
+    font-size: 0.85em;
     text-align: center;
 }
 
 .close-btnf {
-    position: absolute;
-    top: 5px;
-    right: 20px;
+    position: fixed;
+    top: -20px;
+    right: 40px;
     font-size: 40px;
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
@@ -1333,38 +1506,44 @@ input[type="text"] {
 .titlef {
     color: white;
     text-align: center;
+	overflow: hidden;
     text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
-    margin-top: 10px;
+    margin-top: 0px 0 5px 0;
     font-size: 20px;
     font-weight: 300;
 }
 
 .friends-tablef {
     width: 100%;
-    margin-top: 50px;
+    margin-top: 5px;
     table-layout: fixed;
 }
 
 .friend-row {
+    overflow-x: hidden;
+    overflow-y: auto;
     display: flex;
+    justify-content: left;
     align-items: center;
+    flex-direction: row;
 }
 
+
 .friends-tablef td {
-    padding: 10px;
-    text-align: left;
-    font-size: 16px;
+    text-align: center;
     vertical-align: middle;
+    padding: 5px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .friends-tablef td img {
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    vertical-align: middle;
-    margin-right: 10px;
+    margin-right: 2px;
+    display: inline-block;
 }
 
 .userf {
@@ -1372,16 +1551,17 @@ input[type="text"] {
 }
 
 .remove-btnf {
-    cursor: pointer;
+	cursor: pointer;
     color: #ff0000;
     font-size: 20px;
+    position: absolute;
+    left: 10px;
     background-color: transparent;
     text-shadow: 0px 5px 3px rgba(0, 0, 0, 0.4);
-    margin-left: auto;
 }
 
 .remove-btnf:hover {
-    color: #ff0000;
+    color: #6a0c0c;
     text-shadow: 0 3px 3px rgba(255, 0, 0, 0.7); 
 }
 
@@ -1390,11 +1570,9 @@ input[type="text"] {
     width: 10px;
     border-radius: 50%;
     display: inline-block;
-    margin-right: 5px;
     position: relative;
 }
 
-/* Tooltip container */
 .status-circle::after {
     content: attr(data-tooltip);
     position: absolute;
@@ -1413,6 +1591,24 @@ input[type="text"] {
 
 .status-circle:hover::after {
     opacity: 1;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0);
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(231, 231, 231, 0.2);
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(67, 66, 66, 0.6);
 }
 .navbar-supperposition {
     position: relative;

@@ -115,6 +115,7 @@ const Game = async () => {
 
         function showInitialMenu() {
             drawInitialGame();
+            updateScores(0, 0);
             hideAll();
             settings.classList.remove("hidden");
         }
@@ -385,7 +386,8 @@ const Game = async () => {
                     closeSocketWithDelay(500)
 
                     hideAll();
-                    initializeGameVariables();
+                    // initializeGameVariables();
+
                     showInitialMenu()
                 }
             };
@@ -507,7 +509,7 @@ const Game = async () => {
             ballY = state.ball_y_position;
             scorePlayer1 = state.score_player1;
             scorePlayer2 = state.score_player2;
-            updateScores(scorePlayer1, scorePlayer2);
+            updateScoresTournoi(scorePlayer1, scorePlayer2, player1_name, player2_name);
             drawGameTournoi(player1_name, player2_name);
         }
 
@@ -526,6 +528,12 @@ const Game = async () => {
             // Mettre à jour les scores
             document.getElementById('score-player1').textContent = `${Player1_name}: ${score1}`;
             document.getElementById('score-player2').textContent = `Invité: ${score2}`;
+        }
+
+        function updateScoresTournoi(score1, score2, player1_tournoi_name, player2_tournoi_name) {
+            // Mettre à jour les scores
+            document.getElementById('score-player1').textContent = `${player1_tournoi_name}: ${score1}`;
+            document.getElementById('score-player2').textContent = `${player2_tournoi_name}: ${score2}`;
         }
 
         function drawGameTournoi(player1_name, player2_name) {

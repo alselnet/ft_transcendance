@@ -29,7 +29,7 @@ export const FriendDashStat = () => {
 							<div class="friend-username-stat">${userData.username}</div>
 						</div>
                         <div class="status">
-                            <div class="status-pastille" style="background-color: ${getStatusColor(userData.status)};"></div>
+                            <div class="status-pastille" style="background-color: ${getStatusColor(userData.status)}; margin-top: 0.5vh;"></div>
                             <div class="friend-status-text">${userData.status}</div>
                             <a class="nav-link" href="#" id="delete-friend-btn"><i class="bi bi-person-dash-fill person-icon delete-icon"></i></a>
                             <a class="nav-link" href="#" id="add-friend-btn"><i class="bi bi-person-plus-fill person-icon"></i></a>
@@ -42,66 +42,101 @@ export const FriendDashStat = () => {
 						<div class="stat-title">Statistiques du joueur :</div>
 						<div class="camembert-stat"></div>
 					</div>
+                    <div class="middle">
+            		    <div class="legend-stat">
+                    		<div style="width: 1vw; height: 1vw; background-color: #63aa63; margin-right: 0.5vw; border-radius: 50%; margin-top: 0.2vw;"></div>
+                    		<p>victoires</p>
+                		</div>
+                		<div class="legend-stat">
+                    		<div style="width: 1vw; height: 1vw; background-color: #b26969; margin-right: 0.5vw; border-radius: 50%; margin-top: 0.2vw;"></div>
+                    		<p>défaites</p>
+                		</div>
+            		</div>
 					<div class="right-side">
 						<div class="stat-data">
 							<div class="stat-rubric-stat">
 								<p class="stat-text">Points marqués :</p>
-								<p class="stat-number"> ${userData.scored_points}</p>
+								<p class="stat-number" data-target="${userData.scored_points}">0</p>
 							</div>
 							<div class="stat-rubric-stat">
 								<p class="stat-text">Points concédés :</p>
-								<p class="stat-number"> ${userData.conceded_points}</p>
+								<p class="stat-number" data-target="${userData.conceded_points}">0</p>
 							</div>
 							<div class="stat-rubric-stat">
 								<p class="stat-text">Victoires parfaites :</p>
-								<p class="stat-number"> ${userData.perfect_wins}</p>
+								<p class="stat-number" data-target="${userData.perfect_wins}">0</p>
 							</div>
 						</div>
 					</div>
 				</div>
 
 				<div class="footer-friend-link">
-					<a class="nav-link" href="#/friendlist">         
-						<div class="footer-friend" id="list-stat-friend">
-							<i class="bi bi-list-task footer-friend-icon"></i>
-							<p class="footer-friend-text">Liste d'amis</p>
-						</div>
-					</a>
-					<a class="nav-link" href="#/publicgamehistory/${username}">         
-						<div class="footer-friend" id="list-stat-friend">
+					<div class="search-container">
+            			<div class="search-barre">
+                			<input type="text" id="login-search" placeholder="Entrez le nom de l'utilisateur">
+            			</div>
+            			<button type="button" id="search-button">
+                			<i class="bi bi-search search-icon"></i>
+            			</button>
+        			</div>
+					<a class="nav-link" href="#/publicgamehistory/${userData.username}">         
+						<div class="footer-friend" id="history-stat">
 							<i class="bi bi-clock-history footer-friend-icon"></i>
-							<p class="footer-friend-text">Historique des parties</p>
+							<p class="footer-friend-text">Historique des parties de ${userData.username}</p>
 						</div>
 					</a>
 				</div>
+
 			</div>
             `;
 
             setTimeout(() => {
-                const numbers = form.querySelectorAll('.stat-number-stat');
+                const numbers = form.querySelectorAll('.stat-number');
                 numbers.forEach(number => {
                     const target = +number.getAttribute('data-target');
                     animateNumbers(number, target);
                 });
             }, 500);
 
-            console.log("valeurs");
-		    console.log("win:", userData.won_games);
-		    console.log("played:", userData.played_games);
 
-		    let percentage = 60;
+            let percentage = 0;
             let color = "#63aa63";
+            let message = '';
             if (userData.played_games !== 0) {
-                percentage = ((userData.won_games - userData.played_games) * 100) / userData.played_games;
+                percentage = ((userData.played_games - userData.won_games) * 100) / userData.played_games;
             } else {
-                color = "purple";
+                color = "#fef86c";
+                message = "aucune partie jouée";
             }
+            setupCamembertAnimation(form, percentage, color, message);
 
-		    setupCamembertAnimation(form, percentage, color);
-
-		    window.addEventListener('resize', () => {
-                setupCamembertAnimation(form, percentage, color);
+            window.addEventListener('resize', () => {
+                setupCamembertAnimation(form, percentage, color, message);
             });
+
+
+            const loginSearchInput = form.querySelector("#login-search");
+            const searchButton = form.querySelector("#search-button");
+
+            const searchLogin = () => {
+                const username = loginSearchInput.value;
+                if (username) {
+                    if (isUserSelf(username, userData.username)) {
+                        alert("Vous ne pouvez pas accéder à votre propre profil.");
+                    } else {
+                        window.location.href = `#/friendprofile/${username}`;
+                    }
+                    loginSearchInput.value = "";
+                }
+            };
+
+        searchButton.addEventListener('click', searchLogin);
+
+        loginSearchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                searchLogin();
+            }
+        });
 
 			document.getElementById('delete-friend-btn').addEventListener('click', (e) => {
                 e.preventDefault();
@@ -139,6 +174,10 @@ function getStatusColor(status) {
             return 'red';
     }
 }
+
+const isUserSelf = (searchedUsername, currentUsername) => {
+    return searchedUsername === currentUsername;
+};
 
 function addFriend(username) {
 
@@ -179,3 +218,4 @@ function deleteFriend(username) {
         alert(error.message || 'Failed to remove friend');
     });
 }
+

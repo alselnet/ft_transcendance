@@ -43,7 +43,7 @@ const DashStat = () => {
 									</li>
 									<li class="dropdown-item" data-status="offline">
 										<div class="status-dropdown">
-											<div class="status-pastille" style="background-color: red; margin-right: 0.3vw"></div>
+											<div class="status-pastille" style="background-color: grey; margin-right: 0.3vw"></div>
 											<div class="status-text">Offline</div>
 										</div>
 									</li>
@@ -58,19 +58,30 @@ const DashStat = () => {
 						<div class="stat-title">Statistiques du joueur :</div>
 						<div class="camembert-stat"></div>
 					</div>
+					<div class="middle">
+            		    <div class="legend-stat">
+                    		<div style="width: 1vw; height: 1vw; background-color: #63aa63; margin-right: 0.5vw; border-radius: 50%; margin-top: 0.2vw;"></div>
+                    		<p>victoires</p>
+                		</div>
+                		<div class="legend-stat">
+                    		<div style="width: 1vw; height: 1vw; background-color: #b26969; margin-right: 0.5vw; border-radius: 50%; margin-top: 0.2vw;"></div>
+                    		<p>défaites</p>
+                		</div>
+            		</div>
 					<div class="right-side">
 						<div class="stat-data">
 							<div class="stat-rubric-stat">
-								<p class="stat-text">Points marqués :</p>
-								<p class="stat-number"> ${userData.scored_points}</p>
+								<p class="stat-text">Points marqués</p>
+								<p class="stat-number" data-target="${userData.scored_points}">0</p>
 							</div>
 							<div class="stat-rubric-stat">
-								<p class="stat-text">Points concédés :</p>
-								<p class="stat-number"> ${userData.conceded_points}</p>
+								<p class="stat-text">Points concédés</p>
+								<p class="stat-number" data-target="${userData.conceded_points}">0</p>
+
 							</div>
 							<div class="stat-rubric-stat">
-								<p class="stat-text">Victoires parfaites :</p>
-								<p class="stat-number"> ${userData.perfect_wins}</p>
+								<p class="stat-text">Victoires parfaites</p>
+								<p class="stat-number" data-target="${userData.perfect_wins}">0</p>
 							</div>
 						</div>
 					</div>
@@ -92,7 +103,7 @@ const DashStat = () => {
 						</div>
 					</a>
 					<a class="nav-link" href="#/gamehistory">         
-						<div class="footer" id="list-stat">
+						<div class="footer" id="history-stat">
 							<i class="bi bi-clock-history footer-icon"></i>
 							<p class="footer-text">Historique des parties</p>
 						</div>
@@ -103,7 +114,7 @@ const DashStat = () => {
         console.log('Form innerHTML set');
 
         setTimeout(() => {
-            const numbers = form.querySelectorAll('.stat-number-stat');
+            const numbers = form.querySelectorAll('.stat-number');
             numbers.forEach(number => {
                 const target = +number.getAttribute('data-target');
                 animateNumbers(number, target);
@@ -137,34 +148,45 @@ const DashStat = () => {
         });
         console.log('Event listeners set');
 
-		form.querySelector('#search-button').addEventListener('click', () => {
-			const username = document.getElementById("login-search").value;
-			if (username) {
-				if (isUserSelf(username, userData.username)) {
+
+		const loginSearchInput = form.querySelector("#login-search");
+        const searchButton = form.querySelector("#search-button");
+
+        const searchLogin = () => {
+            const username = loginSearchInput.value;
+            if (username) {
+                if (isUserSelf(username, userData.username)) {
                     alert("Vous ne pouvez pas accéder à votre propre profil.");
                 } else {
                     window.location.href = `#/friendprofile/${username}`;
                 }
-			}
-		});
+                loginSearchInput.value = "";
+            }
+        };
+
+        searchButton.addEventListener('click', searchLogin);
+
+        loginSearchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                searchLogin();
+            }
+        });
 
 
-		console.log("valeurs");
-		console.log("win:", userData.won_games);
-		console.log("played:", userData.played_games);
-
-		let percentage = 0;
+        let percentage = 0;
         let color = "#63aa63";
+        let message = '';
         if (userData.played_games !== 0) {
-            percentage = ((userData.won_games - userData.played_games) * 100) / userData.played_games;
+            percentage = ((userData.played_games - userData.won_games) * 100) / userData.played_games;
         } else {
-            color = "yellow";
+            color = "#fef86c";
+            message = "aucune partie jouée";
         }
 
-		setupCamembertAnimation(form, percentage, color);
+        setupCamembertAnimation(form, percentage, color, message);
 
-		window.addEventListener('resize', () => {
-            setupCamembertAnimation(form, percentage, color);
+        window.addEventListener('resize', () => {
+            setupCamembertAnimation(form, percentage, color, message);
         });
 
     })
