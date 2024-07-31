@@ -181,22 +181,6 @@ export function setupCamembertAnimation(dashboardContainer, percentage, color, m
     });
 }
 
-// function showMessageInCircle(container, size, message) {
-//     const radius = size / 2;
-//     const center = radius;
-
-//     const svg = `
-//         <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
-//             <circle cx="${center}" cy="${center}" r="${radius}" fill="#fef86c"/>
-//             <text x="${center}" y="${center}" text-anchor="middle" dominant-baseline="middle" font-size="18" fill="#9e9d9d">
-//                 ${message}
-//             </text>
-//         </svg>
-//     `;
-
-//     container.innerHTML = svg;
-// }
-
 function showMessageInCircle(container, size, message) {
     const radius = size / 2;
     const center = radius;
