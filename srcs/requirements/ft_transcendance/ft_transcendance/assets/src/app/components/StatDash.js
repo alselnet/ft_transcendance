@@ -58,6 +58,16 @@ const DashStat = () => {
 						<div class="stat-title">Statistiques du joueur :</div>
 						<div class="camembert-stat"></div>
 					</div>
+					<div class="middle">
+            		    <div class="legend-stat">
+                    		<div style="width: 1vw; height: 1vw; background-color: #63aa63; margin-right: 0.5vw; border-radius: 50%; margin-top: 0.2vw;"></div>
+                    		<p>victoires</p>
+                		</div>
+                		<div class="legend-stat">
+                    		<div style="width: 1vw; height: 1vw; background-color: #b26969; margin-right: 0.5vw; border-radius: 50%; margin-top: 0.2vw;"></div>
+                    		<p>défaites</p>
+                		</div>
+            		</div>
 					<div class="right-side">
 						<div class="stat-data">
 							<div class="stat-rubric-stat">
@@ -162,18 +172,21 @@ const DashStat = () => {
             }
         });
 
-		let percentage = 0;
+
+        let percentage = 0;
         let color = "#63aa63";
+        let message = '';
         if (userData.played_games !== 0) {
             percentage = ((userData.played_games - userData.won_games) * 100) / userData.played_games;
         } else {
             color = "#fef86c";
+            message = "aucune partie jouée";
         }
 
-		setupCamembertAnimation(form, percentage, color);
+        setupCamembertAnimation(form, percentage, color, message);
 
-		window.addEventListener('resize', () => {
-            setupCamembertAnimation(form, percentage, color);
+        window.addEventListener('resize', () => {
+            setupCamembertAnimation(form, percentage, color, message);
         });
 
     })

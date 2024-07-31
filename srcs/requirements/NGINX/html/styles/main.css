@@ -805,12 +805,27 @@ input[type="text"], input[type="password"], input[type="email"] {
 .left-side {
     display: flex;
     flex-direction: column;
-    margin-right: 20vw;
+    margin-right: 2vw;
+}
+
+.middle {
+    display: flex;
+    flex-direction: column;
+    margin-right: 12vw;
+    margin-left: -5vw;
+    justify-content: center;
+    margin-top: 20vh;
+}
+
+.legend-stat {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin-left: 1vw;
 }
 
 .right-side {
     display: flex;
-    margin-left: -30px;
     flex-direction: column;
     margin-top: 50px;
     text-align: center;
@@ -848,6 +863,24 @@ input[type="text"], input[type="password"], input[type="email"] {
         margin-right: 10vw;
     }
 
+    .right-side {
+        display: none;
+    }
+
+    .middle {
+        display: none;
+    }
+
+    .stat-title {
+        display: none;
+    }
+
+    .camembert-stat {
+        width: 35vw;
+        height: 35vw;
+        margin-top: 8vh;
+        margin-left: 14vw;
+    }
 }
 
 
