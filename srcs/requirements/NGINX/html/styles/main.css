@@ -994,6 +994,11 @@ input[type="text"], input[type="password"], input[type="email"] {
     margin-left: 1vw;
     font-size: 2.5vw;
 }
+.active-2fa {
+    background-color: #007bff;
+    color: #fff;
+}
+
 .settings-container {
     display: flex;
     flex-direction: column;

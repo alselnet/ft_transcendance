@@ -25,6 +25,7 @@ const update2FA = (newMethod) => {
             if (response.ok) {
                 return response.json().then(updateData => {
                     alert('2FA method updated successfully');
+                    update2FAActiveClass(newMethod);
                 });
             } else {
                 return response.json().then(errorData => {
@@ -36,6 +37,13 @@ const update2FA = (newMethod) => {
             console.error('Error updating 2FA method:', error);
             alert('An error occurred while updating the 2FA method');
         });
+    };
+    
+const update2FAActiveClass = (method) => {
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+        item.classList.remove('active-2fa');
+    });
+    document.querySelector(`#tfa-${method}`).classList.add('active-2fa');
 };
 
 const updateUsername = (newUsername) => {
@@ -142,7 +150,7 @@ const Settings = async () => {
                         </ul>
                     </div>
                     
-                    <button type="button" class="btn btn-danger delet-account">supprimer le compte</button>
+                    <button type="button" class="btn btn-danger delete-account">supprimer le compte</button>
 
                 </div>
 
@@ -204,6 +212,8 @@ const Settings = async () => {
         section.querySelector('#tfa-authenticator').addEventListener('click', () => {
             update2FA('authenticator');
         });
+
+        update2FAActiveClass(userData.two_fa_method);
     })
     .catch(error => {
         console.error('Error fetching user profile:', error);
