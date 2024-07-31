@@ -34,11 +34,7 @@ services:
     build: ./requirements/NGINX/
     volumes:
       - ./requirements/NGINX/nginx.conf:/etc/nginx/nginx.conf
-      - ./requirements/NGINX/html/index.html:/usr/share/nginx/html/index.html
-      - ./requirements/NGINX/html/bundle.js:/usr/share/nginx/html/bundle.js
-      - ./requirements/NGINX/html/styles:/usr/share/nginx/html/styles
-      - ./requirements/NGINX/html/images:/usr/share/nginx/html/images
-      - ./requirements/NGINX/html/fonts:/usr/share/nginx/html/fonts
+      - ./requirements/NGINX/html/:/usr/share/nginx/html
       - ./requirements/NGINX/conf/server.crt:/etc/nginx/ssl/server.crt
       - ./requirements/NGINX/conf/server.key:/etc/nginx/ssl/server.key
       - STATIC:/static
