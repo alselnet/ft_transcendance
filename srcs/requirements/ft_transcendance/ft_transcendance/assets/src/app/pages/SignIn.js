@@ -85,7 +85,7 @@ const SignIn = () => {
         const passwordMatch = formData.password === formData.confirmPassword;
 
         if (!usernameValide) {
-            alert("Le nom d'utilisateur peut avoir maximum 8 caractères");
+            alert("Le nom d'utilisateur peut avoir maximum 8 caractères, et ne peut contenir que des lettres et des chiffres");
             console.log('Invalid email');
             return;
         }

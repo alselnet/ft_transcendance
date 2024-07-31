@@ -50,7 +50,7 @@ const LogIn = () => {
                 <div class="arrow-sm"><i class="bi bi-arrow-left-circle-fill"></i></div>
             </a>
         <div class="white-ball-login-sm">
-                <form id="login-form-sm" class="login-form-login"> <!-- Ajout de la balise form -->
+                <form id="login-form-sm" class="login-form-login">
                     <input type="text" id="username-sm" placeholder="Username">
                     <input type="password" id="password-sm" placeholder="Password">
                     <button type="submit" class="button-login">se connecter</button>

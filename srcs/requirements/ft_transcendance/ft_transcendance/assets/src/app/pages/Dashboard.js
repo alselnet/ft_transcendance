@@ -17,10 +17,8 @@ const Dashboard = async () => {
     section.innerHTML = "";
     section.append(DashStat());
 
-    // setTimeout(() => {
         setupFriendListAnimation(section);
         setupGameHistoryAnimation(section);
-    // }, 100);
     
 };
 
