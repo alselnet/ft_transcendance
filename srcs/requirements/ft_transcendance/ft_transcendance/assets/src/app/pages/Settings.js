@@ -18,6 +18,26 @@ const sendConfirmationEmail = (email) => {
         });
 };
 
+const update2FA = (newMethod) => {
+	console.log("Update 2FA Method");
+    post('https://localhost/api/auth/update-2fa/', { method: newMethod })
+        .then(response => {
+            if (response.ok) {
+                return response.json().then(updateData => {
+                    alert('2FA method updated successfully');
+                });
+            } else {
+                return response.json().then(errorData => {
+                    alert(`Error: ${errorData.error || 'Failed to update 2FA method'}`);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error updating 2FA method:', error);
+            alert('An error occurred while updating the 2FA method');
+        });
+};
+
 const updateUsername = (newUsername) => {
     console.log("Update Username");
     put('https://localhost/api/users/update-username/', { username: newUsername })
@@ -36,6 +56,27 @@ const updateUsername = (newUsername) => {
         .catch(error => {
             console.error('Error updating username:', error);
             alert('An error occurred while updating the username');
+        });
+};
+
+const updateEmail = (newEmail) => {
+    console.log("Update Email");
+    put('https://localhost/api/users/update-email/', { email: newEmail })
+        .then(response => {
+            if (response.ok) {
+                return response.json().then(updateData => {
+                    document.querySelector('#email-display').textContent = updateData.email;
+                    alert('Email updated successfully');
+                });
+            } else {
+                return response.json().then(errorData => {
+                    alert(`Error: ${errorData.error || 'Failed to update email'}`);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error updating email:', error);
+            alert('An error occurred while updating the email');
         });
 };
 
@@ -71,8 +112,8 @@ const Settings = async () => {
                         <button type="button" id="edit-username" class="btn btn-light">modifier username</button>
                     </div>
                     <div class="modif-username">
-                        <p>${userData.email}</p>
-                        <button type="button" class="btn btn-light">modifier adresse mail</button>
+                        <p id="email-display">${userData.email}</p>
+                        <button type="button" id="edit-email" class="btn btn-light">modifier adresse mail</button>
                     </div>
                     <div class="modif-username">
                         <p>********</p>
@@ -84,10 +125,9 @@ const Settings = async () => {
                         methode 2fa
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">${userData.two_fa_method}</a></li>
-                        <li><a class="dropdown-item" href="#">aucune</a></li>
-                        <li><a class="dropdown-item" href="#">mail</a></li>
-                        <li><a class="dropdown-item" href="#">qrcode</a></li>
+                        <li><a class="dropdown-item" id="tfa-none">aucune</a></li>
+                        <li><a class="dropdown-item" id="tfa-email">mail</a></li>
+                        <li><a class="dropdown-item" id="tfa-authenticator">qrcode</a></li>
                         </ul>
                     </div>
 
@@ -127,7 +167,7 @@ const Settings = async () => {
 
                 <div class="confirm-email">
                     votre adresse mail doit etre verifiee : 
-                    <a href="#" id="resend-verification-email">renvoyer un mail de verification</a>
+                    <a id="resend-verification-email">renvoyer un mail de verification</a>
                 </div>
 
             </div>
@@ -144,6 +184,25 @@ const Settings = async () => {
             if (newUsername && newUsername !== userData.username) {
                 updateUsername(newUsername);
             }
+        });
+
+		section.querySelector('#edit-email').addEventListener('click', (event) => {
+            const newEmail = prompt(`Entrez la nouvelle adresse mail :`, userData.email);
+            if (newEmail && newEmail !== userData.email) {
+                updateEmail(newEmail);
+            }
+        });
+
+		section.querySelector('#tfa-none').addEventListener('click', () => {
+            update2FA('none');
+        });
+
+        section.querySelector('#tfa-email').addEventListener('click', () => {
+            update2FA('email');
+        });
+
+        section.querySelector('#tfa-authenticator').addEventListener('click', () => {
+            update2FA('authenticator');
         });
     })
     .catch(error => {

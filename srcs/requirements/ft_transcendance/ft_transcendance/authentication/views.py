@@ -175,7 +175,7 @@ def CsrfTokenView(request):
 
 
 class ConfirmEmailView(APIView):
-    def get(self, token):
+    def get(self, request, token=None):
         email = verify_token(token)
         if email:
             try:
