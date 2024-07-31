@@ -35,7 +35,7 @@ export const PublicGameHistory = async () => {
             const loserAvatar = game.loser_avatar;
             const gameMode = game.local_game ? 'Locale' : 'Online';
             const result = game.winner === currentUsername ? 'Victory' : 'Defeat';
-            const resultClass = game.winner === currentUsername ? 'victory2' : 'defeat2';
+            const resultClass = game.winner === currentUsername ? 'victory' : 'defeat';
 
             return `
                 <tr>

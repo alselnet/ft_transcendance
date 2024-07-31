@@ -22,9 +22,8 @@
 
 .history-container2 {
     margin-top: 10px;
-    width: 85%;
-    max-height: 80vh;
-	min-width: 900px;
+    width: 85vw;
+    height: 75vh;
     padding: 20px;
     border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -54,39 +53,46 @@
     text-align: center;
     text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
     margin-top: -10px;
-    font-size: 30px;
+    font-size: 2.7vw;
 }
 
 .history-table2 {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 1vh;
     table-layout: fixed;
 }
     
 .history-table2 th, .history-table2 td {
-    padding: 10px;
+    padding: 1%;
     text-shadow: 0px 5px 9px rgba(0, 0, 0, 0.5);
     text-align: center;
 }
 
 .history-table2 th {
-    font-size: 20px;
+    font-size: 1.2vw;
     color: white;
 }
 
 .history-table2 td img {
-    width: 30px;
-    height: 30px;
+    width: 2.5vw;
+    height: 2.5vw;
     border-radius: 50%;
     vertical-align: middle;
 }
 
-.defeat2 {
+tbody, td, tfoot, th, thead, tr {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+    font-size: 1vw;
+}
+
+.defeat {
     color: #C20D0D;
 }
 
-.victory2 {
+.victory {
     color: #2B6E25;
 }
 
