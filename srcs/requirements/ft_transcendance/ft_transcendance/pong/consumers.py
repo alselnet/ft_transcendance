@@ -86,6 +86,26 @@ class PongConsumer(AsyncWebsocketConsumer):
                 except Exception as e:
                     logger.error(f"Error sending game over message: {e}")
 
+                if self.pong_game.game_over:
+                    await self.handle_game_over()
+
+    async def handle_game_over(self):
+        try:
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'game_over',
+                    'winner': self.pong_game.winner,
+                    'score_player1': self.pong_game.score_player1,
+                    'score_player2': self.pong_game.score_player2
+                }
+            )
+        except Exception as e:
+            logger.error(f"Error sending game over message: {e}")
+        finally:
+            self.connected = False
+            await self.disconnect(close_code=1000)
+
     async def game_state(self, event):
         try:
             if self.channel_layer and self.channel_name:
