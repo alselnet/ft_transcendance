@@ -79,13 +79,14 @@ export const FriendDashStat = () => {
                 			<i class="bi bi-search search-icon"></i>
             			</button>
         			</div>
-					<a class="nav-link" href="#/publicgamehistory/${username}">         
+					<a class="nav-link" href="#/publicgamehistory/${userData.username}">         
 						<div class="footer-friend" id="history-stat">
 							<i class="bi bi-clock-history footer-friend-icon"></i>
-							<p class="footer-friend-text">Historique des parties de ${username}</p>
+							<p class="footer-friend-text">Historique des parties de ${userData.username}</p>
 						</div>
 					</a>
 				</div>
+
 			</div>
             `;
 
@@ -107,7 +108,6 @@ export const FriendDashStat = () => {
                 color = "#fef86c";
                 message = "aucune partie jouée";
             }
-
             setupCamembertAnimation(form, percentage, color, message);
 
             window.addEventListener('resize', () => {

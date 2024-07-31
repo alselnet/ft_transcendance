@@ -188,7 +188,7 @@ function showMessageInCircle(container, size, message) {
     const svg = `
         <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
             <circle cx="${center}" cy="${center}" r="${radius}" fill="#fef86c" style="transform-origin: ${center}px ${center}px; transform: scale(0); transition: transform 0.5s ease;"/>
-            <text x="${center}" y="${center}" text-anchor="middle" dominant-baseline="middle" font-size="20" fill="#9e9d9d" style="opacity: 0; transition: opacity 0.5s ease 0.5s;">
+            <text x="${center}" y="${center}" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="#9e9d9d" style="opacity: 0; transition: opacity 0.5s ease 0.5s;">
                 ${message}
             </text>
         </svg>
@@ -208,9 +208,6 @@ function showMessageInCircle(container, size, message) {
         }, 510);
     }, 10);
 }
-
-
-
 
 export const animateNumbers = (element, target) => {
     let start = 0;
