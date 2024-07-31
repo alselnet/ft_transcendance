@@ -89,7 +89,7 @@ const SignIn = () => {
             return;
         }
         if (!passwordValid) {
-            alert("mot de passe doit contenir au moins 5 caractères, une lettre, un chiffre et un caractère spécial.");
+            alert("mot de passe doit contenir au moins 8 caractères, une lettre, un chiffre et un caractère spécial.");
             console.log('Invalid password');
             return;
         }
@@ -130,7 +130,7 @@ const SignIn = () => {
     });
 
     const checkPassword = (password) => {
-        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{5,}$/;
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$/;
         return regex.test(password);
     };
 

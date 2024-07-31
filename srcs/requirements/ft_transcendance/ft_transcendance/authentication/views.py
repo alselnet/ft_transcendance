@@ -50,6 +50,15 @@ class UserDeletionView(APIView):
     permission_classes = [IsAuthenticated]
 
     def delete(self, request):
+        password = request.data.get('password')
+        
+        if not password:
+            return Response({"error": "Password is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        user = authenticate(username=request.user.username, password=password)
+        if not user:
+            return Response({"error": "Invalid password"}, status=status.HTTP_400_BAD_REQUEST)
+
         try:
             user = request.user
             game_summaries = GameSummary.objects.filter(winner=user) | GameSummary.objects.filter(loser=user)
@@ -141,7 +150,7 @@ class Callback(APIView):
             avatar_url = user_info['image']['versions']['small']
             logger.info("Link de l'intra 42: %s", avatar_url)
             
-            user, created = User.objects.get_or_create(username=username, defaults={'email': email})
+            user, created = User.objects.get_or_create(email=email)
             
             if not created:
                 user.email = email
