@@ -196,11 +196,12 @@ class UpdateEmailView(APIView):
     def put(self, request):
         user = request.user
         profile = request.user.profile
-        if (profile.fortytwo_account is True):
+        if profile.fortytwo_account is True:
             return Response({'error': '42 accounts data can only be edited on intra.42.fr'}, status=status.HTTP_401_UNAUTHORIZED)
-        serializer = EmailUpdateSerializer(user, data=request.data, partial=True)
+        
+        serializer = EmailUpdateSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
-            serializer.save()
+            serializer.update(user, serializer.validated_data)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -212,11 +213,12 @@ class UpdateUsernameView(APIView):
     def put(self, request):
         user = request.user
         profile = request.user.profile
-        if (profile.fortytwo_account is True):
+        if profile.fortytwo_account is True:
             return Response({'error': '42 accounts data can only be edited on intra.42.fr'}, status=status.HTTP_401_UNAUTHORIZED)
-        serializer = UsernameUpdateSerializer(user, data=request.data, partial=True)
+
+        serializer = UsernameUpdateSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
-            serializer.save()
+            serializer.update(user, serializer.validated_data)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -228,12 +230,17 @@ class UpdatePasswordView(APIView):
     def put(self, request):
         user = request.user
         profile = request.user.profile
-        if (profile.fortytwo_account is True):
+        
+
+        if profile.fortytwo_account is True:
             return Response({'error': '42 accounts data can only be edited on intra.42.fr'}, status=status.HTTP_401_UNAUTHORIZED)
-        serializer = PasswordUpdateSerializer(user, data=request.data, partial=True)
+
+        serializer = PasswordUpdateSerializer(user, data=request.data, context={'request': request}, partial=True)
+        
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response({'detail': 'Password updated successfully'}, status=status.HTTP_200_OK)
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
