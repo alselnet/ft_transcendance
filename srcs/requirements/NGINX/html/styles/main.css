@@ -1128,7 +1128,7 @@ input[type="text"], input[type="password"], input[type="email"] {
         font-size: 2vw;
     }
 
-    .footer-friend-icon {
+    .footer-friend-text {
         display: none;
     }
 
@@ -1145,6 +1145,10 @@ input[type="text"], input[type="password"], input[type="email"] {
 
     .person-icon {
         font-size: 3vw;
+    }
+
+    .footer-friend-icon {
+        margin-left: 3vw;
     }
 
 }
