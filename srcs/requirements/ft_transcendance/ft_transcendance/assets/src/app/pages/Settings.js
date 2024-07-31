@@ -161,6 +161,12 @@ const Settings = async () => {
     .then(userData => {
         console.log('Fetched user data:', userData);
 
+        const emailConfirmationBanner = userData.mail_confirmation_status ? '' : `
+            <div class="confirm-email">
+                votre adresse mail doit etre verifiee : 
+                <a href="" id="resend-verification-email">renvoyer un mail de verification</a>
+            </div>`;
+
         section.innerHTML = 
             `
             <div class="settings-container">
@@ -229,10 +235,7 @@ const Settings = async () => {
                     </a>
                 </div>
 
-                <div class="confirm-email">
-                    votre adresse mail doit etre verifiee : 
-                    <a href="" id="resend-verification-email">renvoyer un mail de verification</a>
-                </div>
+                ${emailConfirmationBanner}
 
             </div>
 
@@ -249,12 +252,7 @@ const Settings = async () => {
                 updateAvatar(file);
             }
         });
-
-		section.querySelector('#resend-verification-email').addEventListener('click', (event) => {
-            event.preventDefault();
-            sendConfirmationEmail(userData.email);
-        });
-
+        
         section.querySelector('#edit-username').addEventListener('click', (event) => {
             const newUsername = prompt(`Entrez le nouveau nom d'utilisateur :`, userData.username);
             if (newUsername && newUsername !== userData.username) {
@@ -268,7 +266,7 @@ const Settings = async () => {
                 updateEmail(newEmail);
             }
         });
-
+        
 		section.querySelector('#tfa-none').addEventListener('click', () => {
             update2FA('none');
         });
@@ -276,22 +274,27 @@ const Settings = async () => {
         section.querySelector('#tfa-email').addEventListener('click', () => {
             update2FA('email');
         });
-
+        
         section.querySelector('#tfa-authenticator').addEventListener('click', () => {
             update2FA('authenticator');
         });
-
+        
         section.querySelector('.delete-account').addEventListener('click', () => {
             deleteAccount();
         });
-
+        
         update2FAActiveClass(userData.two_fa_method);
+
+        section.querySelector('#resend-verification-email').addEventListener('click', (event) => {
+            event.preventDefault();
+            sendConfirmationEmail(userData.email);
+        });
     })
     .catch(error => {
         console.error('Error fetching user profile:', error);
         form.innerHTML = '<p>Failed to load user profile</p>';
     })
-
+    
     return form;
 };
 

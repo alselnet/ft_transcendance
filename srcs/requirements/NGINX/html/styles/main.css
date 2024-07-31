@@ -905,6 +905,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     width: calc(100% - 20px);
     outline: none;
     color: white;
+    font-family: 'Play';
 }
 
 
