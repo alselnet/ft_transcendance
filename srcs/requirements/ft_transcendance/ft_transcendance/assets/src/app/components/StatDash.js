@@ -61,11 +61,13 @@ const DashStat = () => {
 					<div class="middle">
             		    <div class="legend-stat">
                     		<div style="width: 1vw; height: 1vw; background-color: #63aa63; margin-right: 0.5vw; border-radius: 50%; margin-top: 0.2vw;"></div>
-                    		<p>victoires</p>
+                    		<p style="color: white;">victoires:&nbsp;</p>
+							<p style="color: green;">${userData.won_games}</p>
                 		</div>
                 		<div class="legend-stat">
                     		<div style="width: 1vw; height: 1vw; background-color: #b26969; margin-right: 0.5vw; border-radius: 50%; margin-top: 0.2vw;"></div>
-                    		<p>défaites</p>
+                    		<p style="color: white;">défaites:&nbsp;</p>
+							<p style="color: red;">${userData.played_games - userData.won_games}</p>
                 		</div>
             		</div>
 					<div class="right-side">

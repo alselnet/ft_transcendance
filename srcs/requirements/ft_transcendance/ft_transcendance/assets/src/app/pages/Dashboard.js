@@ -1,8 +1,4 @@
 import { DashStat } from "../components/StatDash.js";
-import {
-    setupFriendListAnimation,
-    setupGameHistoryAnimation,
-} from "../animation/DashboardAnimation.js";
 import { checkAuth } from "../services/Api.js";
 
 const Dashboard = async () => {
@@ -16,10 +12,6 @@ const Dashboard = async () => {
 
     section.innerHTML = "";
     section.append(DashStat());
-
-        setupFriendListAnimation(section);
-        setupGameHistoryAnimation(section);
-    
 };
 
 export { Dashboard };
