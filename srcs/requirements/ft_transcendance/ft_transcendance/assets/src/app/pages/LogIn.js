@@ -93,9 +93,38 @@ const LogIn = () => {
             localStorage.setItem('accessToken', data.access);
             localStorage.setItem('refreshToken', data.refresh);
 
-            // Rediriger vers le tableau de bord
-            console.log('Redirecting to dashboard from login...');
-            window.location.href = '#/dashboard';
+            return fetch('https://localhost/api/users/me/', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${data.access}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+        })
+        .then(response => response.json())
+        .then(userData => {
+            console.log('User data:', userData);
+            
+            // Redirection et envoi du code 2FA en fonction du statut 2FA
+            if (userData.two_fa_method === 'email') {
+                // Envoyer le code 2FA par email
+                return fetch('https://localhost/api/auth/generate-2fa-code/', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    }
+                })
+                .then(() => {
+                    window.location.href = '#/2fa-auth';
+                })
+                .catch(error => {
+                    console.error('Erreur lors de l\'envoi du code 2FA:', error);
+                });
+            } else {
+                window.location.href = '#/dashboard';
+            }
         })
         .catch(error => {
             console.error('Erreur:', error);

@@ -66,7 +66,7 @@ export const Router = async () => {
         GameHistory();
 	} else if (hash.startsWith ("#/publicgamehistory")) {
 		PublicGameHistory();
-    } else if (hash === "#/2fa") {
+    } else if (hash === "#/2fa-auth") {
         TwoFactorAuth();
     } else if (hash === "#/logout") {
         LogOutMsg();
