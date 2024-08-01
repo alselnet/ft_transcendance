@@ -1,8 +1,8 @@
-import { getCookie } from '../utils/cookies'
+import { getCookie } from '../utils/cookies';
 import img42 from '../images/42.png';
-import { FortyTwoSignIn, handleCallback } from "./42SignIn.js";
+import { FortyTwoSignIn } from "./42SignIn.js";
 
-const LogIn = () => {
+export const LogIn = () => {
     let root = document.getElementById("root");
     if (!root) {
         console.error("#root not found in the DOM");
@@ -21,92 +21,132 @@ const LogIn = () => {
 
     let section = document.querySelector("#section");
     if (section) {
-        section.innerHTML = 
-    `
-        <div class="balls-login d-none d-md-flex">
-            <div class="orange-ball-login">
+        section.innerHTML = `
+            <div class="balls-login d-none d-md-flex">
+                <div class="orange-ball-login">
+                    <a class="nav-link" href="#/">
+                        <div class="arrow"><i class="bi bi-arrow-left-circle-fill"></i></div>
+                    </a>
+                </div>
+                <div class="white-ball-login">
+                    <form id="login-form" class="login-form-login">
+                        <input type="text" id="username" placeholder="Username">
+                        <input type="password" id="password" placeholder="Password">
+                        <button type="submit" class="button-login">se connecter</button>
+                    </form>
+                </div>
+                <div class="btn-container-home">
+                    <button id="fortyTwoSignInBtn" class="btn-42-home">
+                        <p class="co-42-home">connexion avec</p>
+                        <img src="${img42}" class="img-42-home" alt="button-42">
+                    </button>
+                </div>
+            </div>
+
+            <div class="balls-login d-none d-sm-flex d-md-none">
                 <a class="nav-link" href="#/">
-                    <div class="arrow"><i class="bi bi-arrow-left-circle-fill"></i></div>
+                    <div class="arrow-sm"><i class="bi bi-arrow-left-circle-fill"></i></div>
                 </a>
+                <div class="white-ball-login-sm">
+                    <form id="login-form-sm" class="login-form-login">
+                        <input type="text" id="username-sm" placeholder="Username">
+                        <input type="password" id="password-sm" placeholder="Password">
+                        <button type="submit" class="button-login">se connecter</button>
+                    </form>
+                </div>
             </div>
-            <div class="white-ball-login">
-                <form id="login-form" class="login-form-login">
-                    <input type="text" id="username" placeholder="Username">
-                    <input type="password" id="password" placeholder="Password">
-                    <button type="submit" class="button-login">se connecter</button>
-                </form>
-            </div>
+        `;
 
-            <div class="btn-container-home">
-                <button id="fortyTwoSignInBtn" class="btn-42-home">
-                    <p class="co-42-home">connexion avec</p>
-                    <img src="${img42}" class="img-42-home" alt="button-42">
-                </button>
-            </div>
-        </div>
+        handleFormVisibility();
+        window.addEventListener('resize', handleFormVisibility);
 
-        <div class="balls-login d-none d-sm-flex d-md-none">
-            <a class="nav-link" href="#/">
-                <div class="arrow-sm"><i class="bi bi-arrow-left-circle-fill"></i></div>
-            </a>
-        <div class="white-ball-login-sm">
-                <form id="login-form-sm" class="login-form-login">
-                    <input type="text" id="username-sm" placeholder="Username">
-                    <input type="password" id="password-sm" placeholder="Password">
-                    <button type="submit" class="button-login">se connecter</button>
-                </form>
-            </div>
-        </div>
-    `;
-    } 
-
-    // Attacher l'événement submit au formulaire
-    const form = document.getElementById("login-form") || document.getElementById("login-form-sm"); // Modifié pour attacher l'événement au formulaire
-    form.addEventListener("submit", (event) => {
-        event.preventDefault(); // Empêche le formulaire de soumettre de manière traditionnelle
-
-        // Récupérer les données du formulaire
-        const logData = {
-            username: document.getElementById("username").value || document.getElementById("username-sm").value,
-            password: document.getElementById("password").value || document.getElementById("password-sm").value,
-        };
-
-        // Envoi des données de connexion
-        fetch('https://localhost/api/auth/signin/', {  // Modification de l'URL
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-				'X-CSRFToken': getCookie('csrftoken')
-            },
-            body: JSON.stringify(logData)
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(err => { throw new Error('Erreur de connexion') });
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Réponse du backend:', data);
-            
-            // Stocker les tokens JWT dans le localStorage
-            localStorage.setItem('accessToken', data.access);
-            localStorage.setItem('refreshToken', data.refresh);
-
-            // Rediriger vers le tableau de bord
-            console.log('Redirecting to dashboard from login...');
-            window.location.href = '#/dashboard';
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-            alert('Nom d utilisateur ou mot de passe incorrect');
-        });
-    });
-
-    const signInButton = document.getElementById('fortyTwoSignInBtn');
-    signInButton.addEventListener('click', () => {
-        FortyTwoSignIn();
-    });
+        const signInButton = document.getElementById('fortyTwoSignInBtn');
+        if (signInButton) {
+            signInButton.addEventListener('click', () => {
+                FortyTwoSignIn();
+            });
+        }
+    }
 };
 
-export { LogIn };
+let currentForm = null;
+
+function handleFormVisibility() {
+    const isDesktop = window.innerWidth >= 768;
+    const formDesktop = document.getElementById("login-form");
+    const formMobile = document.getElementById("login-form-sm");
+
+    if (isDesktop) {
+        if (formMobile) {
+            formMobile.classList.add('d-none');
+        }
+        if (formDesktop) {
+            formDesktop.classList.remove('d-none');
+            formDesktop.classList.add('d-md-block');
+        }
+        if (currentForm && currentForm !== formDesktop) {
+            currentForm.removeEventListener("submit", handleFormSubmit);
+        }
+        if (formDesktop) {
+            formDesktop.addEventListener("submit", handleFormSubmit);
+            currentForm = formDesktop;
+        }
+    } else {
+        if (formDesktop) {
+            formDesktop.classList.add('d-none');
+            formDesktop.classList.remove('d-md-block');
+        }
+        if (formMobile) {
+            formMobile.classList.remove('d-none');
+            formMobile.classList.add('d-md-block');
+        }
+        if (currentForm && currentForm !== formMobile) {
+            currentForm.removeEventListener("submit", handleFormSubmit);
+        }
+        if (formMobile) {
+            formMobile.addEventListener("submit", handleFormSubmit);
+            currentForm = formMobile;
+        }
+    }
+}
+
+function handleFormSubmit(event) {
+    event.preventDefault();
+    console.log('Form submitted');
+
+    const logData = {
+        username: document.getElementById("username")?.value || document.getElementById("username-sm")?.value,
+        password: document.getElementById("password")?.value || document.getElementById("password-sm")?.value,
+    };
+
+    console.log('Form data:', logData);
+
+    fetch('https://localhost/api/auth/signin/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify(logData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(err => { throw new Error('Erreur de connexion') });
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Réponse du backend:', data);
+        
+        localStorage.setItem('accessToken', data.access);
+        localStorage.setItem('refreshToken', data.refresh);
+
+        console.log('Redirecting to dashboard from login...');
+        window.location.href = '#/dashboard';
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        alert('Nom d utilisateur ou mot de passe incorrect');
+    });
+}
+
