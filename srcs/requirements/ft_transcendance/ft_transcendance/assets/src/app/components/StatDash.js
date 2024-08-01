@@ -173,18 +173,15 @@ const DashStat = () => {
         });
 
         let percentage = 0;
-        let color = "#63aa63";
+        let color = "#b26969";
         let message = '';
         if (userData.played_games !== 0) {
-            percentage = ((userData.played_games - userData.won_games) * 100) / userData.played_games;
+            percentage = ((userData.played_games - userData.won_games) * 99.9999) / userData.played_games;
         } else {
             message = "aucune partie jouée";
         }
-
-        console.log("color: ", color);
-
+        
         setupCamembertAnimation(form, percentage, color, message);
-
         window.addEventListener('resize', () => {
             setupCamembertAnimation(form, percentage, color, message);
         });

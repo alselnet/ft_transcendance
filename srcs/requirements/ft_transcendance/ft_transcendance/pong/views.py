@@ -10,7 +10,7 @@ pong_game = PongGame(ball_speed, player_speed)
 
 class LocalGameInitView(APIView):
     def get(self, request, room_name):
-        pong_game.reset_game()
+        pong_game.view_init()
         return Response({'message': f'Local game {room_name} initialized'}, status=status.HTTP_200_OK)
 
 class LocalPlayerMoveView(APIView):
@@ -37,7 +37,7 @@ class LocalGameStateView(APIView):
 
 class LocalStartBallView(APIView):
     def post(self, request, room_name):
-        pong_game.start_ball_movement()
+        pong_game.start_ball()
         return Response({'message': 'Ball movement started'}, status=status.HTTP_200_OK)
 
 def pong_game_view(request):
