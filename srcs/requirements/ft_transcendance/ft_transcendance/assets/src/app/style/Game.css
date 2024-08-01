@@ -1,55 +1,18 @@
-.frame-game-container {
-    position: relative;
+.game-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: 100vh;
-    margin: 0;
-}
-
-.frame-game {
-    margin-left: 2vw;
-    width: 90vw;
-    height: 93vh;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 0.2);
+    overflow: hidden;
     position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.title-game {
-    color: white;
-    text-align: center;
-    text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
-    margin-top: 10px;
-    font-size: 30px;
-}
-
-.frame-game-sm {
-    margin-left: 2vw;
-    width: 96vw;
-    height: 82vh;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 0.2);
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.title-game-sm {
-    color: white;
-    text-align: center;
-    text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
-    margin-top: 10px;
-    font-size: 30px;
 }
 
 .score-container {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
-    font-size: 24px;
+    padding: 2vw;
+    font-size: 2vw;
     color: white;
     position: absolute;
     top: 0;
@@ -57,20 +20,44 @@
     text-align: center;
 }
 
-#score-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 24px;
-    color: white;
-}
-
-#score-player1,
-#score-player2 {
+.score-player {
     flex: 1;
     text-align: center;
+    font-size: 2vw;
+}
+
+.game-canvas {
+    width: 75vw;
+    height: 75vh;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.game-button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 1vw;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1vw;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.tournoi-buttons {
+    margin-top: 11.25vh;
+}
+
+.hidden {
+    display: none;
 }

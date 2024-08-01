@@ -1,7 +1,7 @@
 PYTHON := python3
 PIP := pip3
 DOCKER_COMPOSE := docker compose
-VOLUMES_PATH := /Users/alexandreselnet/Coding/
+VOLUMES_PATH := /home/t/Documents/
 
 all: up
 

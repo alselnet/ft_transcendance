@@ -12,10 +12,10 @@ const Game = async () => {
     `   
         <div class="game-container" id="game-container">
             <div class="score-container">
-                <span id="score-player1">Player 1: 0</span>
-                <span id="score-player2">Player 2: 0</span>
+                <span id="score-player1" class="score-player">Player 1: 0</span>
+                <span id="score-player2" class="score-player">Player 2: 0</span>
             </div>
-            <canvas id="game-canvas" width="1200" height="700"></canvas>
+            <canvas id="game-canvas" class="game-canvas"></canvas>
         <div class="button-container" id="initial-buttons">
             <button class="game-button" id="local-mode">Local</button>
             <button class="game-button" id="tournoi-mode">Tournoi</button>
@@ -24,25 +24,25 @@ const Game = async () => {
             <div>
                 <label for="ball-speed">Ball Speed:</label>
                 <select id="ball-speed">
-                    <option value="15">Slow</option>
-                    <option value="20">Normal</option>
-                    <option value="25">Fast</option>
+                    <option value="15" class="value">Slow</option>
+                    <option value="20" class="value">Normal</option>
+                    <option value="25" class="value">Fast</option>
                 </select>
             </div>
             <div>
                 <label for="paddle-speed">Paddle Speed:</label>
                 <select id="paddle-speed">
-                    <option value="5">Slow</option>
-                    <option value="7">Normal</option>
-                    <option value="10">Fast</option>
+                    <option value="5" class="value">Slow</option>
+                    <option value="7" class="value">Normal</option>
+                    <option value="10" class="value">Fast</option>
                 </select>
             </div>
             <div>
                 <label for="background-color">Background Color:</label>
                 <select id="background-color">
-                    <option value="black">Black</option>
-                    <option value="blue">Blue</option>
-                    <option value="green">Green</option>
+                    <option value="black" class="value">Black</option>
+                    <option value="blue" class="value">Blue</option>
+                    <option value="green" class="value">Green</option>
                 </select>
             </div>
             <button class="game-button" id="start-game-btn">Start Game</button>
@@ -120,11 +120,19 @@ const Game = async () => {
         function drawInitialGame() {
 
             // Initialiser Three.js
+            // scene = new THREE.Scene();
+            // camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            // renderer = new THREE.WebGLRenderer({ canvas: canvas });
+            // renderer.setSize(window.innerWidth, window.innerHeight);
+            // renderer.setClearColor(0x4790c5);
+            
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 0, 100);
             renderer = new THREE.WebGLRenderer({ canvas: canvas });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setClearColor(0x4790c5);
+
 
             // Lumière ambiante
             const ambientLight = new THREE.AmbientLight(0xffffff, 0.2); // Couleur blanche, faible intensité
@@ -578,6 +586,26 @@ const Game = async () => {
                 }
             }
         });
+        
+        window.addEventListener('resize', () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            canvas.width = width;
+            canvas.height = height;
+            
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            
+            renderer.render(scene, camera);
+        });
+
+        window.addEventListener('unload', () => {
+            document.removeEventListener('keydown', handleKeys);
+            document.removeEventListener('keyup', handleKeys);
+        });
+        
     }
 };  
 
