@@ -71,14 +71,12 @@ const Game = async () => {
         }
         
         let player1Y, player2Y, ballX, ballY, socket, keys, playerNames, renderer, scene, camera, paddle1, paddle2, ball, tableWidth, tableHeight, scorePlayer1, scorePlayer2;
-        // let scorePlayer1Text, scorePlayer2Text, font;
         let Player1_name;
         const delay = 200;
         let gameEnd = false
 
         initializeGameVariables();
         showInitialMenu();
-        // loadFontAndStart();
 
         async function initializeGameVariables() {
             player1Y = 0;
@@ -90,22 +88,21 @@ const Game = async () => {
             playerNames = [];
             scorePlayer1 = 0;
             scorePlayer2 = 0;
-            const response = await get('https://localhost/api/users/me/')
-            const result = await response.json();
-            console.log(result);
-            Player1_name = result.username;
-            console.log(Player1_name)
-
+            try {
+                const response = await get('https://localhost/api/users/me/')
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const result = await response.json();
+                console.log(result);
+                Player1_name = result.username;
+                console.log(Player1_name)
+            } catch (error) {
+                console.error('Fetch error:', error);
+                Player1_name = 'Unknown Player';
+            }
             updateScores(scorePlayer1, scorePlayer2)
         }
-
-        // function loadFontAndStart() {
-        //     const fontLoader = new FontLoader();
-        //     fontLoader.load('../../fonts/Julius_Sans_One/helvetiker_regular.typeface.json', function (loadedFont) {
-        //         font = loadedFont; // Assigner la police chargée
-        //         showInitialMenu();
-        //     });
-        // }
 
         function hideAll() {
             initialButtons.classList.add("hidden");
@@ -121,11 +118,6 @@ const Game = async () => {
         }
 
         function drawInitialGame() {
-            console.log("Dans init game")
-            // if (!font) {
-            //     console.error("Font not loaded yet");
-            //     return;
-            // }
 
             // Initialiser Three.js
             scene = new THREE.Scene();
@@ -305,8 +297,7 @@ const Game = async () => {
             }
 
             alert(`Tournament Winner: ${participants[0]}`);
-            hideAll();
-            showInitialMenu();
+            location.reload();
         }
 
         function connectWebSocket(roomName, ballSpeed, paddleSpeed) {
@@ -334,7 +325,6 @@ const Game = async () => {
                 const data = JSON.parse(event.data);
                 if (data.type === 'game_state') {
                     updateGame(data);
-                    // updateScores(state.score_player1, state.score_player2)
                 } else if (data.type === 'start_game') {
                     console.log('The game has started!');
                 } else if (data.type === 'game_over') {
@@ -385,10 +375,7 @@ const Game = async () => {
 
                     closeSocketWithDelay(500)
 
-                    hideAll();
-                    // initializeGameVariables();
-
-                    showInitialMenu()
+                    location.reload();
                 }
             };
 
@@ -441,7 +428,6 @@ const Game = async () => {
                     const data = JSON.parse(event.data);
                     if (data.type === 'game_state') {
                         updateGameTournoi(data, player1_name, player2_name);
-                        // updateScores(state.score_player1, state.score_player2)
                     } else if (data.type === 'start_game') {
                         console.log('The game has started!');
                     } else if (data.type === 'game_over') {
@@ -525,13 +511,11 @@ const Game = async () => {
         }
 
         function updateScores(score1, score2) {
-            // Mettre à jour les scores
             document.getElementById('score-player1').textContent = `${Player1_name}: ${score1}`;
             document.getElementById('score-player2').textContent = `Invité: ${score2}`;
         }
 
         function updateScoresTournoi(score1, score2, player1_tournoi_name, player2_tournoi_name) {
-            // Mettre à jour les scores
             document.getElementById('score-player1').textContent = `${player1_tournoi_name}: ${score1}`;
             document.getElementById('score-player2').textContent = `${player2_tournoi_name}: ${score2}`;
         }

@@ -3,7 +3,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .game_logic import PongGame
-from .models import Game
 
 ball_speed = 20
 player_speed = 7
@@ -43,11 +42,3 @@ class LocalStartBallView(APIView):
 
 def pong_game_view(request):
     return render(request, 'srcs/ft_transcendance/ft_transcendance/assets/src/app/pages/Game.js')
-
-def save_game_result(room_name, winner):
-    Game.objects.create(
-        room_name=room_name,
-        player1_score=pong_game.score_player1,
-        player2_score=pong_game.score_player2,
-        winner=winner
-    )
