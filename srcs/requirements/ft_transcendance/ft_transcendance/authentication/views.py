@@ -18,7 +18,7 @@ from rest_framework.views import APIView
 from ft_transcendance.settings import EMAIL_HOST_USER
 from users.models import Profile, GameSummary
 from .utils import generate_token, verify_token, resize_image, crop_to_square
-from .serializers import UserRegistrationSerializer, Update2FAStatusSerializer
+from .serializers import UserRegistrationSerializer, Update2FAStatusSerializer, DeleteUserSerializer
 from io import BytesIO
 from PIL import Image
 
@@ -49,13 +49,17 @@ class UserDeletionView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def delete(self, request):
-        password = request.data.get('password')
-        
-        if not password:
-            return Response({"error": "Password is required"}, status=status.HTTP_400_BAD_REQUEST)
+    logger.info("Deleting Account\n")
 
+    def delete(self, request):
+        serializer = DeleteUserSerializer(data=request.data)
+        
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        password = serializer.validated_data.get('password')
         user = authenticate(username=request.user.username, password=password)
+
         if not user:
             return Response({"error": "Invalid password"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -67,7 +71,7 @@ class UserDeletionView(APIView):
                 loser_exists = True if game.loser and User.objects.filter(username=game.loser.username).exists() else False
                 
                 if not winner_exists or not loser_exists:
-                     game.delete()
+                    game.delete()
 
             user.delete()
             return Response({"message": "User and related game summaries deleted successfully"}, status=status.HTTP_200_OK)

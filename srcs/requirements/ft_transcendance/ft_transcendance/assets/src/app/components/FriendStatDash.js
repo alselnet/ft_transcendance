@@ -100,16 +100,16 @@ const FriendDashStat = () => {
 
 
             let percentage = 0;
-            let color = "#63aa63";
+            let color = "#b26969";
             let message = '';
             if (userData.played_games !== 0) {
-                percentage = ((userData.played_games - userData.won_games) * 100) / userData.played_games;
+                percentage = ((userData.played_games - userData.won_games) * 99.9999) / userData.played_games;
             } else {
-                color = "#fef86c";
                 message = "aucune partie jouée";
             }
+            
             setupCamembertAnimation(form, percentage, color, message);
-
+ 
             window.addEventListener('resize', () => {
                 setupCamembertAnimation(form, percentage, color, message);
             });
