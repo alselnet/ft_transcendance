@@ -150,7 +150,7 @@ class Callback(APIView):
             avatar_url = user_info['image']['versions']['small']
             logger.info("Link de l'intra 42: %s", avatar_url)
             
-            user, created = User.objects.get_or_create(email=email)
+            user, created = User.objects.get_or_create(username=username)
             
             if not created:
                 user.email = email
