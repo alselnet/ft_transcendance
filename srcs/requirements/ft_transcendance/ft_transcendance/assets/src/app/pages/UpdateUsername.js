@@ -1,50 +1,50 @@
+import { put } from "../services/Api.js";
 
-// const updateUsername = (newUsername) => {
-//     console.log("Update Username");
-//     put('https://localhost/api/users/update-username/', { username: newUsername })
-//         .then(response => {
-//             if (response.ok) {
-//                 return response.json().then(updateData => {
-//                     document.querySelector('#username-display').textContent = updateData.username;
-//                     alert('Username updated successfully');
-//                 });
-//             } else {
-//                 return response.json().then(errorData => {
-//                     alert(`Error: ${errorData.error || 'Failed to update username'}`);
-//                 });
-//             }
-//         })
-//         .catch(error => {
-//             console.error('Error updating username:', error);
-//             alert('An error occurred while updating the username');
-//         });
-// };
+const UpdateUsername = async () => {
+    let section = document.querySelector("#section");
 
+    section.innerHTML = `
+        <div class="container-update-data">
+            <div class="update-data-form">
+                <h1 class="title-update-data">Modifier le Nom d'Utilisateur</h1>
+                <input type="text" id="new-data" placeholder="Nouveau nom d'utilisateur" required>
+                <input type="password" id="password" placeholder="Mot de passe" required>
+                <button class="button-update-data" id="submit-update-username">Mettre à jour</button>
+                <button class="button-update-data" id="cancel-update-username">Annuler</button>
+            </div>
+        </div>
+    `;
 
-// export const UpdateUsername = (appDiv) => {
-// 	appDiv.innerHTML = `
-//         <div class="container">
-//             <h1>Modifier Nom d'Utilisateur</h1>
-//             <form id="username-form">
-//                 <div class="mb-3">
-//                     <label for="new-username" class="form-label">Nouveau Nom d'Utilisateur</label>
-//                     <input type="text" class="form-control" id="new-username" required>
-//                 </div>
-//                 <button type="submit" class="btn btn-primary">Enregistrer</button>
-//             </form>
-//         </div>
-//     `;
+    document.getElementById('submit-update-username').addEventListener('click', async () => {
+        const newUsername = document.getElementById('new-data').value;
+        const password = document.getElementById('password').value;
 
-// 	document.getElementById('username-form').addEventListener('submit', async (event) => {
-//         event.preventDefault();
-//         const newUsername = document.getElementById('new-username').value;
-//         try {
-//             await updateUsername(newUsername);
-//             alert('Nom d\'utilisateur mis à jour avec succès');
-//             window.location.hash = '#/settings';
-//         } catch (error) {
-//             console.error('Error updating username:', error);
-//             alert('Une erreur est survenue lors de la mise à jour du nom d\'utilisateur');
-//         }
-//     });
-// };
+        if (newUsername && password) {
+            try {
+                const response = await put('https://localhost/api/users/update-username/', { username: newUsername, password: password });
+
+                if (response.ok) {
+                    const updateData = await response.json();
+                    alert('Username updated successfully');
+					window.location.hash = '#/settings';
+                } else {
+                    const errorData = await response.json();
+                    alert(`Error: ${errorData.error || 'Failed to update username'}`);
+                }
+            } catch (error) {
+                console.error('Error updating username:', error);
+                alert('An error occurred while updating the username');
+            }
+        } else {
+            alert('Please enter both username and password');
+        }
+    });
+
+    document.getElementById('cancel-update-username').addEventListener('click', () => {
+        window.location.hash = '#/settings';
+    });
+
+    return section;
+};
+
+export { UpdateUsername };

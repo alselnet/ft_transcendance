@@ -35,6 +35,7 @@ class EmailUpdateSerializer(serializers.Serializer):
 
     def validate(self, data):
         password = data.get('password')
+        email = data.get('email')
         user = self.context['request'].user
         if not user.check_password(password):
             raise serializers.ValidationError({'password': 'Password is incorrect.'})
@@ -54,6 +55,7 @@ class UsernameUpdateSerializer(serializers.Serializer):
 
     def validate(self, data):
         password = data.get('password')
+        username = data.get('username')
         user = self.context['request'].user
         if not user.check_password(password):
             raise serializers.ValidationError({'password': 'Password is incorrect.'})

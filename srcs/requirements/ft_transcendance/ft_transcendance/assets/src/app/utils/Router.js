@@ -13,6 +13,8 @@ import { PublicGameHistory } from "../components/PublicGameHistory.js";
 import { TwoFactorAuth } from "../components/2FA.js"
 import { LogOutMsg } from "../components/LogOutMsg.js";
 import { CharteMsg } from "../components/CharteMsg.js";
+import { UpdateUsername } from "../pages/UpdateUsername.js";
+import { UpdateEmail } from "../pages/UpdateEmail.js";
 import { post } from "../services/Api.js"
 
 const exactMatches = ['#/game', '#/dashboard', '#/settings', '#/aboutus', '#/chartemsg', '#/friendlist', '#/gamehistory'];
@@ -68,6 +70,10 @@ export const Router = async () => {
         LogOutMsg();
     } else if (hash === "#/chartemsg") {
         CharteMsg();
+    } else if (hash === "#/update-username") {
+        UpdateUsername();
+    } else if (hash === "#/update-email") {
+        UpdateEmail();
     } else if (hash.startsWith("#/friendprofile/")) {
         FriendProfile();
     } else {

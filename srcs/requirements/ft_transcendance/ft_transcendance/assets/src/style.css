@@ -12,6 +12,8 @@
 @import url('./app/style/CanvaGame.css');
 @import url('./app/style/AboutUs.css');
 @import url('./app/style/CharteMsg.css');
+@import url('./app/style/UpdateUsername.css');
+
 
 @font-face {
     font-family: 'JuliusSansOne';

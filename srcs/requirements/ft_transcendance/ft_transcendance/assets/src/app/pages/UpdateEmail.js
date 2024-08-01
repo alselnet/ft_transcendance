@@ -1,50 +1,50 @@
+import { put } from "../services/Api.js";
 
-// const updateEmail = (newEmail) => {
-//     console.log("Update Email");
-//     put('https://localhost/api/users/update-email/', { email: newEmail })
-//         .then(response => {
-//             if (response.ok) {
-//                 return response.json().then(updateData => {
-//                     document.querySelector('#email-display').textContent = updateData.email;
-//                     alert('Email updated successfully');
-//                 });
-//             } else {
-//                 return response.json().then(errorData => {
-//                     alert(`Error: ${errorData.error || 'Failed to update email'}`);
-//                 });
-//             }
-//         })
-//         .catch(error => {
-//             console.error('Error updating email:', error);
-//             alert('An error occurred while updating the email');
-//         });
-// };
+const UpdateEmail = async () => {
+    let section = document.querySelector("#section");
 
+    section.innerHTML = `
+        <div class="container-update-data">
+            <div class="update-data-form">
+                <h1 class="title-update-data">Modifier le Nom d'Utilisateur</h1>
+                <input type="text" id="new-data" placeholder="Nouvelle adresse mail" required>
+                <input type="password" id="password" placeholder="Mot de passe" required>
+                <button class="button-update-data" id="submit-update-email">Mettre à jour</button>
+                <button class="button-update-data" id="cancel-update-email">Annuler</button>
+            </div>
+        </div>
+    `;
 
-// export const UpdateEmail = (appDiv) => {
-// 	appDiv.innerHTML = `
-//         <div class="container">
-//             <h1>Modifier Adresse Mail</h1>
-//             <form id="email-form">
-//                 <div class="mb-3">
-//                     <label for="new-email" class="form-label">Nouvelle Adresse Email</label>
-//                     <input type="text" class="form-control" id="new-email" required>
-//                 </div>
-//                 <button type="submit" class="btn btn-primary">Enregistrer</button>
-//             </form>
-//         </div>
-//     `;
+    document.getElementById('submit-update-email').addEventListener('click', async () => {
+        const newEmail = document.getElementById('new-data').value;
+        const password = document.getElementById('password').value;
 
-// 	document.getElementById('email-form').addEventListener('submit', async (event) => {
-//         event.preventDefault();
-//         const newEmail = document.getElementById('new-email').value;
-//         try {
-//             await updateEmail(newEmail);
-//             alert('Adresse Mail mise à jour avec succès');
-//             window.location.hash = '#/settings';
-//         } catch (error) {
-//             console.error('Error updating email:', error);
-//             alert('Une erreur est survenue lors de la mise à jour de l\'adresse mail');
-//         }
-//     });
-// };
+        if (newEmail && password) {
+            try {
+                const response = await put('https://localhost/api/users/update-email/', { email: newEmail, password: password });
+
+                if (response.ok) {
+                    const updateData = await response.json();
+                    alert('Email updated successfully');
+					window.location.hash = '#/settings';
+                } else {
+                    const errorData = await response.json();
+                    alert(`Error: ${errorData.error || 'Failed to update email'}`);
+                }
+            } catch (error) {
+                console.error('Error updating email:', error);
+                alert('An error occurred while updating the email');
+            }
+        } else {
+            alert('Please enter both email and password');
+        }
+    });
+
+    document.getElementById('cancel-update-email').addEventListener('click', () => {
+        window.location.hash = '#/settings';
+    });
+
+    return section;
+};
+
+export { UpdateEmail };

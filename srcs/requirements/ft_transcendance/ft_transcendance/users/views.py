@@ -201,12 +201,12 @@ class UpdateEmailView(APIView):
         
         serializer = EmailUpdateSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
-            serializer.save()
+            serializer.validated_data['email']
+            serializer.update(user, serializer.validated_data)
             profile.mail_confirmation_status = False
             if profile.two_fa_method == "email":
                 profile.two_fa_method = "none"
             profile.save()
-            serializer.update(user, serializer.validated_data)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

@@ -77,49 +77,49 @@ const update2FAActiveClass = (method) => {
     document.querySelector(`#tfa-${method}`).classList.add('active-2fa');
 };
 
-const updateUsername = (newUsername) => {
-    console.log("Update Username");
-    put('https://localhost/api/users/update-username/', { username: newUsername })
-        .then(response => {
-            if (response.ok) {
-                return response.json().then(updateData => {
-                    document.querySelector('#username-display').textContent = updateData.username;
-                    alert('Username updated successfully');
-                    window.location.reload();
-                });
-            } else {
-                return response.json().then(errorData => {
-                    alert(`Error: ${errorData.error || 'Failed to update username'}`);
-                });
-            }
-        })
-        .catch(error => {
-            console.error('Error updating username:', error);
-            alert('An error occurred while updating the username');
-        });
-};
+// const updateUsername = (newUsername) => {
+//     console.log("Update Username");
+//     put('https://localhost/api/users/update-username/', { username: newUsername })
+//         .then(response => {
+//             if (response.ok) {
+//                 return response.json().then(updateData => {
+//                     document.querySelector('#username-display').textContent = updateData.username;
+//                     alert('Username updated successfully');
+//                     window.location.reload();
+//                 });
+//             } else {
+//                 return response.json().then(errorData => {
+//                     alert(`Error: ${errorData.error || 'Failed to update username'}`);
+//                 });
+//             }
+//         })
+//         .catch(error => {
+//             console.error('Error updating username:', error);
+//             alert('An error occurred while updating the username');
+//         });
+// };
 
-const updateEmail = (newEmail) => {
-    console.log("Update Email");
-    put('https://localhost/api/users/update-email/', { email: newEmail })
-        .then(response => {
-            if (response.ok) {
-                return response.json().then(updateData => {
-                    document.querySelector('#email-display').textContent = updateData.email;
-                    alert('Email updated successfully');
-                    window.location.reload();
-                });
-            } else {
-                return response.json().then(errorData => {
-                    alert(`Error: ${errorData.error || 'Failed to update email'}`);
-                });
-            }
-        })
-        .catch(error => {
-            console.error('Error updating email:', error);
-            alert('An error occurred while updating the email');
-        });
-};
+// const updateEmail = (newEmail) => {
+//     console.log("Update Email");
+//     put('https://localhost/api/users/update-email/', { email: newEmail })
+//         .then(response => {
+//             if (response.ok) {
+//                 return response.json().then(updateData => {
+//                     document.querySelector('#email-display').textContent = updateData.email;
+//                     alert('Email updated successfully');
+//                     window.location.reload();
+//                 });
+//             } else {
+//                 return response.json().then(errorData => {
+//                     alert(`Error: ${errorData.error || 'Failed to update email'}`);
+//                 });
+//             }
+//         })
+//         .catch(error => {
+//             console.error('Error updating email:', error);
+//             alert('An error occurred while updating the email');
+//         });
+// };
 
 const deleteAccount = () => {
     if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
@@ -178,12 +178,12 @@ const Settings = async () => {
                         <input type="file" id="avatar-input" style="display: none;" accept="image/*">
                     </div>
                     <div class="modif-username">
-                        <p id="username-display">${userData.username}</p>
-                        <button type="button" id="edit-username" class="btn btn-light">modifier username</button>
+                        <p>${userData.username}</p>
+                        <button href="#/update-username" type="button" class="btn btn-light" id="edit-username">modifier username</button>
                     </div>
                     <div class="modif-username">
-                        <p id="email-display">${userData.email}</p>
-                        <button type="button" id="edit-email" class="btn btn-light">modifier adresse mail</button>
+                        <p>${userData.email}</p>
+                        <button href="#/update-username" type="button" id="edit-email" class="btn btn-light">modifier adresse mail</button>
                     </div>
                     <div class="modif-username">
                         <p>********</p>
@@ -227,7 +227,7 @@ const Settings = async () => {
                         </button>
                     </div>
 
-                    <a class="nav-link" href="#/confidentalite">         
+                    <a class="nav-link" href="#/confidentalite">  
                         <div class="settings-footer" id="list-stat">
                             <i class="bi bi-file-earmark-lock settings-footer-icon"></i>
                             <p class="settings-footer-text">Charte de confidentialite</p>
@@ -254,18 +254,26 @@ const Settings = async () => {
         });
         
         section.querySelector('#edit-username').addEventListener('click', (event) => {
-            const newUsername = prompt(`Entrez le nouveau nom d'utilisateur :`, userData.username);
-            if (newUsername && newUsername !== userData.username) {
-                updateUsername(newUsername);
-            }
+            window.location.hash = '#/update-username';
         });
 
-		section.querySelector('#edit-email').addEventListener('click', (event) => {
-            const newEmail = prompt(`Entrez la nouvelle adresse mail :`, userData.email);
-            if (newEmail && newEmail !== userData.email) {
-                updateEmail(newEmail);
-            }
+        section.querySelector('#edit-email').addEventListener('click', (event) => {
+            window.location.hash = '#/update-email';
         });
+
+        // section.querySelector('#edit-username').addEventListener('click', (event) => {
+        //     const newUsername = prompt(`Entrez le nouveau nom d'utilisateur :`, userData.username);
+        //     if (newUsername && newUsername !== userData.username) {
+        //         updateUsername(newUsername);
+        //     }
+        // });
+
+		// section.querySelector('#edit-email').addEventListener('click', (event) => {
+        //     const newEmail = prompt(`Entrez la nouvelle adresse mail :`, userData.email);
+        //     if (newEmail && newEmail !== userData.email) {
+        //         updateEmail(newEmail);
+        //     }
+        // });
         
 		section.querySelector('#tfa-none').addEventListener('click', () => {
             update2FA('none');
@@ -285,10 +293,13 @@ const Settings = async () => {
         
         update2FAActiveClass(userData.two_fa_method);
 
-        section.querySelector('#resend-verification-email').addEventListener('click', (event) => {
-            event.preventDefault();
-            sendConfirmationEmail(userData.email);
-        });
+        if (userData.mail_confirmation_status == false)
+        {
+            section.querySelector('#resend-verification-email').addEventListener('click', (event) => {
+                event.preventDefault();
+                sendConfirmationEmail(userData.email);
+            });
+        }
     })
     .catch(error => {
         console.error('Error fetching user profile:', error);
