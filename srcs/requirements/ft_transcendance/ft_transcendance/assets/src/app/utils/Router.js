@@ -15,6 +15,7 @@ import { LogOutMsg } from "../components/LogOutMsg.js";
 import { CharteMsg } from "../components/CharteMsg.js";
 import { UpdateUsername } from "../pages/UpdateUsername.js";
 import { UpdateEmail } from "../pages/UpdateEmail.js";
+import { UpdatePassword } from "../pages/UpdatePassword.js";
 import { post } from "../services/Api.js"
 
 const exactMatches = ['#/game', '#/dashboard', '#/settings', '#/aboutus', '#/chartemsg', '#/friendlist', '#/gamehistory'];
@@ -74,6 +75,8 @@ export const Router = async () => {
         UpdateUsername();
     } else if (hash === "#/update-email") {
         UpdateEmail();
+    } else if (hash === "#/update-password") {
+        UpdatePassword();
     } else if (hash.startsWith("#/friendprofile/")) {
         FriendProfile();
     } else {

@@ -232,10 +232,14 @@ class UpdatePasswordView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
+    logger.info("AAAAA Here\n")
+
     def put(self, request):
+        logger.info("DDDDDDDDDDDDDDDDDDDDDDDDDDDD\n")
+        print("Request data:", request.data)  # Debugging line
         user = request.user
         profile = request.user.profile
-        if profile.fortytwo_account is True:
+        if profile.fortytwo_account:
             return Response({'error': '42 accounts data can only be edited on intra.42.fr'}, status=status.HTTP_401_UNAUTHORIZED)
 
         serializer = PasswordUpdateSerializer(user, data=request.data, context={'request': request}, partial=True)

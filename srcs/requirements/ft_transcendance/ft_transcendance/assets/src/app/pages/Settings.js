@@ -183,11 +183,11 @@ const Settings = async () => {
                     </div>
                     <div class="modif-username">
                         <p>${userData.email}</p>
-                        <button href="#/update-username" type="button" id="edit-email" class="btn btn-light">modifier adresse mail</button>
+                        <button href="#/update-email" type="button" class="btn btn-light" id="edit-email">modifier adresse mail</button>
                     </div>
                     <div class="modif-username">
                         <p>********</p>
-                        <button type="button" class="btn btn-light">modifier mot de passe</button>
+                        <button href="#/update-password" type="button" class="btn btn-light" id="edit-password">modifier mot de passe</button>
                     </div>
 
                     <div class="dropdown">
@@ -261,19 +261,9 @@ const Settings = async () => {
             window.location.hash = '#/update-email';
         });
 
-        // section.querySelector('#edit-username').addEventListener('click', (event) => {
-        //     const newUsername = prompt(`Entrez le nouveau nom d'utilisateur :`, userData.username);
-        //     if (newUsername && newUsername !== userData.username) {
-        //         updateUsername(newUsername);
-        //     }
-        // });
-
-		// section.querySelector('#edit-email').addEventListener('click', (event) => {
-        //     const newEmail = prompt(`Entrez la nouvelle adresse mail :`, userData.email);
-        //     if (newEmail && newEmail !== userData.email) {
-        //         updateEmail(newEmail);
-        //     }
-        // });
+        section.querySelector('#edit-password').addEventListener('click', (event) => {
+            window.location.hash = '#/update-password';
+        });
         
 		section.querySelector('#tfa-none').addEventListener('click', () => {
             update2FA('none');
