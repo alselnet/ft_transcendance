@@ -87,12 +87,23 @@ export const put = async (url, data, options = {}) => {
     return fetch(url, options);
 };
 
-export const del = async (url, options = {}) => {
+export const del = async (url, data = {}) => {
     const isAuthenticated = await checkAuth();
     if (!isAuthenticated) {
         throw new Error('User is not authenticated');
     }
-    options.method = 'DELETE';
-    options.headers = { ...getHeaders(), ...options.headers };
-    return fetch(url, options);
+    const options = {
+        method: 'DELETE',
+        headers: {
+            ...getHeaders()
+        },
+        body: JSON.stringify(data)
+    };
+    try {
+        const response = await fetch(url, options);
+        return response;
+    } catch (error) {
+        console.error('Error with DELETE request:', error);
+        throw error;
+    }
 };

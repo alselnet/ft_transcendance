@@ -34,3 +34,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
 class Update2FAStatusSerializer(serializers.Serializer):
     method = serializers.ChoiceField(choices=[('none', 'None'), ('email', 'Email'), ('authenticator', 'Authenticator')])
+
+
+class DeleteUserSerializer(serializers.Serializer):
+    password = serializers.CharField(write_only=True, required=True)

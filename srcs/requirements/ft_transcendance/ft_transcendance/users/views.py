@@ -232,11 +232,9 @@ class UpdatePasswordView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
-    logger.info("AAAAA Here\n")
+    logger.info("Updating Password\n")
 
     def put(self, request):
-        logger.info("DDDDDDDDDDDDDDDDDDDDDDDDDDDD\n")
-        print("Request data:", request.data)  # Debugging line
         user = request.user
         profile = request.user.profile
         if profile.fortytwo_account:
