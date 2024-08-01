@@ -13,6 +13,20 @@ class PongGame:
         self.ball_speed = ball_speed / 2
         self.reset_game()
 
+    def view_init(self):
+        self.player1_y_position = 0
+        self.player2_y_position = 0
+        self.score_player1 = 0
+        self.score_player2 = 0
+        self.ball_x_speed = 0
+        self.ball_y_speed = 0
+        self.ball_x_position = 0
+        self.ball_y_position = 0
+        self.ball_waiting = False
+        self.waiting_player = None
+        self.game_over = False
+        self.winner = None
+
     def reset_game(self):
         self.player1_y_position = 0
         self.player2_y_position = 0
