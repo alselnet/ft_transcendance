@@ -172,16 +172,16 @@ const DashStat = () => {
             }
         });
 
-
         let percentage = 0;
         let color = "#63aa63";
         let message = '';
         if (userData.played_games !== 0) {
             percentage = ((userData.played_games - userData.won_games) * 100) / userData.played_games;
         } else {
-            color = "#fef86c";
             message = "aucune partie jouée";
         }
+
+        console.log("color: ", color);
 
         setupCamembertAnimation(form, percentage, color, message);
 
