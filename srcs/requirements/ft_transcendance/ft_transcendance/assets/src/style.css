@@ -29,6 +29,18 @@
     src: url( './app/fonts/Press_Start_2P/PressStart2P-Regular.ttf');
 }
 
+.bg-nagoya {
+    background-image: url('./app/images/background.png');
+}
+
+.bg-roland {
+    background-image: url('./app/images/backgroundOrange.png');
+}
+
+.bg-wimbledon {
+    background-image: url('./app/images/backgroundGreen.png');
+}
+
 body {
     font-family: 'JuliusSansOne', sans-serif;
     margin: 0;
@@ -37,3 +49,5 @@ body {
     height: 100vh;
     overflow: hidden;
 }
+
+
