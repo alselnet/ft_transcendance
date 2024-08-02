@@ -17,6 +17,7 @@ up:
 
 	@echo "Bundling frontend files..."
 	@cd srcs/requirements/ft_transcendance/ft_transcendance/assets/src && npm run build
+	@cp ./srcs/requirements/ft_transcendance/ft_transcendance/assets/src/app/images/favicon.ico ./srcs/requirements/NGINX/html/images/.
 	@echo "Launching docker compose..."
 	@$(DOCKER_COMPOSE) -f srcs/docker-compose.yml up --build
 
