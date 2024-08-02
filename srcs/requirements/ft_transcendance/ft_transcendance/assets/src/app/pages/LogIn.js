@@ -146,7 +146,7 @@ function handleFormSubmit(event) {
 
         console.log('Redirecting to dashboard from login...');
         
-        // Récupérer les données de l'utilisateur
+        // Récupérer user data
         return fetch(`${usersUrl}/me/`, {
             method: 'GET',
             headers: {
@@ -159,9 +159,9 @@ function handleFormSubmit(event) {
     .then(userData => {
         console.log('User data:', userData);
 
-        // Vérifier la méthode 2FA et rediriger si nécessaire
+        // Check 2FA
         if (userData.two_fa_method === 'email') {
-            // Envoyer le code 2FA par email
+
             return fetch(`${authUrl}/generate-2fa-code/`, {
                 method: 'POST',
                 headers: {
@@ -177,6 +177,8 @@ function handleFormSubmit(event) {
                 console.error('Erreur lors de l\'envoi du code 2FA:', error);
                 alert('Erreur lors de l\'envoi du code 2FA. Veuillez réessayer.');
             });
+        } else if (userData.two_fa_method === 'authenticator') {
+            window.location.href = '#/qr-code';
         } else {
             window.location.href = '#/dashboard';
         }

@@ -175,6 +175,8 @@ class UpdateAvatarView(APIView):
     permission_classes = [IsAuthenticated]
     parser_classes = (MultiPartParser, FormParser) # Definit les parseurs utilises -> typiquement pour les DL de fichiers
 
+    logger.info("")
+
     def post(self, request):
         profile = request.user.profile
         if profile.fortytwo_account is True:
@@ -232,7 +234,7 @@ class UpdatePasswordView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
-    logger.info("Updating Password\n")
+    logger.info("")
 
     def put(self, request):
         user = request.user

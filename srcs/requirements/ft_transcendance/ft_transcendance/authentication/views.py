@@ -304,6 +304,7 @@ class Validate2FACodeView(APIView):
             return Response({'error': 'Invalid 2FA code'}, status=status.HTTP_400_BAD_REQUEST)
 
 
+
 class Update2FAStatusView(APIView):
     permission_classes = [IsAuthenticated]
 
