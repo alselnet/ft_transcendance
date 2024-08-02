@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer'); // Uncomment if needed
 
 module.exports = {
@@ -56,11 +56,11 @@ module.exports = {
 		threshold: 10240, // Only assets bigger than this size (in bytes) will be processed
 		minRatio: 0.8, // Only assets that compress better than this ratio will be processed
 	  }),
-	new CopyWebpackPlugin({
-	patterns: [
-		{ from: './src/app/images/favicon.ico', to: 'images/favicon.ico' }
-	]
-	}),
+	// new CopyWebpackPlugin({
+	// patterns: [
+	// 	{ from: './src/app/images/favicon.ico', to: 'images/favicon.ico' }
+	// ]
+	// }),
     // new BundleAnalyzerPlugin(), // Uncomment if needed
   ],
 //   devServer: {
