@@ -262,34 +262,6 @@ const Settings = async () => {
             }
         });
         
-
-        // const changeBackgroundImage = (imageClass) => {
-        //     console.log("ETER CHANGE BGD");
-        //     document.body.classList.remove('bg-nagoya', 'bg-roland', 'bg-wimbledon');
-        //     document.body.classList.add(imageClass);
-        //     localStorage.setItem('backgroundClass', imageClass); 
-        // };
-
-        // const savedBackgroundClass = localStorage.getItem('backgroundClass');
-        // if (savedBackgroundClass) {
-        //     changeBackgroundImage(savedBackgroundClass);
-        // }
-
-        // section.querySelectorAll('.dropdown-menu .dropdown-item').forEach(item => {
-
-        //     console.log("ETER SELECT IMG SECTION");
-
-        //     item.addEventListener('click', (event) => {
-        //         event.preventDefault();
-        //         const imageClass = item.getAttribute('data-bg-class');
-        //         if (imageClass) {
-        //             console.log("ETER CLICK EVENT");
-        //             console.log(imageClass);
-        //             changeBackgroundImage(imageClass);
-        //         }
-        //     });
-        // });
-        
        section.querySelector('#edit-username').addEventListener('click', (event) => {
            window.location.hash = '#/update-username';
        });
