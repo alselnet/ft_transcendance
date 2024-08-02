@@ -1,5 +1,7 @@
 import { getCookie } from '../utils/cookies';
 
+const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
+
 const TwoFactorAuth = async () => {
     let section = document.querySelector("#section");
     if (!section) {
@@ -41,7 +43,7 @@ const TwoFactorAuth = async () => {
         }
 
         try {
-            const response = await fetch('https://localhost/api/auth/validate-2fa-code/', {
+            const response = await fetch(`${authUrl}/validate-2fa-code/`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
@@ -67,7 +69,7 @@ const TwoFactorAuth = async () => {
 
     resendButton.addEventListener('click', async () => {
         try {
-            const response = await fetch('https://localhost/api/auth/generate-2fa-code/', {
+            const response = await fetch(`${authUrl}/generate-2fa-code/`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,

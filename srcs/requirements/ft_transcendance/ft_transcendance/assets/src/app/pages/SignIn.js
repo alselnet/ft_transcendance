@@ -2,6 +2,8 @@ import { getCookie } from '../utils/cookies';
 import { FortyTwoSignIn } from "./42SignIn.js";
 import img42 from '../images/42.png';
 
+const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
+
 export const SignIn = () => {
     let root = document.getElementById("root");
     if (!root) {
@@ -153,7 +155,7 @@ function handleFormSubmit(event) {
         return;
     }
 
-    fetch('https://localhost/api/auth/register/', {
+    fetch(`${authUrl}/register/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -1,11 +1,13 @@
 import { animateNumbers, setupCamembertAnimation } from "../animation/DashboardAnimation.js";
 import { get, put } from "../services/Api.js"
 
+const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
+
 const DashStat = () => {
     let form = document.createElement("div");
     console.log('Creating form element');
 
-    get('https://localhost/api/users/me/')
+    get(`${usersUrl}/me/`)
     .then(response => {
         if (!response.ok) {
             throw new Error('Failed to fetch user profile');
@@ -127,7 +129,7 @@ const DashStat = () => {
         form.querySelectorAll('.dropdown-item').forEach(item => {
             item.addEventListener('click', () => {
                 const newStatus = item.getAttribute('data-status');
-                put('https://localhost/api/users/update-status/', { status: newStatus })
+                put(`${usersUrl}/update-status/`, { status: newStatus })
                 .then(updateResponse => {
                     if (!updateResponse.ok) {
                         throw new Error('Failed to update user status');

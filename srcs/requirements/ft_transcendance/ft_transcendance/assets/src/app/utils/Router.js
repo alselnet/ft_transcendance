@@ -21,6 +21,7 @@ import { post } from "../services/Api.js"
 
 const exactMatches = ['#/game', '#/dashboard', '#/settings', '#/aboutus', '#/chartemsg', '#/friendlist', '#/gamehistory'];
 const prefixMatches = ['#/friendprofile', '#/publicgamehistory'];
+const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
 
 export const Router = async () => {
 	const hash = window.location.hash;
@@ -34,7 +35,7 @@ export const Router = async () => {
 
     if (isExactMatch || isPrefixMatch){
         window.onbeforeunload = function (event) {
-			post('https://localhost/api/auth/signout/');
+			post(`${authUrl}/signout/`);
         };
     } else {
         window.onbeforeunload = null;

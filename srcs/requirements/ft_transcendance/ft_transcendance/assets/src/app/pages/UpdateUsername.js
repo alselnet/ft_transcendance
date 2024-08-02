@@ -1,5 +1,7 @@
 import { put } from "../services/Api.js";
 
+const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
+
 const UpdateUsername = async () => {
     let section = document.querySelector("#section");
 
@@ -21,7 +23,7 @@ const UpdateUsername = async () => {
 
         if (newUsername && password) {
             try {
-                const response = await put('https://localhost/api/users/update-username/', { username: newUsername, password: password });
+                const response = await put(`${usersUrl}/update-username/`, { username: newUsername, password: password });
 
                 if (response.ok) {
                     const updateData = await response.json();

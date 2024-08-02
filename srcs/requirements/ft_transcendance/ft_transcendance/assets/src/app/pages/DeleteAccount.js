@@ -1,5 +1,7 @@
 import { del } from "../services/Api.js";
 
+const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
+
 const DeleteAccount = async () => {
     let section = document.querySelector("#section");
 
@@ -21,7 +23,7 @@ const DeleteAccount = async () => {
         if (password) {
             if (confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')) {
                 try {
-                    const response = await del('https://localhost/api/auth/delete-user/', { password });
+                    const response = await del(`${authUrl}/delete-user/`, { password });
 
                     if (response.ok) {
                         alert('Compte supprimé avec succès');

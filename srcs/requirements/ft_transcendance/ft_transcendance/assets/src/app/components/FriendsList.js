@@ -1,5 +1,7 @@
 import { get, del } from "../services/Api.js";
 
+const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
+
 export const FriendList = async () => {
     let root = document.getElementById("root");
     if (!root) {
@@ -18,7 +20,7 @@ export const FriendList = async () => {
     }
 
     try {
-        const response = await get('https://localhost/api/users/friendlist/');
+        const response = await get(`${usersUrl}/friendlist/`);
         if (!response.ok) {
             throw new Error('Failed to fetch user friendlist');
         }
@@ -71,7 +73,7 @@ export const FriendList = async () => {
             setTimeout(() => {
                 friendsListContainer.classList.add('fl-visible');
                 friendsListContainer.classList.remove('fl-hidden');
-            }, 10);
+            }, 100);
         }
 
         const deleteButtons = document.querySelectorAll('.remove-btnf');
@@ -115,9 +117,8 @@ function getStatusTooltip(status) {
 }
 
 async function deleteFriend(username) {
-    const url = `https://localhost/api/users/unfriend/${username}/`;
     try {
-        const response = await del(url);
+        const response = await del(`${usersUrl}/unfriend/${username}/`);
         if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.detail || 'Failed to remove friend');

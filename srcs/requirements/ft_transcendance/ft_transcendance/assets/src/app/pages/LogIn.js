@@ -2,6 +2,9 @@ import { getCookie } from '../utils/cookies';
 import img42 from '../images/42.png';
 import { FortyTwoSignIn } from "./42SignIn.js";
 
+const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
+const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
+
 export const LogIn = () => {
     let root = document.getElementById("root");
     if (!root) {
@@ -121,7 +124,7 @@ function handleFormSubmit(event) {
 
     console.log('Form data:', logData);
 
-    fetch('https://localhost/api/auth/signin/', {
+    fetch(`${authUrl}/signin/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -144,7 +147,7 @@ function handleFormSubmit(event) {
         console.log('Redirecting to dashboard from login...');
         
         // Récupérer les données de l'utilisateur
-        return fetch('https://localhost/api/users/me/', {
+        return fetch(`${usersUrl}/me/`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${data.access}`,
@@ -159,7 +162,7 @@ function handleFormSubmit(event) {
         // Vérifier la méthode 2FA et rediriger si nécessaire
         if (userData.two_fa_method === 'email') {
             // Envoyer le code 2FA par email
-            return fetch('https://localhost/api/auth/generate-2fa-code/', {
+            return fetch(`${authUrl}/generate-2fa-code/`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,

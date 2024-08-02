@@ -18,7 +18,7 @@ export function showCircle(container, cx, cy, radius, callback) {
        div.style.top = (cy - radius) + 'px';
        console.log('Circle animation started');
        callback(div);
-   }, 10);
+   }, 100);
 }
 
 function showSectorGraph(container, size, percentage, color) {

@@ -1,5 +1,7 @@
 import { get } from "../services/Api.js";
 
+const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
+
 export const GameHistory = async () => {
     let root = document.getElementById("root");
     if (!root) {
@@ -18,7 +20,7 @@ export const GameHistory = async () => {
     }
 
     try {
-        const response = await get('https://localhost/api/users/game-history/');
+        const response = await get(`${usersUrl}/game-history/`);
         if (!response.ok) {
             throw new Error('Failed to fetch game history');
         }
@@ -86,7 +88,7 @@ export const GameHistory = async () => {
                 setTimeout(() => {
                     gameHistoryContainer.classList.add('ga-visible');
                     gameHistoryContainer.classList.remove('ga-hidden');
-                }, 10);
+                }, 100);
             }
 
             

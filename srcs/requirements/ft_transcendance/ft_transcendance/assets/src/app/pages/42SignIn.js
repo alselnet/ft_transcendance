@@ -1,6 +1,9 @@
+const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
+const baseUrl = `${window.location.protocol}//${window.location.host}`
+
 export function FortyTwoSignIn() {
     // Redirect to the backend endpoint which handles the OAuth flow
-    window.location.href = 'https://localhost/api/auth/42login/';
+    window.location.href = `${authUrl}/42login/`;
 }
 
 export function handleCallback() {
@@ -28,7 +31,7 @@ export function handleCallback() {
             alert(message);
         }
 
-        window.location.href = 'https://localhost/#/dashboard';
+        window.location.href = `${baseUrl}/#/dashboard`;
     } else {
         console.log("No tokens found in URL parameters.");
     }

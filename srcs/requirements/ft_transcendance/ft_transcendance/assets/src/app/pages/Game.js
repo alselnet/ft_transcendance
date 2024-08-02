@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import { checkAuth, post, get } from "../services/Api.js"
 
+const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
+
 const Game = async () => {
     const isAuthenticated = await checkAuth();
     if (!isAuthenticated) {
@@ -89,7 +91,7 @@ const Game = async () => {
             scorePlayer1 = 0;
             scorePlayer2 = 0;
             try {
-                const response = await get('https://localhost/api/users/me/')
+                const response = await get(`${usersUrl}/me/`)
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -368,7 +370,7 @@ const Game = async () => {
                     }
                     console.log(fecth_data_history)
                     try {
-                        const response = await post('https://localhost/api/users/game-history/', fecth_data_history);
+                        const response = await post(`${usersUrl}/game-history/`, fecth_data_history);
                 
                         const result = await response.json();
                 

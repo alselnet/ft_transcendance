@@ -1,5 +1,7 @@
 import { put } from "../services/Api.js";
 
+const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
+
 const UpdatePassword = async () => {
     let section = document.querySelector("#section");
 
@@ -24,7 +26,7 @@ const UpdatePassword = async () => {
         if (currentPassword && newPassword && confirmPassword) {
             if (newPassword === confirmPassword) {
                 try {
-                    const response = await put('https://localhost/api/users/update-password/', {
+                    const response = await put(`${usersUrl}/update-password/`, {
                         current_password: currentPassword,
                         new_password: newPassword
                     });

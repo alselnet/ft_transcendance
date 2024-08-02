@@ -1,6 +1,8 @@
 import { animateNumbers, setupCamembertAnimation } from "../animation/DashboardAnimation.js";
 import { get, post, del } from "../services/Api.js";
 
+const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
+
 const FriendDashStat = () => {
     console.log("enter in friendprofile component")
     let form = document.createElement("div");
@@ -8,7 +10,7 @@ const FriendDashStat = () => {
     const path = window.location.hash.split('/');
     const username = path[path.length - 1];
 
-    get(`https://localhost/api/users/${username}/`)
+    get(`${usersUrl}/${username}/`)
         .then(response => {
             return response.json();
         })
@@ -179,8 +181,7 @@ const isUserSelf = (searchedUsername, currentUsername) => {
 
 function addFriend(username) {
 
-	const url = `https://localhost/api/users/add-friend/${username}/`;
-    post(url)
+    post(`${usersUrl}/add-friend/${username}/`)
     .then(response => {
         if (!response.ok) {
             return response.json().then(data => { throw new Error(data.detail || 'Failed to add friend'); });
@@ -199,8 +200,7 @@ function addFriend(username) {
 
 function deleteFriend(username) {
 
-	const url = `https://localhost/api/users/unfriend/${username}/`;
-    del(url)
+    del(`${usersUrl}/unfriend/${username}/`)
     .then(response => {
         if (!response.ok) {
             return response.json().then(data => { throw new Error(data.detail || 'Failed to remove friend'); });

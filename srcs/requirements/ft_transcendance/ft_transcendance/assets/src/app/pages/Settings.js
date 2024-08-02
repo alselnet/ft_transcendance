@@ -1,8 +1,11 @@
-import { checkAuth, get, put, post, del } from "../services/Api.js";
+import { checkAuth, get, post} from "../services/Api.js";
+
+const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
+const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
 
 const sendConfirmationEmail = (email) => {
     console.log("Send Mail");
-    post('https://localhost/api/auth/send-confirmation-email/', { email })
+    post(`${authUrl}/send-confirmation-email/`, { email })
         .then(response => {
             if (response.ok) {
                 alert('Confirmation email sent');
@@ -22,7 +25,7 @@ const updateAvatar = (file) => {
     const formData = new FormData();
     formData.append('avatar', file);
 
-    fetch('https://localhost/api/users/update-avatar/', {
+    fetch(`${usersUrl}/update-avatar/`, {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -51,7 +54,7 @@ const updateAvatar = (file) => {
 
 const update2FA = (newMethod) => {
 	console.log("Update 2FA Method");
-    post('https://localhost/api/auth/update-2fa/', { method: newMethod })
+    post(`${authUrl}/update-2fa/`, { method: newMethod })
         .then(response => {
             if (response.ok) {
                 return response.json().then(updateData => {
@@ -151,7 +154,7 @@ const Settings = async () => {
         throw new Error('User is not authenticated');
     }
 
-    get('https://localhost/api/users/me/')
+    get(`${usersUrl}/me/`)
     .then(response => {
         if (!response.ok) {
             throw new Error('Failed to fetch user profile');

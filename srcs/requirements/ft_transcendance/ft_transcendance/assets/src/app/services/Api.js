@@ -1,5 +1,7 @@
 import { getCookie } from '../utils/cookies';
 
+const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
+
 export const isTokenExpired = (token) => {
 	const payload = JSON.parse(atob(token.split('.')[1]));
 	return payload.exp < Date.now() / 1000;
@@ -33,7 +35,7 @@ export const checkAuth = async () => {
     }
 	
 	console.log('Refreshing token');
-	const response = await fetch('https://localhost/api/auth/token/refresh/', {
+	const response = await fetch(`${authUrl}/token/refresh/`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',

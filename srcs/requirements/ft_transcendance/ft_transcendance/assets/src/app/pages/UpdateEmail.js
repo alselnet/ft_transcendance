@@ -1,5 +1,7 @@
 import { put } from "../services/Api.js";
 
+const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
+
 const UpdateEmail = async () => {
     let section = document.querySelector("#section");
 
@@ -21,7 +23,7 @@ const UpdateEmail = async () => {
 
         if (newEmail && password) {
             try {
-                const response = await put('https://localhost/api/users/update-email/', { email: newEmail, password: password });
+                const response = await put(`${usersUrl}/update-email/`, { email: newEmail, password: password });
 
                 if (response.ok) {
                     const updateData = await response.json();
