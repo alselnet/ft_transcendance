@@ -1,4 +1,4 @@
-.container-update-data {
+/* .container-update-data {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,6 +38,69 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.button-update-data:hover {
+    background-color: #0056b3;
+} */
+
+
+
+.container-update-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.update-input {
+    background-color: transparent;
+}
+
+.update-data-form {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.title-update-data {
+    margin-bottom: 20px;
+    font-size: 2vw;
+    color: white;
+}
+
+/* .update-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+} */
+
+input[type="text"], input[type="password"], input[type="email"] {
+    border: none;
+    border-bottom: 1px solid #333;
+    background-color: transparent;
+    margin: 10px 0;
+    padding: 8px;
+    width: calc(100% - 20px);
+    outline: none;
+}
+
+.button-update-data {
+    width: 10vw;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1vw;
 }
 
 .button-update-data:hover {
