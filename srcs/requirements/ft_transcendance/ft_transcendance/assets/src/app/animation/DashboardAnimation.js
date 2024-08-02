@@ -61,9 +61,6 @@ function showSectorGraph(container, size, percentage, color) {
    }, 510);
 }
 
-
-
-
 export function setupCamembertAnimation(dashboardContainer, percentage, color, message = '') {
    console.log('Setting up camembert animation');
    const camembertContainer = dashboardContainer.querySelector('.camembert-stat');

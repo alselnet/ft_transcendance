@@ -22,8 +22,8 @@ const sendConfirmationEmail = (email) => {
 };
 
 const updateAvatar = (file) => {
-    const formData = new FormData();
-    formData.append('avatar', file);
+   const formData = new FormData();
+   formData.append('avatar', file);
 
     fetch(`${usersUrl}/update-avatar/`, {
         method: 'POST',
@@ -74,85 +74,53 @@ const update2FA = (newMethod) => {
     };
     
 const update2FAActiveClass = (method) => {
-    document.querySelectorAll('.dropdown-item').forEach(item => {
-        item.classList.remove('active-2fa');
-    });
-    document.querySelector(`#tfa-${method}`).classList.add('active-2fa');
+   document.querySelectorAll('.dropdown-item').forEach(item => {
+       item.classList.remove('active-2fa');
+   });
+   document.querySelector(`#tfa-${method}`).classList.add('active-2fa');
 };
 
-// const updateUsername = (newUsername) => {
-//     console.log("Update Username");
-//     put('https://localhost/api/users/update-username/', { username: newUsername })
-//         .then(response => {
-//             if (response.ok) {
-//                 return response.json().then(updateData => {
-//                     document.querySelector('#username-display').textContent = updateData.username;
-//                     alert('Username updated successfully');
-//                     window.location.reload();
-//                 });
-//             } else {
-//                 return response.json().then(errorData => {
-//                     alert(`Error: ${errorData.error || 'Failed to update username'}`);
-//                 });
-//             }
-//         })
-//         .catch(error => {
-//             console.error('Error updating username:', error);
-//             alert('An error occurred while updating the username');
-//         });
-// };
+const changeBackgroundImage = (imageClass) => {
+    console.log("Change Background Image");
+    document.body.classList.remove('bg-nagoya', 'bg-roland', 'bg-wimbledon');
+    document.body.classList.add(imageClass);
+    localStorage.setItem('backgroundClass', imageClass); 
+};
 
-// const updateEmail = (newEmail) => {
-//     console.log("Update Email");
-//     put('https://localhost/api/users/update-email/', { email: newEmail })
-//         .then(response => {
-//             if (response.ok) {
-//                 return response.json().then(updateData => {
-//                     document.querySelector('#email-display').textContent = updateData.email;
-//                     alert('Email updated successfully');
-//                     window.location.reload();
-//                 });
-//             } else {
-//                 return response.json().then(errorData => {
-//                     alert(`Error: ${errorData.error || 'Failed to update email'}`);
-//                 });
-//             }
-//         })
-//         .catch(error => {
-//             console.error('Error updating email:', error);
-//             alert('An error occurred while updating the email');
-//         });
-// };
+const applySavedBackground = () => {
+    const savedBackgroundClass = localStorage.getItem('backgroundClass');
+    if (savedBackgroundClass) {
+        changeBackgroundImage(savedBackgroundClass);
+    }
+};
 
-// const deleteAccount = () => {
-//     if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-//         del('https://localhost/api/auth/delete-user/')
-//             .then(response => {
-//                 if (response.ok) {
-//                     alert('Account deleted successfully');
-//                     localStorage.removeItem('accessToken');
-//                     localStorage.removeItem('refreshToken');
-//                     window.location.hash = '#/';
-//                 } else {
-//                     return response.json().then(errorData => {
-//                         alert(`Error: ${errorData.error || 'Failed to delete account'}`);
-//                     });
-//                 }
-//             })
-//             .catch(error => {
-//                 console.error('Error deleting account:', error);
-//                 alert('An error occurred while deleting the account');
-//             });
-//     }
-// };
+const setupBackgroundChangeListeners = () => {
+    const dropdownItems = document.querySelectorAll('.dropdown-menu .dropdown-item');
+    
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', (event) => {
+            event.preventDefault();
+            const imageClass = item.getAttribute('data-bg-class');
+            if (imageClass) {
+                changeBackgroundImage(imageClass);
+            }
+        });
+    });
+};
+
+const initializeSettingsPage = () => {
+    applySavedBackground();
+    setupBackgroundChangeListeners();
+};
+
 
 const Settings = async () => {
-    let form = document.createElement("div");
+   let section = document.querySelector("#section");
 
-    const isAuthenticated = await checkAuth();
-    if (!isAuthenticated) {
-        throw new Error('User is not authenticated');
-    }
+   const isAuthenticated = await checkAuth();
+   if (!isAuthenticated) {
+       throw new Error('User is not authenticated');
+   }
 
     get(`${usersUrl}/me/`)
     .then(response => {
@@ -164,146 +132,210 @@ const Settings = async () => {
     .then(userData => {
         console.log('Fetched user data:', userData);
 
-        const emailConfirmationBanner = userData.mail_confirmation_status ? '' : `
-            <div class="confirm-email">
-                votre adresse mail doit etre verifiee : 
-                <a href="" id="resend-verification-email">renvoyer un mail de verification</a>
-            </div>`;
+       const emailConfirmationBanner = userData.mail_confirmation_status ? '' : `
+           <div class="confirm-email">
+               votre adresse mail doit etre verifiee : 
+               <a href="" id="resend-verification-email">renvoyer un mail de verification</a>
+           </div>`;
 
-        section.innerHTML = 
-            `
-            <div class="settings-container">
-                <h1 class="settings-title">Parametre du compte</h1>
-                <div class="settings-box">
-                    <div class="editting">
-                        <img src="${userData.avatar}" class="settings-picture" alt="settings-pic">
-                        <a href="#" class="edit-pp">modifier</a>
-                        <input type="file" id="avatar-input" style="display: none;" accept="image/*">
-                    </div>
-                    <div class="modif-username">
-                        <p>${userData.username}</p>
-                        <button href="#/update-username" type="button" class="btn btn-light" id="edit-username">modifier username</button>
-                    </div>
-                    <div class="modif-username">
-                        <p>${userData.email}</p>
-                        <button href="#/update-email" type="button" class="btn btn-light" id="edit-email">modifier adresse mail</button>
-                    </div>
-                    <div class="modif-username">
-                        <p>********</p>
-                        <button href="#/update-password" type="button" class="btn btn-light" id="edit-password">modifier mot de passe</button>
-                    </div>
+       section.innerHTML = 
+           `
+        <div class="settings-container">
+            <h1 class="settings-title">Parametres du compte</h1>
+            <div class="settings-box">
+            <div class="editting">
+               <div class="picture-wrapper">
+                   <img src="${userData.avatar}" class="settings-picture" alt="settings-pic">
+                   <a href="#" class="edit-pp">modifier</a>
+               </div>
+               <input type="file" id="avatar-input" style="display: none;" accept="image/*">
+            </div>
+            <div class="all-modif">
+               <div class="modif-user">
+                   <div class="modif-username">
+                       <p class="current-data">${userData.username}</p>
+                       <button href="#/update-username" type="button" class="btn btn-light btn-modif-settings"
+                           id="edit-username">modifier
+                           username</button>
+                   </div>
+                   <div class="modif-username">
+                       <p class="current-data">${userData.email}</p>
+                       <button href="#/update-email" type="button" class="btn btn-light btn-modif-email"
+                           id="edit-email">modifier
+                           adresse
+                           mail</button>
+                   </div>
+                   <div class="modif-username">
+                       <p class="current-data">********</p>
+                       <button href="#/update-password" type="button" class="btn btn-light btn-modif-psw"
+                           id="edit-password">modifier
+                           mot
+                           de passe</button>
+                   </div>
+               </div>
+               <div class="modif-website">
+                   <div class="dropdown drop-settings">
+                       <button class="btn btn-secondary dropdown-toggle set-drop" type="button"
+                           id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                           methode 2fa
+                       </button>
+                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                           <li><a class="dropdown-item" id="tfa-none">aucune</a></li>
+                           <li><a class="dropdown-item" id="tfa-email">mail</a></li>
+                           <li><a class="dropdown-item" id="tfa-authenticator">qrcode</a></li>
+                       </ul>
+                   </div>
 
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        methode 2fa
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" id="tfa-none">aucune</a></li>
-                        <li><a class="dropdown-item" id="tfa-email">mail</a></li>
-                        <li><a class="dropdown-item" id="tfa-authenticator">qrcode</a></li>
-                        </ul>
-                    </div>
+                   <div class="dropdown drop-settings">
+                       <button class="btn btn-secondary dropdown-toggle set-drop" type="button"
+                           id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                           couleur de l'arriere plan
+                       </button>
+                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                           <li><a class="dropdown-item" href="#/settings" data-bg-class="bg-nagoya">Nagoya</a></li>
+                           <li><a class="dropdown-item" href="#/settings" data-bg-class="bg-roland">Roland</a></li>
+                           <li><a class="dropdown-item" href="#/settings" data-bg-class="bg-wimbledon">Wimbledon</a></li>
+                       </ul>
+                   </div>
 
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        couleur de l'arriere plan
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Nagoya</a></li>
-                        <li><a class="dropdown-item" href="#">Roland</a></li>
-                        <li><a class="dropdown-item" href="#">Wimbledon</a></li>
-                        </ul>
-                    </div>
-                    
-                    <button type="button" href="#/delete-account" class="btn btn-danger delete-account">supprimer le compte</button>
+               </div>
+           </div>
+           <button type="button" href="#" class="btn btn-danger delete-account">supprimer le compte</button>
 
-                </div>
+       </div>
 
-                <div class="settings-footer">
-                    
-                    <div class="search-container">
-                        <div class="search-barre">
-                            <input type="text" id="login-search" placeholder="Entrez le nom de l'utilisateur">
-                        </div>
-                        <button type="button" id="search-button">
-                            <i class="bi bi-search search-icon"></i>
-                        </button>
-                    </div>
-
-                    <a class="nav-link" href="#/confidentalite">  
-                        <div class="settings-footer" id="list-stat">
-                            <i class="bi bi-file-earmark-lock settings-footer-icon"></i>
-                            <p class="settings-footer-text">Charte de confidentialite</p>
-                        </div>
-                    </a>
-                </div>
-
-                ${emailConfirmationBanner}
-
+       <div class="settings-footer">
+           <div class="search-container">
+               <div class="search-barre">
+                   <input type="text" id="login-search" placeholder="Entrez le nom de l'utilisateur">
+               </div>
+               <button type="button" id="search-button">
+                   <i class="bi bi-search search-icon"></i>
+               </button>
             </div>
 
-        `;
+           <a class="nav-link" href="#/chartemsg">
+               <div class="chart-footer" id="list-stat">
+                   <i class="bi bi-file-earmark-lock settings-footer-icon"></i>
+                   <p class="settings-footer-text">Charte de confidentialite</p>
+               </div>
+           </a>
+       </div>
+       ${emailConfirmationBanner}
 
-        section.querySelector('.edit-pp').addEventListener('click', (event) => {
-            event.preventDefault();
-            section.querySelector('#avatar-input').click();
-        });
+   </div>
 
-        section.querySelector('#avatar-input').addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                updateAvatar(file);
+
+       `;
+
+       section.querySelector('.edit-pp').addEventListener('click', (event) => {
+           event.preventDefault();
+           section.querySelector('#avatar-input').click();
+       });
+
+       section.querySelector('#avatar-input').addEventListener('change', (event) => {
+           const file = event.target.files[0];
+           if (file) {
+               updateAvatar(file);
+           }
+       });
+
+       const loginSearchInput = section.querySelector("#login-search");
+        const searchButton = section.querySelector("#search-button");
+
+        const searchLogin = () => {
+            const username = loginSearchInput.value;
+            if (username) {
+                if (isUserSelf(username, userData.username)) {
+                    alert("Vous ne pouvez pas accéder à votre propre profil.");
+                } else {
+                    window.location.href = `#/friendprofile/${username}`;
+                }
+                loginSearchInput.value = "";
+            }
+        };
+        searchButton.addEventListener('click', searchLogin);
+
+        loginSearchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                searchLogin();
             }
         });
         
-        section.querySelector('#edit-username').addEventListener('click', (event) => {
-            window.location.hash = '#/update-username';
-        });
 
-        section.querySelector('#edit-email').addEventListener('click', (event) => {
-            window.location.hash = '#/update-email';
-        });
+        // const changeBackgroundImage = (imageClass) => {
+        //     console.log("ETER CHANGE BGD");
+        //     document.body.classList.remove('bg-nagoya', 'bg-roland', 'bg-wimbledon');
+        //     document.body.classList.add(imageClass);
+        //     localStorage.setItem('backgroundClass', imageClass); 
+        // };
 
-        section.querySelector('#edit-password').addEventListener('click', (event) => {
-            window.location.hash = '#/update-password';
-        });
-        
-		section.querySelector('#tfa-none').addEventListener('click', () => {
-            update2FA('none');
-        });
+        // const savedBackgroundClass = localStorage.getItem('backgroundClass');
+        // if (savedBackgroundClass) {
+        //     changeBackgroundImage(savedBackgroundClass);
+        // }
 
-        section.querySelector('#tfa-email').addEventListener('click', () => {
-            update2FA('email');
-        });
-        
-        section.querySelector('#tfa-authenticator').addEventListener('click', () => {
-            update2FA('authenticator');
-        });
-        
-        // section.querySelector('.delete-account').addEventListener('click', () => {
-        //     deleteAccount();
+        // section.querySelectorAll('.dropdown-menu .dropdown-item').forEach(item => {
+
+        //     console.log("ETER SELECT IMG SECTION");
+
+        //     item.addEventListener('click', (event) => {
+        //         event.preventDefault();
+        //         const imageClass = item.getAttribute('data-bg-class');
+        //         if (imageClass) {
+        //             console.log("ETER CLICK EVENT");
+        //             console.log(imageClass);
+        //             changeBackgroundImage(imageClass);
+        //         }
+        //     });
         // });
-
-        section.querySelector('.delete-account').addEventListener('click', (event) => {
-            window.location.hash = '#/delete-account';
-        });
         
-        update2FAActiveClass(userData.two_fa_method);
+       section.querySelector('#edit-username').addEventListener('click', (event) => {
+           window.location.hash = '#/update-username';
+       });
 
-        if (userData.mail_confirmation_status == false)
-        {
-            section.querySelector('#resend-verification-email').addEventListener('click', (event) => {
-                event.preventDefault();
-                sendConfirmationEmail(userData.email);
-            });
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching user profile:', error);
-        form.innerHTML = '<p>Failed to load user profile</p>';
-    })
-    
-    return form;
+       section.querySelector('#edit-email').addEventListener('click', (event) => {
+           window.location.hash = '#/update-email';
+       });
+
+       section.querySelector('#edit-password').addEventListener('click', (event) => {
+           window.location.hash = '#/update-password';
+       });
+       
+       section.querySelector('#tfa-none').addEventListener('click', () => {
+           update2FA('none');
+       });
+
+       section.querySelector('#tfa-email').addEventListener('click', () => {
+           update2FA('email');
+       });
+       
+       section.querySelector('#tfa-authenticator').addEventListener('click', () => {
+           update2FA('authenticator');
+       });
+       
+       section.querySelector('.delete-account').addEventListener('click', (event) => {
+           window.location.hash = '#/delete-account';
+       });
+       
+       update2FAActiveClass(userData.two_fa_method);
+
+       if (userData.mail_confirmation_status == false)
+       {
+           section.querySelector('#resend-verification-email').addEventListener('click', (event) => {
+               event.preventDefault();
+               sendConfirmationEmail(userData.email);
+           });
+       }
+
+       initializeSettingsPage();
+   })
+   .catch(error => {
+       console.error('Error fetching user profile:', error);
+       section.innerHTML = '<p>Failed to load user profile</p>';
+   })
+   
 };
 
 export { Settings };
+
