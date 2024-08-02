@@ -8,7 +8,7 @@ const UpdateEmail = async () => {
     section.innerHTML = `
         <div class="container-update-data">
             <div class="update-data-form">
-                <h1 class="title-update-data">Modifier le Nom d'Utilisateur</h1>
+                <h1 class="title-update-data">Modifier l'adresse mail</h1>
                 <input type="text" id="new-data" placeholder="Nouvelle adresse mail" required>
                 <input type="password" id="password" placeholder="Mot de passe" required>
                 <button class="button-update-data" id="submit-update-email">Mettre à jour</button>

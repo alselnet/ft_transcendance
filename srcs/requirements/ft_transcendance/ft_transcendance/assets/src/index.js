@@ -1,10 +1,18 @@
 import './style.css';
 import { App } from "./app/App.js";
+import { applySavedBackground } from './app/pages/Settings.js';
 
 window.isInternalNavigation = false;
 
-// document.addEventListener("DOMContentLoaded", App);
 document.addEventListener("DOMContentLoaded", function() {
+
+    const savedBackgroundClass = localStorage.getItem('backgroundClass');
+
+    if (savedBackgroundClass)
+        applySavedBackground();
+    else {
+        document.body.classList.add('bg-nagoya');
+    }
     window.isInternalNavigation = false;
     App();
 });
