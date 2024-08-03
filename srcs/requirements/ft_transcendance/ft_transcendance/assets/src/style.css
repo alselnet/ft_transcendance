@@ -12,6 +12,7 @@
 @import url('./app/style/AboutUs.css');
 @import url('./app/style/CharteMsg.css');
 @import url('./app/style/UpdateData.css');
+@import url('./app/style/FriendProfile.css');
 
 
 @font-face {
@@ -24,30 +25,22 @@
     src: url( './app/fonts/Play/Play-Regular.ttf');
 }
 
-@font-face {
-    font-family: 'PressStart2P';
-    src: url( './app/fonts/Press_Start_2P/PressStart2P-Regular.ttf');
-}
-
 .bg-nagoya {
-    background-image: url('./app/images/background.png');
+    background-image: url('./app/images/nagoya.png');
 }
 
 .bg-roland {
-    background-image: url('./app/images/backgroundOrange.png');
+    background-image: url('./app/images/roland.png');
 }
 
 .bg-wimbledon {
-    background-image: url('./app/images/backgroundGreen.png');
+    background-image: url('./app/images/wimbledon.png');
 }
 
 body {
     font-family: 'JuliusSansOne', sans-serif;
     margin: 0;
-    /* background-image: url('./app/images/background.png'); */
     background-size: cover;
     height: 100vh;
     overflow: hidden;
 }
-
-

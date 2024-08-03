@@ -1,6 +1,6 @@
 import './style.css';
 import { App } from "./app/App.js";
-import { applySavedBackground } from './app/pages/Settings.js';
+import { applySavedBackground } from './app/functions/SettingsFunctions.js';
 
 window.isInternalNavigation = false;
 

@@ -1,69 +1,11 @@
-<<<<<<< HEAD
-import CryptoJS from 'crypto-js';
 import { getCookie } from '../utils/cookies';
-=======
->>>>>>> 4ffc65bea4903c53be883169c678e32526575de6
-import img42 from '../images/42.png';
-import { FortyTwoSignIn } from "../functions/42SignIn.js";
-import { handleFormVisibility } from '../functions/LoginFunctions.js';
-import { removeMainComponent } from "../functions/MainFunctions.js";
 
-export const LogIn = () => {
-
-    removeMainComponent();
-    let section = document.querySelector("#section");
-    if (section) {
-        section.innerHTML = `
-            <div class="balls-login d-none d-md-flex">
-                <div class="orange-ball-login">
-                    <a class="nav-link" href="#/">
-                        <div class="arrow"><i class="bi bi-arrow-left-circle-fill"></i></div>
-                    </a>
-                </div>
-                <div class="white-ball-login">
-                    <form id="login-form" class="login-form-login">
-                        <input type="text" id="username" placeholder="Username">
-                        <input type="password" id="password" placeholder="Password">
-                        <button type="submit" class="button-login">se connecter</button>
-                    </form>
-                </div>
-                <div class="btn-container-home">
-                    <button id="fortyTwoSignInBtn" class="btn-42-home">
-                        <p class="co-42-home">connexion avec</p>
-                        <img src="${img42}" class="img-42-home" alt="button-42">
-                    </button>
-                </div>
-            </div>
-
-            <div class="balls-login d-none d-sm-flex d-md-none">
-                <a class="nav-link" href="#/">
-                    <div class="arrow-sm"><i class="bi bi-arrow-left-circle-fill"></i></div>
-                </a>
-                <div class="white-ball-login-sm">
-                    <form id="login-form-sm" class="login-form-login">
-                        <input type="text" id="username-sm" placeholder="Username">
-                        <input type="password" id="password-sm" placeholder="Password">
-                        <button type="submit" class="button-login">se connecter</button>
-                    </form>
-                </div>
-            </div>
-        `;
-
-        handleFormVisibility();
-        window.addEventListener('resize', handleFormVisibility);
-
-        const signInButton = document.getElementById('fortyTwoSignInBtn');
-        if (signInButton) {
-            signInButton.addEventListener('click', () => {
-                FortyTwoSignIn();
-            });
-        }
-    }
-};
+const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
+const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
 
 let currentForm = null;
 
-function handleFormVisibility() {
+export function handleFormVisibility() {
     const isDesktop = window.innerWidth >= 768;
     const formDesktop = document.getElementById("login-form");
     const formMobile = document.getElementById("login-form-sm");
@@ -141,38 +83,26 @@ function handleFormSubmit(event) {
     .then(response => response.json())
     .then(userData => {
         console.log('User data:', userData);
-        if (userData.totp_secret) {
-            localStorage.setItem('totp', userData.totp_secret);
-        } else {
-            console.error('Erreur : `totp_secret` non disponible dans les données utilisateur.');
-        }
-    
-        const totp = localStorage.getItem('totp');
 
-        console.error('TOTP :', totp)
         if (userData.two_fa_method === 'email') {
             return fetch(`${authUrl}/generate-2fa-code/`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ 'totp_secret': totp })
+                body: JSON.stringify({
+                    'username': userData.username
+                })
             })
             .then(() => {
-                if (totp)
-                    window.location.href = `#/2fa-auth?totp=${encodeURIComponent(totp)}`;
-                else
-                    alert('Erreur totp_secret non valide');
+                window.location.href = `#/2fa-auth?username=${encodeURIComponent(logData.username)}`;
             })
             .catch(error => {
                 console.error('Erreur lors de l\'envoi du code 2FA:', error);
                 alert('Erreur lors de l\'envoi du code 2FA. Veuillez réessayer.');
             });
         } else if (userData.two_fa_method === 'authenticator') {
-            if (totp)
-                window.location.href = `#/qr-code?totp=${encodeURIComponent(totp)}`;
-            else
-                alert('Erreur totp_secret non valide');
+            window.location.href = '#/qr-code';
         } else {
             return fetch(`${authUrl}/signin/`, {
                 method: 'POST',
@@ -193,7 +123,6 @@ function handleFormSubmit(event) {
             })
             .then(tokens => {
                 console.log('Tokens récupérés:', tokens);
-                localStorage.removeItem('totp');
                 localStorage.setItem('accessToken', tokens.access);
                 localStorage.setItem('refreshToken', tokens.refresh);
 
@@ -210,10 +139,3 @@ function handleFormSubmit(event) {
         alert('Nom d utilisateur ou mot de passe incorrect');
     });
 }
-
-// const signInButton = document.getElementById('fortyTwoSignInBtn');
-// if (signInButton) {
-//     signInButton.addEventListener('click', () => {
-//         FortyTwoSignIn();
-//     });
-// }

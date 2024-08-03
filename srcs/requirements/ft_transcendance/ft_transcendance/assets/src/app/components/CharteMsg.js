@@ -1,4 +1,5 @@
 import { checkAuth } from "../services/Api.js";
+import { removeMainComponent } from "../functions/MainFunctions.js";
 
 const CharteMsg = async () => {
     const isAuthenticated = await checkAuth();
@@ -8,22 +9,7 @@ const CharteMsg = async () => {
 
     let msg = document.querySelector("#section");
 
-    let root = document.getElementById("root");
-    if (!root) {
-        console.error("#root not found in the DOM");
-        return;
-    }
-
-    let navbar = document.querySelector(".navbar-container");
-    if (navbar) {
-        navbar.remove();
-    }
-
-    let logoutbutton = document.querySelector(".logout-container");
-    if (logoutbutton) {
-        logoutbutton.remove();
-    }
-
+    removeMainComponent();
     if (msg) {
         msg.innerHTML =
     `   <div class="charte-container">

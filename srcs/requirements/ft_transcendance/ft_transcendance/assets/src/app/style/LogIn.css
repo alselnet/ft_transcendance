@@ -1,4 +1,3 @@
-/* BALLS */
 .balls-login {
     position: relative;
     display: flex;
@@ -107,6 +106,17 @@
     z-index: 2;
 }
 
+.arrow {
+    color: white;
+    margin-bottom: 30vh;
+    margin-left: -5vh;
+    font-size: 2rem;
+}
+
+.arrow:hover {
+    color: rgb(218, 147, 16);
+}
+
 .arrow-sm {
     color: white;
     margin-bottom: 40vh;
@@ -117,3 +127,4 @@
 .arrow-sm:hover {
     color: orange;
 }
+

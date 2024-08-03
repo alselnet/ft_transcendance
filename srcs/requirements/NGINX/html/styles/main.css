@@ -4,7 +4,6 @@ a {
     font-size: larger;
 }
 
-/* BALLS */
 .balls-home {
     position: relative;
     display: flex;
@@ -53,14 +52,6 @@ a {
     z-index: 2;
 }
 
-/* Positionnement des lettres */
-.orange-ball-home span,
-.white-ball-home span {
-    position: absolute;
-    transform-origin: center;
-}
-
-/* BUTTON */
 .btn-container-home {
     position: absolute;
     top: 85%;
@@ -90,8 +81,7 @@ a {
     margin-bottom: 10%;
 }
 
-/* MOBILE VERSION */
-.balls-sm-home {
+/* .balls-sm-home {
     position: relative;
     display: flex;
     justify-content: center;
@@ -99,9 +89,9 @@ a {
     align-items: center;
     height: 100vh;
     margin: 0;
-}
+} */
 
-.orange-ball-sm-home {
+/* .orange-ball-sm-home {
     margin-bottom: 30vh;
     width: 40vw;
     height: 40vw;
@@ -114,9 +104,9 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
-.white-ball-sm-home {
+/* .white-ball-sm-home {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,9 +120,9 @@ a {
     border-radius: 50%;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
     z-index: 2;
-}
+} */
 
-.btn-container-sm-home {
+/* .btn-container-sm-home {
     position: absolute;
     top: 70%;
     left: 50%;
@@ -141,14 +131,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-
-
-/*********************************/
-
-
-/* MOBILE VERSION */
+} */
 
 .balls-home-sm {
     position: relative;
@@ -191,7 +174,7 @@ a {
     z-index: 2;   
 }
 
-.btn-container-home-sm {
+/* .btn-container-home-sm {
     position: absolute;
     top: 70%;
     left: 50%;
@@ -200,11 +183,11 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
-.orange-ball-home-sm:hover {
+/* .orange-ball-home-sm:hover {
     color: red;
-}
+} */
 /* BALLS */
 .balls-signin {
     position: relative;
@@ -213,17 +196,6 @@ a {
     align-items: center;
     height: 100vh;
     margin: 0;
-}
-
-.arrow {
-    color: white;
-    margin-bottom: 30vh;
-    margin-left: -5vh;
-    font-size: 2rem;
-}
-
-.arrow:hover {
-    color: rgb(218, 147, 16);
 }
 
 .arrow-s {
@@ -242,7 +214,6 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* text-align: center; */
     margin: 0;
     margin-right: 30vw;
     width: 40vw;
@@ -358,8 +329,6 @@ input[type="text"], input[type="password"], input[type="email"] {
     color: white;
 }
 
-
-/* BALLS */
 .balls-login {
     position: relative;
     display: flex;
@@ -468,6 +437,17 @@ input[type="text"], input[type="password"], input[type="email"] {
     z-index: 2;
 }
 
+.arrow {
+    color: white;
+    margin-bottom: 30vh;
+    margin-left: -5vh;
+    font-size: 2rem;
+}
+
+.arrow:hover {
+    color: rgb(218, 147, 16);
+}
+
 .arrow-sm {
     color: white;
     margin-bottom: 40vh;
@@ -478,7 +458,9 @@ input[type="text"], input[type="password"], input[type="email"] {
 .arrow-sm:hover {
     color: orange;
 }
-.navbar-superposition {
+
+
+.navbar-supperposition {
     position: relative;
 }
 
@@ -510,15 +492,6 @@ input[type="text"], input[type="password"], input[type="email"] {
     color: white;
     filter: blur(0px);
 }
-
-
-
-
-
-
-
-
-
 
 /* NAVBAR SMALL SCREEN */
 .navbar-container-sm {
@@ -899,99 +872,6 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 
-.profile-text {
-    position: fixed;
-    color: black;
-    background-color: rgba(255, 255, 255, 0.2);
-    margin-left: 2vw;
-    width: 6vw;
-    height: 1vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 6px;
-    font-size: 70%;
-    color: black;
-}
-
-
-.footer-friend-link {
-	position: fixed;
-	bottom: 5vh;
-	width: 75%;
-	z-index: 100;
-    margin-left: 18vw;
-    display: flex;
-	align-items: center;
-    flex-direction: row;
-    justify-content: flex-start;
-}
-
-.footer-friend-icon {
-    font-size: 2rem;
-    color: white;
-    margin-top: 0.5vh;
-}
-
-.footer-friend-icon:hover {
-    color: #245070;
-}
-
-.footer-friend {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-}
-
-.footer-friend-text {
-    margin-left: 15px;
-    margin-top: 15px;
-    margin-right: 10vw;
-    color: white;
-    font-size: 1vw;
-}
-
-.footer-friend-text:hover {
-    color: #245070;
-}
-
-.person-icon {
-    display: flex;
-    font-size: 2vw;
-    color: rgba(255, 255, 255, 0.2);
-    margin-left: 1vw;
-    color: rgb(71, 136, 71);
-}
-
-.person-icon:hover {
-    color: white;
-}
-
-.friend-status-text {
-    color: white;
-    margin-left: 7px;
-    margin-right: 45vw;
-    font-size: 1vw;
-}
-
-.delete-icon {
-    color: rgb(195, 103, 103);
-}
-
-.friend-name {
-    display: flex;
-    flex-direction: column;
-}
-
-.friend-username-stat {
-    color: white;
-    text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
-    margin-top: 2vh;
-    margin-left: 1vw;
-    font-size: 2.5vw;
-}
-
-
 @media (min-width: 768px) and (max-width: 1278px) {
 
     .middle {
@@ -1041,30 +921,6 @@ input[type="text"], input[type="password"], input[type="email"] {
     .stat-text {
         font-size: 70%;
     }
-
-    .person-icon {
-        font-size: 3vw;
-    }
-
-    .friend-status-text {
-        margin-right: 35vw;
-        font-size: 1.5vw;
-        margin-top: 0.1vh;
-    }
-
-    .profile-text {
-        font-size: 1.5vw;
-        margin-left: 4vw;
-        width: 10vw;
-        height: 2vw;
-        
-    }
-
-    .friend-username-stat {
-        font-size: 3vw;
-        margin-left: 4vw;
-    }
-    
 }
 
 
@@ -1114,33 +970,7 @@ input[type="text"], input[type="password"], input[type="email"] {
         font-size: 2vw;
     }
 
-    .friend-status-text {
-        margin-right: 25vw;
-        font-size: 2vw;
-    }
-
-    .footer-friend-text {
-        display: none;
-    }
-
-    .profile-text {
-        font-size: 1.5vw;
-        margin-left: 4vw;
-        width: 10vw;
-        height: 2vw;
-    }
-
-    .friend-username-stat {
-        margin-left: 2vw;
-    }
-
-    .person-icon {
-        font-size: 3vw;
-    }
-
-    .footer-friend-icon {
-        margin-left: 3vw;
-    }
+    
 
 }
 .settings-container {
@@ -1294,7 +1124,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     color: #fff;
  }
  
- .settings-link {
+ /* .settings-link {
     position: fixed;
     bottom: 5vh;
     width: 75%;
@@ -1303,7 +1133,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     align-items: center;
     flex-direction: row;
     justify-content: flex-start;
- }
+ } */
  
  .settings-footer {
     display: flex;
@@ -1319,7 +1149,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     color: white;
  }
  
- .chart-footer {
+ .charte-footer {
     display: flex;
     justify-content: center;
     text-align: center;
@@ -1354,10 +1184,10 @@ input[type="text"], input[type="password"], input[type="email"] {
     left: 0;
     font-size: 1vw;
  }
- 
+/*  
  .hidden {
     display: none;
- }
+ } */
  
 .btn.delete-account {
         margin-top: 2vh;
@@ -1394,7 +1224,6 @@ input[type="text"], input[type="password"], input[type="email"] {
  }
 
 @media (max-width: 840px) {
-    /* @media (max-width: 768px) { */
 
     .editting {
         margin-top: 7vh;
@@ -1547,10 +1376,6 @@ input[type="text"], input[type="password"], input[type="email"] {
         margin-bottom: 0vh;
      }
 
-     /* .settings-picture {
-        width: 4vw;
-        height: 4vh;
-     } */
 }
 .container-2FA
 {
@@ -1573,8 +1398,7 @@ input[type="text"], input[type="password"], input[type="email"] {
    background-color: #fbffea;
    padding: 40px;
    border-radius: 50%;
-   box-shadow: 0 8px 16px rgba(0,0,0,0.3),
-                inset 0 2px 4px rgba(255,255,255,0.5);
+   box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
    text-align: center;
    width: 25vw;
    height: 25vw;
@@ -1761,11 +1585,6 @@ tbody, td, tfoot, th, thead, tr {
     color: #2B6E25;
 }
 
-.game-historic-history:hover {
-    color: gold;
-}
-
-
 .main-containerf {
     display: flex;
     flex-direction: column;
@@ -1939,10 +1758,6 @@ tbody, td, tfoot, th, thead, tr {
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(67, 66, 66, 0.6);
 }
-.navbar-supperposition {
-    position: relative;
-}
-
 .logout-container {
     position: absolute;
     top: 20px;
@@ -1959,7 +1774,6 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 /* MSG */
-
 .frame-LogOutMsg-container {
     position: relative;
     display: flex;
@@ -2072,121 +1886,6 @@ tbody, td, tfoot, th, thead, tr {
     background-color: rgba(255, 255, 255, 0.452);
 }
 
-/* .charte-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.charte-title {
-    color: white;
-    margin-bottom: 4vh;
-}
-
-.charte-text {
-    color: white;
-    margin-bottom: 4vh;
-}
-
-.charte-msg {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-    margin-left: 2vw;
-    width: 50vw;
-    height: 70vh;
-    margin: 10;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 0.2);
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-} */
-
-/* body {
-    font-family: 'JuliusSansOne', sans-serif;
-    margin: 0;
-    background-image: url('./background.png');
-    background-size: cover;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.charte-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-    overflow: auto;
-
-}
-
-.charte-title {
-    color: white;
-    margin-bottom: 4vh;
-    font-size: 2.5vw;
-}
-
-.charte-text {
-    color: white;
-    margin-bottom: 4vh;
-}
-
-.charte-msg {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    flex-direction: column;
-    width: 50vw;
-    height: 70vh;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 0.2);
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    overflow: auto; 
-    padding-left: 5vw;
-    padding-right: 5vw;
-    padding-top: 5vh;
-    padding-bottom: 5vh;
-    font-size: 1.1vw;
-}
-
-@media (max-width: 900px) {
-
-    .charte-msg {
-        padding-left: 2vw;
-        padding-right: 2vw;
-        font-size: 1.1vw;
-    }
-
-    .btn-charte {
-        font-size: 1vw;
-        width: 1.5vw;
-        height: 1vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-    }
-
-}
-
-@media (max-height: 624px) {
-
-.charte-msg {
-    padding-top: 20vh;
-}
-} */
-
-
-
 .charte-container {
     position: relative;
     display: flex;
@@ -2273,54 +1972,6 @@ tbody, td, tfoot, th, thead, tr {
 
 
 
-/* .container-update-data {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-}
-
-.update-data-form {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: center;
-}
-
-.title-update-data {
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-#new-data, #password {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.button-update-data {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.button-update-data:hover {
-    background-color: #0056b3;
-} */
-
-
-
 .container-update-data {
     display: flex;
     justify-content: center;
@@ -2382,6 +2033,156 @@ input[type="text"], input[type="password"], input[type="email"] {
     background-color: #0056b3;
 }
 
+.profile-text {
+    position: fixed;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-left: 2vw;
+    width: 6vw;
+    height: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    font-size: 70%;
+    color: black;
+} 
+
+
+.footer-friend-link {
+	position: fixed;
+	bottom: 5vh;
+	width: 75%;
+	z-index: 100;
+    margin-left: 18vw;
+    display: flex;
+	align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+
+.footer-friend-icon {
+    font-size: 2rem;
+    color: white;
+    margin-top: 0.5vh;
+}
+
+.footer-friend-icon:hover {
+    color: #245070;
+}
+
+.footer-friend {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.footer-friend-text {
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-right: 10vw;
+    color: white;
+    font-size: 1vw;
+}
+
+.footer-friend-text:hover {
+    color: #245070;
+}
+
+.person-icon {
+    display: flex;
+    font-size: 2vw;
+    color: rgba(255, 255, 255, 0.2);
+    margin-left: 1vw;
+    color: rgb(71, 136, 71);
+}
+
+.person-icon:hover {
+    color: white;
+}
+
+.friend-status-text {
+    color: white;
+    margin-left: 7px;
+    margin-right: 45vw;
+    font-size: 1vw;
+}
+
+.delete-icon {
+    color: rgb(195, 103, 103);
+}
+
+.friend-name {
+    display: flex;
+    flex-direction: column;
+}
+
+.friend-username-stat {
+    color: white;
+    text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
+    margin-top: 2vh;
+    margin-left: 1vw;
+    font-size: 2.5vw;
+}
+
+
+@media (min-width: 768px) and (max-width: 1278px) {
+
+    .person-icon {
+        font-size: 3vw;
+    }
+
+    .friend-status-text {
+        margin-right: 35vw;
+        font-size: 1.5vw;
+        margin-top: 0.1vh;
+    }
+
+    .friend-username-stat {
+        font-size: 3vw;
+        margin-left: 4vw;
+    }
+
+    .profile-text {
+        font-size: 1.5vw;
+        margin-left: 4vw;
+        width: 10vw;
+        height: 2vw;   
+    }
+}
+
+@media (max-width: 768px) {
+
+    .friend-status-text {
+        margin-right: 25vw;
+        font-size: 2vw;
+    }
+
+    .footer-friend-text {
+        display: none;
+    }
+
+    .profile-text {
+        font-size: 1.5vw;
+        margin-left: 4vw;
+        width: 10vw;
+        height: 2vw;
+    }
+
+    .friend-username-stat {
+        margin-left: 2vw;
+    }
+
+    .person-icon {
+        font-size: 3vw;
+    }
+
+    .footer-friend-icon {
+        margin-left: 3vw;
+    }
+
+}
 @font-face {
     font-family: 'JuliusSansOne';
     src: url( /fonts/2de04709e76a8c3a838d.ttf);
@@ -2390,11 +2191,6 @@ input[type="text"], input[type="password"], input[type="email"] {
 @font-face {
     font-family: 'Play';
     src: url( /fonts/e0424c5771f87080b05e.ttf);
-}
-
-@font-face {
-    font-family: 'PressStart2P';
-    src: url( /fonts/21503c6a5385ab41dde9.ttf);
 }
 
 .bg-nagoya {
@@ -2412,11 +2208,8 @@ input[type="text"], input[type="password"], input[type="email"] {
 body {
     font-family: 'JuliusSansOne', sans-serif;
     margin: 0;
-    /* background-image: url('./app/images/background.png'); */
     background-size: cover;
     height: 100vh;
     overflow: hidden;
 }
-
-
 

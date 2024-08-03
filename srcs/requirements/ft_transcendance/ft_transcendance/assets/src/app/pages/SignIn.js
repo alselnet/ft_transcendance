@@ -1,26 +1,12 @@
-import { getCookie } from '../utils/cookies';
-import { FortyTwoSignIn } from "./42SignIn.js";
+import { FortyTwoSignIn } from '../functions/42SignIn.js';
 import img42 from '../images/42.png';
+import { handleFormVisibility } from '../functions/SignInFunctions.js';
+import { removeMainComponent } from "../functions/MainFunctions.js";
 
-const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
 
 export const SignIn = () => {
-    let root = document.getElementById("root");
-    if (!root) {
-        console.error("#root not found in the DOM");
-        return;
-    }
 
-    let navbar = document.querySelector(".navbar-container");
-    if (navbar) {
-        navbar.remove();
-    }
-
-    let logoutbutton = document.querySelector(".logout-container");
-    if (logoutbutton) {
-        logoutbutton.remove();
-    }
-
+    removeMainComponent();
     let section = document.querySelector("#section");
     if (section) {
         section.innerHTML = `
@@ -75,127 +61,3 @@ export const SignIn = () => {
     }
 };
 
-let currentForm = null;
-
-function handleFormVisibility() {
-    const isDesktop = window.innerWidth >= 768;
-    const formDesktop = document.getElementById("signin-form");
-    const formMobile = document.getElementById("signin-form-sm");
-
-    if (isDesktop) {
-        if (formMobile) {
-            formMobile.classList.add('d-none');
-        }
-        if (formDesktop) {
-            formDesktop.classList.remove('d-none');
-            formDesktop.classList.add('d-md-block');
-        }
-        if (currentForm && currentForm !== formDesktop) {
-            currentForm.removeEventListener("submit", handleFormSubmit);
-        }
-        if (formDesktop) {
-            formDesktop.addEventListener("submit", handleFormSubmit);
-            currentForm = formDesktop;
-        }
-    } else {
-        if (formDesktop) {
-            formDesktop.classList.add('d-none');
-            formDesktop.classList.remove('d-md-block');
-        }
-        if (formMobile) {
-            formMobile.classList.remove('d-none');
-            formMobile.classList.add('d-md-block');
-        }
-        if (currentForm && currentForm !== formMobile) {
-            currentForm.removeEventListener("submit", handleFormSubmit);
-        }
-        if (formMobile) {
-            formMobile.addEventListener("submit", handleFormSubmit);
-            currentForm = formMobile;
-        }
-    }
-}
-
-function handleFormSubmit(event) {
-    event.preventDefault();
-    console.log('Form submitted');
-
-    const formData = {
-        username: document.getElementById("username")?.value || document.getElementById("username-sm")?.value,
-        email: document.getElementById("email")?.value || document.getElementById("email-sm")?.value,
-        password: document.getElementById("password")?.value || document.getElementById("password-sm")?.value,
-        confirmPassword: document.getElementById("confirmPassword")?.value || document.getElementById("confirmPassword-sm")?.value
-    };
-
-    console.log('Form data:', formData);
-
-    const usernameValid = checkUsername(formData.username);
-    const emailValid = checkEmail(formData.email);
-    const passwordValid = checkPassword(formData.password);
-    const passwordMatch = formData.password === formData.confirmPassword;
-
-    if (!usernameValid) {
-        alert("Le nom d'utilisateur peut avoir maximum 8 caractères, et ne peut contenir que des lettres et des chiffres");
-        console.log('Invalid username');
-        return;
-    }
-    if (!emailValid) {
-        alert("email non conforme");
-        console.log('Invalid email');
-        return;
-    }
-    if (!passwordValid) {
-        alert("mot de passe doit contenir au moins 8 caractères, une lettre, un chiffre et un caractère spécial.");
-        console.log('Invalid password');
-        return;
-    }
-    if (!passwordMatch) {
-        alert("confirmation de mot de passe incorrect");
-        console.log('Passwords do not match');
-        return;
-    }
-
-    fetch(`${authUrl}/register/`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => {
-        console.log('Response status:', response.status);
-        if (!response.ok) {
-            return response.json().then(err => { throw new Error(err.message) });
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Response data:', data);
-        alert(data.message);
-        localStorage.setItem('accessToken', data.access);
-        localStorage.setItem('refreshToken', data.refresh);
-        console.log('Redirecting to dashboard from signin...');
-        window.location.href = '#/dashboard';
-        console.log('Current hash:', window.location.hash);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('User creation failed.');
-    });
-}
-
-function checkUsername(username) {
-    const regex = /^[a-zA-Z0-9]{1,8}$/;
-    return regex.test(username);
-}
-
-function checkPassword(password) {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$/;
-    return regex.test(password);
-}
-
-function checkEmail(email) {
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.+[a-zA-Z]{2,}$/;
-    return regex.test(email);
-}

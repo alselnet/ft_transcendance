@@ -1,5 +1,6 @@
 import { animateNumbers, setupCamembertAnimation } from "../animation/DashboardAnimation.js";
 import { get, put } from "../services/Api.js"
+import { getStatusColor } from "../functions/FriendProfileFunctions.js"
 
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
 
@@ -199,19 +200,6 @@ const DashStat = () => {
 
     return form;
 };
-
-function getStatusColor(status) {
-    switch (status) {
-        case 'online':
-            return 'green';
-        case 'offline':
-            return 'grey';
-		case 'in game':
-			return 'orange';
-        default:
-            return 'red';
-    }
-}
 
 const isUserSelf = (searchedUsername, currentUsername) => {
     return searchedUsername === currentUsername;

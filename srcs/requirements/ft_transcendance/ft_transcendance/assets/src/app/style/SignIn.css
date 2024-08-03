@@ -8,17 +8,6 @@
     margin: 0;
 }
 
-.arrow {
-    color: white;
-    margin-bottom: 30vh;
-    margin-left: -5vh;
-    font-size: 2rem;
-}
-
-.arrow:hover {
-    color: rgb(218, 147, 16);
-}
-
 .arrow-s {
     color: white;
     margin-bottom: 55vh;
@@ -35,7 +24,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* text-align: center; */
     margin: 0;
     margin-right: 30vw;
     width: 40vw;
@@ -150,4 +138,3 @@ input[type="text"], input[type="password"], input[type="email"] {
 .arrow-s-sm:hover {
     color: white;
 }
-

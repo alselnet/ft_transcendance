@@ -4,7 +4,6 @@ a {
     font-size: larger;
 }
 
-/* BALLS */
 .balls-home {
     position: relative;
     display: flex;
@@ -53,14 +52,6 @@ a {
     z-index: 2;
 }
 
-/* Positionnement des lettres */
-.orange-ball-home span,
-.white-ball-home span {
-    position: absolute;
-    transform-origin: center;
-}
-
-/* BUTTON */
 .btn-container-home {
     position: absolute;
     top: 85%;
@@ -90,8 +81,7 @@ a {
     margin-bottom: 10%;
 }
 
-/* MOBILE VERSION */
-.balls-sm-home {
+/* .balls-sm-home {
     position: relative;
     display: flex;
     justify-content: center;
@@ -99,9 +89,9 @@ a {
     align-items: center;
     height: 100vh;
     margin: 0;
-}
+} */
 
-.orange-ball-sm-home {
+/* .orange-ball-sm-home {
     margin-bottom: 30vh;
     width: 40vw;
     height: 40vw;
@@ -114,9 +104,9 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
-.white-ball-sm-home {
+/* .white-ball-sm-home {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,9 +120,9 @@ a {
     border-radius: 50%;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
     z-index: 2;
-}
+} */
 
-.btn-container-sm-home {
+/* .btn-container-sm-home {
     position: absolute;
     top: 70%;
     left: 50%;
@@ -141,14 +131,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-
-
-/*********************************/
-
-
-/* MOBILE VERSION */
+} */
 
 .balls-home-sm {
     position: relative;
@@ -191,7 +174,7 @@ a {
     z-index: 2;   
 }
 
-.btn-container-home-sm {
+/* .btn-container-home-sm {
     position: absolute;
     top: 70%;
     left: 50%;
@@ -200,8 +183,8 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
-.orange-ball-home-sm:hover {
+/* .orange-ball-home-sm:hover {
     color: red;
-}
+} */

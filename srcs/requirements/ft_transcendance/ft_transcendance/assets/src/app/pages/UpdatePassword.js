@@ -1,8 +1,11 @@
 import { put } from "../services/Api.js";
+import { removeMainComponent } from "../functions/MainFunctions.js";
 
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
 
 const UpdatePassword = async () => {
+
+    removeMainComponent();
     let section = document.querySelector("#section");
 
     section.innerHTML = `

@@ -1,24 +1,12 @@
 import { animateBalls } from "../animation/HomeAnimation.js";
-import { FortyTwoSignIn, handleCallback } from "./42SignIn.js";
+import { FortyTwoSignIn } from "../functions/42SignIn.js";
 import img42 from '../images/42.png';
+import { removeMainComponent } from "../functions/MainFunctions.js";
+
 
 const Home = () => {
-    let root = document.getElementById("root");
-    if (!root) {
-        console.error("#root not found in the DOM");
-        return;
-    }
 
-    let navbar = document.querySelector(".navbar-container");
-    if (navbar) {
-        navbar.remove();
-    }
-
-    let logoutbutton = document.querySelector(".logout-container");
-    if (logoutbutton) {
-        logoutbutton.remove();
-    }
-
+    removeMainComponent();
     let section = document.querySelector("#section");
     if (section) {
         section.innerHTML = `
