@@ -78,6 +78,7 @@ class Profile(models.Model):
     won_games = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     perfect_wins = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     totp_secret = models.CharField(max_length=32, blank=True, null=True)
+    tfa_token = models.CharField(max_length=32, blank=True, null=True)
     fortytwo_account = models.BooleanField(default=False)
     
     def __str__(self):

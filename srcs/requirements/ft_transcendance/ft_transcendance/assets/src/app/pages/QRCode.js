@@ -5,10 +5,10 @@ export const QRCode = () => {
     let section = document.querySelector("#section");
 
     const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
-    const totp = urlParams.get('totp');
-    if (!totp) {
-        console.error('TOTP not found in URL');
-        alert('TOTP non trouvé. Veuillez réessayer.');
+    const tfa = urlParams.get('tfa');
+    if (!tfa) {
+        console.error('TFA not found in URL');
+        alert('TFA non trouvé. Veuillez réessayer.');
         return;
     }
 
@@ -27,7 +27,7 @@ export const QRCode = () => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 'totp_secret': totp })
+        body: JSON.stringify({ 'tfa_token': tfa })
     })
     .then(response => {
         if (!response.ok) {
@@ -45,7 +45,7 @@ export const QRCode = () => {
     });
 
     document.getElementById('proceed-to-2fa-auth').addEventListener('click', () => {
-        window.location.href = `#/2fa-auth?totp=${encodeURIComponent(totp)}`;
+        window.location.href = `#/2fa-auth?tfa=${encodeURIComponent(tfa)}`;
     });
 
     return section;

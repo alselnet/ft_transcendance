@@ -83,26 +83,38 @@ function handleFormSubmit(event) {
     .then(response => response.json())
     .then(userData => {
         console.log('User data:', userData);
+        if (userData.tfa_token) {
+            localStorage.setItem('tfa', userData.tfa_token);
+        } else {
+            console.error('Erreur : `tfa_token` non disponible dans les données utilisateur.');
+        }
+    
+        const tfa = localStorage.getItem('tfa');
 
+        console.error('TFA :', tfa)
         if (userData.two_fa_method === 'email') {
             return fetch(`${authUrl}/generate-2fa-code/`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    'username': userData.username
-                })
+                body: JSON.stringify({ 'tfa_token': tfa })
             })
             .then(() => {
-                window.location.href = `#/2fa-auth?username=${encodeURIComponent(logData.username)}`;
+                if (tfa)
+                    window.location.href = `#/2fa-auth?tfa=${encodeURIComponent(tfa)}`;
+                else
+                    alert('Erreur tfa_token non valide');
             })
             .catch(error => {
                 console.error('Erreur lors de l\'envoi du code 2FA:', error);
                 alert('Erreur lors de l\'envoi du code 2FA. Veuillez réessayer.');
             });
         } else if (userData.two_fa_method === 'authenticator') {
-            window.location.href = '#/qr-code';
+            if (tfa)
+                window.location.href = `#/qr-code?tfa=${encodeURIComponent(tfa)}`;
+            else
+                alert('Erreur tfa_token non valide');
         } else {
             return fetch(`${authUrl}/signin/`, {
                 method: 'POST',
@@ -123,6 +135,7 @@ function handleFormSubmit(event) {
             })
             .then(tokens => {
                 console.log('Tokens récupérés:', tokens);
+                localStorage.removeItem('tfa');
                 localStorage.setItem('accessToken', tokens.access);
                 localStorage.setItem('refreshToken', tokens.refresh);
 

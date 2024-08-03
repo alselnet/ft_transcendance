@@ -36,7 +36,7 @@ class MeView(APIView):
             'won_games': profile.won_games,
             'perfect_wins': profile.perfect_wins,
             'fortytwo_account': profile.fortytwo_account,
-            'totp_secret': profile.totp_secret
+            'tfa_token': profile.tfa_token
         }
 
         return Response(user_data, status=200)

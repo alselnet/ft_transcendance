@@ -247,21 +247,24 @@ class InitialAuthenticationView(APIView):
 
 class Generate2FACodeView(APIView):
     def post(self, request):
-        totp_secret = request.data.get('totp_secret')
+        tfa_token = request.data.get('tfa_token')
 
-        if not totp_secret:
-            return Response({'error': 'TOTP secret is required'}, status=status.HTTP_400_BAD_REQUEST)
+        if not tfa_token:
+            return Response({'error': 'TFA secret is required'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            profile = Profile.objects.get(totp_secret=totp_secret)
+            profile = Profile.objects.get(tfa_token=tfa_token)
             user = profile.user
         except Profile.DoesNotExist:
-            return Response({'error': 'Invalid TOTP secret'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Invalid TFA secret'}, status=status.HTTP_400_BAD_REQUEST)
 
         method = profile.two_fa_method
 
+        if not profile.totp_secret:
+            return Response({'error': 'TOTP secret is not set for this user'}, status=status.HTTP_400_BAD_REQUEST)
+
         if method == 'authenticator':
-            totp = pyotp.TOTP(totp_secret)
+            totp = pyotp.TOTP(profile.totp_secret)
             uri = totp.provisioning_uri(user.username, issuer_name="Pong")
             qr = qrcode.make(uri)
 
@@ -276,7 +279,7 @@ class Generate2FACodeView(APIView):
             if not profile.mail_confirmation_status:
                 return Response({'error': 'Email is not confirmed'}, status=status.HTTP_400_BAD_REQUEST)
 
-            totp = pyotp.TOTP(totp_secret)
+            totp = pyotp.TOTP(profile.totp_secret)
             totp_code = totp.now()
 
             subject = 'Your 2FA Code'
@@ -298,24 +301,26 @@ class Generate2FACodeView(APIView):
 
 class Validate2FACodeView(APIView):
     def post(self, request):
-        totp_secret = request.data.get('totp_secret')
+        tfa_token = request.data.get('tfa_token')
         code = request.data.get('code')
 
-        if not totp_secret or not code:
-            return Response({'error': 'TOTP secret and code are required'}, status=status.HTTP_400_BAD_REQUEST)
+        if not tfa_token or not code:
+            return Response({'error': 'TFA secret and code are required'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            profile = Profile.objects.get(totp_secret=totp_secret)
+            profile = Profile.objects.get(tfa_token=tfa_token)
             user = profile.user
         except Profile.DoesNotExist:
-            return Response({'error': 'Invalid TOTP secret'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Invalid TFA secret'}, status=status.HTTP_400_BAD_REQUEST)
 
-        totp = pyotp.TOTP(totp_secret)
+        totp = pyotp.TOTP(profile.totp_secret)
 
         if totp.verify(code):
             refresh = RefreshToken.for_user(user)
             access = refresh.access_token
 
+            profile.tfa_token = pyotp.random_base32()
+            profile.save()
             return Response({
                 'access': str(access),
                 'refresh': str(refresh),
@@ -336,7 +341,7 @@ class Update2FAStatusView(APIView):
         user = request.user
         profile = Profile.objects.get(user=user)
         
-        profile.totp_secret = pyotp.random_base32()
+        profile.tfa_token = pyotp.random_base32()
         profile.save()
 
         serializer = Update2FAStatusSerializer(data=request.data)
