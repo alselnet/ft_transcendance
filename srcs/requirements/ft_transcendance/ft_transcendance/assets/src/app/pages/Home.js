@@ -1,5 +1,5 @@
 import { animateBalls } from "../animation/HomeAnimation.js";
-import { FortyTwoSignIn, handleCallback } from "./42SignIn.js";
+import { FortyTwoSignIn } from "../functions/42SignIn.js";
 import img42 from '../images/42.png';
 
 const Home = () => {

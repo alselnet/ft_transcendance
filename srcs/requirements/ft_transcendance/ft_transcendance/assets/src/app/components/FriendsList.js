@@ -1,5 +1,5 @@
 import { get } from "../services/Api.js";
-import { getStatusColor, getStatusTooltip, deleteFriendList } from "../fonction/FriendsListFunctions.js";
+import { getStatusColor, getStatusTooltip, deleteFriendList } from "../functions/FriendsListFunctions.js";
 
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
 

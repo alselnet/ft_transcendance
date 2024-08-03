@@ -1,5 +1,5 @@
 import { getCookie } from '../utils/cookies';
-import { FortyTwoSignIn } from "./42SignIn.js";
+import { FortyTwoSignIn } from '../functions/42SignIn.js';
 import img42 from '../images/42.png';
 
 const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`

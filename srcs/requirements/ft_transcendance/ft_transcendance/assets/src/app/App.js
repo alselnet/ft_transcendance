@@ -2,7 +2,7 @@ import { LogOut } from "./components/LogOut.js";
 import { Navbar } from "./components/Navbar.js";
 import { Main } from "./utils/Main.js";
 import { Router } from "./utils/Router.js";
-import { updateActiveLink } from "./components/Navbar.js";
+import { updateActiveLink } from "./functions/NavbarFunctions.js";
 
 export const App = async () => {
     let root = document.getElementById("root");

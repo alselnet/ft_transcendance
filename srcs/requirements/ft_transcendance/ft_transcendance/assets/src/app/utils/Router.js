@@ -5,7 +5,7 @@ import { Game } from "../pages/Game.js";
 import { Dashboard } from "../pages/Dashboard.js";
 import { Settings } from "../pages/Settings.js";
 import { AboutUs } from "../pages/AboutUs.js";
-import { handleCallback } from '../pages/42SignIn.js';
+import { handleCallback } from "../functions/42SignIn.js";
 import { FriendProfile } from "../pages/FriendProfile.js";
 import { FriendList } from "../components/FriendsList.js";
 import { GameHistory } from "../components/GameHistory.js";
