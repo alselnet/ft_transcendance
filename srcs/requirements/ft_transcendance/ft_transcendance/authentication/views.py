@@ -228,32 +228,40 @@ class SendConfirmationEmailView(APIView):
             return Response({'error': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
 
+class InitialAuthenticationView(APIView):
+
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+        if not username or not password:
+            return Response({'error': 'Username and password are required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            # Authentification réussie, retourne une réponse positive sans générer les tokens
+            return Response({'message': 'Authentication successful', 'username': username}, status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
+
 class Generate2FACodeView(APIView):
     def post(self, request):
+        totp_secret = request.data.get('totp_secret')
 
-        username = request.data.get('username')
+        if not totp_secret:
+            return Response({'error': 'TOTP secret is required'}, status=status.HTTP_400_BAD_REQUEST)
 
-        if not username:
-            return Response({'error': 'Username is required'}, status=status.HTTP_400_BAD_REQUEST)
-        
         try:
-            user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            return Response({'error': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
-        
-        profile = Profile.objects.get(user=user)
-        
-        if profile.two_fa_method == 'none':
-            return Response({'error': 'Two-factor authentication is not enabled'}, status=status.HTTP_400_BAD_REQUEST)
+            profile = Profile.objects.get(totp_secret=totp_secret)
+            user = profile.user
+        except Profile.DoesNotExist:
+            return Response({'error': 'Invalid TOTP secret'}, status=status.HTTP_400_BAD_REQUEST)
 
         method = profile.two_fa_method
 
         if method == 'authenticator':
-            if not profile.totp_secret:
-                profile.totp_secret = pyotp.random_base32()
-                profile.save()
-
-            totp = pyotp.TOTP(profile.totp_secret)
+            totp = pyotp.TOTP(totp_secret)
             uri = totp.provisioning_uri(user.username, issuer_name="Pong")
             qr = qrcode.make(uri)
 
@@ -263,16 +271,12 @@ class Generate2FACodeView(APIView):
 
             response = HttpResponse(buffer, content_type="image/png")
             return response
-        
+
         elif method == 'email':
             if not profile.mail_confirmation_status:
                 return Response({'error': 'Email is not confirmed'}, status=status.HTTP_400_BAD_REQUEST)
 
-            if not profile.totp_secret:
-                profile.totp_secret = pyotp.random_base32()
-                profile.save()
-
-            totp = pyotp.TOTP(profile.totp_secret)
+            totp = pyotp.TOTP(totp_secret)
             totp_code = totp.now()
 
             subject = 'Your 2FA Code'
@@ -293,31 +297,22 @@ class Generate2FACodeView(APIView):
 
 
 class Validate2FACodeView(APIView):
-
     def post(self, request):
-        username = request.data.get('username')
+        totp_secret = request.data.get('totp_secret')
         code = request.data.get('code')
 
-        if not username or not code:
-            return Response({'error': 'Username and code are required'}, status=status.HTTP_400_BAD_REQUEST)
+        if not totp_secret or not code:
+            return Response({'error': 'TOTP secret and code are required'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
-
-        try:
-            profile = Profile.objects.get(user=user)
+            profile = Profile.objects.get(totp_secret=totp_secret)
+            user = profile.user
         except Profile.DoesNotExist:
-            return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'error': 'Invalid TOTP secret'}, status=status.HTTP_400_BAD_REQUEST)
 
-        if profile.two_fa_method == 'none':
-            return Response({'error': 'Two-factor authentication is not enabled'}, status=status.HTTP_400_BAD_REQUEST)
-
-        totp = pyotp.TOTP(profile.totp_secret)
+        totp = pyotp.TOTP(totp_secret)
 
         if totp.verify(code):
-            # Générer des tokens JWT
             refresh = RefreshToken.for_user(user)
             access = refresh.access_token
 
@@ -328,8 +323,6 @@ class Validate2FACodeView(APIView):
             }, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid 2FA code'}, status=status.HTTP_400_BAD_REQUEST)
-
-
 
 
 class Update2FAStatusView(APIView):
@@ -343,6 +336,9 @@ class Update2FAStatusView(APIView):
         user = request.user
         profile = Profile.objects.get(user=user)
         
+        profile.totp_secret = pyotp.random_base32()
+        profile.save()
+
         serializer = Update2FAStatusSerializer(data=request.data)
         if serializer.is_valid():
             two_fa_method = serializer.validated_data['method']

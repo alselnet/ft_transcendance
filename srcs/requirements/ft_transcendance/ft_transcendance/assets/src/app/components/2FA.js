@@ -20,10 +20,10 @@ const TwoFactorAuth = async () => {
     }
 
     const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
-    const username = urlParams.get('username');
-    if (!username) {
-        console.error('Username not found in URL');
-        alert('Nom d utilisateur non trouvé. Veuillez réessayer.');
+    const totp = urlParams.get('totp');
+    if (!totp) {
+        console.error('TOTP not found in URL');
+        alert('TOTP non trouvé. Veuillez réessayer.');
         return;
     }
     
@@ -56,7 +56,7 @@ const TwoFactorAuth = async () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, code })
+                body: JSON.stringify({ 'totp_secret': totp, 'code': code })
             });
 
             if (!response.ok) {
@@ -68,6 +68,7 @@ const TwoFactorAuth = async () => {
             console.log('2FA code validated:', data);
 
             if (data.access && data.refresh) {
+                localStorage.removeItem('totp');
                 localStorage.setItem('accessToken', data.access);
                 localStorage.setItem('refreshToken', data.refresh);
                 window.location.href = '#/dashboard';
@@ -87,7 +88,7 @@ const TwoFactorAuth = async () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username })
+                body: JSON.stringify({ 'totp_secret': totp })
             });
 
             if (!response.ok) {

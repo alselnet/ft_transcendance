@@ -1,9 +1,16 @@
-import { getCookie } from '../utils/cookies';
 
 const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`;
 
 export const QRCode = () => {
     let section = document.querySelector("#section");
+
+    const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
+    const totp = urlParams.get('totp');
+    if (!totp) {
+        console.error('TOTP not found in URL');
+        alert('TOTP non trouvé. Veuillez réessayer.');
+        return;
+    }
 
     section.innerHTML = `
         <div class="container-qr-code">
@@ -19,7 +26,8 @@ export const QRCode = () => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-        }
+        },
+        body: JSON.stringify({ 'totp_secret': totp })
     })
     .then(response => {
         if (!response.ok) {
@@ -33,11 +41,11 @@ export const QRCode = () => {
     })
     .catch(error => {
         console.error('Erreur lors de la génération du QR Code:', error);
-        alert('Erreur lors de la génération du QR Code. Veuillez réessayer.');
+        alert(`Erreur lors de la génération du QR Code: ${error.message}`);
     });
 
     document.getElementById('proceed-to-2fa-auth').addEventListener('click', () => {
-        window.location.href = '#/2fa-auth';
+        window.location.href = `#/2fa-auth?totp=${encodeURIComponent(totp)}`;
     });
 
     return section;

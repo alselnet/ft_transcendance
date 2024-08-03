@@ -80,12 +80,12 @@ export const Router = async () => {
         UpdatePassword();
     } else if (hash === "#/delete-account") {
         DeleteAccount();
-    } else if (hash === "#/qr-code") {
+    } else if (hash.startsWith("#/qr-code")) {
         QRCode();
-    } else if (hash.startsWith("#/friendprofile/")) {
-        FriendProfile();
     } else if (hash.startsWith("#/2fa-auth")) {
         TwoFactorAuth();
+    } else if (hash.startsWith("#/friendprofile/")) {
+        FriendProfile();
     } else {
         section.innerHTML = "<h1>Page not found</h1>";
     }

@@ -1,3 +1,4 @@
+import CryptoJS from 'crypto-js';
 import { getCookie } from '../utils/cookies';
 import img42 from '../images/42.png';
 import { FortyTwoSignIn } from "./42SignIn.js";
@@ -152,26 +153,38 @@ function handleFormSubmit(event) {
     .then(response => response.json())
     .then(userData => {
         console.log('User data:', userData);
+        if (userData.totp_secret) {
+            localStorage.setItem('totp', userData.totp_secret);
+        } else {
+            console.error('Erreur : `totp_secret` non disponible dans les données utilisateur.');
+        }
+    
+        const totp = localStorage.getItem('totp');
 
+        console.error('TOTP :', totp)
         if (userData.two_fa_method === 'email') {
             return fetch(`${authUrl}/generate-2fa-code/`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    'username': userData.username
-                })
+                body: JSON.stringify({ 'totp_secret': totp })
             })
             .then(() => {
-                window.location.href = `#/2fa-auth?username=${encodeURIComponent(logData.username)}`;
+                if (totp)
+                    window.location.href = `#/2fa-auth?totp=${encodeURIComponent(totp)}`;
+                else
+                    alert('Erreur totp_secret non valide');
             })
             .catch(error => {
                 console.error('Erreur lors de l\'envoi du code 2FA:', error);
                 alert('Erreur lors de l\'envoi du code 2FA. Veuillez réessayer.');
             });
         } else if (userData.two_fa_method === 'authenticator') {
-            window.location.href = '#/qr-code';
+            if (totp)
+                window.location.href = `#/qr-code?totp=${encodeURIComponent(totp)}`;
+            else
+                alert('Erreur totp_secret non valide');
         } else {
             return fetch(`${authUrl}/signin/`, {
                 method: 'POST',
@@ -192,6 +205,7 @@ function handleFormSubmit(event) {
             })
             .then(tokens => {
                 console.log('Tokens récupérés:', tokens);
+                localStorage.removeItem('totp');
                 localStorage.setItem('accessToken', tokens.access);
                 localStorage.setItem('refreshToken', tokens.refresh);
 

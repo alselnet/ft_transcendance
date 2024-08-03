@@ -35,7 +35,8 @@ class MeView(APIView):
             'played_games': profile.played_games,
             'won_games': profile.won_games,
             'perfect_wins': profile.perfect_wins,
-            'fortytwo_account': profile.fortytwo_account
+            'fortytwo_account': profile.fortytwo_account,
+            'totp_secret': profile.totp_secret
         }
 
         return Response(user_data, status=200)
@@ -174,7 +175,6 @@ class UpdateAvatarView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     parser_classes = (MultiPartParser, FormParser) # Definit les parseurs utilises -> typiquement pour les DL de fichiers
-
 
     def post(self, request):
         profile = request.user.profile
