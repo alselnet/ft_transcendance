@@ -25,30 +25,31 @@ const updateAvatar = (file) => {
    const formData = new FormData();
    formData.append('avatar', file);
 
-    fetch(`${usersUrl}/update-avatar/`, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-        },
-        body: formData
+   fetch(`${usersUrl}/update-avatar/`, {
+    method: 'POST',
+    headers: {
+        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+    },
+    body: formData
     })
     .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
+        if (response.status === 413) {
+            throw new Error('Le fichier est trop grand. Veuillez choisir un fichier plus petit.');
+        } else if (!response.ok) {
             return response.json().then(errorData => {
-                throw new Error(errorData.error || 'Failed to update avatar');
+                throw new Error(errorData.error || 'Échec de la mise à jour de l\'avatar');
             });
         }
+        return response.json();
     })
     .then(data => {
         document.querySelector('.settings-picture').src = data.avatar;
-        alert('Avatar updated successfully');
+        alert('Avatar mis à jour avec succès');
         window.location.reload();
     })
     .catch(error => {
-        console.error('Error updating avatar:', error);
-        alert('An error occurred while updating the avatar');
+        console.error('Erreur lors de la mise à jour de l\'avatar:', error);
+        alert(`Une erreur s'est produite lors de la mise à jour de l'avatar : ${error.message}`);
     });
 };
 
