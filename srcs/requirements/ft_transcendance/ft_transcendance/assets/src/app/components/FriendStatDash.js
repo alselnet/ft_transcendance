@@ -1,6 +1,7 @@
 import { get } from "../services/Api.js";
-import { animateNumbers, setupCamembertAnimation } from "../animation/DashboardAnimation.js";
+import { searchLogin } from "../functions/SettingsFunctions.js"
 import { getStatusColor, addFriend, deleteFriend } from "../functions/FriendProfileFunctions.js";
+import { addCamembert, setUpNumberAnimation } from "../functions/DashboardFunctions.js";
 
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
 
@@ -93,54 +94,22 @@ const FriendDashStat = () => {
 			</div>
             `;
 
-            setTimeout(() => {
-                const numbers = form.querySelectorAll('.stat-number');
-                numbers.forEach(number => {
-                    const target = +number.getAttribute('data-target');
-                    animateNumbers(number, target);
-                });
-            }, 500);
-
-
-            let percentage = 0;
-            let color = "#b26969";
-            let message = '';
-            if (userData.played_games !== 0) {
-                percentage = ((userData.played_games - userData.won_games) * 99.9999) / userData.played_games;
-            } else {
-                message = "aucune partie jouée";
-            }
-            
-            setupCamembertAnimation(form, percentage, color, message);
- 
-            window.addEventListener('resize', () => {
-                setupCamembertAnimation(form, percentage, color, message);
-            });
-
+		    setUpNumberAnimation(form);
+            addCamembert(form, userData.played_games, userData.won_games);
 
             const loginSearchInput = form.querySelector("#login-search");
             const searchButton = form.querySelector("#search-button");
-
-            const searchLogin = () => {
-                const username = loginSearchInput.value;
-                if (username) {
-                    if (isUserSelf(username, userData.username)) {
-                        alert("Vous ne pouvez pas accéder à votre propre profil.");
-                    } else {
-                        window.location.href = `#/friendprofile/${username}`;
-                    }
-                    loginSearchInput.value = "";
+    
+            searchButton.addEventListener('click', () => {
+                searchLogin(loginSearchInput, userData.username);
+            });
+            
+            loginSearchInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    searchLogin(loginSearchInput, userData.username);
                 }
-            };
-
-        searchButton.addEventListener('click', searchLogin);
-
-        loginSearchInput.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                searchLogin();
-            }
-        });
-
+            });
+        
 			document.getElementById('delete-friend-btn').addEventListener('click', (e) => {
                 e.preventDefault();
                 deleteFriend(username);
@@ -163,9 +132,5 @@ const FriendDashStat = () => {
     
 };
 
-
-const isUserSelf = (searchedUsername, currentUsername) => {
-    return searchedUsername === currentUsername;
-};
 
 export { FriendDashStat };
