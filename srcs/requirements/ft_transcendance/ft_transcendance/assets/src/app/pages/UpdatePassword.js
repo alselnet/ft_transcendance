@@ -1,7 +1,5 @@
-import { put } from "../services/Api.js";
 import { removeMainComponent } from "../functions/MainFunctions.js";
-
-const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
+import { updatePswSettings } from "../functions/UpdateDataFunctions.js";
 
 const UpdatePassword = async () => {
 
@@ -21,37 +19,7 @@ const UpdatePassword = async () => {
         </div>
     `;
 
-    document.getElementById('submit-update-password').addEventListener('click', async () => {
-        const currentPassword = document.getElementById('current-password').value;
-        const newPassword = document.getElementById('new-password').value;
-        const confirmPassword = document.getElementById('confirm-password').value;
-
-        if (currentPassword && newPassword && confirmPassword) {
-            if (newPassword === confirmPassword) {
-                try {
-                    const response = await put(`${usersUrl}/update-password/`, {
-                        current_password: currentPassword,
-                        new_password: newPassword
-                    });
-
-                    if (response.ok) {
-                        alert('Password updated successfully');
-                        window.location.hash = '#/settings';
-                    } else {
-                        const errorData = await response.json();
-                        alert(`Error: ${errorData.current_password || errorData.new_password || 'Failed to update password'}`);
-                    }
-                } catch (error) {
-                    console.error('Error updating password:', error);
-                    alert('An error occurred while updating the password');
-                }
-            } else {
-                alert('New password and confirmation do not match');
-            }
-        } else {
-            alert('Please enter all fields');
-        }
-    });
+    updatePswSettings();
 
     document.getElementById('cancel-update-password').addEventListener('click', () => {
         window.location.hash = '#/settings';

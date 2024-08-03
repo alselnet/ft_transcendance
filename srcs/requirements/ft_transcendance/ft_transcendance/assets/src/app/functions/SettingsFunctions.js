@@ -131,6 +131,38 @@ const isUserSelf = (searchedUsername, currentUsername) => {
     return searchedUsername === currentUsername;
 };
 
+const updateDataSettings = () => {
+
+    section.querySelector('#edit-username').addEventListener('click', (event) => {
+        window.location.hash = '#/update-username';
+    });
+
+    section.querySelector('#edit-email').addEventListener('click', (event) => {
+        window.location.hash = '#/update-email';
+    });
+
+    section.querySelector('#edit-password').addEventListener('click', (event) => {
+        window.location.hash = '#/update-password';
+    });
+    
+    section.querySelector('#tfa-none').addEventListener('click', () => {
+        update2FA('none');
+    });
+
+    section.querySelector('#tfa-email').addEventListener('click', () => {
+        update2FA('email');
+    });
+    
+    section.querySelector('#tfa-authenticator').addEventListener('click', () => {
+        update2FA('authenticator');
+    });
+    
+    section.querySelector('.delete-account').addEventListener('click', (event) => {
+        window.location.hash = '#/delete-account';
+    });
+
+}
+
 export { sendConfirmationEmail, updateAvatar, 
     update2FA, update2FAActiveClass,  changeBackgroundImage,  
-    setupBackgroundChangeListeners, searchLogin};
+    setupBackgroundChangeListeners, searchLogin, updateDataSettings};

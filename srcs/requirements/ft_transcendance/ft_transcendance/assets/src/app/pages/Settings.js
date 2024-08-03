@@ -1,6 +1,7 @@
 import { checkAuth, get } from "../services/Api.js";
 import { sendConfirmationEmail, updateAvatar, update2FA, update2FAActiveClass,
-      initializeSettingsPage, searchLogin, } from "../functions/SettingsFunctions.js";
+      initializeSettingsPage, searchLogin,
+      updateDataSettings, } from "../functions/SettingsFunctions.js";
 
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
 
@@ -114,8 +115,6 @@ const Settings = async () => {
        ${emailConfirmationBanner}
 
    </div>
-
-
        `;
 
        section.querySelector('.edit-pp').addEventListener('click', (event) => {
@@ -133,43 +132,18 @@ const Settings = async () => {
         const loginSearchInput = section.querySelector("#login-search");
         const searchButton = section.querySelector("#search-button");
 
-        searchButton.addEventListener('click', searchLogin);
-
+		searchButton.addEventListener('click', () => {
+			searchLogin(loginSearchInput, userData.username);
+		});
+		
         loginSearchInput.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
-                searchLogin();
+                searchLogin(loginSearchInput, userData.username);
             }
         });
-        
-       section.querySelector('#edit-username').addEventListener('click', (event) => {
-           window.location.hash = '#/update-username';
-       });
 
-       section.querySelector('#edit-email').addEventListener('click', (event) => {
-           window.location.hash = '#/update-email';
-       });
-
-       section.querySelector('#edit-password').addEventListener('click', (event) => {
-           window.location.hash = '#/update-password';
-       });
-       
-       section.querySelector('#tfa-none').addEventListener('click', () => {
-           update2FA('none');
-       });
-
-       section.querySelector('#tfa-email').addEventListener('click', () => {
-           update2FA('email');
-       });
-       
-       section.querySelector('#tfa-authenticator').addEventListener('click', () => {
-           update2FA('authenticator');
-       });
-       
-       section.querySelector('.delete-account').addEventListener('click', (event) => {
-           window.location.hash = '#/delete-account';
-       });
-       
-       update2FAActiveClass(userData.two_fa_method);
+        updateDataSettings();
+        update2FAActiveClass(userData.two_fa_method);
 
        if (userData.mail_confirmation_status == false)
        {

@@ -1,7 +1,6 @@
-import { put } from "../services/Api.js";
 import { removeMainComponent } from "../functions/MainFunctions.js";
+import { updateUsernameSettings } from "../functions/UpdateDataFunctions.js";
 
-const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
 
 const UpdateUsername = async () => {
 
@@ -19,31 +18,7 @@ const UpdateUsername = async () => {
         </div>
     </div>
     `;
-
-    document.getElementById('submit-update-username').addEventListener('click', async () => {
-        const newUsername = document.getElementById('new-data').value;
-        const password = document.getElementById('password').value;
-
-        if (newUsername && password) {
-            try {
-                const response = await put(`${usersUrl}/update-username/`, { username: newUsername, password: password });
-
-                if (response.ok) {
-                    const updateData = await response.json();
-                    alert('Username updated successfully');
-					window.location.hash = '#/settings';
-                } else {
-                    const errorData = await response.json();
-                    alert(`Error: ${errorData.error || 'Failed to update username'}`);
-                }
-            } catch (error) {
-                console.error('Error updating username:', error);
-                alert('An error occurred while updating the username');
-            }
-        } else {
-            alert('Please enter both username and password');
-        }
-    });
+    updateUsernameSettings();
 
     document.getElementById('cancel-update-username').addEventListener('click', () => {
         window.location.hash = '#/settings';

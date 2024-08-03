@@ -1,7 +1,5 @@
-import { put } from "../services/Api.js";
 import { removeMainComponent } from "../functions/MainFunctions.js";
-
-const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
+import { updateEmailSettings } from "../functions/UpdateDataFunctions.js";
 
 const UpdateEmail = async () => {
 
@@ -19,31 +17,7 @@ const UpdateEmail = async () => {
             </div>
         </div>
     `;
-
-    document.getElementById('submit-update-email').addEventListener('click', async () => {
-        const newEmail = document.getElementById('new-data').value;
-        const password = document.getElementById('password').value;
-
-        if (newEmail && password) {
-            try {
-                const response = await put(`${usersUrl}/update-email/`, { email: newEmail, password: password });
-
-                if (response.ok) {
-                    const updateData = await response.json();
-                    alert('Email updated successfully');
-					window.location.hash = '#/settings';
-                } else {
-                    const errorData = await response.json();
-                    alert(`Error: ${errorData.error || 'Failed to update email'}`);
-                }
-            } catch (error) {
-                console.error('Error updating email:', error);
-                alert('An error occurred while updating the email');
-            }
-        } else {
-            alert('Please enter both email and password');
-        }
-    });
+    updateEmailSettings();
 
     document.getElementById('cancel-update-email').addEventListener('click', () => {
         window.location.hash = '#/settings';
