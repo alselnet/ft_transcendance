@@ -1,25 +1,12 @@
 import { get } from "../services/Api.js";
 import { getStatusColor, getStatusTooltip, deleteFriendList } from "../functions/FriendsListFunctions.js";
+import { removeMainComponent } from "../functions/MainFunctions.js";
 
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
 
 export const FriendList = async () => {
-    let root = document.getElementById("root");
-    if (!root) {
-        console.error("#root not found in the DOM");
-        return;
-    }
     
-    let navbar = document.querySelector(".navbar-container");
-    if (navbar) {
-        navbar.remove();
-    }
-    
-    let logoutbutton = document.querySelector(".logout-container");
-    if (logoutbutton) {
-        logoutbutton.remove();
-    }
-
+    removeMainComponent();
     try {
         const response = await get(`${usersUrl}/friendlist/`);
         if (!response.ok) {

@@ -1,24 +1,11 @@
 import img42 from '../images/42.png';
 import { FortyTwoSignIn } from "../functions/42SignIn.js";
 import { handleFormVisibility } from '../functions/LoginFunctions.js';
+import { removeMainComponent } from "../functions/MainFunctions.js";
 
 export const LogIn = () => {
-    let root = document.getElementById("root");
-    if (!root) {
-        console.error("#root not found in the DOM");
-        return;
-    }
 
-    let navbar = document.querySelector(".navbar-container");
-    if (navbar) {
-        navbar.remove();
-    }
-
-    let logoutbutton = document.querySelector(".logout-container");
-    if (logoutbutton) {
-        logoutbutton.remove();
-    }
-
+    removeMainComponent();
     let section = document.querySelector("#section");
     if (section) {
         section.innerHTML = `

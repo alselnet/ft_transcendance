@@ -1,25 +1,12 @@
 import { LogOutUser } from "../functions/LogOutFunctions";
+import { removeMainComponent } from "../functions/MainFunctions.js";
+
 
 const LogOutMsg = async () => {
 
     let msg = document.querySelector("#section");
 
-    let root = document.getElementById("root");
-    if (!root) {
-        console.error("#root not found in the DOM");
-        return;
-    }
-
-    let navbar = document.querySelector(".navbar-container");
-    if (navbar) {
-        navbar.remove();
-    }
-
-    let logoutbutton = document.querySelector(".logout-container");
-    if (logoutbutton) {
-        logoutbutton.remove();
-    }
-
+    removeMainComponent();
     if (msg) {
         msg.innerHTML =
     `   <div class="frame-LogOutMsg-container">
