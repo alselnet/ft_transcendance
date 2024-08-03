@@ -18,9 +18,7 @@ export const QRCode = () => {
     fetch(`${authUrl}/generate-2fa-code/`, {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
             'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')
         }
     })
     .then(response => {

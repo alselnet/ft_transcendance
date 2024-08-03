@@ -68,8 +68,6 @@ export const Router = async () => {
         GameHistory();
 	} else if (hash.startsWith ("#/publicgamehistory")) {
 		PublicGameHistory();
-    } else if (hash === "#/2fa-auth") {
-        TwoFactorAuth();
     } else if (hash === "#/logout") {
         LogOutMsg();
     } else if (hash === "#/chartemsg") {
@@ -86,6 +84,8 @@ export const Router = async () => {
         QRCode();
     } else if (hash.startsWith("#/friendprofile/")) {
         FriendProfile();
+    } else if (hash.startsWith("#/2fa-auth")) {
+        TwoFactorAuth();
     } else {
         section.innerHTML = "<h1>Page not found</h1>";
     }

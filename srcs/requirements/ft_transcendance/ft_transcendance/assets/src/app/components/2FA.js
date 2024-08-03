@@ -19,6 +19,14 @@ const TwoFactorAuth = async () => {
         logoutbutton.remove();
     }
 
+    const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
+    const username = urlParams.get('username');
+    if (!username) {
+        console.error('Username not found in URL');
+        alert('Nom d utilisateur non trouvé. Veuillez réessayer.');
+        return;
+    }
+    
     section.innerHTML = 
       `
       <div class="container-2FA">
@@ -46,11 +54,9 @@ const TwoFactorAuth = async () => {
             const response = await fetch(`${authUrl}/validate-2fa-code/`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                     'Content-Type': 'application/json',
-                    'X-CSRFToken': getCookie('csrftoken')
                 },
-                body: JSON.stringify({ code })
+                body: JSON.stringify({ username, code })
             });
 
             if (!response.ok) {
@@ -60,7 +66,14 @@ const TwoFactorAuth = async () => {
 
             const data = await response.json();
             console.log('2FA code validated:', data);
-            window.location.href = '#/dashboard';  // Redirige vers le tableau de bord après validation
+
+            if (data.access && data.refresh) {
+                localStorage.setItem('accessToken', data.access);
+                localStorage.setItem('refreshToken', data.refresh);
+                window.location.href = '#/dashboard';
+            } else {
+                throw new Error('Tokens non valides reçus');
+            }
         } catch (error) {
             console.error('Erreur de validation du code 2FA:', error);
             alert(error.message);
@@ -72,10 +85,9 @@ const TwoFactorAuth = async () => {
             const response = await fetch(`${authUrl}/generate-2fa-code/`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                     'Content-Type': 'application/json',
-                    'X-CSRFToken': getCookie('csrftoken')
-                }
+                },
+                body: JSON.stringify({ username })
             });
 
             if (!response.ok) {

@@ -175,7 +175,6 @@ class UpdateAvatarView(APIView):
     permission_classes = [IsAuthenticated]
     parser_classes = (MultiPartParser, FormParser) # Definit les parseurs utilises -> typiquement pour les DL de fichiers
 
-    logger.info("")
 
     def post(self, request):
         profile = request.user.profile

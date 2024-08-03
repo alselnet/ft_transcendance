@@ -229,10 +229,18 @@ class SendConfirmationEmailView(APIView):
 
 
 class Generate2FACodeView(APIView):
-    permission_classes = [IsAuthenticated]
-
     def post(self, request):
-        user = request.user
+
+        username = request.data.get('username')
+
+        if not username:
+            return Response({'error': 'Username is required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return Response({'error': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
+        
         profile = Profile.objects.get(user=user)
         
         if profile.two_fa_method == 'none':
@@ -285,23 +293,42 @@ class Generate2FACodeView(APIView):
 
 
 class Validate2FACodeView(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        user = request.user
-        profile = Profile.objects.get(user=user)
+        username = request.data.get('username')
+        code = request.data.get('code')
+
+        if not username or not code:
+            return Response({'error': 'Username and code are required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        try:
+            profile = Profile.objects.get(user=user)
+        except Profile.DoesNotExist:
+            return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)
 
         if profile.two_fa_method == 'none':
             return Response({'error': 'Two-factor authentication is not enabled'}, status=status.HTTP_400_BAD_REQUEST)
 
         totp = pyotp.TOTP(profile.totp_secret)
-        code = request.data.get('code')
 
         if totp.verify(code):
-            return Response({'message': '2FA code is valid'}, status=status.HTTP_200_OK)
+            # Générer des tokens JWT
+            refresh = RefreshToken.for_user(user)
+            access = refresh.access_token
+
+            return Response({
+                'access': str(access),
+                'refresh': str(refresh),
+                'message': '2FA code is valid'
+            }, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid 2FA code'}, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 
