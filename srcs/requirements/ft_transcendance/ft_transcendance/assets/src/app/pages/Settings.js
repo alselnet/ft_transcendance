@@ -217,7 +217,7 @@ const Settings = async () => {
             </div>
 
            <a class="nav-link" href="#/chartemsg">
-               <div class="chart-footer" id="list-stat">
+               <div class="charte-footer" id="list-stat">
                    <i class="bi bi-file-earmark-lock settings-footer-icon"></i>
                    <p class="settings-footer-text">Charte de confidentialite</p>
                </div>

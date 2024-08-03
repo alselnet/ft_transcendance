@@ -4,7 +4,6 @@ a {
     font-size: larger;
 }
 
-/* BALLS */
 .balls-home {
     position: relative;
     display: flex;
@@ -53,13 +52,6 @@ a {
     z-index: 2;
 }
 
-/* Positionnement des lettres */
-.orange-ball-home span,
-.white-ball-home span {
-    position: absolute;
-    transform-origin: center;
-}
-
 .btn-container-home {
     position: absolute;
     top: 85%;
@@ -89,7 +81,7 @@ a {
     margin-bottom: 10%;
 }
 
-.balls-sm-home {
+/* .balls-sm-home {
     position: relative;
     display: flex;
     justify-content: center;
@@ -97,9 +89,9 @@ a {
     align-items: center;
     height: 100vh;
     margin: 0;
-}
+} */
 
-.orange-ball-sm-home {
+/* .orange-ball-sm-home {
     margin-bottom: 30vh;
     width: 40vw;
     height: 40vw;
@@ -112,9 +104,9 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
-.white-ball-sm-home {
+/* .white-ball-sm-home {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -128,9 +120,9 @@ a {
     border-radius: 50%;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
     z-index: 2;
-}
+} */
 
-.btn-container-sm-home {
+/* .btn-container-sm-home {
     position: absolute;
     top: 70%;
     left: 50%;
@@ -139,7 +131,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 .balls-home-sm {
     position: relative;
@@ -182,7 +174,7 @@ a {
     z-index: 2;   
 }
 
-.btn-container-home-sm {
+/* .btn-container-home-sm {
     position: absolute;
     top: 70%;
     left: 50%;
@@ -191,11 +183,11 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
-.orange-ball-home-sm:hover {
+/* .orange-ball-home-sm:hover {
     color: red;
-}
+} */
 /* BALLS */
 .balls-signin {
     position: relative;
@@ -204,17 +196,6 @@ a {
     align-items: center;
     height: 100vh;
     margin: 0;
-}
-
-.arrow {
-    color: white;
-    margin-bottom: 30vh;
-    margin-left: -5vh;
-    font-size: 2rem;
-}
-
-.arrow:hover {
-    color: rgb(218, 147, 16);
 }
 
 .arrow-s {
@@ -233,7 +214,6 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* text-align: center; */
     margin: 0;
     margin-right: 30vw;
     width: 40vw;
@@ -349,8 +329,6 @@ input[type="text"], input[type="password"], input[type="email"] {
     color: white;
 }
 
-
-/* BALLS */
 .balls-login {
     position: relative;
     display: flex;
@@ -459,6 +437,17 @@ input[type="text"], input[type="password"], input[type="email"] {
     z-index: 2;
 }
 
+.arrow {
+    color: white;
+    margin-bottom: 30vh;
+    margin-left: -5vh;
+    font-size: 2rem;
+}
+
+.arrow:hover {
+    color: rgb(218, 147, 16);
+}
+
 .arrow-sm {
     color: white;
     margin-bottom: 40vh;
@@ -469,7 +458,9 @@ input[type="text"], input[type="password"], input[type="email"] {
 .arrow-sm:hover {
     color: orange;
 }
-.navbar-superposition {
+
+
+.navbar-supperposition {
     position: relative;
 }
 
@@ -881,99 +872,6 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 
-.profile-text {
-    position: fixed;
-    color: black;
-    background-color: rgba(255, 255, 255, 0.2);
-    margin-left: 2vw;
-    width: 6vw;
-    height: 1vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 6px;
-    font-size: 70%;
-    color: black;
-}
-
-
-.footer-friend-link {
-	position: fixed;
-	bottom: 5vh;
-	width: 75%;
-	z-index: 100;
-    margin-left: 18vw;
-    display: flex;
-	align-items: center;
-    flex-direction: row;
-    justify-content: flex-start;
-}
-
-.footer-friend-icon {
-    font-size: 2rem;
-    color: white;
-    margin-top: 0.5vh;
-}
-
-.footer-friend-icon:hover {
-    color: #245070;
-}
-
-.footer-friend {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-}
-
-.footer-friend-text {
-    margin-left: 15px;
-    margin-top: 15px;
-    margin-right: 10vw;
-    color: white;
-    font-size: 1vw;
-}
-
-.footer-friend-text:hover {
-    color: #245070;
-}
-
-.person-icon {
-    display: flex;
-    font-size: 2vw;
-    color: rgba(255, 255, 255, 0.2);
-    margin-left: 1vw;
-    color: rgb(71, 136, 71);
-}
-
-.person-icon:hover {
-    color: white;
-}
-
-.friend-status-text {
-    color: white;
-    margin-left: 7px;
-    margin-right: 45vw;
-    font-size: 1vw;
-}
-
-.delete-icon {
-    color: rgb(195, 103, 103);
-}
-
-.friend-name {
-    display: flex;
-    flex-direction: column;
-}
-
-.friend-username-stat {
-    color: white;
-    text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
-    margin-top: 2vh;
-    margin-left: 1vw;
-    font-size: 2.5vw;
-}
-
-
 @media (min-width: 768px) and (max-width: 1278px) {
 
     .middle {
@@ -1023,30 +921,6 @@ input[type="text"], input[type="password"], input[type="email"] {
     .stat-text {
         font-size: 70%;
     }
-
-    .person-icon {
-        font-size: 3vw;
-    }
-
-    .friend-status-text {
-        margin-right: 35vw;
-        font-size: 1.5vw;
-        margin-top: 0.1vh;
-    }
-
-    .profile-text {
-        font-size: 1.5vw;
-        margin-left: 4vw;
-        width: 10vw;
-        height: 2vw;
-        
-    }
-
-    .friend-username-stat {
-        font-size: 3vw;
-        margin-left: 4vw;
-    }
-    
 }
 
 
@@ -1096,33 +970,7 @@ input[type="text"], input[type="password"], input[type="email"] {
         font-size: 2vw;
     }
 
-    .friend-status-text {
-        margin-right: 25vw;
-        font-size: 2vw;
-    }
-
-    .footer-friend-text {
-        display: none;
-    }
-
-    .profile-text {
-        font-size: 1.5vw;
-        margin-left: 4vw;
-        width: 10vw;
-        height: 2vw;
-    }
-
-    .friend-username-stat {
-        margin-left: 2vw;
-    }
-
-    .person-icon {
-        font-size: 3vw;
-    }
-
-    .footer-friend-icon {
-        margin-left: 3vw;
-    }
+    
 
 }
 .settings-container {
@@ -1276,7 +1124,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     color: #fff;
  }
  
- .settings-link {
+ /* .settings-link {
     position: fixed;
     bottom: 5vh;
     width: 75%;
@@ -1285,7 +1133,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     align-items: center;
     flex-direction: row;
     justify-content: flex-start;
- }
+ } */
  
  .settings-footer {
     display: flex;
@@ -1301,7 +1149,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     color: white;
  }
  
- .chart-footer {
+ .charte-footer {
     display: flex;
     justify-content: center;
     text-align: center;
@@ -1336,10 +1184,10 @@ input[type="text"], input[type="password"], input[type="email"] {
     left: 0;
     font-size: 1vw;
  }
- 
+/*  
  .hidden {
     display: none;
- }
+ } */
  
 .btn.delete-account {
         margin-top: 2vh;
@@ -1737,11 +1585,6 @@ tbody, td, tfoot, th, thead, tr {
     color: #2B6E25;
 }
 
-.game-historic-history:hover {
-    color: gold;
-}
-
-
 .main-containerf {
     display: flex;
     flex-direction: column;
@@ -1915,10 +1758,6 @@ tbody, td, tfoot, th, thead, tr {
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(67, 66, 66, 0.6);
 }
-.navbar-supperposition {
-    position: relative;
-}
-
 .logout-container {
     position: absolute;
     top: 20px;
@@ -1935,7 +1774,6 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 /* MSG */
-
 .frame-LogOutMsg-container {
     position: relative;
     display: flex;
@@ -2195,6 +2033,156 @@ input[type="text"], input[type="password"], input[type="email"] {
     background-color: #0056b3;
 }
 
+.profile-text {
+    position: fixed;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-left: 2vw;
+    width: 6vw;
+    height: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    font-size: 70%;
+    color: black;
+} 
+
+
+.footer-friend-link {
+	position: fixed;
+	bottom: 5vh;
+	width: 75%;
+	z-index: 100;
+    margin-left: 18vw;
+    display: flex;
+	align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+
+.footer-friend-icon {
+    font-size: 2rem;
+    color: white;
+    margin-top: 0.5vh;
+}
+
+.footer-friend-icon:hover {
+    color: #245070;
+}
+
+.footer-friend {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.footer-friend-text {
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-right: 10vw;
+    color: white;
+    font-size: 1vw;
+}
+
+.footer-friend-text:hover {
+    color: #245070;
+}
+
+.person-icon {
+    display: flex;
+    font-size: 2vw;
+    color: rgba(255, 255, 255, 0.2);
+    margin-left: 1vw;
+    color: rgb(71, 136, 71);
+}
+
+.person-icon:hover {
+    color: white;
+}
+
+.friend-status-text {
+    color: white;
+    margin-left: 7px;
+    margin-right: 45vw;
+    font-size: 1vw;
+}
+
+.delete-icon {
+    color: rgb(195, 103, 103);
+}
+
+.friend-name {
+    display: flex;
+    flex-direction: column;
+}
+
+.friend-username-stat {
+    color: white;
+    text-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
+    margin-top: 2vh;
+    margin-left: 1vw;
+    font-size: 2.5vw;
+}
+
+
+@media (min-width: 768px) and (max-width: 1278px) {
+
+    .person-icon {
+        font-size: 3vw;
+    }
+
+    .friend-status-text {
+        margin-right: 35vw;
+        font-size: 1.5vw;
+        margin-top: 0.1vh;
+    }
+
+    .friend-username-stat {
+        font-size: 3vw;
+        margin-left: 4vw;
+    }
+
+    .profile-text {
+        font-size: 1.5vw;
+        margin-left: 4vw;
+        width: 10vw;
+        height: 2vw;   
+    }
+}
+
+@media (max-width: 768px) {
+
+    .friend-status-text {
+        margin-right: 25vw;
+        font-size: 2vw;
+    }
+
+    .footer-friend-text {
+        display: none;
+    }
+
+    .profile-text {
+        font-size: 1.5vw;
+        margin-left: 4vw;
+        width: 10vw;
+        height: 2vw;
+    }
+
+    .friend-username-stat {
+        margin-left: 2vw;
+    }
+
+    .person-icon {
+        font-size: 3vw;
+    }
+
+    .footer-friend-icon {
+        margin-left: 3vw;
+    }
+
+}
 @font-face {
     font-family: 'JuliusSansOne';
     src: url( /fonts/2de04709e76a8c3a838d.ttf);
