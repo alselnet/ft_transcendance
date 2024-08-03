@@ -1,23 +1,24 @@
-import { animateBalls } from "../animation/HomeAnimation.js";
-import { FortyTwoSignIn } from "../functions/42SignIn.js";
 import img42 from '../images/42.png';
+import { FortyTwoSignIn } from "../functions/42SignIn.js";
+import { animateBalls } from "../animation/HomeAnimation.js";
 import { removeMainComponent } from "../functions/MainFunctions.js";
-
 
 const Home = () => {
 
     removeMainComponent();
+
     let section = document.querySelector("#section");
+    
     if (section) {
         section.innerHTML = `
         <div class="balls-home d-none d-md-flex">
             <div class="orange-ball-home">
-                <a href="#/signin" data-hash="signin">
+                <a class="balls-inscription" href="#/signin" data-hash="signin">
                     Inscription
                 </a>
             </div>
             <div class="white-ball-home">
-                <a href="#/login" data-hash="login">
+                <a class="balls-inscription" href="#/login" data-hash="login">
                     Connexion
                 </a>
             </div>
@@ -29,14 +30,14 @@ const Home = () => {
             </div>
         </div>
 
-        <div class="balls-home-sm d-none d-sm-flex d-md-none">
+        <div class="balls-home-sm d-flex d-md-none">
             <div class="orange-ball-home-sm">
-                <a href="#/signin" data-hash="signin">
+                <a class="balls-inscription" href="#/signin" data-hash="signin">
                     Inscription
                 </a>
             </div>
             <div class="white-ball-home-sm">
-                <a href="#/login" data-hash="login">
+                <a class="balls-inscription" href="#/login" data-hash="login">
                     Connexion
                 </a>
             </div>

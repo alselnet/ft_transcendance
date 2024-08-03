@@ -1,9 +1,8 @@
-a {
-    text-decoration: none;
-    color: black;
-    font-size: larger;
-}
+/*********************************************************/
+/*               medium & large screen                   */
+/*********************************************************/
 
+/* BALLS */
 .balls-home {
     position: relative;
     display: flex;
@@ -13,54 +12,51 @@ a {
     margin: 0;
 }
 
-.orange-ball-home {
-    position: absolute;
-    width: 40vw;
-    height: 40vw;
-    max-width: 60vh;
-    max-height: 60vh;
-    border-radius: 50%;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.balls-inscription {
+    text-decoration: none;
+    color: black;
 }
 
+.orange-ball-home,
 .white-ball-home {
-    position: absolute;
-    width: 40vw;
-    height: 40vw;
+    width: 30vw;
+    height: 30vw;
     max-width: 60vh;
     max-height: 60vh;
-    margin-top: 3%;
     border-radius: 50%;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 1.5vw;
 }
 
 .orange-ball-home {
+    position: absolute;
     background-color: rgb(218, 147, 16);
-    margin-right: 30vw;
+    margin-right: 25vw;
     z-index: 1;
 }
 
 .white-ball-home {
+    position: absolute;
+    margin-top: 3%;
     background-color: white;
-    margin-left: 25%;
+    margin-left: 25vw;
     z-index: 2;
 }
 
+/* 42 BUTTON */
 .btn-container-home {
     position: absolute;
     top: 85%;
-    left: 45%;
+    left: 47%;
     transform: translate(-50%, -50%);
     z-index: 4;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 1vw;
 }
 
 .btn-42-home {
@@ -72,67 +68,20 @@ a {
 }
 
 .co-42-home {
-    margin-right: 10px;
+    margin-right: 0.5vw;
 }
 
 .img-42-home {
-    width: 40px;
+    width: 3vw;
     height: auto;
-    margin-bottom: 10%;
+    margin-bottom: 15%;
 }
 
-/* .balls-sm-home {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-} */
+/*********************************************************/
+/*                     small screen                      */
+/*********************************************************/
 
-/* .orange-ball-sm-home {
-    margin-bottom: 30vh;
-    width: 40vw;
-    height: 40vw;
-    max-width: 60vh;
-    max-height: 60vh;
-    background-color: rgb(218, 147, 16);
-    border-radius: 50%;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
-
-/* .white-ball-sm-home {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    margin-top: 6%;
-    width: 40vw;
-    height: 40vw;
-    max-width: 60vh;
-    max-height: 60vh;
-    background-color: white;
-    border-radius: 50%;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
-    z-index: 2;
-} */
-
-/* .btn-container-sm-home {
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
-
+/* BALLS */
 .balls-home-sm {
     position: relative;
     display: flex;
@@ -143,48 +92,72 @@ a {
     margin: 0;
 }
 
-.orange-ball-home-sm {
-    margin-bottom: 40vh;
+.orange-ball-home-sm,
+.white-ball-home-sm {
     width: 40vw;
     height: 40vw;
     max-width: 60vh;
     max-height: 60vh;
-    background-color: rgb(218, 147, 16);
     border-radius: 50%;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
-    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 2.5vw;
+}
+
+.orange-ball-home-sm {
+    margin-bottom: 30vh;
+    background-color: rgb(218, 147, 16);
+    z-index: 1;
 }
 
 .white-ball-home-sm {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: absolute;
-    margin-top: 6%;
-    width: 40vw;
-    height: 40vw;
-    max-width: 60vh;
-    max-height: 60vh;
+    margin-top: 5vh;
     background-color: white;
-    border-radius: 50%;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
-    z-index: 2;   
+    z-index: 2;
 }
 
-/* .btn-container-home-sm {
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
+/* BUTTON 42*/
+.btn-container-home-sm {
+    font-size: 1.8vw; 
+}
 
-/* .orange-ball-home-sm:hover {
-    color: red;
-} */
+/*********************************************************/
+/*                     media screen                      */
+/*********************************************************/
+
+@media (min-width: 1318px) {
+
+    .orange-ball-home {
+        margin-left: 3vw;
+    }
+
+    .white-ball-home {
+        margin-right: 3vw;
+
+    }
+
+    .btn-container-home {
+        top: 90%;
+        left: 47%;
+        font-size: 1vw;
+    }
+    
+    .img-42-home {
+        width: 3vw;
+        height: auto;
+        margin-bottom: 10%;
+    }
+
+}
+
+@media (max-height: 350px) {
+
+    .orange-ball-home,
+    .white-ball-home {
+        font-size: 3vh;
+    }
+    
+}
