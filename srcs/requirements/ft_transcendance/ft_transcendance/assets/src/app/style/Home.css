@@ -60,7 +60,6 @@ a {
     transform-origin: center;
 }
 
-/* BUTTON */
 .btn-container-home {
     position: absolute;
     top: 85%;
@@ -90,7 +89,6 @@ a {
     margin-bottom: 10%;
 }
 
-/* MOBILE VERSION */
 .balls-sm-home {
     position: relative;
     display: flex;
@@ -142,13 +140,6 @@ a {
     justify-content: center;
     align-items: center;
 }
-
-
-
-/*********************************/
-
-
-/* MOBILE VERSION */
 
 .balls-home-sm {
     position: relative;

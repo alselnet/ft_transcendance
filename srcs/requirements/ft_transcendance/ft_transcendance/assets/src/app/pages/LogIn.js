@@ -208,10 +208,3 @@ function handleFormSubmit(event) {
         alert('Nom d utilisateur ou mot de passe incorrect');
     });
 }
-
-// const signInButton = document.getElementById('fortyTwoSignInBtn');
-// if (signInButton) {
-//     signInButton.addEventListener('click', () => {
-//         FortyTwoSignIn();
-//     });
-// }

@@ -249,7 +249,6 @@
  }
 
 @media (max-width: 840px) {
-    /* @media (max-width: 768px) { */
 
     .editting {
         margin-top: 7vh;
@@ -402,8 +401,4 @@
         margin-bottom: 0vh;
      }
 
-     /* .settings-picture {
-        width: 4vw;
-        height: 4vh;
-     } */
 }

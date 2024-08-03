@@ -1,5 +1,3 @@
-import { getCookie } from '../utils/cookies';
-
 const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`;
 
 export const QRCode = () => {
