@@ -301,7 +301,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     background-color: transparent;
     margin: 10px 0;
     padding: 8px;
-    width: calc(100% - 20px);
+    width: calc(70% - 20px);
     outline: none;
 }
 
@@ -574,7 +574,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     position: relative;
 }
 
-.score-container {
+ .score-container {
     display: flex;
     justify-content: space-between;
     padding: 2vw;
@@ -593,8 +593,9 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 .game-canvas {
-    width: 75vw;
-    height: 75vh;
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .button-container {
@@ -624,9 +625,10 @@ input[type="text"], input[type="password"], input[type="email"] {
     margin-top: 11.25vh;
 }
 
+
 .hidden {
     display: none;
-}
+} 
 
 .stat-container {
     display: flex;
@@ -2410,7 +2412,7 @@ input[type="text"], input[type="password"], input[type="email"] {
 body {
     font-family: 'JuliusSansOne', sans-serif;
     margin: 0;
-    background-image: url(/images/67029cb09c7fa0e9334c.png);
+    /* background-image: url('./app/images/background.png'); */
     background-size: cover;
     height: 100vh;
     overflow: hidden;

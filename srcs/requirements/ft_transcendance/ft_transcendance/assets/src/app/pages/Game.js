@@ -122,12 +122,6 @@ const Game = async () => {
         function drawInitialGame() {
 
             // Initialiser Three.js
-            // scene = new THREE.Scene();
-            // camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            // renderer = new THREE.WebGLRenderer({ canvas: canvas });
-            // renderer.setSize(window.innerWidth, window.innerHeight);
-            // renderer.setClearColor(0x4790c5);
-            
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             camera.position.set(0, 0, 100);
@@ -593,16 +587,21 @@ const Game = async () => {
             const width = window.innerWidth;
             const height = window.innerHeight;
             
+            // Maj taille du canvas
             canvas.width = width;
             canvas.height = height;
             
+            // Maj du renderer
             renderer.setSize(width, height);
+
+            // Maj paramètres de la caméra
             camera.aspect = width / height;
             camera.updateProjectionMatrix();
             
             renderer.render(scene, camera);
         });
 
+        // Nettoyage lorsque la page est déchargée
         window.addEventListener('unload', () => {
             document.removeEventListener('keydown', handleKeys);
             document.removeEventListener('keyup', handleKeys);

@@ -87,7 +87,7 @@ const changeBackgroundImage = (imageClass) => {
     localStorage.setItem('backgroundClass', imageClass); 
 };
 
-const applySavedBackground = () => {
+export const applySavedBackground = () => {
     const savedBackgroundClass = localStorage.getItem('backgroundClass');
     if (savedBackgroundClass) {
         changeBackgroundImage(savedBackgroundClass);
@@ -108,7 +108,8 @@ const setupBackgroundChangeListeners = () => {
     });
 };
 
-const initializeSettingsPage = () => {
+export const initializeSettingsPage = () => {
+    console.log("HAWAII");
     applySavedBackground();
     setupBackgroundChangeListeners();
 };
