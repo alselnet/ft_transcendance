@@ -1,6 +1,7 @@
-import { animateNumbers, setupCamembertAnimation } from "../animation/DashboardAnimation.js";
-import { get, put } from "../services/Api.js"
+import { get } from "../services/Api.js"
 import { getStatusColor } from "../functions/FriendProfileFunctions.js"
+import { searchLogin } from "../functions/SettingsFunctions.js"
+import { addCamembert, modifyStatus, setUpNumberAnimation } from "../functions/DashboardFunctions.js";
 
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
 
@@ -118,78 +119,24 @@ const DashStat = () => {
         `;
         console.log('Form innerHTML set');
 
-        setTimeout(() => {
-            const numbers = form.querySelectorAll('.stat-number');
-            numbers.forEach(number => {
-                const target = +number.getAttribute('data-target');
-                animateNumbers(number, target);
-            });
-            console.log('Animation set');
-        }, 500);
-
-        form.querySelectorAll('.dropdown-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const newStatus = item.getAttribute('data-status');
-                put(`${usersUrl}/update-status/`, { status: newStatus })
-                .then(updateResponse => {
-                    if (!updateResponse.ok) {
-                        throw new Error('Failed to update user status');
-                    }
-                    return updateResponse.json();
-                })
-                .then(() => {
-                    userData.status = newStatus;
-                    const statusText = form.querySelector('.status-text');
-                    const statusPastille = form.querySelector('.status-pastille');
-                    if (statusText && statusPastille) {
-                        statusText.innerText = newStatus;
-                        statusPastille.style.backgroundColor = getStatusColor(newStatus);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error updating status:', error);
-                });
-            });
-        });
+		setUpNumberAnimation(form);
+		modifyStatus(form, userData.status);
         console.log('Event listeners set');
-
 
 		const loginSearchInput = form.querySelector("#login-search");
         const searchButton = form.querySelector("#search-button");
 
-        const searchLogin = () => {
-            const username = loginSearchInput.value;
-            if (username) {
-                if (isUserSelf(username, userData.username)) {
-                    alert("Vous ne pouvez pas accéder à votre propre profil.");
-                } else {
-                    window.location.href = `#/friendprofile/${username}`;
-                }
-                loginSearchInput.value = "";
-            }
-        };
-
-        searchButton.addEventListener('click', searchLogin);
-
+		searchButton.addEventListener('click', () => {
+			searchLogin(loginSearchInput, userData.username);
+		});
+		
         loginSearchInput.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
-                searchLogin();
+                searchLogin(loginSearchInput, userData.username);
             }
         });
 
-        let percentage = 0;
-        let color = "#b26969";
-        let message = '';
-        if (userData.played_games !== 0) {
-            percentage = ((userData.played_games - userData.won_games) * 99.9999) / userData.played_games;
-        } else {
-            message = "aucune partie jouée";
-        }
-        
-        setupCamembertAnimation(form, percentage, color, message);
-        window.addEventListener('resize', () => {
-            setupCamembertAnimation(form, percentage, color, message);
-        });
+		addCamembert(form, userData.played_games, userData.won_games);
 
     })
     .catch(error => {
@@ -199,10 +146,6 @@ const DashStat = () => {
 
 
     return form;
-};
-
-const isUserSelf = (searchedUsername, currentUsername) => {
-    return searchedUsername === currentUsername;
 };
 
 export { DashStat };

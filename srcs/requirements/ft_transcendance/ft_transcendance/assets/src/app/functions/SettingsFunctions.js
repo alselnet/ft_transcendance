@@ -21,7 +21,6 @@ const sendConfirmationEmail = (email) => {
         });
 };
 
-
 const updateAvatar = (file) => {
    const formData = new FormData();
    formData.append('avatar', file);
@@ -73,9 +72,7 @@ const update2FA = (newMethod) => {
             console.error('Error updating 2FA method:', error);
             alert('An error occurred while updating the 2FA method');
         });
-    };
-    
-
+};
 
 const update2FAActiveClass = (method) => {
    document.querySelectorAll('.dropdown-item').forEach(item => {
@@ -113,25 +110,25 @@ const setupBackgroundChangeListeners = () => {
     });
 };
 
-
-
 export const initializeSettingsPage = () => {
-    console.log("HAWAII");
     applySavedBackground();
     setupBackgroundChangeListeners();
 };
 
- 
-const searchLogin = () => {
+const searchLogin = (loginSearchInput, userDataUsername) => {
     const username = loginSearchInput.value;
     if (username) {
-        if (isUserSelf(username, userData.username)) {
+        if (isUserSelf(username, userDataUsername)) {
             alert("Vous ne pouvez pas accéder à votre propre profil.");
         } else {
             window.location.href = `#/friendprofile/${username}`;
         }
         loginSearchInput.value = "";
     }
+};
+
+const isUserSelf = (searchedUsername, currentUsername) => {
+    return searchedUsername === currentUsername;
 };
 
 export { sendConfirmationEmail, updateAvatar, 

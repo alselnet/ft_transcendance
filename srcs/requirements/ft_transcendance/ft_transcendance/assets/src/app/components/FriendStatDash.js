@@ -1,5 +1,5 @@
-import { animateNumbers, setupCamembertAnimation } from "../animation/DashboardAnimation.js";
 import { get } from "../services/Api.js";
+import { animateNumbers, setupCamembertAnimation } from "../animation/DashboardAnimation.js";
 import { getStatusColor, addFriend, deleteFriend } from "../functions/FriendProfileFunctions.js";
 
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`

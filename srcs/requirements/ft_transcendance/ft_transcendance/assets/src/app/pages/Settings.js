@@ -130,7 +130,7 @@ const Settings = async () => {
            }
        });
 
-       const loginSearchInput = section.querySelector("#login-search");
+        const loginSearchInput = section.querySelector("#login-search");
         const searchButton = section.querySelector("#search-button");
 
         searchButton.addEventListener('click', searchLogin);
