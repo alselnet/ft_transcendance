@@ -310,8 +310,7 @@ const Game = async () => {
             }
 
             gameEnd = false
-
-            socket = new WebSocket(`wss://localhost/ws/pong/${roomName}/`);
+            socket = new WebSocket(`wss://${window.location.host}/ws/pong/${roomName}/`);
 
             socket.onopen = function(event) {
                 console.log('Connected to the server');
@@ -417,7 +416,7 @@ const Game = async () => {
 
             gameEnd = false
             return new Promise((resolve, reject) => {
-                socket = new WebSocket(`wss://localhost/ws/pong/${roomName}/`);
+                socket = new WebSocket(`wss://${window.location.host}/ws/pong/${roomName}/`);
 
                 socket.onopen = function(event) {
                     console.log('Connected to the server');
