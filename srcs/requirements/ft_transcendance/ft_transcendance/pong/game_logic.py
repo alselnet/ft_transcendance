@@ -62,7 +62,7 @@ class PongGame:
         return rightMin + (valueScaled * rightSpan)
 
     def update_ball_position(self):
-        buffer = 0.5
+        buffer = 1
         if not self.ball_waiting:
             self.ball_x_position += self.ball_x_speed
             self.ball_y_position += self.ball_y_speed

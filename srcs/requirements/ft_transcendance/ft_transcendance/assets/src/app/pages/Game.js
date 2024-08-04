@@ -58,6 +58,7 @@ const Game = async () => {
         const ballSpeed = document.getElementById("ball-speed");
         const paddleSpeed = document.getElementById("paddle-speed");
         const canvas = document.getElementById('game-canvas');
+        const background_color = localStorage.getItem('backgroundClass');
         if (!canvas) {
             console.error('Failed to find the canvas element with ID game-canvas');
             return;
@@ -95,6 +96,7 @@ const Game = async () => {
                 Player1_name = 'Unknown Player';
             }
             updateScores(scorePlayer1, scorePlayer2)
+            // console.log(a)
         }
 
         function hideAll() {
@@ -118,8 +120,12 @@ const Game = async () => {
             camera.position.set(0, 0, 100);
             renderer = new THREE.WebGLRenderer({ canvas: canvas });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setClearColor(0x4790c5);
-
+            if (background_color == "bg-roland")
+                renderer.setClearColor(0xa55318);
+            else if(background_color == "bg-wimbledon")
+                renderer.setClearColor(0x2b6e25);
+            else
+                renderer.setClearColor(0x4790C5);
 
             // Lumière ambiante
             const ambientLight = new THREE.AmbientLight(0xffffff, 0.2); // Couleur blanche, faible intensité
@@ -470,6 +476,7 @@ const Game = async () => {
 
                 document.addEventListener('keyup', function(event) {
                     keys[event.code] = false;
+                    resetKeys()
                 });
             });
         }
