@@ -61,7 +61,6 @@ const AboutUs = async () => {
 	    </div>
     `; 
     }
-
 };
 
 export { AboutUs };
