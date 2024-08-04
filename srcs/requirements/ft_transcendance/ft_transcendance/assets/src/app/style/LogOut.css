@@ -72,3 +72,12 @@
     text-align: center;
     flex-direction: row;
 }
+
+
+@media (max-height: 660px) {
+    
+    .logout-container {
+        display: none;
+    }
+
+}

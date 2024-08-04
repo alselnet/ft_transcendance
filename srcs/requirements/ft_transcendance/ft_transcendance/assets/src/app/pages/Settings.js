@@ -30,7 +30,7 @@ const Settings = async () => {
            </div>`;
 
        section.innerHTML = 
-           `
+           ` 
         <div class="settings-container">
             <h1 class="settings-title">Parametres du compte</h1>
             <div class="settings-box">
@@ -152,6 +152,20 @@ const Settings = async () => {
                sendConfirmationEmail(userData.email);
            });
        }
+
+
+   
+        /* C'EST ICI JULES  */
+        // if (userData.fortytwoaccount === true) {
+        //     document.getElementById('edit-username').disabled = true;
+        //     document.getElementById('edit-email').disabled = true;
+        //     document.getElementById('edit-password').disabled = true;
+        // }
+
+
+
+
+
 
        initializeSettingsPage();
    })

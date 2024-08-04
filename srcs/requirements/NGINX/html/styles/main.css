@@ -528,6 +528,17 @@
     position: relative;
 }
 
+.navbar-container-media {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    z-index: 1000;
+    padding: 10px;
+}
+
 .myNavbar {
     display: flex;
     flex-direction: column;
@@ -548,7 +559,6 @@
     filter: blur(0px);
 }
 
-/* NAVBAR SMALL SCREEN */
 .navbar-container-sm {
     position: fixed;
     top: 0;
@@ -590,6 +600,24 @@
 
 .myNavbar-sm .nav-link:hover {
     color: #245070;
+}
+
+
+@media (min-height: 660px) and (min-width: 992px) {
+
+    .navbar-container-media {
+        display: none;
+    }
+
+}
+
+@media (max-height: 660px) and (min-width: 992px) {
+
+    .navbar-container {
+        display: none;
+    }
+
+
 }
 
 .game-container {
@@ -1894,6 +1922,15 @@ tbody, td, tfoot, th, thead, tr {
     justify-content: center;
     text-align: center;
     flex-direction: row;
+}
+
+
+@media (max-height: 660px) {
+    
+    .logout-container {
+        display: none;
+    }
+
 }
 .main-container-aboutus {
     max-height: 100vh;
