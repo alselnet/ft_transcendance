@@ -208,7 +208,8 @@ class SendConfirmationEmailView(APIView):
         try:
             user = User.objects.get(email=email)
             token = generate_token(email)
-            confirm_url = request.build_absolute_uri(reverse('confirm-email', args=[token]))
+            path = reverse('confirm-email', args=[token])
+            confirm_url = f"https://localhost:4443{path}"
 
             subject = 'Email Confirmation'
             message = f"""
