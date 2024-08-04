@@ -39,14 +39,6 @@ const Game = async () => {
                     <option value="10" class="value">Fast</option>
                 </select>
             </div>
-            <div>
-                <label for="background-color">Background Color:</label>
-                <select id="background-color">
-                    <option value="black" class="value">Black</option>
-                    <option value="blue" class="value">Blue</option>
-                    <option value="green" class="value">Green</option>
-                </select>
-            </div>
             <button class="game-button" id="start-game-btn">Start Game</button>
         </div>
         <div class="button-container" id="tournoi-buttons">
@@ -65,7 +57,6 @@ const Game = async () => {
         const startGameButton = document.getElementById("start-game-btn");
         const ballSpeed = document.getElementById("ball-speed");
         const paddleSpeed = document.getElementById("paddle-speed");
-        const backgroundColor = document.getElementById("background-color");
         const canvas = document.getElementById('game-canvas');
         if (!canvas) {
             console.error('Failed to find the canvas element with ID game-canvas');
@@ -226,7 +217,6 @@ const Game = async () => {
         }
 
         startGameButton.addEventListener("click", function() {
-            document.getElementById('game-canvas').style.backgroundColor = backgroundColor.value;
             hideAll();
             initialButtons.classList.remove("hidden");
         });
@@ -333,7 +323,7 @@ const Game = async () => {
                 } else if (data.type === 'game_over') {
                     gameEnd = true
                     console.log("Fin de game");
-                    alert(`Player ${data.winner} wins!`);
+                    // alert(`Player ${data.winner} wins!`);
                     let fecth_data_history = {
                         winner_username: '',
                         loser_username: '',
@@ -383,7 +373,13 @@ const Game = async () => {
             };
 
             socket.onclose = function(event) {
+                resetKeys();
                 console.log('Disconnected from the server');
+                if (scorePlayer1 == 1)
+                    alert(`Player 1 wins!`);
+                else
+                    alert(`Player 2 wins!`);
+                location.reload();
             };
 
             socket.onerror = function(error) {
@@ -393,6 +389,7 @@ const Game = async () => {
             document.addEventListener('keydown', function(event) {
                 keys[event.code] = true;
                 handleKeys();
+                
             });
 
             document.addEventListener('keyup', function(event) {
@@ -444,14 +441,20 @@ const Game = async () => {
                         }
                         alert(`${player1_name} vs ${player2_name} - Winner: ${winner}`);
                         nextRoundParticipants.push(winner);
-                        socket.close();
-                        socket = null;
-                        hideAll();
-                        resolve();
+                        // socket.close();
+                        // socket = null;
+                        // hideAll();
+                        // resolve();
+                        // location.reload();
                     }
                 };
 
                 socket.onclose = function(event) {
+                    resetKeys();
+                    socket.close();
+                    socket = null;
+                    hideAll();
+                    resolve();
                     console.log('Disconnected from the server');
                 };
 
@@ -490,6 +493,19 @@ const Game = async () => {
                 }
             }
         }
+
+        // function checkHeartbeat() {
+        //     const currentTime = Date.now();
+        //     if (currentTime - lastMessageTime > TIMEOUT) {
+        //         console.log('No message received for 1 second. Reloading page...');
+        //         socket.close();
+        //         socket = null;
+        //         hideAll();
+        //         resolve();
+        //     } else {
+        //         setTimeout(checkHeartbeat, TIMEOUT); // Vérifie à nouveau après 1 seconde
+        //     }
+        // }
 
         function updateGameTournoi(state, player1_name, player2_name) {
             player1Y = state.player1_y_position;
@@ -549,6 +565,10 @@ const Game = async () => {
         }
 
         gameLoop();
+
+        function resetKeys() {
+            keys = {};
+        }
 
         function resetGameState() {
             player1Y = 0;

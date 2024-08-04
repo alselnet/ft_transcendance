@@ -62,12 +62,24 @@ class PongGame:
         return rightMin + (valueScaled * rightSpan)
 
     def update_ball_position(self):
+        buffer = 0.5
         if not self.ball_waiting:
             self.ball_x_position += self.ball_x_speed
             self.ball_y_position += self.ball_y_speed
 
-            if self.ball_y_position <= -self.screen_height / 2 + self.ball_size or self.ball_y_position >= self.screen_height / 2 - self.ball_size:
+            # if self.ball_y_position <= -self.screen_height / 2 + self.ball_size or self.ball_y_position >= self.screen_height / 2 - self.ball_size:
+            #     self.ball_y_speed = -self.ball_y_speed
+
+            if self.ball_y_position <= -self.screen_height / 2 + self.ball_size + buffer or self.ball_y_position >= self.screen_height / 2 - self.ball_size - buffer:
                 self.ball_y_speed = -self.ball_y_speed
+
+        # if self.ball_y_position <= -self.screen_height / 2 + self.ball_size + buffer:
+        #     self.ball_y_position = -self.screen_height / 2 + self.ball_size + buffer
+        #     self.ball_y_speed = -self.ball_y_speed
+
+        # if self.ball_y_position >= self.screen_height / 2 - self.ball_size - buffer:
+        #     self.ball_y_position = self.screen_height / 2 - self.ball_size - buffer
+        #     self.ball_y_speed = -self.ball_y_speed
             
             # Ball collision with player 1 paddle
             if (self.ball_x_position - self.ball_size <= -self.screen_width / 2 + self.player_width and
