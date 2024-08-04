@@ -114,7 +114,7 @@
 
 .white-ball-home-sm {
     position: absolute;
-    margin-top: 8vh;
+    margin-top: 12vh;
     background-color: white;
     z-index: 2;
 }
@@ -589,7 +589,7 @@
 }
 
 .myNavbar-sm .nav-link:hover {
-    color: black;
+    color: #245070;
 }
 
 .game-container {
@@ -1039,7 +1039,7 @@
     justify-content: center;
     text-align: center;
     margin-top: 7vh;
-    margin-right: 5vw;
+    /* margin-right: 5vw; */
  }
  
  .settings-box {
@@ -1813,6 +1813,14 @@ tbody, td, tfoot, th, thead, tr {
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(67, 66, 66, 0.6);
 }
+
+
+@media (max-width: 700px) {
+
+    .friend-count {
+        font-size: 0.60em;
+    }
+}
 .logout-container {
     position: absolute;
     top: 20px;
@@ -1942,14 +1950,16 @@ tbody, td, tfoot, th, thead, tr {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
-    overflow: auto;
+    min-height: 100vh;
+    padding: 5vh 0;
+    box-sizing: border-box;
 }
 
 .charte-title {
     color: white;
     margin-bottom: 4vh;
     font-size: 2.5vw;
+    margin-top: 2vh;
 }
 
 .charte-text {
@@ -1964,15 +1974,16 @@ tbody, td, tfoot, th, thead, tr {
     align-items: center;
     flex-direction: column;
     width: 50vw;
-    height: 70vh;
+    max-height: 70vh;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.2);
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: auto;
-    padding: 6vh 5vw;
-    box-sizing: border-box; 
+    padding: 10vh 5vw 6vh 5vw; /* Ajout de padding en haut pour éviter le crop */
+    box-sizing: border-box;
+    margin-bottom: 2vh;
 }
 
 @media (max-width: 693px) {
@@ -1982,12 +1993,13 @@ tbody, td, tfoot, th, thead, tr {
 
     .charte-text {
         font-size: 2.5vw;
+        font-size: 2vw;
     }
 
     .charte-msg {
         width: 90vw;
-        height: auto; 
-        padding: 5vh 2vw;
+        max-height: auto;
+        padding: 10vh 2vw 10vh 2vw;
     }
 
     .btn-charte {
@@ -2002,7 +2014,7 @@ tbody, td, tfoot, th, thead, tr {
 
 @media (max-height: 624px) {
     .charte-msg {
-        padding-top: 10vh;
+        padding-top: 15vh;
     }
 }
 
@@ -2019,8 +2031,6 @@ tbody, td, tfoot, th, thead, tr {
         margin-top: -6vh;
     }
 }
-
-
 
 .container-update-data {
     display: flex;
@@ -2045,19 +2055,12 @@ tbody, td, tfoot, th, thead, tr {
 
 .title-update-data {
     margin-bottom: 20px;
-    font-size: 2vw;
+    font-size: 2em;
     color: white;
 }
 
-/* .update-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-} */
 
-/* input[type="text"], input[type="password"], input[type="email"] {
+.input-update-data {
     border: none;
     border-bottom: 1px solid #333;
     background-color: transparent;
@@ -2065,10 +2068,10 @@ tbody, td, tfoot, th, thead, tr {
     padding: 8px;
     width: calc(100% - 20px);
     outline: none;
-} */
+}
 
 .button-update-data {
-    width: 10vw;
+    width: 150px;
     padding: 10px;
     margin-top: 10px;
     background-color: #0056b3;
@@ -2076,7 +2079,7 @@ tbody, td, tfoot, th, thead, tr {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 1vw;
+    font-size: 1em;
 }
 
 .button-update-data:hover {
@@ -2261,5 +2264,10 @@ body {
     background-size: cover;
     height: 100vh;
     overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
 

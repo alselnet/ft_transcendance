@@ -10,8 +10,8 @@ const UpdateEmail = async () => {
         <div class="container-update-data">
             <div class="update-data-form">
                 <h1 class="title-update-data">Modifier l'adresse mail</h1>
-                <input type="text" id="new-data" placeholder="Nouvelle adresse mail" required>
-                <input type="password" id="password" placeholder="Mot de passe" required>
+                <input type="text" id="new-data" class="input-update-data" placeholder="Nouvelle adresse mail" required>
+                <input type="password" id="password" class="input-update-data" placeholder="Mot de passe" required>
                 <button class="button-update-data" id="submit-update-email">Mettre à jour</button>
                 <button class="button-update-data" id="cancel-update-email">Annuler</button>
             </div>

@@ -171,3 +171,11 @@
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(67, 66, 66, 0.6);
 }
+
+
+@media (max-width: 700px) {
+
+    .friend-count {
+        font-size: 0.60em;
+    }
+}

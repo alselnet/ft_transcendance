@@ -10,9 +10,9 @@ const UpdatePassword = async () => {
         <div class="container-update-data">
             <div class="update-data-form">
                 <h1 class="title-update-data">Modifier le Mot de Passe</h1>
-                <input type="password" id="current-password" placeholder="Mot de passe actuel" required>
-                <input type="password" id="new-password" placeholder="Nouveau mot de passe" required>
-                <input type="password" id="confirm-password" placeholder="Confirmer le nouveau mot de passe" required>
+                <input type="password" id="current-password" class="input-update-data" placeholder="Mot de passe actuel" required>
+                <input type="password" id="new-password" class="input-update-data" placeholder="Nouveau mot de passe" required>
+                <input type="password" id="confirm-password" class="input-update-data" placeholder="Confirmation mdp" required>
                 <button class="button-update-data" id="submit-update-password">Mettre à jour</button>
                 <button class="button-update-data" id="cancel-update-password">Annuler</button>
             </div>

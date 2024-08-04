@@ -4,14 +4,16 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
-    overflow: auto;
+    min-height: 100vh;
+    padding: 5vh 0;
+    box-sizing: border-box;
 }
 
 .charte-title {
     color: white;
     margin-bottom: 4vh;
     font-size: 2.5vw;
+    margin-top: 2vh;
 }
 
 .charte-text {
@@ -26,15 +28,16 @@
     align-items: center;
     flex-direction: column;
     width: 50vw;
-    height: 70vh;
+    max-height: 70vh;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.2);
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: auto;
-    padding: 6vh 5vw;
-    box-sizing: border-box; 
+    padding: 10vh 5vw 6vh 5vw; /* Ajout de padding en haut pour éviter le crop */
+    box-sizing: border-box;
+    margin-bottom: 2vh;
 }
 
 @media (max-width: 693px) {
@@ -44,12 +47,13 @@
 
     .charte-text {
         font-size: 2.5vw;
+        font-size: 2vw;
     }
 
     .charte-msg {
         width: 90vw;
-        height: auto; 
-        padding: 5vh 2vw;
+        max-height: auto;
+        padding: 10vh 2vw 10vh 2vw;
     }
 
     .btn-charte {
@@ -64,7 +68,7 @@
 
 @media (max-height: 624px) {
     .charte-msg {
-        padding-top: 10vh;
+        padding-top: 15vh;
     }
 }
 
@@ -81,5 +85,3 @@
         margin-top: -6vh;
     }
 }
-
-
