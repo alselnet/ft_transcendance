@@ -78,9 +78,9 @@
        font-size: 2vw;
    }
 
-   input[type="text"] {
+   /* input[type="text"] {
        font-size: 2vw;
-   }
+   } */
 
    .button-2FA {
        font-size: 1.5vw;
@@ -98,9 +98,9 @@
        font-size: 1.2vw;
    }
 
-   input[type="text"] {
+   /* input[type="text"] {
        font-size: 1vw;
-   }
+   } */
 
    .button-2FA {
        font-size: 1vw;

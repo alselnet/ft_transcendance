@@ -19,8 +19,8 @@
 
 .orange-ball-home,
 .white-ball-home {
-    width: 30vw;
-    height: 30vw;
+    width: 40vw;
+    height: 40vw;
     max-width: 60vh;
     max-height: 60vh;
     border-radius: 50%;
@@ -114,14 +114,14 @@
 
 .white-ball-home-sm {
     position: absolute;
-    margin-top: 5vh;
+    margin-top: 12vh;
     background-color: white;
     z-index: 2;
 }
 
 /* BUTTON 42*/
 .btn-container-home-sm {
-    font-size: 1.8vw; 
+    font-size: 2vw; 
 }
 
 /*********************************************************/

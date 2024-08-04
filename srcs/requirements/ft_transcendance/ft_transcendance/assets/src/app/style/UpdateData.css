@@ -33,7 +33,7 @@
     border-radius: 20px;
 } */
 
-input[type="text"], input[type="password"], input[type="email"] {
+/* input[type="text"], input[type="password"], input[type="email"] {
     border: none;
     border-bottom: 1px solid #333;
     background-color: transparent;
@@ -41,7 +41,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     padding: 8px;
     width: calc(100% - 20px);
     outline: none;
-}
+} */
 
 .button-update-data {
     width: 10vw;

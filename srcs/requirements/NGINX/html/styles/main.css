@@ -19,8 +19,8 @@
 
 .orange-ball-home,
 .white-ball-home {
-    width: 30vw;
-    height: 30vw;
+    width: 40vw;
+    height: 40vw;
     max-width: 60vh;
     max-height: 60vh;
     border-radius: 50%;
@@ -114,14 +114,14 @@
 
 .white-ball-home-sm {
     position: absolute;
-    margin-top: 5vh;
+    margin-top: 8vh;
     background-color: white;
     z-index: 2;
 }
 
 /* BUTTON 42*/
 .btn-container-home-sm {
-    font-size: 1.8vw; 
+    font-size: 2vw; 
 }
 
 /*********************************************************/
@@ -161,6 +161,10 @@
     }
     
 }
+/*********************************************************/
+/*               medium & large screen                   */
+/*********************************************************/
+
 /* BALLS */
 .balls-signin {
     position: relative;
@@ -171,15 +175,16 @@
     margin: 0;
 }
 
-.arrow-s {
-    color: white;
-    margin-bottom: 55vh;
-    margin-right: 30vw;
-    font-size: 2rem;
-}
-
-.arrow-s:hover {
-    color: rgb(218, 147, 16);
+.orange-ball-signin,
+.white-ball-signin {
+    width: 40vw;
+    height: 40vw;
+    max-width: 60vh;
+    max-height: 60vh;
+    border-radius: 50%;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3),
+    inset 0 2px 4px rgba(255,255,255,0.5);
+    z-index: 2;
 }
 
 .orange-ball-signin {
@@ -187,17 +192,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
-    margin-right: 30vw;
-    width: 40vw;
-    height: 40vw;
 	flex-direction: column;
-    max-width: 60vh;
-    max-height: 60vh;
+    margin: 0;
+    margin-right: 25vw;
     background-color: rgb(218, 147, 16);
-    border-radius: 50%;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3),
-    inset 0 2px 4px rgba(255,255,255,0.5);
     background-color: rgb(218, 147, 16);
     z-index: 2;
 }
@@ -209,11 +207,6 @@
     position: absolute;
     margin-left: 25%;
     margin-top: 6%;
-    width: 40vw;
-    height: 40vw;
-    max-width: 60vh;
-    max-height: 60vh;
-    background-color: rgb(218, 147, 16);
     border-radius: 50%;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3),
     inset 0 2px 4px rgba(255,255,255,0.5);
@@ -239,19 +232,21 @@
     font-family: 'Play';
 }
 
-input[type="text"], input[type="password"], input[type="email"] {
-    border: none;
-    border-bottom: 1px solid #333;
-    background-color: transparent;
-    margin: 10px 0;
-    padding: 8px;
-    width: calc(70% - 20px);
-    outline: none;
+/* BUTTON */
+.arrow-s {
+    color: white;
+    margin-bottom: 55vh;
+    margin-right: 30vw;
+    font-size: 2rem;
+}
+
+.arrow-s:hover {
+    color: rgb(218, 147, 16);
 }
 
 .button-signin {
     font-family: Lato, sans-serif;
-    font-size: 14px;
+    font-size: 80%;
     color: black;
     background-color: transparent;
     border: solid 2px;
@@ -265,12 +260,15 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 .button-signin:hover {
-    background-color: rgb(218, 147, 16);
+    background-color: rgb(224, 177, 101);
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
-/* MOBILE VERSION */
+/*********************************************************/
+/*                     small screen                      */
+/*********************************************************/
 
+/* BALLS */
 .orange-ball-signin-sm {
     position: absolute;
     display: flex;
@@ -283,7 +281,6 @@ input[type="text"], input[type="password"], input[type="email"] {
     height: 70vw;
     max-width: 60vh;
     max-height: 60vh;
-    background-color: rgb(218, 147, 16);
     border-radius: 50%;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3),
     inset 0 2px 4px rgba(255,255,255,0.5);
@@ -291,9 +288,20 @@ input[type="text"], input[type="password"], input[type="email"] {
     z-index: 2;
 }
 
+/* FORM */
+.login-input-signin {
+    border: none;
+    border-bottom: 1px solid #333;
+    background-color: transparent;
+    margin: 10px 0;
+    width: 70%;
+    outline: none;
+}
+
+/* BUTTON */
 .arrow-s-sm {
     color: rgb(218, 147, 16);
-    margin-bottom: 40vh;
+    margin-bottom: 50vh;
     margin-right: 50vh;
     font-size: 2rem;
 }
@@ -302,6 +310,55 @@ input[type="text"], input[type="password"], input[type="email"] {
     color: white;
 }
 
+
+/*********************************************************/
+/*                     media screen                      */
+/*********************************************************/
+
+@media (min-width: 1318px) {
+
+    .orange-ball-signin {
+        margin-left: 3vw;
+    }
+
+    .white-ball-signin {
+        margin-right: 3vw;
+
+    }
+
+}
+
+@media (max-height: 350px) {
+
+    .orange-ball-signin,
+    .white-ball-signin {
+        font-size: 3vh;
+    }
+    
+}
+
+@media (max-height: 523px) and (min-width: 767px) {
+
+    .login-input-signin {
+        display: none;
+    }
+    
+    .button-signin {
+        display: none;
+    }
+}
+
+@media (max-width: 678px) {
+
+    .login-input-signin {
+        width: 100%;
+    }
+}
+/*********************************************************/
+/*               medium & large screen                   */
+/*********************************************************/
+
+/* BALLS */
 .balls-login {
     position: relative;
     display: flex;
@@ -311,55 +368,60 @@ input[type="text"], input[type="password"], input[type="email"] {
     margin: 0;
 }
 
-.orange-ball-login {
-    margin-right: 30vw;
+.orange-ball-login,
+.white-ball-login  {
     width: 40vw;
     height: 40vw;
     max-width: 60vh;
     max-height: 60vh;
-    background-color: rgb(218, 147, 16);
     border-radius: 50%;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3),
-    inset 0 2px 4px rgba(255,255,255,0.5);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.5);
+}
+
+.orange-ball-login {
+    margin-right: 25vw;
     background-color: rgb(218, 147, 16);
     z-index: 1; 
 }
 
 .white-ball-login {
-    position: relative;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    position: absolute;
-    margin-left: 25%;
+    margin-left: 25vw;
     margin-top: 6%;
     width: 40vw;
     height: 40vw;
-    max-width: 60vh;
-    max-height: 60vh;
-    background-color: rgb(218, 147, 16);
-    border-radius: 50%;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3),
-    inset 0 2px 4px rgba(255,255,255,0.5);
     background-color: white;
     z-index: 2;
 }
 
 /* FORMULAR */
 .login-form-login {
-    padding: 40px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    overflow: hidden;
     width: 30vw;
     height: 35vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+    padding: 40px;
     font-family: 'Play';
+}
+
+.login-input {
+    border: none;
+    border-bottom: 1px solid #333;
+    background-color: transparent;
+    margin: 10px 0;
+    padding: 8px;
+    width: 18vw;
+    outline: none;
 }
 
 .login-form-login::before {
@@ -370,44 +432,24 @@ input[type="text"], input[type="password"], input[type="email"] {
     opacity: 0.6;
 }
 
+/* BUTTON */
 .button-login {
-    font-family: Lato, sans-serif;
-    font-size: 14px;
-    color: black;
-    background-color: transparent;
+    font-size: 70%;
     border: solid 2px;
     border-radius: 5px;
+    margin-top: 35px;
+    color: black;
+    font-weight: bold;
+    font-family: Lato, sans-serif;
+    background-color: transparent;
     cursor: pointer;
-    text-transform: uppercase;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     transition: background-color 0.3s, box-shadow 0.3s;
-    margin-top: 35px;
-    font-weight: bold;
 }
 
 .button-login:hover {
     background-color: rgb(218, 147, 16);
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-
-/* MOBILE VERSION */
-.white-ball-login-sm {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    position: absolute;
-    width: 70vw;
-    height: 70vw;
-    max-width: 60vh;
-    max-height: 60vh;
-    background-color: rgb(218, 147, 16);
-    border-radius: 50%;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3),
-    inset 0 2px 4px rgba(255,255,255,0.5);
-    background-color: white;
-    z-index: 2;
 }
 
 .arrow {
@@ -421,9 +463,35 @@ input[type="text"], input[type="password"], input[type="email"] {
     color: rgb(218, 147, 16);
 }
 
+
+/*********************************************************/
+/*                     small screen                      */
+/*********************************************************/
+
+/* BALLS */
+.white-ball-login-sm {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    width: 70vw;
+    height: 70vw;
+    max-width: 60vh;
+    max-height: 60vh;
+    background-color: rgb(218, 147, 16);
+    border-radius: 50%;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3),
+    inset 0 2px 4px rgba(255,255,255,0.5);
+    background-color: white;
+    z-index: 2;
+}
+
+/* BUTTON */
 .arrow-sm {
     color: white;
-    margin-bottom: 40vh;
+    margin-bottom: 50vh;
     margin-right: 50vh;
     font-size: 2rem;
 }
@@ -432,7 +500,21 @@ input[type="text"], input[type="password"], input[type="email"] {
     color: orange;
 }
 
+/*********************************************************/
+/*                     media screen                      */
+/*********************************************************/
 
+@media (min-width: 1318px) {
+
+    .orange-ball-login {
+        margin-left: 3vw;
+    }
+
+    .white-ball-login {
+        margin-right: 3vw;
+    }
+
+}
 .navbar-supperposition {
     position: relative;
 }
@@ -1430,9 +1512,9 @@ input[type="text"], input[type="password"], input[type="email"] {
        font-size: 2vw;
    }
 
-   input[type="text"] {
+   /* input[type="text"] {
        font-size: 2vw;
-   }
+   } */
 
    .button-2FA {
        font-size: 1.5vw;
@@ -1450,9 +1532,9 @@ input[type="text"], input[type="password"], input[type="email"] {
        font-size: 1.2vw;
    }
 
-   input[type="text"] {
+   /* input[type="text"] {
        font-size: 1vw;
-   }
+   } */
 
    .button-2FA {
        font-size: 1vw;
@@ -1975,7 +2057,7 @@ tbody, td, tfoot, th, thead, tr {
     border-radius: 20px;
 } */
 
-input[type="text"], input[type="password"], input[type="email"] {
+/* input[type="text"], input[type="password"], input[type="email"] {
     border: none;
     border-bottom: 1px solid #333;
     background-color: transparent;
@@ -1983,7 +2065,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     padding: 8px;
     width: calc(100% - 20px);
     outline: none;
-}
+} */
 
 .button-update-data {
     width: 10vw;

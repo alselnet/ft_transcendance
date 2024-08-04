@@ -1,3 +1,7 @@
+/*********************************************************/
+/*               medium & large screen                   */
+/*********************************************************/
+
 /* BALLS */
 .balls-signin {
     position: relative;
@@ -8,15 +12,16 @@
     margin: 0;
 }
 
-.arrow-s {
-    color: white;
-    margin-bottom: 55vh;
-    margin-right: 30vw;
-    font-size: 2rem;
-}
-
-.arrow-s:hover {
-    color: rgb(218, 147, 16);
+.orange-ball-signin,
+.white-ball-signin {
+    width: 40vw;
+    height: 40vw;
+    max-width: 60vh;
+    max-height: 60vh;
+    border-radius: 50%;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3),
+    inset 0 2px 4px rgba(255,255,255,0.5);
+    z-index: 2;
 }
 
 .orange-ball-signin {
@@ -24,17 +29,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
-    margin-right: 30vw;
-    width: 40vw;
-    height: 40vw;
 	flex-direction: column;
-    max-width: 60vh;
-    max-height: 60vh;
+    margin: 0;
+    margin-right: 25vw;
     background-color: rgb(218, 147, 16);
-    border-radius: 50%;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3),
-    inset 0 2px 4px rgba(255,255,255,0.5);
     background-color: rgb(218, 147, 16);
     z-index: 2;
 }
@@ -46,11 +44,6 @@
     position: absolute;
     margin-left: 25%;
     margin-top: 6%;
-    width: 40vw;
-    height: 40vw;
-    max-width: 60vh;
-    max-height: 60vh;
-    background-color: rgb(218, 147, 16);
     border-radius: 50%;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3),
     inset 0 2px 4px rgba(255,255,255,0.5);
@@ -76,19 +69,21 @@
     font-family: 'Play';
 }
 
-input[type="text"], input[type="password"], input[type="email"] {
-    border: none;
-    border-bottom: 1px solid #333;
-    background-color: transparent;
-    margin: 10px 0;
-    padding: 8px;
-    width: calc(70% - 20px);
-    outline: none;
+/* BUTTON */
+.arrow-s {
+    color: white;
+    margin-bottom: 55vh;
+    margin-right: 30vw;
+    font-size: 2rem;
+}
+
+.arrow-s:hover {
+    color: rgb(218, 147, 16);
 }
 
 .button-signin {
     font-family: Lato, sans-serif;
-    font-size: 14px;
+    font-size: 80%;
     color: black;
     background-color: transparent;
     border: solid 2px;
@@ -102,12 +97,15 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 .button-signin:hover {
-    background-color: rgb(218, 147, 16);
+    background-color: rgb(224, 177, 101);
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
-/* MOBILE VERSION */
+/*********************************************************/
+/*                     small screen                      */
+/*********************************************************/
 
+/* BALLS */
 .orange-ball-signin-sm {
     position: absolute;
     display: flex;
@@ -120,7 +118,6 @@ input[type="text"], input[type="password"], input[type="email"] {
     height: 70vw;
     max-width: 60vh;
     max-height: 60vh;
-    background-color: rgb(218, 147, 16);
     border-radius: 50%;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3),
     inset 0 2px 4px rgba(255,255,255,0.5);
@@ -128,13 +125,69 @@ input[type="text"], input[type="password"], input[type="email"] {
     z-index: 2;
 }
 
+/* FORM */
+.login-input-signin {
+    border: none;
+    border-bottom: 1px solid #333;
+    background-color: transparent;
+    margin: 10px 0;
+    width: 70%;
+    outline: none;
+}
+
+/* BUTTON */
 .arrow-s-sm {
     color: rgb(218, 147, 16);
-    margin-bottom: 40vh;
+    margin-bottom: 50vh;
     margin-right: 50vh;
     font-size: 2rem;
 }
 
 .arrow-s-sm:hover {
     color: white;
+}
+
+
+/*********************************************************/
+/*                     media screen                      */
+/*********************************************************/
+
+@media (min-width: 1318px) {
+
+    .orange-ball-signin {
+        margin-left: 3vw;
+    }
+
+    .white-ball-signin {
+        margin-right: 3vw;
+
+    }
+
+}
+
+@media (max-height: 350px) {
+
+    .orange-ball-signin,
+    .white-ball-signin {
+        font-size: 3vh;
+    }
+    
+}
+
+@media (max-height: 523px) and (min-width: 767px) {
+
+    .login-input-signin {
+        display: none;
+    }
+    
+    .button-signin {
+        display: none;
+    }
+}
+
+@media (max-width: 678px) {
+
+    .login-input-signin {
+        width: 100%;
+    }
 }
