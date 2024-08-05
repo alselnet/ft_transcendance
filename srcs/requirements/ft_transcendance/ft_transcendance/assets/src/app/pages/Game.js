@@ -97,6 +97,7 @@ const Game = async () => {
         let ball_color_ig
         let ball_size_ig
         let olympicRings
+        let tournoiProgress = false
 
         initializeGameVariables();
         showInitialMenu();
@@ -301,6 +302,7 @@ const Game = async () => {
 
         async function runTournament(participants) {
             let round = 1;
+            tournoiProgress = true;
 
             while (participants.length > 1) {
                 let nextRoundParticipants = [];
@@ -317,6 +319,10 @@ const Game = async () => {
                     hideAll();
                     alert(`Round: ${round}  Match: ${player1} Vs ${player2}`);
                     await connectWebSocketTournoi(roomName, player1, player2, nextRoundParticipants, ballSpeed.value, paddleSpeed.value);
+                    if (tournoiProgress == false) {
+                        location.reload();
+                        return;
+                    }
                 }
 
                 participants = nextRoundParticipants;
@@ -353,6 +359,7 @@ const Game = async () => {
                     updateGame(data);
                 } else if (data.type === 'game_over') {
                     gameEnd = true
+                    alert(`Player ${data.winner} wins!`);
                     let fecth_data_history = {
                         winner_username: '',
                         loser_username: '',
@@ -400,10 +407,10 @@ const Game = async () => {
 
             socket.onclose = function(event) {
                 resetKeys();
-                if (scorePlayer1 == 1)
-                    alert(`Player 1 wins!`);
-                else
-                    alert(`Player 2 wins!`);
+                // if (scorePlayer1 == 1)
+                //     alert(`Player 1 wins!`);
+                // else
+                //     alert(`Player 2 wins!`);
                 location.reload();
             };
 
@@ -465,6 +472,9 @@ const Game = async () => {
                         nextRoundParticipants.push(winner);
                     }
                 };
+
+                // hideAll();
+                // resolve();
 
                 socket.onclose = function(event) {
                     resetKeys();
@@ -580,14 +590,15 @@ const Game = async () => {
             scorePlayer1 = 0;
             scorePlayer2 = 0;
             gameEnd = false;
+            tournoiProgress = false
             updateScores(scorePlayer1, scorePlayer2);
         }
 
         window.addEventListener('popstate', function() {
             if (socket) {
-                socket.close();
-                socket = null;
                 resetGameState()
+                socket.close();
+                // socket = null;
             }
         });
 
@@ -596,9 +607,9 @@ const Game = async () => {
                 Game();
             } else {
                 if (socket) {
-                    socket.close();
-                    socket = null;
                     resetGameState();
+                    socket.close();
+                    // socket = null;
                 }
             }
         });

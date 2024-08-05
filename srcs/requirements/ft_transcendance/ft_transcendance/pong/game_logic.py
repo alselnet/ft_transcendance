@@ -119,10 +119,10 @@ class PongGame:
 
     def reset_ball_position(self):
         if self.waiting_player == 1:
-            self.ball_x_position = -self.screen_width / 2 + self.player_width + self.ball_size
+            self.ball_x_position = -self.screen_width / 2 + self.player_width + self.ball_size + 4
             self.ball_y_position = self.player1_y_position
         else:
-            self.ball_x_position = self.screen_width / 2 - self.player_width - self.ball_size
+            self.ball_x_position = self.screen_width / 2 - self.player_width - self.ball_size - 4
             self.ball_y_position = self.player2_y_position
 
     def start_ball_movement(self):
