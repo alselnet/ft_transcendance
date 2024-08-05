@@ -43,7 +43,6 @@ const updateAvatar = (file) => {
         return response.json();
     })
     .then(data => {
-        // document.querySelector('.settings-picture').src = data.avatar;
         alert('Avatar mis à jour avec succès');
         window.location.reload();
     })
@@ -154,11 +153,6 @@ const updateDataSettings = () => {
     section.querySelector('#tfa-authenticator').addEventListener('click', () => {
         update2FA('authenticator');
     });
-    
-    // section.querySelector('.delete-account').addEventListener('click', (event) => {
-    //     window.location.hash = '#/delete-account';
-    // });
-
 }
 
 export { sendConfirmationEmail, updateAvatar, 
