@@ -15,7 +15,6 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.views import APIView
-from ft_transcendance.settings import EMAIL_HOST_USER
 from users.models import Profile, GameSummary
 from .utils import generate_token, verify_token, resize_image, crop_to_square
 from .serializers import UserRegistrationSerializer, Update2FAStatusSerializer, DeleteUserSerializer
@@ -48,8 +47,6 @@ class UserRegistrationView(APIView):
 class UserDeletionView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
-
-    logger.info("Deleting Account\n")
 
     def delete(self, request):
         serializer = DeleteUserSerializer(data=request.data)
@@ -126,7 +123,6 @@ def FortyTwoLoginView(request):
 
 class Callback(APIView):
     def get(self, request):
-        logger.info("callback view")
         code = request.GET.get('code')
         client_id = settings.CLIENT_ID
         client_secret = settings.CLIENT_SECRET
@@ -149,11 +145,9 @@ class Callback(APIView):
             user_info_response = requests.get(user_info_url, headers=headers)
             user_info_response.raise_for_status()
             user_info = user_info_response.json()
-            # logger.info("Réponse de l'intra 42: %s", json.dumps(user_info, indent=4))
             username = user_info['login']
             email = user_info['email']
             avatar_url = user_info['image']['versions']['small']
-            logger.info("Link de l'intra 42: %s", avatar_url)
             
             user, created = User.objects.get_or_create(username=username)
             
@@ -177,8 +171,7 @@ class Callback(APIView):
             profile.save()
 
             refresh = RefreshToken.for_user(user)
-            redirect_url = f"https://paul-f4Ar2s4:4443/callback#access={refresh.access_token}&refresh={refresh}"
-            logger.info("redirect url: %s", redirect_url)
+            redirect_url = f"https://{settings.HOST}/callback#access={refresh.access_token}&refresh={refresh}"
             return redirect(redirect_url)
         except requests.exceptions.RequestException as e:
             return Response({'error': 'Failed to obtain access token', 'details': str(e)}, status=status.HTTP_400_BAD_REQUEST)
@@ -250,27 +243,21 @@ class InitialAuthenticationView(APIView):
 
 class Generate2FACodeView(APIView):
     def post(self, request):
-        logger.info('Requête reçue pour générer un code 2FA')
         tfa_token = request.data.get('tfa_token')
-        logger.debug(f'tfa_token reçu : {tfa_token}')
 
         if not tfa_token:
-            logger.error('TFA secret est manquant dans la requête')
             return Response({'error': 'TFA secret is required'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             profile = Profile.objects.get(tfa_token=tfa_token)
             user = profile.user
-            logger.debug(f'Utilisateur trouvé : {user.username}')
         except Profile.DoesNotExist:
-            logger.error('TFA secret invalide')
+
             return Response({'error': 'Invalid TFA secret'}, status=status.HTTP_400_BAD_REQUEST)
 
         method = profile.two_fa_method
-        logger.debug(f'Méthode 2FA trouvée : {method}')
 
         if not profile.totp_secret:
-            logger.error('TOTP secret non défini pour cet utilisateur')
             return Response({'error': 'TOTP secret is not set for this user'}, status=status.HTTP_400_BAD_REQUEST)
 
         if method == 'authenticator':
@@ -283,12 +270,10 @@ class Generate2FACodeView(APIView):
             buffer.seek(0)
 
             response = HttpResponse(buffer, content_type="image/png")
-            logger.info('QR code généré pour authenticator')
             return response
 
         elif method == 'email':
             if not profile.mail_confirmation_status:
-                logger.error('Email non confirmé')
                 return Response({'error': 'Email is not confirmed'}, status=status.HTTP_400_BAD_REQUEST)
 
             totp = pyotp.TOTP(profile.totp_secret)
@@ -300,15 +285,11 @@ class Generate2FACodeView(APIView):
 
             try:
                 send_mail(subject, message, settings.EMAIL_HOST_USER, recipient_list)
-                logger.info(f"Code 2FA envoyé à {user.email}")
-
                 return Response({'message': '2FA code sent via email'}, status=status.HTTP_200_OK)
             except Exception as e:
-                logger.error(f"Erreur lors de l'envoi de l'email : {str(e)}")
                 return Response({'error': 'Failed to send 2FA code via email'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         else:
-            logger.error('Méthode 2FA invalide dans le profil')
             return Response({'error': 'Invalid 2FA method in profile'}, status=status.HTTP_400_BAD_REQUEST)
 
 class Validate2FACodeView(APIView):
@@ -346,10 +327,7 @@ class Update2FAStatusView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-
-        logger.info("POST request received")
-        logger.info(f"Request data: {request.data}")
-        
+      
         user = request.user
         profile = Profile.objects.get(user=user)
         

@@ -42,13 +42,13 @@ const DashStat = () => {
 									<li class="dropdown-item" data-status="online">
 										<div class="status-dropdown">
 											<div class="status-pastille" style="background-color: green; margin-right: 0.3vw"></div>
-											<div class="status-text">Online</div>
+											<div class="status-text">En ligne</div>
 										</div>
 									</li>
 									<li class="dropdown-item" data-status="offline">
 										<div class="status-dropdown">
 											<div class="status-pastille" style="background-color: grey; margin-right: 0.3vw"></div>
-											<div class="status-text">Offline</div>
+											<div class="status-text">Invisible</div>
 										</div>
 									</li>
 								</ul>
