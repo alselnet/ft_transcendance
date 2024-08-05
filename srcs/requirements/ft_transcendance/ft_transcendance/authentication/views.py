@@ -228,7 +228,7 @@ class SendConfirmationEmailView(APIView):
             token = generate_token(email)
             path = reverse('confirm-email', args=[token])
             
-            confirm_url = f"https://{settings.HOST}/{path}"
+            confirm_url = f"https://{settings.HOST}{path}"
 
             subject = 'Email Confirmation'
             message = f"""
