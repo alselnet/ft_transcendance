@@ -25,7 +25,7 @@ const Settings = async () => {
        const emailConfirmationBanner = userData.mail_confirmation_status ? '' : `
            <div class="confirm-email">
                votre adresse mail doit etre verifiee : 
-               <a href="" id="resend-verification-email">envoyer un mail de verification</a>
+               <a href="" id="resend-verification-email">renvoyer un mail de verification</a>
            </div>`;
 
        section.innerHTML = 
@@ -116,10 +116,21 @@ const Settings = async () => {
    </div>
        `;
 
-       section.querySelector('.edit-pp').addEventListener('click', (event) => {
-           event.preventDefault();
-           section.querySelector('#avatar-input').click();
-       });
+       if (userData.fortytwo_account === true) {
+		section.querySelector('.edit-pp').style.display = 'none';
+	} else {
+		section.querySelector('.edit-pp').addEventListener('click', (event) => {
+			event.preventDefault();
+			section.querySelector('#avatar-input').click();
+		});
+
+		section.querySelector('#avatar-input').addEventListener('change', (event) => {
+			const file = event.target.files[0];
+			if (file) {
+				updateAvatar(file);
+			}
+		});
+	}
 
        section.querySelector('#avatar-input').addEventListener('change', (event) => {
            const file = event.target.files[0];
@@ -152,6 +163,12 @@ const Settings = async () => {
            });
        }
 
+       if (userData.fortytwo_account === true) {
+            document.getElementById('edit-username').disabled = true;
+            document.getElementById('edit-email').disabled = true;
+            document.getElementById('edit-password').disabled = true;
+        }
+        
         section.querySelector('#delete-account').addEventListener('click', (event) => {
             event.preventDefault();
             const redirectUrl = userData.auth_method === '42' ? '/delete-account-42' : '/delete-account';

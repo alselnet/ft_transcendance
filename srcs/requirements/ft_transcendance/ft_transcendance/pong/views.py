@@ -9,13 +9,38 @@ player_speed = 7
 ball_size = 8
 pong_game = PongGame(ball_speed, player_speed, ball_size)
 
+active_rooms = set()
+
 class LocalGameInitView(APIView):
     def get(self, request, room_name):
+        if len(room_name) > 15:
+            return Response({'error': 'Room name must be less than 15 characters'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if ' ' in room_name:
+            return Response({'error': 'Room name must not contain spaces'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if not room_name:
+            return Response({'error': 'Room name must not be empty'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if room_name in active_rooms:
+            return Response({'error': 'Room already exists'}, status=status.HTTP_400_BAD_REQUEST)
+
+        active_rooms.add(room_name)
         pong_game.view_init()
         return Response({'message': f'Local game {room_name} initialized'}, status=status.HTTP_200_OK)
 
+class LocalGameCloseView(APIView):
+    def get(self, request, room_name):
+        if room_name in active_rooms:
+            active_rooms.remove(room_name)
+            return Response({'message': f'Local game {room_name} closed'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'Room does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+
 class LocalPlayerMoveView(APIView):
     def post(self, request, room_name, player):
+        if room_name not in active_rooms:
+            return Response({'error': 'Room does not exist'}, status=status.HTTP_400_BAD_REQUEST)
         direction = request.data.get('direction')
         if direction == 'up':
             pong_game.update_player_position(player, -1)
@@ -25,6 +50,8 @@ class LocalPlayerMoveView(APIView):
 
 class LocalGameStateView(APIView):
     def get(self, request, room_name):
+        if room_name not in active_rooms:
+            return Response({'error': 'Room does not exist'}, status=status.HTTP_400_BAD_REQUEST)
         pong_game.update_ball_position()
         state = {
             'player1_y_position': pong_game.player1_y_position,
@@ -38,6 +65,8 @@ class LocalGameStateView(APIView):
 
 class LocalStartBallView(APIView):
     def post(self, request, room_name):
+        if room_name not in active_rooms:
+            return Response({'error': 'Room does not exist'}, status=status.HTTP_400_BAD_REQUEST)
         pong_game.start_ball()
         return Response({'message': 'Ball movement started'}, status=status.HTTP_200_OK)
 

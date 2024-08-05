@@ -2,9 +2,6 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from .game_logic import PongGame
 import asyncio
-import logging
-
-logger = logging.getLogger(__name__)
 
 class PongConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -71,7 +68,7 @@ class PongConsumer(AsyncWebsocketConsumer):
                     }
                 )
             except Exception as e:
-                logger.error(f"Error sending game state: {e}")
+                pass
 
             if self.pong_game.game_over:
                 try:
@@ -85,7 +82,7 @@ class PongConsumer(AsyncWebsocketConsumer):
                         }
                     )
                 except Exception as e:
-                    logger.error(f"Error sending game over message: {e}")
+                    pass
 
                 if self.pong_game.game_over:
                     await self.handle_game_over()
@@ -102,7 +99,7 @@ class PongConsumer(AsyncWebsocketConsumer):
                 }
             )
         except Exception as e:
-            logger.error(f"Error sending game over message: {e}")
+            pass
         finally:
             self.connected = False
             await self.disconnect(close_code=1000)
@@ -111,10 +108,8 @@ class PongConsumer(AsyncWebsocketConsumer):
         try:
             if self.channel_layer and self.channel_name:
                 await self.send(text_data=json.dumps(event['game_state']))
-            else:
-                logger.warning("Connection is closed. Cannot send message.")
         except Exception as e:
-            logger.error(f"Error sending message: {e}")
+            pass
 
     async def game_over(self, event):
         try:
@@ -126,7 +121,7 @@ class PongConsumer(AsyncWebsocketConsumer):
                     'score_player2': self.pong_game.score_player2
                 }))
         except Exception as e:
-            logger.error(f"Error sending game_over message: {e}")
+            pass
         finally:
             await self.close()
 
