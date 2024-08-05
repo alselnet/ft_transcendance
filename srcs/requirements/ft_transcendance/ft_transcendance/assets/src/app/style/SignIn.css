@@ -33,7 +33,6 @@
     margin: 0;
     margin-right: 25vw;
     background-color: rgb(218, 147, 16);
-    background-color: rgb(218, 147, 16);
     z-index: 2;
 }
 
@@ -53,17 +52,9 @@
 
 /* FORM */
 .login-form-signin {
-    margin-top: 5%;
     padding: 40px;
-    text-align: center;
-    width: 35vw;
-    height: 45vh;
     max-width: 400px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
     position: absolute;
     overflow: hidden;
     font-family: 'Play';
@@ -94,6 +85,8 @@
     transition: background-color 0.3s, box-shadow 0.3s;
     margin-top: 10px;
     font-weight: bold;
+    width: 13vw;
+    height: 3vh;
 }
 
 .button-signin:hover {
@@ -131,8 +124,9 @@
     border-bottom: 1px solid #333;
     background-color: transparent;
     margin: 10px 0;
-    width: 70%;
     outline: none;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* BUTTON */
@@ -160,9 +154,7 @@
 
     .white-ball-signin {
         margin-right: 3vw;
-
     }
-
 }
 
 @media (max-height: 350px) {
@@ -171,7 +163,6 @@
     .white-ball-signin {
         font-size: 3vh;
     }
-    
 }
 
 @media (max-height: 523px) and (min-width: 767px) {
@@ -191,3 +182,36 @@
         width: 100%;
     }
 }
+
+
+@media (max-width: 570px) {
+    .arrow-s-sm {
+        margin-bottom: 40vh;
+        margin-right: 35vh;
+    }
+
+    .button-signin {
+        font-size: 50%;
+    }
+
+    .login-form-signin {
+        margin-right: 3vh;
+    }
+}
+
+@media (max-width: 401px) {
+
+    .arrow-s-sm {
+        margin-bottom: 40vh;
+        margin-right: 20vh;
+    }
+}
+
+@media (max-height: 774px) {
+
+    .arrow-s-sm {
+        margin-bottom: 60vh;
+        margin-right: 40vh;
+    }
+}
+

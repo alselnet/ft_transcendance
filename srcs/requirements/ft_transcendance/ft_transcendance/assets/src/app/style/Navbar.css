@@ -85,6 +85,10 @@
     color: #245070;
 }
 
+.navbar-icon {
+    font-size: 4rem;
+    color: white;
+}
 
 @media (min-height: 660px) and (min-width: 992px) {
 
@@ -96,8 +100,18 @@
 
 @media (max-height: 660px) and (min-width: 992px) {
 
-    .navbar-container {
+    /* .navbar-container {
         display: none;
+    } 
+        
+    .navbar-container-media {
+        display: flex;
+    }
+        */
+
+    .navbar-icon {
+        font-size: 0rem;
+        color: red;
     }
 
 }
