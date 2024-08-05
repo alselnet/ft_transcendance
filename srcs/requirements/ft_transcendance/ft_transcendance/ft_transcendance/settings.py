@@ -11,9 +11,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'paul-f4Ar2s4']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', config('HOSTNAME')]
 
 # Application definition
 
@@ -134,12 +134,12 @@ REST_FRAMEWORK = {
 	]
 }
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 
-# CORS_ORIGIN_WHITELIST = [
-#      'https://localhost',
-# 	 'http://aselnet.42.fr'
-# ]
+CORS_ORIGIN_WHITELIST = [
+     'https://localhost:4443',
+	 'https://' + config('HOST')
+]
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-+@d&r!khzmp7e)=j_*kl2^#huo+=10ev=1^tsl7^bq@nyw7t%%'
@@ -228,6 +228,7 @@ LOGGING = {
 CLIENT_ID = config('CLIENT_ID')
 CLIENT_SECRET = config('CLIENT_SECRET')
 REDIRECT_URI = config('REDIRECT_URI')
+HOST = config('HOST')
 
 CSRF_TRUSTED_ORIGINS = ['https://localhost:4443']
 

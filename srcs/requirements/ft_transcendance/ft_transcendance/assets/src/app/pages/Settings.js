@@ -152,21 +152,6 @@ const Settings = async () => {
                sendConfirmationEmail(userData.email);
            });
        }
-
-
-   
-        /* C'EST ICI JULES  */
-        // if (userData.fortytwoaccount === true) {
-        //     document.getElementById('edit-username').disabled = true;
-        //     document.getElementById('edit-email').disabled = true;
-        //     document.getElementById('edit-password').disabled = true;
-        // }
-
-
-
-
-
-
        initializeSettingsPage();
    })
    .catch(error => {

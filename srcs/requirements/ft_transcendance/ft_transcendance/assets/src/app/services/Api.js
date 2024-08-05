@@ -17,18 +17,15 @@ export const checkAuth = async () => {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    // Verify if access token exists
     if (!accessToken) {
         window.location.hash = '#/';
         return false;
     }
 
     if (!isTokenExpired(accessToken)) {
-        // Access token is not expired
         return true;
     }
 	
-    // Access token is expired and no refresh token in local storage
     if (!refreshToken) {
 		window.location.hash = '#/';
         return false;

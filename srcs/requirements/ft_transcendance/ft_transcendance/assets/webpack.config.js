@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer'); // Uncomment if needed
 
 module.exports = {
@@ -48,13 +47,13 @@ module.exports = {
       inject: 'body',
     }),
     new MiniCssExtractPlugin({
-      filename: 'styles/[name].css', // Added contenthash for cache busting
+      filename: 'styles/[name].css',
     }),
 	new CompressionWebpackPlugin({
-		algorithm: 'gzip', // Use gzip compression
-		test: /\.(js|css|html|svg)$/, // Files to compress
-		threshold: 10240, // Only assets bigger than this size (in bytes) will be processed
-		minRatio: 0.8, // Only assets that compress better than this ratio will be processed
+		algorithm: 'gzip',
+		test: /\.(js|css|html|svg)$/,
+		threshold: 10240,
+		minRatio: 0.8,
 	  }),
 	// new CopyWebpackPlugin({
 	// patterns: [

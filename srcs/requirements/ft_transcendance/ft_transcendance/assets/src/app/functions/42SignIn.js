@@ -2,12 +2,10 @@ const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
 const baseUrl = `${window.location.protocol}//${window.location.host}`
 
 export function FortyTwoSignIn() {
-    // Redirect to the backend endpoint which handles the OAuth flow
     window.location.href = `${authUrl}/42login/`;
 }
 
 export function handleCallback() {
-    // Extract tokens from the URL fragment
 	console.log('handleCallback()');
     const fragment = window.location.hash.substring(1);
     console.log("Fragment part of URL:", fragment);
