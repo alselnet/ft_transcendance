@@ -49,7 +49,7 @@ export const PublicGameHistory = async () => {
         if (section) {
             section.innerHTML = `
                 <div class="main-container2 ga-hidden">
-                    <h1 class="title2">Match History</h1>
+                    <h1 class="title2">Historique des parties</h1>
                     <div class="history-container2">
                         <button id="close-btn-pgh" class="close-btn2">
                             &times;
@@ -58,10 +58,10 @@ export const PublicGameHistory = async () => {
                             <thead>
                                 <tr>
                                     <th>Date</th>
-                                    <th>Winner</th>
-                                    <th>Loser</th>
-                                    <th>Result</th>
-                                    <th>Game Mode</th>
+                                    <th>Vinqueur</th>
+                                    <th>Perdant</th>
+                                    <th>Resultat</th>
+                                    <th>Mode de jeu</th>
                                     <th>Score</th>
                                 </tr>
                             </thead>

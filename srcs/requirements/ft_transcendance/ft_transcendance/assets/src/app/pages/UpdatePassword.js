@@ -2,8 +2,8 @@ import { removeMainComponent } from "../functions/MainFunctions.js";
 import { updatePswSettings } from "../functions/UpdateDataFunctions.js";
 
 const UpdatePassword = async () => {
-
     removeMainComponent();
+    
     let section = document.querySelector("#section");
 
     section.innerHTML = `

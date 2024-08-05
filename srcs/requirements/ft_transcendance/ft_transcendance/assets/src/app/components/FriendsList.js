@@ -5,7 +5,6 @@ import { removeMainComponent } from "../functions/MainFunctions.js";
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
 
 export const FriendList = async () => {
-    
     removeMainComponent();
     try {
         const response = await get(`${usersUrl}/friendlist/`);

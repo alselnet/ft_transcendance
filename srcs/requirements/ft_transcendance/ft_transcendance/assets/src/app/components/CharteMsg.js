@@ -29,7 +29,6 @@ const CharteMsg = async () => {
             </div>
         </div>
     `;
-
         document.getElementById('ok-button').addEventListener('click', () => {
             window.history.back();
         });

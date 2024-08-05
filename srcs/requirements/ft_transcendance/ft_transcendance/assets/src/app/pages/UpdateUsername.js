@@ -3,8 +3,8 @@ import { updateUsernameSettings } from "../functions/UpdateDataFunctions.js";
 
 
 const UpdateUsername = async () => {
-
     removeMainComponent();
+    
     let section = document.querySelector("#section");
 
     section.innerHTML = `

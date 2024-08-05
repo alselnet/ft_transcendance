@@ -13,7 +13,6 @@ const setUpNumberAnimation = (form) => {
             animateNumbers(number, target);
         });
     }, 500);
-
 }
 
 const modifyStatus = (form, userDataSatus) => {
@@ -33,7 +32,6 @@ const modifyStatus = (form, userDataSatus) => {
                 const statusPastille = form.querySelector('.status-pastille');
                 if (statusText && statusPastille) {
                     statusText.innerText = translateStatus(newStatus);
-                    // statusText.innerText = newStatus;
                     statusPastille.style.backgroundColor = getStatusColor(newStatus);
                 }
             })

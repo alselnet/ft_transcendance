@@ -1,5 +1,4 @@
 export function removeMainComponent() {
-
     let root = document.getElementById("root");
     if (!root) {
         console.error("#root not found in the DOM");

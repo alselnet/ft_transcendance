@@ -52,7 +52,6 @@ function handleFormSubmit(event) {
         password: document.getElementById("password")?.value || document.getElementById("password-sm")?.value,
     };
 
-
     fetch(`${authUrl}/signin/`, {
         method: 'POST',
         headers: {

@@ -3,7 +3,6 @@ import { put } from "../services/Api.js";
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
 
 const updateEmailSettings = () => {
-
     document.getElementById('submit-update-email').addEventListener('click', async () => {
         const newEmail = document.getElementById('new-data').value;
         const password = document.getElementById('password').value;
@@ -28,11 +27,9 @@ const updateEmailSettings = () => {
             alert('Please enter both email and password');
         }
     });
-
 }
 
 const updatePswSettings = () => {
-
     document.getElementById('submit-update-password').addEventListener('click', async () => {
         const currentPassword = document.getElementById('current-password').value;
         const newPassword = document.getElementById('new-password').value;
@@ -64,11 +61,9 @@ const updatePswSettings = () => {
             alert('Please enter all fields');
         }
     });
-
 }
 
 const updateUsernameSettings = () => {
-    
     document.getElementById('submit-update-username').addEventListener('click', async () => {
         const newUsername = document.getElementById('new-data').value;
         const password = document.getElementById('password').value;

@@ -8,7 +8,6 @@ const usersUrl = `${window.location.protocol}//${window.location.host}/api/users
 const DashStat = () => {
     let form = document.createElement("div");
 
-
     get(`${usersUrl}/me/`)
     .then(response => {
         if (!response.ok) {
@@ -17,8 +16,6 @@ const DashStat = () => {
         return response.json();
     })
     .then(userData => {
-
-
         form.innerHTML = `
 			<div class="stat-container">
 				<div class="id">
@@ -141,7 +138,6 @@ const DashStat = () => {
         console.error('Error fetching user profile:', error);
         form.innerHTML = '<p>Failed to load user profile</p>';
     });
-
 
     return form;
 };

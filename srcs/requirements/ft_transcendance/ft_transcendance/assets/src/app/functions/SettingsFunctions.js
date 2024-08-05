@@ -129,7 +129,6 @@ const isUserSelf = (searchedUsername, currentUsername) => {
 };
 
 const updateDataSettings = () => {
-
     section.querySelector('#edit-username').addEventListener('click', (event) => {
         window.location.hash = '#/update-username';
     });

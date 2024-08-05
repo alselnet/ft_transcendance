@@ -5,8 +5,8 @@ import Jthuysba from '../images/Jules.png'
 import { checkAuth } from "../services/Api.js";
 
 const AboutUs = async () => {
-
     const isAuthenticated = await checkAuth();
+
     if (!isAuthenticated) {
         throw new Error('User is not authenticated');
     }
@@ -16,7 +16,6 @@ const AboutUs = async () => {
         section.innerHTML = 
     `
 	    <div class="main-container-aboutus">
-
         <h1 class="title-aboutus">Qui sommes nous ?</h1>
 	    <div class="container-aboutus">
 	    	<div class="row">

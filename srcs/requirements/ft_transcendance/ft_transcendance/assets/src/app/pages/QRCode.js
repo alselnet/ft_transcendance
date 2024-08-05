@@ -3,8 +3,8 @@ import { removeMainComponent } from "../functions/MainFunctions";
 const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`;
 
 export const QRCode = () => {
+    removeMainComponent();
 
-    removeMainComponent()
     let section = document.querySelector("#section");
     section.id = "qr-section";
 

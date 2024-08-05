@@ -1,5 +1,4 @@
 export const LogOut = () => {
-    
     let icon = document.createElement("div");
     
     icon.classList.add('logout-container');
@@ -9,6 +8,5 @@ export const LogOut = () => {
             <i class="bi bi-box-arrow-right"></i>
         </a>
     `;
-    
     return icon;
 };

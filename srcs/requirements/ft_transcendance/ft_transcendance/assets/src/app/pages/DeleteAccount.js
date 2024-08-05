@@ -2,7 +2,6 @@ import { deleteProcess } from "../functions/DeleteAccountFunctions.js";
 import { removeMainComponent } from "../functions/MainFunctions.js";
 
 const DeleteAccount = async () => {
-
     removeMainComponent();
     let section = document.querySelector("#section");
 

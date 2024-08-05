@@ -2,8 +2,8 @@ import { removeMainComponent } from "../functions/MainFunctions.js";
 import { updateEmailSettings } from "../functions/UpdateDataFunctions.js";
 
 const UpdateEmail = async () => {
-
     removeMainComponent();
+
     let section = document.querySelector("#section");
 
     section.innerHTML = `
@@ -23,7 +23,6 @@ const UpdateEmail = async () => {
         window.location.hash = '#/settings';
     });
 
-    
     return section;
 };
 

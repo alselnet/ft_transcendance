@@ -53,7 +53,6 @@ export function handleFormSubmit(event) {
         confirmPassword: document.getElementById("confirmPassword")?.value || document.getElementById("confirmPassword-sm")?.value
     };
 
-
     const usernameValid = checkUsername(formData.username);
     const emailValid = checkEmail(formData.email);
     const passwordValid = checkPassword(formData.password);

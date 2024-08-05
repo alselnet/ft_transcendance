@@ -4,7 +4,6 @@ import { animateBalls } from "../animation/HomeAnimation.js";
 import { removeMainComponent } from "../functions/MainFunctions.js";
 
 const Home = () => {
-
     removeMainComponent();
 
     let section = document.querySelector("#section");

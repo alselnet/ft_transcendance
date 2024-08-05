@@ -1,12 +1,12 @@
-import { FortyTwoSignIn } from '../functions/42SignIn.js';
 import img42 from '../images/42.png';
+import { FortyTwoSignIn } from '../functions/42SignIn.js';
 import { handleFormVisibility } from '../functions/SignInFunctions.js';
 import { removeMainComponent } from "../functions/MainFunctions.js";
 
 
 export const SignIn = () => {
-
     removeMainComponent();
+
     let section = document.querySelector("#section");
     if (section) {
         section.innerHTML = `
@@ -60,4 +60,3 @@ export const SignIn = () => {
         }
     }
 };
-
