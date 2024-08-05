@@ -126,6 +126,7 @@ def FortyTwoLoginView(request):
 
 class Callback(APIView):
     def get(self, request):
+        logger.info("callback view")
         code = request.GET.get('code')
         client_id = settings.CLIENT_ID
         client_secret = settings.CLIENT_SECRET
@@ -176,7 +177,8 @@ class Callback(APIView):
             profile.save()
 
             refresh = RefreshToken.for_user(user)
-            redirect_url = f"https://localhost/callback#access={refresh.access_token}&refresh={refresh}"
+            redirect_url = f"https://paul-f4Ar2s4:4443/callback#access={refresh.access_token}&refresh={refresh}"
+            logger.info("redirect url: %s", redirect_url)
             return redirect(redirect_url)
         except requests.exceptions.RequestException as e:
             return Response({'error': 'Failed to obtain access token', 'details': str(e)}, status=status.HTTP_400_BAD_REQUEST)
