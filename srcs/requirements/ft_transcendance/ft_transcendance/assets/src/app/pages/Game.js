@@ -39,6 +39,30 @@ const Game = async () => {
                     <option value="10" class="value">Fast</option>
                 </select>
             </div>
+            <div>
+                <label for="paddle-color">Paddle color:</label>
+                <select id="paddle-color">
+                    <option value="white" class="value">White</option>
+                    <option value="orange" class="value">Orange</option>
+                    <option value="black" class="value">Black</option>
+                </select>
+            </div>
+            <div>
+                <label for="ball-color">Ball color:</label>
+                <select id="ball-color">
+                    <option value="white" class="value">White</option>
+                    <option value="orange" class="value">Orange</option>
+                    <option value="black" class="value">Black</option>
+                </select>
+            </div>
+            <div>
+                <label for="ball-size">Ball size:</label>
+                <select id="ball-size">
+                    <option value="8" class="value">normal</option>
+                    <option value="4" class="value">small</option>
+                    <option value="15" class="value">big</option>
+                </select>
+            </div>
             <button class="game-button" id="start-game-btn">Start Game</button>
         </div>
         <div class="button-container" id="tournoi-buttons">
@@ -59,15 +83,20 @@ const Game = async () => {
         const paddleSpeed = document.getElementById("paddle-speed");
         const canvas = document.getElementById('game-canvas');
         const background_color = localStorage.getItem('backgroundClass');
+        const ball_color = document.getElementById('ball-color');
+        const paddle_color = document.getElementById('paddle-color');
+        const ball_size = document.getElementById('ball-size');
         if (!canvas) {
             console.error('Failed to find the canvas element with ID game-canvas');
             return;
         }
-        
         let player1Y, player2Y, ballX, ballY, socket, keys, playerNames, renderer, scene, camera, paddle1, paddle2, ball, tableWidth, tableHeight, scorePlayer1, scorePlayer2;
         let Player1_name;
-        const delay = 200;
         let gameEnd = false
+        let paddle_color_ig
+        let ball_color_ig
+        let ball_size_ig
+        let olympicRings
 
         initializeGameVariables();
         showInitialMenu();
@@ -82,6 +111,9 @@ const Game = async () => {
             playerNames = [];
             scorePlayer1 = 0;
             scorePlayer2 = 0;
+            ball_color_ig = "black";
+            paddle_color_ig = "white";
+            ball_size_ig = 8
             try {
                 const response = await get(`${usersUrl}/me/`)
                 if (!response.ok) {
@@ -106,10 +138,40 @@ const Game = async () => {
         }
 
         function showInitialMenu() {
-            drawInitialGame();
+            // drawInitialGame();
             updateScores(0, 0);
             hideAll();
             settings.classList.remove("hidden");
+        }
+
+        function addOlympicLogo() {
+            const ringRadius = 50; // Rayon des anneaux beaucoup plus grand
+            const tubeRadius = 8; // Rayon du tube des anneaux beaucoup plus grand
+            const segments = 16; // Segments pour la géométrie du tore
+            const opacity = 0.8; // Niveau de transparence (0.0 à 1.0)
+            const ringsData = [
+                { color: 0x0081C8, position: [-80, 150, -200] }, // Bleu, position beaucoup plus haute
+                { color: 0x000000, position: [0, 150, -200] }, // Noir, position beaucoup plus haute
+                { color: 0xEE334E, position: [80, 150, -200] }, // Rouge, position beaucoup plus haute
+                { color: 0xF4C300, position: [-40, 100, -200] }, // Jaune, position beaucoup plus haute
+                { color: 0x009F3D, position: [40, 100, -200] }, // Vert, position beaucoup plus haute
+            ];
+        
+            const rings = [];
+            ringsData.forEach(data => {
+                const geometry = new THREE.TorusGeometry(ringRadius, tubeRadius, segments, segments);
+                const material = new THREE.MeshPhongMaterial({ 
+                    color: data.color,
+                    transparent: true,
+                    opacity: opacity
+                });
+                const ring = new THREE.Mesh(geometry, material);
+                ring.position.set(...data.position);
+                scene.add(ring);
+                rings.push(ring);
+            });
+        
+            return rings;
         }
 
         function drawInitialGame() {
@@ -118,7 +180,7 @@ const Game = async () => {
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             camera.position.set(0, 0, 100);
-            renderer = new THREE.WebGLRenderer({ canvas: canvas });
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: false });
             renderer.setSize(window.innerWidth, window.innerHeight);
             if (background_color == "bg-roland")
                 renderer.setClearColor(0xa55318);
@@ -126,6 +188,8 @@ const Game = async () => {
                 renderer.setClearColor(0x2b6e25);
             else
                 renderer.setClearColor(0x4790C5);
+
+            
 
             // Lumière ambiante
             const ambientLight = new THREE.AmbientLight(0xffffff, 0.2); // Couleur blanche, faible intensité
@@ -136,35 +200,35 @@ const Game = async () => {
             directionalLight.position.set(0, 500, 200); // Positionner la lumière au-dessus et devant la scène
             scene.add(directionalLight);
 
-            // Lumières ponctuelles aux coins du terrain
-            const pointLight1 = new THREE.PointLight(0xffffff, 0.5, 0, 2);
-            pointLight1.position.set(-tableWidth / 2, 50, -tableHeight / 2);
-            scene.add(pointLight1);
+            // // Lumières ponctuelles aux coins du terrain
+            // const pointLight1 = new THREE.PointLight(0xffffff, 0.5, 0, 2);
+            // pointLight1.position.set(-tableWidth / 2, 50, -tableHeight / 2);
+            // scene.add(pointLight1);
 
-            const pointLight2 = new THREE.PointLight(0xffffff, 0.5, 0, 2);
-            pointLight2.position.set(tableWidth / 2, 50, -tableHeight / 2);
-            scene.add(pointLight2);
+            // const pointLight2 = new THREE.PointLight(0xffffff, 0.5, 0, 2);
+            // pointLight2.position.set(tableWidth / 2, 50, -tableHeight / 2);
+            // scene.add(pointLight2);
 
-            const pointLight3 = new THREE.PointLight(0xffffff, 0.5, 0, 2);
-            pointLight3.position.set(-tableWidth / 2, 50, tableHeight / 2);
-            scene.add(pointLight3);
+            // const pointLight3 = new THREE.PointLight(0xffffff, 0.5, 0, 2);
+            // pointLight3.position.set(-tableWidth / 2, 50, tableHeight / 2);
+            // scene.add(pointLight3);
 
-            const pointLight4 = new THREE.PointLight(0xffffff, 0.5, 0, 2);
-            pointLight4.position.set(tableWidth / 2, 50, tableHeight / 2);
-            scene.add(pointLight4);
+            // const pointLight4 = new THREE.PointLight(0xffffff, 0.5, 0, 2);
+            // pointLight4.position.set(tableWidth / 2, 50, tableHeight / 2);
+            // scene.add(pointLight4);
 
-            // Lumières spot pour les effets dramatiques
-            const spotLight1 = new THREE.SpotLight(0xffffff, 0.7, 0, Math.PI / 4, 0.5, 2);
-            spotLight1.position.set(0, 300, 0);
-            spotLight1.target.position.set(0, 0, 0);
-            scene.add(spotLight1);
-            scene.add(spotLight1.target);
+            // // Lumières spot pour les effets dramatiques
+            // const spotLight1 = new THREE.SpotLight(0xffffff, 0.7, 0, Math.PI / 4, 0.5, 2);
+            // spotLight1.position.set(0, 300, 0);
+            // spotLight1.target.position.set(0, 0, 0);
+            // scene.add(spotLight1);
+            // scene.add(spotLight1.target);
 
-            const spotLight2 = new THREE.SpotLight(0xffffff, 0.7, 0, Math.PI / 4, 0.5, 2);
-            spotLight2.position.set(0, 300, 0);
-            spotLight2.target.position.set(0, 0, tableHeight / 2);
-            scene.add(spotLight2);
-            scene.add(spotLight2.target);
+            // const spotLight2 = new THREE.SpotLight(0xffffff, 0.7, 0, Math.PI / 4, 0.5, 2);
+            // spotLight2.position.set(0, 300, 0);
+            // spotLight2.target.position.set(0, 0, tableHeight / 2);
+            // scene.add(spotLight2);
+            // scene.add(spotLight2.target);
 
             tableWidth = 1200; // Largeur de la table en unités Three.js
             tableHeight = 700; // Hauteur de la table en unités Three.js
@@ -173,7 +237,7 @@ const Game = async () => {
             const paddleWidth = 10;
             const paddleHeight = 70;
             const paddleDepth = 10;
-            const paddleMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff });
+            const paddleMaterial = new THREE.MeshPhongMaterial({ color: paddle_color_ig });
             paddle1 = new THREE.Mesh(new THREE.BoxGeometry(paddleWidth, paddleDepth, paddleHeight), paddleMaterial);
             paddle2 = new THREE.Mesh(new THREE.BoxGeometry(paddleWidth, paddleDepth, paddleHeight), paddleMaterial);
 
@@ -184,8 +248,8 @@ const Game = async () => {
             scene.add(paddle2);
 
             // Ajouter la balle
-            const ballRadius = 5;
-            const ballMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 });
+            const ballRadius = ball_size_ig;
+            const ballMaterial = new THREE.MeshPhongMaterial({ color: ball_color_ig });
             ball = new THREE.Mesh(new THREE.SphereGeometry(ballRadius, 32, 32), ballMaterial);
             ball.position.set(0, ballRadius, 0);
             scene.add(ball);
@@ -215,6 +279,9 @@ const Game = async () => {
                 scene.add(point);
             }
 
+            // add olympic logo
+            olympicRings = addOlympicLogo();
+
             // Position de la caméra
             camera.position.set(0, 600, 500);
             camera.lookAt(new THREE.Vector3(0, 0, 0));
@@ -224,7 +291,12 @@ const Game = async () => {
 
         startGameButton.addEventListener("click", function() {
             hideAll();
+            ball_color_ig = ball_color.value;
+            paddle_color_ig = paddle_color.value;
+            ball_size_ig = ball_size.value;
+            console.log(ball_color_ig, paddle_color_ig, ball_size_ig)
             initialButtons.classList.remove("hidden");
+            drawInitialGame();
         });
 
         localModeButton.addEventListener("click", function() {
@@ -327,6 +399,7 @@ const Game = async () => {
                     'type': 'config',
                     'ball_speed': ballSpeed,
                     'paddle_speed': paddleSpeed,
+                    'ball_size': ball_size_ig,
                 }));
                 socket.send(JSON.stringify({
                     'type': 'start_ball'
@@ -440,6 +513,7 @@ const Game = async () => {
                         'type': 'config',
                         'ball_speed': ballSpeed,
                         'paddle_speed': paddleSpeed,
+                        'ball_size': ball_size_ig,
                     }));
                 };
 
@@ -582,6 +656,7 @@ const Game = async () => {
         function gameLoop() {
             handleKeys();
             requestAnimationFrame(gameLoop);
+            // rotateOlympicLogo(olympicRings); // Faire tourner le logo
         }
 
         gameLoop();

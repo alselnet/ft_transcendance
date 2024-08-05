@@ -6,7 +6,8 @@ from .game_logic import PongGame
 
 ball_speed = 20
 player_speed = 7
-pong_game = PongGame(ball_speed, player_speed)
+ball_size = 8
+pong_game = PongGame(ball_speed, player_speed, ball_size)
 
 class LocalGameInitView(APIView):
     def get(self, request, room_name):

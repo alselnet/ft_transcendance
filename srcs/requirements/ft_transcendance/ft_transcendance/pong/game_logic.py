@@ -3,10 +3,10 @@ import math
 import asyncio
 
 class PongGame:
-    def __init__(self, ball_speed, player_speed):
+    def __init__(self, ball_speed, player_speed, ball_size):
         self.screen_width = 1200
         self.screen_height = 700
-        self.ball_size = 10
+        self.ball_size = ball_size
         self.player_height = 70
         self.player_width = 10
         self.player_speed = player_speed
@@ -70,8 +70,8 @@ class PongGame:
             # if self.ball_y_position <= -self.screen_height / 2 + self.ball_size or self.ball_y_position >= self.screen_height / 2 - self.ball_size:
             #     self.ball_y_speed = -self.ball_y_speed
 
-            if self.ball_y_position <= -self.screen_height / 2 + self.ball_size + buffer or self.ball_y_position >= self.screen_height / 2 - self.ball_size - buffer:
-                self.ball_y_speed = -self.ball_y_speed
+            # if self.ball_y_position <= -self.screen_height / 2 + self.ball_size + buffer or self.ball_y_position >= self.screen_height / 2 - self.ball_size - buffer:
+            #     self.ball_y_speed = -self.ball_y_speed
 
         # if self.ball_y_position <= -self.screen_height / 2 + self.ball_size + buffer:
         #     self.ball_y_position = -self.screen_height / 2 + self.ball_size + buffer
@@ -93,7 +93,7 @@ class PongGame:
                 self.ball_x_position = -self.screen_width / 2 + self.player_width + self.ball_size
 
             # Ball collision with player 2 paddle
-            if (self.ball_x_position + self.ball_size >= self.screen_width / 2 - self.player_width and
+            elif (self.ball_x_position + self.ball_size >= self.screen_width / 2 - self.player_width and
                 self.ball_y_position >= self.player2_y_position - self.player_height / 2 and
                 self.ball_y_position <= self.player2_y_position + self.player_height / 2):
                 diff = (self.ball_y_position - (self.player2_y_position - self.player_height / 2)) / self.player_height
@@ -102,6 +102,9 @@ class PongGame:
                 self.ball_x_speed = -self.ball_speed * math.cos(angle)
                 self.ball_y_speed = self.ball_speed * math.sin(angle)
                 self.ball_x_position = self.screen_width / 2 - self.player_width - self.ball_size
+
+            elif self.ball_y_position <= -self.screen_height / 2 + self.ball_size + buffer or self.ball_y_position >= self.screen_height / 2 - self.ball_size - buffer:
+                self.ball_y_speed = -self.ball_y_speed
 
             if self.ball_x_position <= -self.screen_width / 2:
                 print(self.ball_x_position, self.ball_y_position)

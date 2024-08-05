@@ -38,7 +38,8 @@ class PongConsumer(AsyncWebsocketConsumer):
         if data['type'] == 'config' and not self.configured:
             ball_speed = float(data['ball_speed'])
             paddle_speed = float(data['paddle_speed'])
-            self.pong_game = PongGame(ball_speed, paddle_speed)
+            ball_size = float(data['ball_size'])
+            self.pong_game = PongGame(ball_speed, paddle_speed, ball_size)
             self.configured = True
             self.update_task = asyncio.create_task(self.update_game_state())
         elif data['type'] == 'move':
