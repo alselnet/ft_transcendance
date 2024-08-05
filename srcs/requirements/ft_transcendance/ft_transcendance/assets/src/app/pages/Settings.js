@@ -164,7 +164,7 @@ const Settings = async () => {
         
         section.querySelector('#delete-account').addEventListener('click', (event) => {
             event.preventDefault();
-            if (userData.fortytwo_account === True) {
+            if (userData.fortytwo_account === true) {
                 window.location.href = '#/delete-account-42';
             }
             else {
