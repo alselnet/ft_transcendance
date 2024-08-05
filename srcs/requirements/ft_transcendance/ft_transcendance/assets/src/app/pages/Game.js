@@ -123,13 +123,11 @@ const Game = async () => {
                     throw new Error('Network response was not ok');
                 }
                 const result = await response.json();
-                console.log(result.username)
                 Player1_name = result.username;
             } catch (error) {
                 console.error('Fetch error:', error);
                 Player1_name = 'Unknown Player';
             }
-            console.log(Player1_name)
             updateScores(scorePlayer1, scorePlayer2)
         }
 
@@ -361,7 +359,6 @@ const Game = async () => {
                     updateGame(data);
                 } else if (data.type === 'game_over') {
                     gameEnd = true
-                    console.log("avant histo")
                     let fecth_data_history = {
                         winner_username: '',
                         loser_username: '',
@@ -371,7 +368,6 @@ const Game = async () => {
                         local_game: true
                     };
                     if (data.winner == 1) {
-                        console.log("player1 win")
                         fecth_data_history.winner_username = Player1_name
                         fecth_data_history.loser_username = "Player2"
                         fecth_data_history.winner_score = data.score_player1
@@ -379,10 +375,8 @@ const Game = async () => {
                         if (data.score_player2 == 0) {
                             fecth_data_history.perfect = true
                         }
-                        console.log(fecth_data_history)
                     }
                     else {
-                        console.log("player2 win")
                         fecth_data_history.winner_username  = "Player2"
                         fecth_data_history.loser_username = Player1_name
                         fecth_data_history.winner_score = data.score_player2
