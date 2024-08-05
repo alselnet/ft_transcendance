@@ -211,10 +211,6 @@
     transition: all 0.5s ease-out;
 }
 
-
-
-
-
 /* search pad */
 .search-container {
     display: flex;
@@ -365,6 +361,27 @@
         font-size: 2vw;
     }
 
-    
+}
 
+@media (max-height: 617px) {
+    
+    .footer-link {
+        display: none;
+    }
+
+    .stat-text {
+        font-size: 60%;
+    }
+
+    .stat-number {
+        font-size: 60%;
+    }
+
+    .camembert-stat {
+        display: none;
+    }
+
+    .legend-stat {
+        margin-right: 5vw;
+    }
 }

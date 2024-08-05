@@ -148,3 +148,11 @@
     }
 
 }
+
+@media (max-height: 617px) {
+
+    .footer-friend-link {
+        display: none;
+    }
+
+}

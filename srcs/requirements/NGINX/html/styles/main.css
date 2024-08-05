@@ -617,7 +617,6 @@
         display: none;
     }
 
-
 }
 
 .game-container {
@@ -899,10 +898,6 @@
     transition: all 0.5s ease-out;
 }
 
-
-
-
-
 /* search pad */
 .search-container {
     display: flex;
@@ -1053,9 +1048,31 @@
         font-size: 2vw;
     }
 
-    
-
 }
+
+@media (max-height: 617px) {
+    
+    .footer-link {
+        display: none;
+    }
+
+    .stat-text {
+        font-size: 60%;
+    }
+
+    .stat-number {
+        font-size: 60%;
+    }
+
+    .camembert-stat {
+        display: none;
+    }
+
+    .legend-stat {
+        margin-right: 5vw;
+    }
+}
+
 .settings-container {
     display: flex;
     flex-direction: column;
@@ -1460,6 +1477,18 @@
      }
 
 }
+
+@media (max-height: 617px) {
+
+   .settings-footer {
+      display: none;
+   }
+
+   .settings-box {
+      margin-bottom: 7vh;
+   }
+
+}
 .container-2FA
 {
    font-family: Lato, sans-serif;
@@ -1504,7 +1533,7 @@
    border-bottom: 1px solid #333;
    background-color: transparent;
    margin: 10px 0;
-   width: calc(30% - 20px);
+   width: calc(100% - 20px);
    outline: none;
    font-size: 0.9vw;
    text-align: center;
@@ -2271,6 +2300,14 @@ tbody, td, tfoot, th, thead, tr {
 
     .footer-friend-icon {
         margin-left: 3vw;
+    }
+
+}
+
+@media (max-height: 617px) {
+
+    .footer-friend-link {
+        display: none;
     }
 
 }

@@ -402,3 +402,15 @@
      }
 
 }
+
+@media (max-height: 617px) {
+
+   .settings-footer {
+      display: none;
+   }
+
+   .settings-box {
+      margin-bottom: 7vh;
+   }
+
+}
