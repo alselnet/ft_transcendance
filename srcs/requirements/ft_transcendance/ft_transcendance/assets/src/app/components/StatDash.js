@@ -1,7 +1,7 @@
 import { get } from "../services/Api.js"
 import { getStatusColor } from "../functions/FriendProfileFunctions.js"
 import { searchLogin } from "../functions/SettingsFunctions.js"
-import { addCamembert, modifyStatus, setUpNumberAnimation } from "../functions/DashboardFunctions.js";
+import { addCamembert, modifyStatus, setUpNumberAnimation, translateStatus } from "../functions/DashboardFunctions.js";
 
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
 
@@ -35,7 +35,7 @@ const DashStat = () => {
 									id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 									<div class="status-dropdown">
 										<div class="status-pastille" style="background-color: ${getStatusColor(userData.status)};"></div>
-										<div class="status-text">${userData.status}</div>
+										<div class="status-text">${translateStatus(userData.status)}</div>
 									</div>
 								</button>
 								<ul class="dropdown-menu transparent-dropdown" aria-labelledby="dropdownMenuButton1">

@@ -32,7 +32,8 @@ const modifyStatus = (form, userDataSatus) => {
                 const statusText = form.querySelector('.status-text');
                 const statusPastille = form.querySelector('.status-pastille');
                 if (statusText && statusPastille) {
-                    statusText.innerText = newStatus;
+                    statusText.innerText = translateStatus(newStatus);
+                    // statusText.innerText = newStatus;
                     statusPastille.style.backgroundColor = getStatusColor(newStatus);
                 }
             })
@@ -58,6 +59,17 @@ const addCamembert = (form, played, won) => {
     window.addEventListener('resize', () => {
         setupCamembertAnimation(form, percentage, color, message);
     });
+}
+
+export function translateStatus(status) {
+    switch (status) {
+        case 'online':
+            return 'En ligne';
+        case 'offline':
+            return 'Invisible';
+        default:
+            return status;
+    }
 }
 
 export { addCamembert, modifyStatus, setUpNumberAnimation }
