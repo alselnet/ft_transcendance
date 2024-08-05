@@ -67,8 +67,13 @@
     cursor: pointer;
 }
 
+
 .co-42-home {
     margin-right: 0.5vw;
+}
+
+.co-42-home-sm {
+    font-size: 2vw;
 }
 
 .img-42-home {

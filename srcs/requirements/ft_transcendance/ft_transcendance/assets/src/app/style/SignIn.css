@@ -165,7 +165,7 @@
     }
 }
 
-@media (max-height: 523px) and (min-width: 767px) {
+/* @media (max-height: 523px) and (min-width: 767px) {
 
     .login-input-signin {
         display: none;
@@ -174,7 +174,7 @@
     .button-signin {
         display: none;
     }
-}
+} */
 
 @media (max-width: 678px) {
 
