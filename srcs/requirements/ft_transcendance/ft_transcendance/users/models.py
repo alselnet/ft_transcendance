@@ -68,7 +68,6 @@ class Profile(models.Model):
 
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='offline')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    # two_fa_status = models.BooleanField(default=True)
     two_fa_method = models.CharField(max_length=20, choices=TWO_FA_METHOD_CHOICES, default='none')
     mail_confirmation_status = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to=user_avatar_path, default='default.png')

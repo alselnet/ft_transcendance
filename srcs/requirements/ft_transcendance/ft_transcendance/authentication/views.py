@@ -50,34 +50,55 @@ class UserDeletionView(APIView):
 
     def delete(self, request):
         serializer = DeleteUserSerializer(data=request.data)
-        
+
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        password = serializer.validated_data.get('password')
-        user = authenticate(username=request.user.username, password=password)
+        user = request.user
+        profile = Profile.objects.get(user=user)
 
-        if not user:
-            return Response({"error": "Invalid password"}, status=status.HTTP_400_BAD_REQUEST)
+        if profile.fortytwo_account:
+            try:
+                game_summaries = GameSummary.objects.filter(winner=user) | GameSummary.objects.filter(loser=user)
+                for game in game_summaries:
+                    winner_exists = True if game.winner and User.objects.filter(username=game.winner.username).exists() else False
+                    loser_exists = True if game.loser and User.objects.filter(username=game.loser.username).exists() else False
 
-        try:
-            user = request.user
-            game_summaries = GameSummary.objects.filter(winner=user) | GameSummary.objects.filter(loser=user)
-            for game in game_summaries:
-                winner_exists = True if game.winner and User.objects.filter(username=game.winner.username).exists() else False
-                loser_exists = True if game.loser and User.objects.filter(username=game.loser.username).exists() else False
-                
-                if not winner_exists or not loser_exists:
-                    game.delete()
+                    if not winner_exists or not loser_exists:
+                        game.delete()
 
-            user.delete()
-            return Response({"message": "User and related game summaries deleted successfully"}, status=status.HTTP_200_OK)
-        
-        except User.DoesNotExist:
-            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+                user.delete()
+                return Response({"message": "User and related game summaries deleted successfully"}, status=status.HTTP_200_OK)
 
-        except Exception as e:
-            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            except User.DoesNotExist:
+                return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+
+            except Exception as e:
+                return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            password = serializer.validated_data.get('password')
+            user = authenticate(username=user.username, password=password)
+
+            if not user:
+                return Response({"error": "Invalid password"}, status=status.HTTP_400_BAD_REQUEST)
+
+            try:
+                game_summaries = GameSummary.objects.filter(winner=user) | GameSummary.objects.filter(loser=user)
+                for game in game_summaries:
+                    winner_exists = True if game.winner and User.objects.filter(username=game.winner.username).exists() else False
+                    loser_exists = True if game.loser and User.objects.filter(username=game.loser.username).exists() else False
+
+                    if not winner_exists or not loser_exists:
+                        game.delete()
+
+                user.delete()
+                return Response({"message": "User and related game summaries deleted successfully"}, status=status.HTTP_200_OK)
+
+            except User.DoesNotExist:
+                return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+
+            except Exception as e:
+                return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         
 
 class UserSigninView(APIView):
