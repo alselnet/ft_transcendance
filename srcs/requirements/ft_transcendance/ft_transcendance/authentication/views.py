@@ -173,10 +173,8 @@ class Callback(APIView):
             avatar_url = user_info['image']['versions']['small']
             
             user, created = User.objects.get_or_create(username=username)
-            
-            if not created:
-                user.email = email
-                user.save()
+            user.email = email
+            user.save()
 
             profile = Profile.objects.get(user=user)
 
