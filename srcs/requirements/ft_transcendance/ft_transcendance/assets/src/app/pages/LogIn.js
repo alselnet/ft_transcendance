@@ -17,8 +17,8 @@ export const LogIn = () => {
                 </div>
                 <div class="white-ball-login">
                     <form id="login-form" class="login-form-login">
-                        <input type="text" id="username" class="login-input" placeholder="Username">
-                        <input type="password" id="password" class="login-input" placeholder="Password">
+                        <input type="text" id="username" class="login-input" placeholder="Nom d'utilisateur">
+                        <input type="password" id="password" class="login-input" placeholder="Mot de passe">
                         <button type="submit" class="button-login">se connecter</button>
                     </form>
                 </div>
@@ -36,8 +36,8 @@ export const LogIn = () => {
                 </a>
                 <div class="white-ball-login-sm">
                     <form id="login-form-sm" class="login-form-login">
-                        <input type="text" id="username-sm" class="login-input" placeholder="Username">
-                        <input type="password" id="password-sm" class="login-input" placeholder="Password">
+                        <input type="text" id="username-sm" class="login-input" placeholder="Nom d'utilisateur">
+                        <input type="password" id="password-sm" class="login-input" placeholder="Mot de passe">
                         <button type="submit" class="button-login">se connecter</button>
                     </form>
                 </div>

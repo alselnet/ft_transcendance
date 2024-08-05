@@ -60,21 +60,21 @@ volumes:
     driver_opts:
       type: volumes
       o: bind
-      device: /tmp/Postgres_volume
+      device: /tmp/volumes/Postgres_volume
 
   STATIC:
     driver: local
     driver_opts:
       type: volumes
       o: bind
-      device: /tmp/Static_volume
+      device: /tmp/volumes/Static_volume
     
   MEDIA:
     driver: local
     driver_opts:
       type: volumes
       o: bind
-      device: /tmp/Media_volume
+      device: /tmp/volumes/Media_volume
       
 networks:
   transcendance:
