@@ -43,7 +43,7 @@ const updateAvatar = (file) => {
         return response.json();
     })
     .then(data => {
-        document.querySelector('.settings-picture').src = data.avatar;
+        // document.querySelector('.settings-picture').src = data.avatar;
         alert('Avatar mis à jour avec succès');
         window.location.reload();
     })

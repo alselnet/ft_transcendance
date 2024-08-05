@@ -132,13 +132,6 @@ const Settings = async () => {
 		});
 	}
 
-       section.querySelector('#avatar-input').addEventListener('change', (event) => {
-           const file = event.target.files[0];
-           if (file) {
-               updateAvatar(file);
-           }
-       });
-
         const loginSearchInput = section.querySelector("#login-search");
         const searchButton = section.querySelector("#search-button");
 
