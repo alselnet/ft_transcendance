@@ -3,6 +3,16 @@ import { checkAuth, post, get } from "../services/Api.js"
 
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
 
+let player1Y, player2Y, ballX, ballY, socket, keys, playerNames, renderer, scene, camera, paddle1, paddle2, ball, tableWidth, tableHeight, scorePlayer1, scorePlayer2;
+let Player1_name;
+let gameEnd = false
+let paddle_color_ig
+let ball_color_ig
+let ball_size_ig
+let tournoiProgress = false
+let isInit = false
+let olympicRings
+
 const Game = async () => {
     const isAuthenticated = await checkAuth();
     if (!isAuthenticated) {
@@ -90,19 +100,13 @@ const Game = async () => {
             console.error('Failed to find the canvas element with ID game-canvas');
             return;
         }
-        let player1Y, player2Y, ballX, ballY, socket, keys, playerNames, renderer, scene, camera, paddle1, paddle2, ball, tableWidth, tableHeight, scorePlayer1, scorePlayer2;
-        let Player1_name;
-        let gameEnd = false
-        let paddle_color_ig
-        let ball_color_ig
-        let ball_size_ig
-        let olympicRings
-        let tournoiProgress = false
 
         initializeGameVariables();
         showInitialMenu();
 
         async function initializeGameVariables() {
+            if (isInit) return;
+            isInit = true;
             player1Y = 0;
             player2Y = 0;
             ballX = 0;
@@ -407,10 +411,6 @@ const Game = async () => {
 
             socket.onclose = function(event) {
                 resetKeys();
-                // if (scorePlayer1 == 1)
-                //     alert(`Player 1 wins!`);
-                // else
-                //     alert(`Player 2 wins!`);
                 location.reload();
             };
 
@@ -472,9 +472,6 @@ const Game = async () => {
                         nextRoundParticipants.push(winner);
                     }
                 };
-
-                // hideAll();
-                // resolve();
 
                 socket.onclose = function(event) {
                     resetKeys();
@@ -591,30 +588,11 @@ const Game = async () => {
             scorePlayer2 = 0;
             gameEnd = false;
             tournoiProgress = false
+            isInit = false
             updateScores(scorePlayer1, scorePlayer2);
         }
 
-        window.addEventListener('popstate', function() {
-            if (socket) {
-                resetGameState()
-                socket.close();
-                // socket = null;
-            }
-        });
-
-        window.addEventListener('hashchange', function() {
-            if (location.hash === "#/game") {
-                Game();
-            } else {
-                if (socket) {
-                    resetGameState();
-                    socket.close();
-                    // socket = null;
-                }
-            }
-        });
-        
-        window.addEventListener('resize', () => {
+        function handleResize() {
             const width = window.innerWidth;
             const height = window.innerHeight;
             
@@ -627,13 +605,41 @@ const Game = async () => {
             camera.updateProjectionMatrix();
             
             renderer.render(scene, camera);
-        });
+        }
 
-        window.addEventListener('unload', () => {
+        function handlePopState() {
+            if (socket) {
+                resetGameState()
+                socket.close();
+            }
+            cleanUpEvents();
+        }
+
+        function handleHashChange() {
+            if (location.hash === "#/game") {
+                Game();
+            } else {
+                if (socket) {
+                    resetGameState();
+                    socket.close();
+                }
+                cleanUpEvents();
+            }
+        }
+
+        window.addEventListener('popstate', handlePopState);
+        window.addEventListener('hashchange', handleHashChange);
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('unload', cleanUpEvents);
+
+        function cleanUpEvents() {
             document.removeEventListener('keydown', handleKeys);
             document.removeEventListener('keyup', handleKeys);
-        });
-        
+            window.removeEventListener('popstate', handlePopState);
+            window.removeEventListener('hashchange', handleHashChange);
+            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('unload', cleanUpEvents);
+        }
     }
 };  
 
