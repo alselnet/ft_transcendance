@@ -1,4 +1,4 @@
-import { post} from "../services/Api.js";
+import { post } from "../services/Api.js";
 
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
 const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
@@ -155,9 +155,9 @@ const updateDataSettings = () => {
         update2FA('authenticator');
     });
     
-    section.querySelector('.delete-account').addEventListener('click', (event) => {
-        window.location.hash = '#/delete-account';
-    });
+    // section.querySelector('.delete-account').addEventListener('click', (event) => {
+    //     window.location.hash = '#/delete-account';
+    // });
 
 }
 

@@ -18,6 +18,7 @@ import { UpdateUsername } from "../pages/UpdateUsername.js";
 import { UpdateEmail } from "../pages/UpdateEmail.js";
 import { UpdatePassword } from "../pages/UpdatePassword.js";
 import { DeleteAccount } from "../pages/DeleteAccount.js";
+import { DeleteAccount42 } from "../pages/DeleteAccount42.js";
 import { QRCode } from "../pages/QRCode.js";
 import { post } from "../services/Api.js"
 
@@ -80,6 +81,8 @@ export const Router = async () => {
         UpdatePassword();
     } else if (hash === "#/delete-account") {
         DeleteAccount();
+    } else if (hash === "#/delete-account-42") {
+        DeleteAccount42();
     } else if (hash.startsWith("#/qr-code")) {
         QRCode();
     } else if (hash.startsWith("#/2fa-auth")) {

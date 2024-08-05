@@ -4,6 +4,7 @@ import { sendConfirmationEmail, updateAvatar, update2FA, update2FAActiveClass,
       updateDataSettings, } from "../functions/SettingsFunctions.js";
 
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
+const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
 
 const Settings = async () => {
    let section = document.querySelector("#section");
@@ -89,7 +90,7 @@ const Settings = async () => {
 
                </div>
            </div>
-           <button type="button" href="#" class="btn btn-danger delete-account">supprimer le compte</button>
+           <button type="button" href="#" class="btn btn-danger delete-account" id="delete-account">supprimer le compte</button>
 
        </div>
 
@@ -150,6 +151,13 @@ const Settings = async () => {
                sendConfirmationEmail(userData.email);
            });
        }
+
+        section.querySelector('#delete-account').addEventListener('click', (event) => {
+            event.preventDefault();
+            const redirectUrl = userData.auth_method === '42' ? '/delete-account-42' : '/delete-account';
+            window.location.href = '#' + redirectUrl;
+        });
+
        initializeSettingsPage();
    })
    .catch(error => {
