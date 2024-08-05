@@ -11,7 +11,7 @@ import { FriendList } from "../components/FriendsList.js";
 import { GameHistory } from "../components/GameHistory.js";
 import { PublicGameHistory } from "../components/PublicGameHistory.js";
 import { TwoFactorsAuth } from "../components/2FA.js"
-import { TwoFactorsAuthQR } from "../components/_QR.js";
+import { TwoFactorsAuthQR } from "../components/2FA_QR.js";
 import { LogOutMsg } from "../components/LogOutMsg.js";
 import { CharteMsg } from "../components/CharteMsg.js";
 import { UpdateUsername } from "../pages/UpdateUsername.js";
