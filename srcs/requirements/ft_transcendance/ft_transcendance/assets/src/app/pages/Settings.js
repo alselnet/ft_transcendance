@@ -171,8 +171,12 @@ const Settings = async () => {
         
         section.querySelector('#delete-account').addEventListener('click', (event) => {
             event.preventDefault();
-            const redirectUrl = userData.auth_method === '42' ? '/delete-account-42' : '/delete-account';
-            window.location.href = '#' + redirectUrl;
+            if (userData.fortytwo_account === True) {
+                window.location.href = '#/delete-account-42';
+            }
+            else {
+                window.location.href = '#/delete-account';
+            }
         });
 
        initializeSettingsPage();
