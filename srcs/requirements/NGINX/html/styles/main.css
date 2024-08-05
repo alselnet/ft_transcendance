@@ -2045,7 +2045,7 @@ tbody, td, tfoot, th, thead, tr {
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: auto;
-    padding: 10vh 5vw 6vh 5vw; /* Ajout de padding en haut pour éviter le crop */
+    padding: 10vh 5vw 6vh 5vw;
     box-sizing: border-box;
     margin-bottom: 2vh;
 }
@@ -2123,7 +2123,6 @@ tbody, td, tfoot, th, thead, tr {
     color: white;
 }
 
-
 .input-update-data {
     border: none;
     border-bottom: 1px solid #333;
@@ -2150,7 +2149,6 @@ tbody, td, tfoot, th, thead, tr {
 .button-update-data:hover {
     background-color: #616161;
 }
-
 .profile-text {
     position: fixed;
     color: black;
@@ -2369,6 +2367,68 @@ tbody, td, tfoot, th, thead, tr {
         font-size: 3vw;
         padding: 2vh 3vw; 
     }
+}
+.container-delete-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.delete-input {
+    background-color: transparent;
+}
+
+.delete-data-form {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.title-delete-data {
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: white;
+}
+
+
+.input-delete-data {
+    border: none;
+    border-bottom: 1px solid #333;
+    background-color: transparent;
+    margin: 10px 0;
+    padding: 8px;
+    width: calc(100% - 20px);
+    outline: none;
+    font-family: 'Play';
+}
+
+.button-delete-data {
+    width: 150px;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #616161;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.button-delete-data:hover {
+    background-color: #616161;
+}
+
+#cancel-delete-account {
+    background-color: #4caf50;
+}
+
+#submit-delete-account {
+    background-color: red;
 }
 @font-face {
     font-family: 'JuliusSansOne';

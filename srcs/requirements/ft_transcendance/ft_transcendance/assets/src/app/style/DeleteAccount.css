@@ -1,15 +1,15 @@
-.container-update-data {
+.container-delete-data {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-.update-input {
+.delete-input {
     background-color: transparent;
 }
 
-.update-data-form {
+.delete-data-form {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.2);
     padding: 20px;
@@ -19,13 +19,14 @@
     text-align: center;
 }
 
-.title-update-data {
+.title-delete-data {
     margin-bottom: 20px;
     font-size: 2em;
     color: white;
 }
 
-.input-update-data {
+
+.input-delete-data {
     border: none;
     border-bottom: 1px solid #333;
     background-color: transparent;
@@ -36,7 +37,7 @@
     font-family: 'Play';
 }
 
-.button-update-data {
+.button-delete-data {
     width: 150px;
     padding: 10px;
     margin-top: 10px;
@@ -48,6 +49,14 @@
     font-size: 1em;
 }
 
-.button-update-data:hover {
+.button-delete-data:hover {
     background-color: #616161;
+}
+
+#cancel-delete-account {
+    background-color: #4caf50;
+}
+
+#submit-delete-account {
+    background-color: red;
 }

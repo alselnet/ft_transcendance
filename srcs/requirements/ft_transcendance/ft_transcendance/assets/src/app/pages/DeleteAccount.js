@@ -7,13 +7,13 @@ const DeleteAccount = async () => {
     let section = document.querySelector("#section");
 
     section.innerHTML = `
-        <div class="container-update-data">
-            <div class="update-data-form">
-                <h1 class="title-update-data">Supprimer le Compte</h1>
+        <div class="container-delete-data">
+            <div class="delete-data-form">
+                <h1 class="title-delete-data">Supprimer le Compte</h1>
                 <p>Veuillez entrer votre mot de passe pour confirmer la suppression du compte.</p>
-                <input type="password" id="delete-password" class="input-update-data" placeholder="Mot de passe" required>
-                <button class="button-update-data" id="submit-delete-account">Supprimer le compte</button>
-                <button class="button-update-data" id="cancel-delete-account">Annuler</button>
+                <input type="password" id="delete-password" class="input-delete-data" placeholder="Mot de passe" required>
+                <button class="button-delete-data" id="submit-delete-account">Supprimer le compte</button>
+                <button class="button-delete-data" id="cancel-delete-account">Annuler</button>
             </div>
         </div>
     `;
