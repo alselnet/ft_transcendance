@@ -62,10 +62,15 @@ class PongGame:
         return rightMin + (valueScaled * rightSpan)
 
     def update_ball_position(self):
-        buffer = 1
+        buffer = 2
         if not self.ball_waiting:
             self.ball_x_position += self.ball_x_speed
             self.ball_y_position += self.ball_y_speed
+
+            if self.ball_y_position + self.ball_size >= self.screen_height / 2:
+                    self.ball_y_position = self.screen_height / 2 - self.ball_size - buffer
+            elif self.ball_y_position - self.ball_size <= -self.screen_height / 2:
+                    self.ball_y_position = -self.screen_height / 2 + self.ball_size + buffer
 
             # if self.ball_y_position <= -self.screen_height / 2 + self.ball_size or self.ball_y_position >= self.screen_height / 2 - self.ball_size:
             #     self.ball_y_speed = -self.ball_y_speed
@@ -91,6 +96,8 @@ class PongGame:
                 self.ball_x_speed = self.ball_speed * math.cos(angle)
                 self.ball_y_speed = self.ball_speed * math.sin(angle)
                 self.ball_x_position = -self.screen_width / 2 + self.player_width + self.ball_size
+                if self.ball_y_position + self.ball_size >= self.screen_height / 2:
+                    self.ball_y_position = self.screen_height / 2 - self.ball_size - buffer
 
             # Ball collision with player 2 paddle
             elif (self.ball_x_position + self.ball_size >= self.screen_width / 2 - self.player_width and
@@ -102,6 +109,8 @@ class PongGame:
                 self.ball_x_speed = -self.ball_speed * math.cos(angle)
                 self.ball_y_speed = self.ball_speed * math.sin(angle)
                 self.ball_x_position = self.screen_width / 2 - self.player_width - self.ball_size
+                if self.ball_y_position - self.ball_size <= -self.screen_height / 2:
+                    self.ball_y_position = -self.screen_height / 2 + self.ball_size + buffer
 
             elif self.ball_y_position <= -self.screen_height / 2 + self.ball_size + buffer or self.ball_y_position >= self.screen_height / 2 - self.ball_size - buffer:
                 self.ball_y_speed = -self.ball_y_speed

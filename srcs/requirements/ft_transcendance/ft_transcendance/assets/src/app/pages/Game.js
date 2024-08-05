@@ -26,16 +26,16 @@ const Game = async () => {
             <div>
                 <label for="ball-speed">Ball Speed:</label>
                 <select id="ball-speed">
+                <option value="20" class="value">Normal</option>
                     <option value="15" class="value">Slow</option>
-                    <option value="20" class="value">Normal</option>
                     <option value="25" class="value">Fast</option>
                 </select>
             </div>
             <div>
                 <label for="paddle-speed">Paddle Speed:</label>
                 <select id="paddle-speed">
+                <option value="7" class="value">Normal</option>
                     <option value="5" class="value">Slow</option>
-                    <option value="7" class="value">Normal</option>
                     <option value="10" class="value">Fast</option>
                 </select>
             </div>
