@@ -6,6 +6,7 @@ export const QRCode = () => {
 
     removeMainComponent()
     let section = document.querySelector("#section");
+    section.id = "qr-section";
 
     const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
     const tfa = urlParams.get('tfa');

@@ -24,7 +24,7 @@ const Settings = async () => {
        const emailConfirmationBanner = userData.mail_confirmation_status ? '' : `
            <div class="confirm-email">
                votre adresse mail doit etre verifiee : 
-               <a href="" id="resend-verification-email">renvoyer un mail de verification</a>
+               <a href="" id="resend-verification-email">envoyer un mail de verification</a>
            </div>`;
 
        section.innerHTML = 

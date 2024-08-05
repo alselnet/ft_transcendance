@@ -1569,10 +1569,6 @@
        font-size: 2vw;
    }
 
-   /* input[type="text"] {
-       font-size: 2vw;
-   } */
-
    .button-2FA {
        font-size: 1.5vw;
    }
@@ -1597,6 +1593,7 @@
        font-size: 1vw;
    }
 }
+
 .main-container2 {
     display: flex;
     flex-direction: column;
@@ -2141,7 +2138,7 @@ tbody, td, tfoot, th, thead, tr {
     width: 150px;
     padding: 10px;
     margin-top: 10px;
-    background-color: #0056b3;
+    background-color: #616161;
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -2150,7 +2147,7 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 .button-update-data:hover {
-    background-color: #0056b3;
+    background-color: #616161;
 }
 
 .profile-text {
@@ -2310,6 +2307,67 @@ tbody, td, tfoot, th, thead, tr {
         display: none;
     }
 
+}
+
+#qr-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+}
+
+.container-qr-code {
+    background-color: #fff;
+    padding: 5vh;
+    border-radius: 8px;
+    box-shadow: 0 2vh 10vh rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 40vw;
+    width: 90%;
+}
+
+.title-qr-code {
+    font-size: 2.4vw;
+    margin-bottom: 2vh;
+    color: #333;
+}
+
+.qr-code-container {
+    margin-bottom: 2vh;
+}
+
+.qr-code-container img {
+    width: 100%;
+    max-width: 25vw;
+    height: auto;
+}
+
+.button-qr-code {
+    background-color: #616161;
+    color: white;
+    padding: 1vh 2vw; 
+    border: none;
+    border-radius: 5px;
+    font-size: 1.6vw;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-qr-code:hover {
+    background-color: #555555;
+}
+
+@media (max-width: 600px) {
+    .title-qr-code {
+        font-size: 4vw;
+    }
+
+    .button-qr-code {
+        font-size: 3vw;
+        padding: 2vh 3vw; 
+    }
 }
 @font-face {
     font-family: 'JuliusSansOne';
