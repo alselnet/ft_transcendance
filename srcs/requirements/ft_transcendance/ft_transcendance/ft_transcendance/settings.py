@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', config('HOSTNAME')]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'paul-f4Ar2s4']
 
 # Application definition
 
@@ -138,7 +138,6 @@ CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ORIGIN_WHITELIST = [
      'https://localhost:4443',
-	 'https://' + config('HOST')
 ]
 
 # SECURITY WARNING: keep the secret key used in production secret!
