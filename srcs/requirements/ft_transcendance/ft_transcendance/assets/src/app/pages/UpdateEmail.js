@@ -23,6 +23,7 @@ const UpdateEmail = async () => {
         window.location.hash = '#/settings';
     });
 
+    
     return section;
 };
 

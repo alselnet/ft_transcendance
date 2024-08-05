@@ -42,7 +42,7 @@
    border-bottom: 1px solid #333;
    background-color: transparent;
    margin: 10px 0;
-   width: calc(30% - 20px);
+   width: calc(100% - 20px);
    outline: none;
    font-size: 0.9vw;
    text-align: center;

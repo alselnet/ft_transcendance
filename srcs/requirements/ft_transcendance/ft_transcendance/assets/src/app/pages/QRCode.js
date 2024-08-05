@@ -1,7 +1,10 @@
+import { removeMainComponent } from "../functions/MainFunctions";
 
 const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`;
 
 export const QRCode = () => {
+
+    removeMainComponent()
     let section = document.querySelector("#section");
 
     const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
