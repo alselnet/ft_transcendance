@@ -60,7 +60,7 @@ const Game = async () => {
                 <select id="ball-size">
                     <option value="8" class="value">normal</option>
                     <option value="4" class="value">small</option>
-                    <option value="15" class="value">big</option>
+                    <option value="30" class="value">big</option>
                 </select>
             </div>
             <button class="game-button" id="start-game-btn">Start Game</button>
@@ -120,7 +120,6 @@ const Game = async () => {
                     throw new Error('Network response was not ok');
                 }
                 const result = await response.json();
-                console.log(result);
                 Player1_name = result.username;
             } catch (error) {
                 console.error('Fetch error:', error);
@@ -136,23 +135,22 @@ const Game = async () => {
         }
 
         function showInitialMenu() {
-            // drawInitialGame();
             updateScores(0, 0);
             hideAll();
             settings.classList.remove("hidden");
         }
 
         function addOlympicLogo() {
-            const ringRadius = 50; // Rayon des anneaux beaucoup plus grand
-            const tubeRadius = 8; // Rayon du tube des anneaux beaucoup plus grand
-            const segments = 16; // Segments pour la géométrie du tore
-            const opacity = 0.8; // Niveau de transparence (0.0 à 1.0)
+            const ringRadius = 50;
+            const tubeRadius = 8;
+            const segments = 64;
+            const opacity = 0.8;
             const ringsData = [
-                { color: 0x0081C8, position: [-80, 150, -200] }, // Bleu, position beaucoup plus haute
-                { color: 0x000000, position: [0, 150, -200] }, // Noir, position beaucoup plus haute
-                { color: 0xEE334E, position: [80, 150, -200] }, // Rouge, position beaucoup plus haute
-                { color: 0xF4C300, position: [-40, 100, -200] }, // Jaune, position beaucoup plus haute
-                { color: 0x009F3D, position: [40, 100, -200] }, // Vert, position beaucoup plus haute
+                { color: 0x0081C8, position: [-80, 150, -200] },
+                { color: 0x000000, position: [0, 150, -200] },
+                { color: 0xEE334E, position: [80, 150, -200] },
+                { color: 0xF4C300, position: [-40, 100, -200] },
+                { color: 0x009F3D, position: [40, 100, -200] },
             ];
         
             const rings = [];
@@ -174,7 +172,6 @@ const Game = async () => {
 
         function drawInitialGame() {
 
-            // Initialiser Three.js
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             camera.position.set(0, 0, 100);
@@ -187,51 +184,16 @@ const Game = async () => {
             else
                 renderer.setClearColor(0x4790C5);
 
-            
-
-            // Lumière ambiante
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.2); // Couleur blanche, faible intensité
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
             scene.add(ambientLight);
 
-            // Lumière directionnelle principale
             const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-            directionalLight.position.set(0, 500, 200); // Positionner la lumière au-dessus et devant la scène
+            directionalLight.position.set(0, 500, 200);
             scene.add(directionalLight);
 
-            // // Lumières ponctuelles aux coins du terrain
-            // const pointLight1 = new THREE.PointLight(0xffffff, 0.5, 0, 2);
-            // pointLight1.position.set(-tableWidth / 2, 50, -tableHeight / 2);
-            // scene.add(pointLight1);
+            tableWidth = 1200;
+            tableHeight = 700;
 
-            // const pointLight2 = new THREE.PointLight(0xffffff, 0.5, 0, 2);
-            // pointLight2.position.set(tableWidth / 2, 50, -tableHeight / 2);
-            // scene.add(pointLight2);
-
-            // const pointLight3 = new THREE.PointLight(0xffffff, 0.5, 0, 2);
-            // pointLight3.position.set(-tableWidth / 2, 50, tableHeight / 2);
-            // scene.add(pointLight3);
-
-            // const pointLight4 = new THREE.PointLight(0xffffff, 0.5, 0, 2);
-            // pointLight4.position.set(tableWidth / 2, 50, tableHeight / 2);
-            // scene.add(pointLight4);
-
-            // // Lumières spot pour les effets dramatiques
-            // const spotLight1 = new THREE.SpotLight(0xffffff, 0.7, 0, Math.PI / 4, 0.5, 2);
-            // spotLight1.position.set(0, 300, 0);
-            // spotLight1.target.position.set(0, 0, 0);
-            // scene.add(spotLight1);
-            // scene.add(spotLight1.target);
-
-            // const spotLight2 = new THREE.SpotLight(0xffffff, 0.7, 0, Math.PI / 4, 0.5, 2);
-            // spotLight2.position.set(0, 300, 0);
-            // spotLight2.target.position.set(0, 0, tableHeight / 2);
-            // scene.add(spotLight2);
-            // scene.add(spotLight2.target);
-
-            tableWidth = 1200; // Largeur de la table en unités Three.js
-            tableHeight = 700; // Hauteur de la table en unités Three.js
-
-            // Ajouter les raquettes
             const paddleWidth = 10;
             const paddleHeight = 70;
             const paddleDepth = 10;
@@ -239,20 +201,17 @@ const Game = async () => {
             paddle1 = new THREE.Mesh(new THREE.BoxGeometry(paddleWidth, paddleDepth, paddleHeight), paddleMaterial);
             paddle2 = new THREE.Mesh(new THREE.BoxGeometry(paddleWidth, paddleDepth, paddleHeight), paddleMaterial);
 
-            // Positionner les raquettes
             paddle1.position.set(-tableWidth / 2 + paddleWidth, paddleDepth / 2, 0);
             paddle2.position.set(tableWidth / 2 - paddleWidth, paddleDepth / 2, 0);
             scene.add(paddle1);
             scene.add(paddle2);
 
-            // Ajouter la balle
             const ballRadius = ball_size_ig;
             const ballMaterial = new THREE.MeshPhongMaterial({ color: ball_color_ig });
             ball = new THREE.Mesh(new THREE.SphereGeometry(ballRadius, 32, 32), ballMaterial);
             ball.position.set(0, ballRadius, 0);
             scene.add(ball);
 
-            // Ajouter les barres de délimitation
             const barWidth = tableWidth;
             const barHeight = 10;
             const barDepth = 15;
@@ -266,7 +225,6 @@ const Game = async () => {
             scene.add(topBar);
             scene.add(bottomBar);
 
-            // Ajouter les points de la ligne du milieu
             const pointMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff });
             const pointGeometry = new THREE.BoxGeometry(10, 1, 10);
             const points = [];
@@ -277,10 +235,8 @@ const Game = async () => {
                 scene.add(point);
             }
 
-            // add olympic logo
             olympicRings = addOlympicLogo();
 
-            // Position de la caméra
             camera.position.set(0, 600, 500);
             camera.lookAt(new THREE.Vector3(0, 0, 0));
 
@@ -292,16 +248,13 @@ const Game = async () => {
             ball_color_ig = ball_color.value;
             paddle_color_ig = paddle_color.value;
             ball_size_ig = ball_size.value;
-            console.log(ball_color_ig, paddle_color_ig, ball_size_ig)
             initialButtons.classList.remove("hidden");
             drawInitialGame();
         });
 
         localModeButton.addEventListener("click", function() {
-            console.log("inside local");
             hideAll();
             const roomName = "local_" + new Date().getTime();
-            console.log(roomName);
             connectWebSocket(roomName, ballSpeed.value, paddleSpeed.value);
         });
 
@@ -310,9 +263,8 @@ const Game = async () => {
         document.getElementById('five-players-btn').addEventListener('click', () => promptPlayerNames(5));
 
         function promptPlayerNames(numPlayers) {
-            console.log("inside prompt player name");
             playerNames = [];
-            const maxLength = 10; // Set the maximum length for player names
+            const maxLength = 10;
         
             for (let i = 1; i <= numPlayers; i++) {
                 let playerName;
@@ -322,7 +274,6 @@ const Game = async () => {
                     playerName = prompt(`Player ${i} name (max ${maxLength} characters):`);
         
                     if (playerName === null) {
-                        console.log("Player input cancelled. Tournament not started.");
                         showInitialMenu();
                         return;
                     } else if (playerName.trim() === "") {
@@ -339,13 +290,11 @@ const Game = async () => {
             }
         
             for (let j = 0; j < playerNames.length; j++) {
-                console.log("player name:", playerNames[j]);
             }
             runTournament(playerNames);
         }
 
         localModeTournoi.addEventListener("click", function() {
-            console.log("inside tournoi");
             hideAll();
             tournoiButtons.classList.remove("hidden");
         });
@@ -354,27 +303,22 @@ const Game = async () => {
             let round = 1;
 
             while (participants.length > 1) {
-                console.log(`Round ${round}:`);
                 let nextRoundParticipants = [];
 
-                // Si le nombre de participants est impair, un participant avance automatiquement
                 if (participants.length % 2 !== 0) {
                     let luckyParticipant = participants.pop();
                     nextRoundParticipants.push(luckyParticipant);
-                    console.log(`${luckyParticipant} advances to the next round automatically`);
                 }
 
-                // Faire s'affronter les participants par paires
                 for (let i = 0; i < participants.length; i += 2) {
                     let player1 = participants[i];
                     let player2 = participants[i + 1];
-                    const roomName = `local_match_${player1}_vs_${player2}`.replace(/[^a-zA-Z0-9_]/g, '');
+                    const roomName = "local_tournoi_" + new Date().getTime();
                     hideAll();
                     alert(`Round: ${round}  Match: ${player1} Vs ${player2}`);
                     await connectWebSocketTournoi(roomName, player1, player2, nextRoundParticipants, ballSpeed.value, paddleSpeed.value);
                 }
 
-                // Préparer les participants pour le prochain round
                 participants = nextRoundParticipants;
                 round++;
             }
@@ -392,7 +336,6 @@ const Game = async () => {
             socket = new WebSocket(`wss://${window.location.host}/ws/pong/${roomName}/`);
 
             socket.onopen = function(event) {
-                console.log('Connected to the server');
                 socket.send(JSON.stringify({
                     'type': 'config',
                     'ball_speed': ballSpeed,
@@ -408,12 +351,8 @@ const Game = async () => {
                 const data = JSON.parse(event.data);
                 if (data.type === 'game_state') {
                     updateGame(data);
-                } else if (data.type === 'start_game') {
-                    console.log('The game has started!');
                 } else if (data.type === 'game_over') {
                     gameEnd = true
-                    console.log("Fin de game");
-                    // alert(`Player ${data.winner} wins!`);
                     let fecth_data_history = {
                         winner_username: '',
                         loser_username: '',
@@ -422,7 +361,6 @@ const Game = async () => {
                         perfect: false,
                         local_game: true
                     };
-                    console.log(data);
                     if (data.winner == 1) {
                         fecth_data_history.winner_username = Player1_name
                         fecth_data_history.loser_username = "Player2"
@@ -441,14 +379,12 @@ const Game = async () => {
                             fecth_data_history.perfect = true
                         }
                     }
-                    console.log(fecth_data_history)
                     try {
                         const response = await post(`${usersUrl}/game-history/`, fecth_data_history);
                 
                         const result = await response.json();
                 
                         if (response.ok) {
-                            console.log('Game history updated successfully:', result);
                         } else {
                             console.error('Error updating game history:', result);
                         }
@@ -464,7 +400,6 @@ const Game = async () => {
 
             socket.onclose = function(event) {
                 resetKeys();
-                console.log('Disconnected from the server');
                 if (scorePlayer1 == 1)
                     alert(`Player 1 wins!`);
                 else
@@ -506,7 +441,6 @@ const Game = async () => {
                 socket = new WebSocket(`wss://${window.location.host}/ws/pong/${roomName}/`);
 
                 socket.onopen = function(event) {
-                    console.log('Connected to the server');
                     socket.send(JSON.stringify({
                         'type': 'config',
                         'ball_speed': ballSpeed,
@@ -519,10 +453,7 @@ const Game = async () => {
                     const data = JSON.parse(event.data);
                     if (data.type === 'game_state') {
                         updateGameTournoi(data, player1_name, player2_name);
-                    } else if (data.type === 'start_game') {
-                        console.log('The game has started!');
                     } else if (data.type === 'game_over') {
-                        console.log("Fin de game");
                         gameEnd = true
                         let winner;
                         if (data.winner == 1) {
@@ -532,11 +463,6 @@ const Game = async () => {
                         }
                         alert(`${player1_name} vs ${player2_name} - Winner: ${winner}`);
                         nextRoundParticipants.push(winner);
-                        // socket.close();
-                        // socket = null;
-                        // hideAll();
-                        // resolve();
-                        // location.reload();
                     }
                 };
 
@@ -546,7 +472,6 @@ const Game = async () => {
                     socket = null;
                     hideAll();
                     resolve();
-                    console.log('Disconnected from the server');
                 };
 
                 socket.onerror = function(error) {
@@ -586,19 +511,6 @@ const Game = async () => {
             }
         }
 
-        // function checkHeartbeat() {
-        //     const currentTime = Date.now();
-        //     if (currentTime - lastMessageTime > TIMEOUT) {
-        //         console.log('No message received for 1 second. Reloading page...');
-        //         socket.close();
-        //         socket = null;
-        //         hideAll();
-        //         resolve();
-        //     } else {
-        //         setTimeout(checkHeartbeat, TIMEOUT); // Vérifie à nouveau après 1 seconde
-        //     }
-        // }
-
         function updateGameTournoi(state, player1_name, player2_name) {
             player1Y = state.player1_y_position;
             player2Y = state.player2_y_position;
@@ -633,7 +545,6 @@ const Game = async () => {
 
         function drawGameTournoi(player1_name, player2_name) {
             renderer.render(scene, camera);
-            // Update paddle and ball positions
             paddle1.position.z = player1Y;
             paddle2.position.z = player2Y;
             ball.position.x = ballX;
@@ -643,7 +554,6 @@ const Game = async () => {
 
         function drawGame() {
             renderer.render(scene, camera);
-            // Update paddle and ball positions
             paddle1.position.z = player1Y;
             paddle2.position.z = player2Y;
             ball.position.x = ballX;
@@ -654,7 +564,6 @@ const Game = async () => {
         function gameLoop() {
             handleKeys();
             requestAnimationFrame(gameLoop);
-            // rotateOlympicLogo(olympicRings); // Faire tourner le logo
         }
 
         gameLoop();
@@ -675,7 +584,6 @@ const Game = async () => {
         }
 
         window.addEventListener('popstate', function() {
-            console.log("fermeture de la socket")
             if (socket) {
                 socket.close();
                 socket = null;
@@ -699,21 +607,17 @@ const Game = async () => {
             const width = window.innerWidth;
             const height = window.innerHeight;
             
-            // Maj taille du canvas
             canvas.width = width;
             canvas.height = height;
             
-            // Maj du renderer
             renderer.setSize(width, height);
 
-            // Maj paramètres de la caméra
             camera.aspect = width / height;
             camera.updateProjectionMatrix();
             
             renderer.render(scene, camera);
         });
 
-        // Nettoyage lorsque la page est déchargée
         window.addEventListener('unload', () => {
             document.removeEventListener('keydown', handleKeys);
             document.removeEventListener('keyup', handleKeys);

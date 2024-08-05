@@ -106,3 +106,20 @@ export const del = async (url, data = {}) => {
         throw error;
     }
 };
+
+export const delpayload = async (url, payload = {}) => {
+    try {
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+            body: JSON.stringify(payload),
+        });
+        return response;
+    } catch (error) {
+        console.error('Error during DELETE request:', error);
+        throw error;
+    }
+};

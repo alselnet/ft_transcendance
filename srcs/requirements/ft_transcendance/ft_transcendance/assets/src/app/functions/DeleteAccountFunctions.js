@@ -1,4 +1,4 @@
-import { del, get } from "../services/Api.js";
+import { delpayload, get } from "../services/Api.js";
 
 const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`;
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`;
@@ -34,7 +34,7 @@ const deleteProcess = () => {
                         payload.password = password;
                     }
 
-                    const response = await del(`${authUrl}/delete-user/`, payload);
+                    const response = await delpayload(`${authUrl}/delete-user/`, payload);
 
                     if (response.ok) {
                         alert('Compte supprimé avec succès');
