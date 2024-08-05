@@ -78,7 +78,7 @@ const Settings = async () => {
 
                    <div class="dropdown drop-settings">
                        <button class="btn btn-secondary dropdown-toggle set-drop" type="button"
-                           id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                           id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                            couleur de l'arriere plan
                        </button>
                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -160,6 +160,7 @@ const Settings = async () => {
             document.getElementById('edit-username').disabled = true;
             document.getElementById('edit-email').disabled = true;
             document.getElementById('edit-password').disabled = true;
+            document.getElementById('dropdownMenuButton1').disabled = true;
         }
         
         section.querySelector('#delete-account').addEventListener('click', (event) => {
