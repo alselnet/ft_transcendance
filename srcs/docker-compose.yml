@@ -33,10 +33,6 @@ services:
     container_name: nginx
     build: ./requirements/NGINX
     volumes:
-    #   - ./requirements/NGINX/nginx.conf:/etc/nginx/nginx.conf
-    #   - ./requirements/NGINX/html/:/var/www/html
-    #   - ./requirements/NGINX/conf/server.crt:/etc/ssl/server.crt
-    #   - ./requirements/NGINX/conf/server.key:/etc/ssl/server.key
       - STATIC:/var/www/static
       - MEDIA:/var/www/media/
     depends_on:
@@ -64,21 +60,21 @@ volumes:
     driver_opts:
       type: volumes
       o: bind
-      device: /tmp/volumes/Postgres_volume
+      device: /tmp/Postgres_volume
 
   STATIC:
     driver: local
     driver_opts:
       type: volumes
       o: bind
-      device: /tmp/volumes/Static_volume
+      device: /tmp/Static_volume
     
   MEDIA:
     driver: local
     driver_opts:
       type: volumes
       o: bind
-      device: /tmp/volumes/Media_volume
+      device: /tmp/Media_volume
       
 networks:
   transcendance:
