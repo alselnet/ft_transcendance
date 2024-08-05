@@ -24,7 +24,6 @@ const deleteProcess42 = () => {
             try {
                 const profile = await getUserProfile();
                 if (profile) {
-                    // Préparer la requête de suppression sans mot de passe pour les utilisateurs 42
                     const response = await del(`${authUrl}/delete-user/`, {});
 
                     if (response.ok) {

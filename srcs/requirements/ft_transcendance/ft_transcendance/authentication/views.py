@@ -352,6 +352,9 @@ class Update2FAStatusView(APIView):
         user = request.user
         profile = Profile.objects.get(user=user)
         
+        if profile.fortytwo_account:
+            return Response({'error': '42 profiles cannot activate 2FA'}, status=status.HTTP_400_BAD_REQUEST)
+
         if not profile.totp_secret:
             profile.totp_secret = pyotp.random_base32()
             

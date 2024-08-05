@@ -1,4 +1,4 @@
-import { deleteProcess42 } from "../functions/DeleteAccountFunctions.js";
+import { deleteProcess42 } from "../functions/Delete42AccountFunctions.js";
 import { removeMainComponent } from "../functions/MainFunctions.js";
 
 const DeleteAccount42 = async () => {
