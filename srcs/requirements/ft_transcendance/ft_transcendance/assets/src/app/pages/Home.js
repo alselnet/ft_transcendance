@@ -43,7 +43,7 @@ const Home = () => {
             </div>
             <div class="btn-container-home">
                 <button id="fortyTwoSignInBtnSm" class="btn-42-home">
-                    <p class="co-42-home">connexion avec</p>
+                    <p class="co-42-home-sm">connexion avec</p>
                     <img src="${img42}" class="img-42-home" alt="button-42">
                 </button>
             </div>

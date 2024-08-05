@@ -3,16 +3,6 @@ import { checkAuth, post, get } from "../services/Api.js"
 
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
 
-let player1Y, player2Y, ballX, ballY, socket, keys, playerNames, renderer, scene, camera, paddle1, paddle2, ball, tableWidth, tableHeight, scorePlayer1, scorePlayer2;
-let Player1_name;
-let gameEnd = false
-let paddle_color_ig
-let ball_color_ig
-let ball_size_ig
-let tournoiProgress = false
-let isInit = false
-let olympicRings
-
 const Game = async () => {
     const isAuthenticated = await checkAuth();
     if (!isAuthenticated) {
@@ -77,8 +67,6 @@ const Game = async () => {
         </div>
         <div class="button-container" id="tournoi-buttons">
             <button class="game-button" id="three-players-btn">3 Players</button>
-            <button class="game-button" id="four-players-btn">4 Players</button>
-            <button class="game-button" id="five-players-btn">5 Players</button>
         </div>
     </div>
     `;
@@ -101,11 +89,21 @@ const Game = async () => {
             return;
         }
 
+        let player1Y, player2Y, ballX, ballY, socket, keys, playerNames, renderer, scene, camera, paddle1, paddle2, ball, tableWidth, tableHeight, scorePlayer1, scorePlayer2;
+        let Player1_name;
+        let gameEnd = false
+        let paddle_color_ig
+        let ball_color_ig
+        let ball_size_ig
+        let tournoiProgress = false
+        let isInit = false
+        let olympicRings
+
         initializeGameVariables();
         showInitialMenu();
 
         async function initializeGameVariables() {
-            if (isInit) return;
+            if (isInit == true) return;
             isInit = true;
             player1Y = 0;
             player2Y = 0;
@@ -125,11 +123,13 @@ const Game = async () => {
                     throw new Error('Network response was not ok');
                 }
                 const result = await response.json();
+                console.log(result.username)
                 Player1_name = result.username;
             } catch (error) {
                 console.error('Fetch error:', error);
                 Player1_name = 'Unknown Player';
             }
+            console.log(Player1_name)
             updateScores(scorePlayer1, scorePlayer2)
         }
 
@@ -264,8 +264,6 @@ const Game = async () => {
         });
 
         document.getElementById('three-players-btn').addEventListener('click', () => promptPlayerNames(3));
-        document.getElementById('four-players-btn').addEventListener('click', () => promptPlayerNames(4));
-        document.getElementById('five-players-btn').addEventListener('click', () => promptPlayerNames(5));
 
         function promptPlayerNames(numPlayers) {
             playerNames = [];
@@ -363,7 +361,7 @@ const Game = async () => {
                     updateGame(data);
                 } else if (data.type === 'game_over') {
                     gameEnd = true
-                    alert(`Player ${data.winner} wins!`);
+                    console.log("avant histo")
                     let fecth_data_history = {
                         winner_username: '',
                         loser_username: '',
@@ -373,6 +371,7 @@ const Game = async () => {
                         local_game: true
                     };
                     if (data.winner == 1) {
+                        console.log("player1 win")
                         fecth_data_history.winner_username = Player1_name
                         fecth_data_history.loser_username = "Player2"
                         fecth_data_history.winner_score = data.score_player1
@@ -380,8 +379,10 @@ const Game = async () => {
                         if (data.score_player2 == 0) {
                             fecth_data_history.perfect = true
                         }
+                        console.log(fecth_data_history)
                     }
                     else {
+                        console.log("player2 win")
                         fecth_data_history.winner_username  = "Player2"
                         fecth_data_history.loser_username = Player1_name
                         fecth_data_history.winner_score = data.score_player2
@@ -403,14 +404,20 @@ const Game = async () => {
                         console.error('Fetch error:', error);
                     }
 
+                    setTimeout(() => {
+                    }, delay);
+                    
                     closeSocketWithDelay(500)
 
-                    location.reload();
                 }
             };
 
             socket.onclose = function(event) {
                 resetKeys();
+                if (scorePlayer1 == 3)
+                    alert(`Player 1 wins!`);
+                else
+                    alert(`Player 2 wins!`);
                 location.reload();
             };
 
@@ -592,20 +599,20 @@ const Game = async () => {
             updateScores(scorePlayer1, scorePlayer2);
         }
 
-        function handleResize() {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
+        // function handleResize() {
+        //     const width = window.innerWidth;
+        //     const height = window.innerHeight;
             
-            canvas.width = width;
-            canvas.height = height;
+        //     canvas.width = width;
+        //     canvas.height = height;
             
-            renderer.setSize(width, height);
+        //     renderer.setSize(width, height);
 
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
+        //     camera.aspect = width / height;
+        //     camera.updateProjectionMatrix();
             
-            renderer.render(scene, camera);
-        }
+        //     renderer.render(scene, camera);
+        // }
 
         function handlePopState() {
             if (socket) {
@@ -629,7 +636,7 @@ const Game = async () => {
 
         window.addEventListener('popstate', handlePopState);
         window.addEventListener('hashchange', handleHashChange);
-        window.addEventListener('resize', handleResize);
+        // window.addEventListener('resize', handleResize);
         window.addEventListener('unload', cleanUpEvents);
 
         function cleanUpEvents() {
@@ -637,7 +644,7 @@ const Game = async () => {
             document.removeEventListener('keyup', handleKeys);
             window.removeEventListener('popstate', handlePopState);
             window.removeEventListener('hashchange', handleHashChange);
-            window.removeEventListener('resize', handleResize);
+            // window.removeEventListener('resize', handleResize);
             window.removeEventListener('unload', cleanUpEvents);
         }
     }

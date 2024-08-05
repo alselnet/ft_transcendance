@@ -14,10 +14,10 @@ export const SignIn = () => {
                 <div class="white-ball-signin"></div>
                 <div class="orange-ball-signin">
                     <form id="signin-form" class="login-form-signin">
-                        <input type="text" id="username" class="login-input-signin" placeholder="nom d'utilisateur">
-                        <input type="email" id="email" class="login-input-signin" placeholder="email">
-                        <input type="password" id="password" class="login-input-signin" placeholder="mot de passe">
-                        <input type="password" id="confirmPassword" class="login-input-signin" placeholder="confirmer mdp">
+                        <input type="text" id="username" class="login-input-signin" placeholder="Nom d'utilisateur">
+                        <input type="email" id="email" class="login-input-signin" placeholder="Adresse mail">
+                        <input type="password" id="password" class="login-input-signin" placeholder="Mot de passe">
+                        <input type="password" id="confirmPassword" class="login-input-signin" placeholder="Confirmer mdp">
                         <button type="submit" class="button-signin">s'inscrire</button>
                     </form>
                     <a class="nav-link" href="#/">
@@ -38,10 +38,10 @@ export const SignIn = () => {
                 </a>
                 <div class="orange-ball-signin-sm">
                     <form id="signin-form-sm" class="login-form-signin">
-                        <input type="text" id="username-sm" class="login-input-signin" placeholder="nom d'utilisateur">
-                        <input type="email" id="email-sm" class="login-input-signin" placeholder="email">
-                        <input type="password" id="password-sm" class="login-input-signin" placeholder="mot de passe">
-                        <input type="password" id="confirmPassword-sm" class="login-input-signin" placeholder="confirmer mdp">
+                        <input type="text" id="username-sm" class="login-input-signin" placeholder="Nom d'utilisateur">
+                        <input type="email" id="email-sm" class="login-input-signin" placeholder="Email">
+                        <input type="password" id="password-sm" class="login-input-signin" placeholder="Mot de passe">
+                        <input type="password" id="confirmPassword-sm" class="login-input-signin" placeholder="Confirmer mdp">
                         <button type="submit" class="button-signin">s'inscrire</button>
                     </form>
                 </div>
