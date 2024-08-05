@@ -1,3 +1,7 @@
+/*********************************************************/
+/*          medium & large & small screen                */
+/*********************************************************/
+
 .charte-container {
     position: relative;
     display: flex;
@@ -39,6 +43,10 @@
     box-sizing: border-box;
     margin-bottom: 2vh;
 }
+
+/*********************************************************/
+/*                     media screen                      */
+/*********************************************************/
 
 @media (max-width: 693px) {
     .charte-title {

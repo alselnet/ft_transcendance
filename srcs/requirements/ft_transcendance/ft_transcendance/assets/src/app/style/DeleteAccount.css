@@ -1,3 +1,7 @@
+/*********************************************************/
+/*                medium & large screen                  */
+/*********************************************************/
+
 .container-delete-data {
     display: flex;
     justify-content: center;
@@ -5,10 +9,19 @@
     height: 100vh;
 }
 
+/* DELETE BOX */
+
 .delete-input {
     background-color: transparent;
 }
 
+.title-delete-data {
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: white;
+}
+
+/* FORM */
 .delete-data-form {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.2);
@@ -18,13 +31,6 @@
     width: 300px;
     text-align: center;
 }
-
-.title-delete-data {
-    margin-bottom: 20px;
-    font-size: 2em;
-    color: white;
-}
-
 
 .input-delete-data {
     border: none;
@@ -37,6 +43,7 @@
     font-family: 'Play';
 }
 
+/* BUTTON */
 .button-delete-data {
     width: 150px;
     padding: 10px;
@@ -52,6 +59,7 @@
 .button-delete-data:hover {
     background-color: #616161;
 }
+
 
 #cancel-delete-account {
     background-color: #4caf50;
