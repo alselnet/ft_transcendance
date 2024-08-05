@@ -24,7 +24,7 @@ const deleteProcess42 = () => {
             try {
                 const profile = await getUserProfile();
                 if (profile) {
-                    const response = await del(`${authUrl}/delete-user/`, {});
+                    const response = await del(`${authUrl}/delete-user/`);
 
                     if (response.ok) {
                         alert('Compte supprimé avec succès');

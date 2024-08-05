@@ -37,4 +37,4 @@ class Update2FAStatusSerializer(serializers.Serializer):
 
 
 class DeleteUserSerializer(serializers.Serializer):
-    password = serializers.CharField(write_only=True, required=True)
+    password = serializers.CharField(write_only=True, required=False)
