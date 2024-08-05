@@ -218,6 +218,7 @@ CLIENT_ID = config('CLIENT_ID')
 CLIENT_SECRET = config('CLIENT_SECRET')
 REDIRECT_URI = config('REDIRECT_URI')
 HOST = config('HOST')
+HOSTNAME = config('HOSTNAME')
 
 CSRF_TRUSTED_ORIGINS = ['https://localhost:4443']
 

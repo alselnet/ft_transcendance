@@ -314,19 +314,27 @@
         font-size: 1.5vw;
      }
     
-     .dropdown-menu {
-        background-color: rgba(255, 255, 255, 0.1);
-        box-shadow: none;
-     }
+	/* Style the dropdown menu itself */
+	.dropdown-menu {
+		background-color: rgba(255, 255, 255, 0.5); /* This sets the background of the entire dropdown */
+		box-shadow: none;
+	}
 
-     .dropdown-item {
-        font-size: 1vw;
-        justify-content: center;
-        text-align: center;
-        padding: -2vw;
-     }
+	/* Style the dropdown items on hover */
+	.dropdown-item:hover {
+		background-color: #2c2c2c; /* This changes the background color when hovering */
+		color: #fff; /* This changes the text color when hovering */
+		font-size: 1vw; /* Adjusts the font size on hover */
+		justify-content: center; /* Centers the content */
+		text-align: center; /* Centers the text */
+	}
 
-     
+	/* Optional: adjust padding (Note: padding values are positive, not negative) */
+	.dropdown-item {
+		padding: 0.5vw 1vw; /* Adjust the padding as needed */
+	}
+
+	 
      .btn.delete-account {
         margin-top: 1vh;
         width: 20vw;
