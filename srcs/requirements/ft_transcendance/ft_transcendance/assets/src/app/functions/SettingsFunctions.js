@@ -4,7 +4,7 @@ const usersUrl = `${window.location.protocol}//${window.location.host}/api/users
 const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
 
 const sendConfirmationEmail = (email) => {
-    console.log("Send Mail");
+    ("Send Mail");
     post(`${authUrl}/send-confirmation-email/`, { email })
         .then(response => {
             if (response.ok) {
@@ -54,7 +54,6 @@ const updateAvatar = (file) => {
 };
 
 const update2FA = (newMethod) => {
-	console.log("Update 2FA Method");
     post(`${authUrl}/update-2fa/`, { method: newMethod })
         .then(response => {
             if (response.ok) {
@@ -82,7 +81,6 @@ const update2FAActiveClass = (method) => {
 };
 
 const changeBackgroundImage = (imageClass) => {
-    console.log("Change Background Image");
     document.body.classList.remove('bg-nagoya', 'bg-roland', 'bg-wimbledon');
     document.body.classList.add(imageClass);
     localStorage.setItem('backgroundClass', imageClass); 

@@ -9,14 +9,12 @@ export function showCircle(container, cx, cy, radius, callback) {
    div.style.transition = 'width 0.5s ease, height 0.5s ease, left 0.5s ease, top 0.5s ease';
 
    container.appendChild(div);
-   console.log('Circle div added to DOM:', div);
 
    setTimeout(() => {
        div.style.width = radius * 2 + 'px';
        div.style.height = radius * 2 + 'px';
        div.style.left = (cx - radius) + 'px';
        div.style.top = (cy - radius) + 'px';
-       console.log('Circle animation started');
        callback(div);
    }, 100);
 }
@@ -51,25 +49,20 @@ function showSectorGraph(container, size, percentage, color) {
    setTimeout(() => {
        const circle = container.querySelector('circle:nth-of-type(2)');
        circle.style.transform = 'scale(1)';
-       console.log('Full circle animation started');
    }, 10);
 
    setTimeout(() => {
        const path = container.querySelector('path');
        path.style.transform = 'scale(1)';
-       console.log('Sector animation started');
    }, 510);
 }
 
 export function setupCamembertAnimation(dashboardContainer, percentage, color, message = '') {
-   console.log('Setting up camembert animation');
    const camembertContainer = dashboardContainer.querySelector('.camembert-stat');
    if (!camembertContainer) {
        console.error('Camembert container not found');
        return;
    }
-
-   console.log('Camembert container found', camembertContainer);
 
    camembertContainer.innerHTML = '';
 
@@ -107,11 +100,9 @@ function showMessageInCircle(container, size, message) {
        const circle = container.querySelector('circle');
        const text = container.querySelector('text');
        circle.style.transform = 'scale(1)';
-       console.log('Full circle animation started');
 
        setTimeout(() => {
            text.style.opacity = 1;
-           console.log('Text animation started');
        }, 510);
    }, 10);
 }

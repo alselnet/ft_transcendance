@@ -6,7 +6,6 @@ import { addCamembert, setUpNumberAnimation } from "../functions/DashboardFuncti
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
 
 const FriendDashStat = () => {
-    console.log("enter in friendprofile component")
     let form = document.createElement("div");
 
     const path = window.location.hash.split('/');
@@ -20,7 +19,6 @@ const FriendDashStat = () => {
             if (userData.detail === "No User matches the given query.") {
                 throw new Error("L'utilisateur n'existe pas");
             }
-            console.log('Fetched user data:', userData);
 
             form.innerHTML = `
             <div class="stat-container">

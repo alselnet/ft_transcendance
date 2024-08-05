@@ -12,7 +12,6 @@ const setUpNumberAnimation = (form) => {
             const target = +number.getAttribute('data-target');
             animateNumbers(number, target);
         });
-        console.log('Animation set');
     }, 500);
 
 }

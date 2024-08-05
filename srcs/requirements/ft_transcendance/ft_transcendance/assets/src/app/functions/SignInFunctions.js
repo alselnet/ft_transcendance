@@ -45,7 +45,6 @@ export function handleFormVisibility() {
 
 export function handleFormSubmit(event) {
     event.preventDefault();
-    console.log('Form submitted');
 
     const formData = {
         username: document.getElementById("username")?.value || document.getElementById("username-sm")?.value,
@@ -54,7 +53,6 @@ export function handleFormSubmit(event) {
         confirmPassword: document.getElementById("confirmPassword")?.value || document.getElementById("confirmPassword-sm")?.value
     };
 
-    console.log('Form data:', formData);
 
     const usernameValid = checkUsername(formData.username);
     const emailValid = checkEmail(formData.email);
@@ -91,7 +89,6 @@ export function handleFormSubmit(event) {
         body: JSON.stringify(formData)
     })
     .then(response => {
-        console.log('Response status:', response.status);
         if (!response.ok) {
             return response.json().then(err => { throw new Error(err.message) });
         }
@@ -102,9 +99,7 @@ export function handleFormSubmit(event) {
         alert(data.message);
         localStorage.setItem('accessToken', data.access);
         localStorage.setItem('refreshToken', data.refresh);
-        console.log('Redirecting to dashboard from signin...');
         window.location.href = '#/dashboard';
-        console.log('Current hash:', window.location.hash);
     })
     .catch(error => {
         console.error('Error:', error);

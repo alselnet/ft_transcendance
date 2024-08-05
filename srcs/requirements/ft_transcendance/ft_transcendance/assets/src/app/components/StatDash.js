@@ -7,7 +7,7 @@ const usersUrl = `${window.location.protocol}//${window.location.host}/api/users
 
 const DashStat = () => {
     let form = document.createElement("div");
-    console.log('Creating form element');
+
 
     get(`${usersUrl}/me/`)
     .then(response => {
@@ -17,7 +17,7 @@ const DashStat = () => {
         return response.json();
     })
     .then(userData => {
-        console.log('Fetched user data:', userData);
+
 
         form.innerHTML = `
 			<div class="stat-container">
@@ -117,11 +117,9 @@ const DashStat = () => {
 				</div>
 			</div>
         `;
-        console.log('Form innerHTML set');
 
 		setUpNumberAnimation(form);
 		modifyStatus(form, userData.status);
-        console.log('Event listeners set');
 
 		const loginSearchInput = form.querySelector("#login-search");
         const searchButton = form.querySelector("#search-button");

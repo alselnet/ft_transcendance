@@ -21,8 +21,6 @@ const Settings = async () => {
         return response.json();
     })
     .then(userData => {
-        console.log('Fetched user data:', userData);
-
        const emailConfirmationBanner = userData.mail_confirmation_status ? '' : `
            <div class="confirm-email">
                votre adresse mail doit etre verifiee : 

@@ -50,6 +50,8 @@ show:
 	@docker volume ls -q
 	@docker image ls -q
 
-re: clean all
+re:
+	-@$(MAKE) clean
+	@$(MAKE) all
 
 .PHONY: all up stop clean fclean prune wipe show logs re
