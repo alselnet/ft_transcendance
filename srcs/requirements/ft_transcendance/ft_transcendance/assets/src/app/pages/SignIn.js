@@ -32,7 +32,7 @@ export const SignIn = () => {
                 </div>
             </div>
 
-            <div class="balls-signin d-none d-sm-flex d-md-none">
+            <div class="balls-signin d-flex d-md-none">
                 <a class="nav-link" href="#/">
                     <div class="arrow-s-sm"><i class="bi bi-arrow-left-circle-fill"></i></div>
                 </a>

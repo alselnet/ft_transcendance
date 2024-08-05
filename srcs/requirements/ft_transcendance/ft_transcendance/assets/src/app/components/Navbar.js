@@ -6,10 +6,10 @@ export const Navbar = () => {
       <nav class="navbar-container">
         <div class="container-fluid">
           <div class="myNavbar d-none d-lg-flex">
-            <a class="nav-link" href="#/game"><i class="bi bi-controller" style="font-size: 4rem; color: white;"></i></a>
-            <a class="nav-link" href="#/dashboard"><i class="bi bi-person-fill" style="font-size: 4rem; color: white;"></i></a>
-            <a class="nav-link" href="#/settings"><i class="bi bi-gear-fill" style="font-size: 4rem; color: white;"></i></a>
-            <a class="nav-link" href="#/aboutus"><i class="bi bi-info-circle" style="font-size: 4rem; color: white;"></i></a>
+            <a class="nav-link" href="#/game"><i class="bi bi-controller navbar-icon"></i></a>
+            <a class="nav-link" href="#/dashboard"><i class="bi bi-person-fill navbar-icon"></i></a>
+            <a class="nav-link" href="#/settings"><i class="bi bi-gear-fill navbar-icon"></i></a>
+            <a class="nav-link" href="#/aboutus"><i class="bi bi-info-circle navbar-icon"></i></a>
           </div>
         </div>
       </nav>

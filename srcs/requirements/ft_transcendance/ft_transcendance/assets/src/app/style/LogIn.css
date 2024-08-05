@@ -13,7 +13,7 @@
 }
 
 .orange-ball-login,
-.white-ball-login  {
+.white-ball-login {
     width: 40vw;
     height: 40vw;
     max-width: 60vh;
@@ -31,14 +31,12 @@
 .white-ball-login {
     position: absolute;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     margin: 0;
     margin-left: 25vw;
     margin-top: 6%;
-    width: 40vw;
-    height: 40vw;
     background-color: white;
     z-index: 2;
 }
@@ -46,16 +44,13 @@
 /* FORMULAR */
 .login-form-login {
     position: relative;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
     text-align: center;
     overflow: hidden;
     width: 30vw;
     height: 35vh;
     padding: 40px;
     font-family: 'Play';
+    margin-top: 5vh;
 }
 
 .login-input {
@@ -74,6 +69,7 @@
     border-radius: 50%;
     transform: rotate(45deg);
     opacity: 0.6;
+    font-size: 1vw;
 }
 
 /* BUTTON */
@@ -87,8 +83,12 @@
     font-family: Lato, sans-serif;
     background-color: transparent;
     cursor: pointer;
+    width: 13vw;
+    height: 3vh;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     transition: background-color 0.3s, box-shadow 0.3s;
+
+    text-align: center;
 }
 
 .button-login:hover {
@@ -107,7 +107,6 @@
     color: rgb(218, 147, 16);
 }
 
-
 /*********************************************************/
 /*                     small screen                      */
 /*********************************************************/
@@ -124,7 +123,6 @@
     height: 70vw;
     max-width: 60vh;
     max-height: 60vh;
-    background-color: rgb(218, 147, 16);
     border-radius: 50%;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3),
     inset 0 2px 4px rgba(255,255,255,0.5);
@@ -158,4 +156,63 @@
         margin-right: 3vw;
     }
 
+}
+
+@media (max-width: 619px) {
+    .arrow-sm {
+        margin-bottom: 40vh;
+        margin-right: 40vh;
+    }
+
+    .button-login {
+        font-size: 50%;
+        width: 15vw;
+        height: 3vh;
+    }
+
+    .login-form-login {
+        margin-right: 3vh;
+    }
+
+}
+
+@media (max-width: 401px) {
+
+    .arrow-sm {
+        margin-bottom: 40vh;
+        margin-right: 20vh;
+    }
+
+    .button-login {
+        font-size: 50%;
+        width: 15vw;
+        height: 3vh;
+        margin-left: 1vw;
+    }
+}
+
+@media (max-height: 774px) {
+
+    .arrow-sm {
+        margin-bottom: 60vh;
+        margin-right: 40vh;
+    }
+
+    .login-form-login {
+        margin-top: -5vh;
+        padding: 20px;
+    }
+}
+
+@media (max-height: 550px) {
+
+    .arrow-sm {
+        margin-bottom: 60vh;
+        margin-right: 40vh;
+    }
+
+    .login-form-login {
+        margin-top: -10vh;
+        padding: 1px;
+    }
 }
