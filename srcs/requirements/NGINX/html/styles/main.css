@@ -1216,7 +1216,8 @@
  
  .current-data {
     margin-right: 1vw;
-    color: #245070;
+    color: white;
+	font-family: 'Play'
  }
  
  .active-2fa {
