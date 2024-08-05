@@ -48,7 +48,7 @@ export const QRCode = () => {
     });
 
     document.getElementById('proceed-to-2fa-auth').addEventListener('click', () => {
-        window.location.href = `#/2fa-auth?tfa=${encodeURIComponent(tfa)}`;
+        window.location.href = `#/qr-2fa-auth?tfa=${encodeURIComponent(tfa)}`;
     });
 
     return section;

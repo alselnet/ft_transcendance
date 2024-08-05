@@ -2,7 +2,7 @@ import { getCookie } from '../utils/cookies';
 
 const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
 
-const TwoFactorsAuth = async () => {
+const TwoFactorsAuthQR = async () => {
     let section = document.querySelector("#section");
     if (!section) {
         console.error("#section not found in the DOM");
@@ -31,16 +31,16 @@ const TwoFactorsAuth = async () => {
       `
       <div class="container-2FA">
           <div class="login-form-2FA">
-              <h1 class="title-2FA">ENTREZ LE CODE REÇU PAR MAIL</h1>
+              <h1 class="title-2FA">ENTREZ LE CODE REÇU SUR L'APPLICATION</h1>
               <input type="text" id="two-fa-code" class="input-2fa" placeholder="Tapez le code ici">
               <button id="verify-2fa-code" class="button-2FA">Confirmer</button>
-              <button id="resend-2fa-code" class="button-2FA">Renvoyer</button>
+              <button id="back-to-qr-code" class="button-2FA">Retourner au QR Code</button>
           </div>
       </div>
       `; 
 
     const verifyButton = document.getElementById('verify-2fa-code');
-    const resendButton = document.getElementById('resend-2fa-code');
+    const backToQRCode = document.getElementById('back-to-qr-code');
 
     verifyButton.addEventListener('click', async () => {
         const code = document.getElementById('two-fa-code').value;
@@ -81,29 +81,11 @@ const TwoFactorsAuth = async () => {
         }
     });
 
-    resendButton.addEventListener('click', async () => {
-        try {
-            const response = await fetch(`${authUrl}/generate-2fa-code/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ 'tfa_token': tfa })
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Erreur de réenvoi du code 2FA.');
-            }
-
-            alert('Le code 2FA a été renvoyé.');
-        } catch (error) {
-            console.error('Erreur de réenvoi du code 2FA:', error);
-            alert(error.message);
-        }
+    backToQRCode.addEventListener('click', () => {
+        window.location.href = `#/qr-code?tfa=${tfa}`;
     });
 
     return section;
 };
 
-export { TwoFactorsAuth };
+export { TwoFactorsAuthQR };

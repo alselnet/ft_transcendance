@@ -10,7 +10,8 @@ import { FriendProfile } from "../pages/FriendProfile.js";
 import { FriendList } from "../components/FriendsList.js";
 import { GameHistory } from "../components/GameHistory.js";
 import { PublicGameHistory } from "../components/PublicGameHistory.js";
-import { TwoFactorAuth } from "../components/2FA.js"
+import { TwoFactorsAuth } from "../components/2FA.js"
+import { TwoFactorsAuthQR } from "../components/_QR.js";
 import { LogOutMsg } from "../components/LogOutMsg.js";
 import { CharteMsg } from "../components/CharteMsg.js";
 import { UpdateUsername } from "../pages/UpdateUsername.js";
@@ -83,7 +84,9 @@ export const Router = async () => {
     } else if (hash.startsWith("#/qr-code")) {
         QRCode();
     } else if (hash.startsWith("#/2fa-auth")) {
-        TwoFactorAuth();
+        TwoFactorsAuth();
+    } else if (hash.startsWith("#/qr-2fa-auth")) {
+        TwoFactorsAuthQR();
     } else if (hash.startsWith("#/friendprofile/")) {
         FriendProfile();
     } else {
