@@ -122,13 +122,11 @@ const Game = async () => {
                 const result = await response.json();
                 console.log(result);
                 Player1_name = result.username;
-                // console.log(Player1_name)
             } catch (error) {
                 console.error('Fetch error:', error);
                 Player1_name = 'Unknown Player';
             }
             updateScores(scorePlayer1, scorePlayer2)
-            // console.log(a)
         }
 
         function hideAll() {

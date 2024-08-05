@@ -44,7 +44,6 @@ export const Router = async () => {
     }
 
     if (window.location.hash.includes('access') && window.location.hash.includes('refresh')) {
-		console.log('handling callback');
         await handleCallback();
 		return ;
     }

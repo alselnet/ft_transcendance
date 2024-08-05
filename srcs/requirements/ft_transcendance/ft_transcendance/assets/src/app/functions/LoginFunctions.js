@@ -46,14 +46,12 @@ export function handleFormVisibility() {
 
 function handleFormSubmit(event) {
     event.preventDefault();
-    console.log('Form submitted');
 
     const logData = {
         username: document.getElementById("username")?.value || document.getElementById("username-sm")?.value,
         password: document.getElementById("password")?.value || document.getElementById("password-sm")?.value,
     };
 
-    console.log('Form data:', logData);
 
     fetch(`${authUrl}/signin/`, {
         method: 'POST',
@@ -70,7 +68,6 @@ function handleFormSubmit(event) {
         return response.json();
     })
     .then(data => {
-        console.log('Réponse du backend:', data);
 
         return fetch(`${usersUrl}/me/`, {
             method: 'GET',
@@ -82,7 +79,6 @@ function handleFormSubmit(event) {
     })
     .then(response => response.json())
     .then(userData => {
-        console.log('User data:', userData);
         if (userData.tfa_token) {
             localStorage.setItem('tfa', userData.tfa_token);
         } else {
@@ -134,7 +130,6 @@ function handleFormSubmit(event) {
                 return tokensResponse.json();
             })
             .then(tokens => {
-                console.log('Tokens récupérés:', tokens);
                 localStorage.removeItem('tfa');
                 localStorage.setItem('accessToken', tokens.access);
                 localStorage.setItem('refreshToken', tokens.refresh);

@@ -36,7 +36,6 @@ export const deleteFriendList = async (username) => {
             throw new Error(errorData.detail || 'Failed to remove friend');
         }
         const data = await response.json();
-        console.log(data);
         alert('Friend removed successfully');
     } catch (error) {
         console.error('Error removing friend:', error);

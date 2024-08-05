@@ -25,11 +25,9 @@ export function addFriend(username) {
         return response.json();
     })
     .then(data => {
-        console.log(data);
         alert('Friend added successfully');
     })
     .catch(error => {
-        console.error('Error adding friend:', error);
         alert(error.message || 'Failed to add friend');
     });
 }

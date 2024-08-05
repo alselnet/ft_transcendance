@@ -65,7 +65,6 @@ const TwoFactorsAuth = async () => {
             }
 
             const data = await response.json();
-            console.log('2FA code validated:', data);
 
             if (data.access && data.refresh) {
                 localStorage.removeItem('tfa');

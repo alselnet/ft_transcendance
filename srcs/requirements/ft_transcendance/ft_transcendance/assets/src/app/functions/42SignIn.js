@@ -6,21 +6,17 @@ export function FortyTwoSignIn() {
 }
 
 export function handleCallback() {
-	console.log('handleCallback()');
     const fragment = window.location.hash.substring(1);
-    console.log("Fragment part of URL:", fragment);
     const urlParams = new URLSearchParams(fragment);
     const access = urlParams.get('access');
     const refresh = urlParams.get('refresh');
     const message = urlParams.get('message');
 
     if (access && refresh) {
-        console.log("Tokens found in URL parameters:", access, refresh);
 
         try {
             localStorage.setItem('accessToken', access);
             localStorage.setItem('refreshToken', refresh);
-            console.log("Tokens stored successfully in local storage.");
         } catch (error) {
             console.error("Error storing tokens in local storage:", error);
         }
