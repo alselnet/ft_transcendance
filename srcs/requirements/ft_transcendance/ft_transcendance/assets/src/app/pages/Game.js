@@ -90,7 +90,7 @@ const Game = async () => {
                 const result = await response.json();
                 console.log(result);
                 Player1_name = result.username;
-                console.log(Player1_name)
+                // console.log(Player1_name)
             } catch (error) {
                 console.error('Fetch error:', error);
                 Player1_name = 'Unknown Player';
@@ -240,22 +240,35 @@ const Game = async () => {
         document.getElementById('five-players-btn').addEventListener('click', () => promptPlayerNames(5));
 
         function promptPlayerNames(numPlayers) {
-            console.log("inside prompte player name");
+            console.log("inside prompt player name");
             playerNames = [];
+            const maxLength = 10; // Set the maximum length for player names
+        
             for (let i = 1; i <= numPlayers; i++) {
-                const playerName = prompt(`Player ${i} name:`);
-                if (playerName === null) {
-                    console.log("Player input cancelled. Tournament not started.");
-                    showInitialMenu();
-                    return;
-                } else if (playerName.trim() === "") {
-                    alert("Please enter a valid name.");
-                    i--; // Redemander le nom si la saisie est vide
-                } else {
-                    playerNames.push(playerName.trim());
+                let playerName;
+                let isUnique = false;
+        
+                while (!isUnique) {
+                    playerName = prompt(`Player ${i} name (max ${maxLength} characters):`);
+        
+                    if (playerName === null) {
+                        console.log("Player input cancelled. Tournament not started.");
+                        showInitialMenu();
+                        return;
+                    } else if (playerName.trim() === "") {
+                        alert("Please enter a valid name.");
+                    } else if (playerName.length > maxLength) {
+                        alert(`Name too long! Please enter a name with a maximum of ${maxLength} characters.`);
+                    } else if (playerNames.includes(playerName.trim())) {
+                        alert("Name already taken! Please enter a unique name.");
+                    } else {
+                        isUnique = true;
+                        playerNames.push(playerName.trim());
+                    }
                 }
             }
-            for (let j = 0; j < numPlayers; j++) {
+        
+            for (let j = 0; j < playerNames.length; j++) {
                 console.log("player name:", playerNames[j]);
             }
             runTournament(playerNames);
