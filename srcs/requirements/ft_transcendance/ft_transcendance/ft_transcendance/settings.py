@@ -142,7 +142,7 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+@d&r!khzmp7e)=j_*kl2^#huo+=10ev=1^tsl7^bq@nyw7t%%'
+SECRET_KEY = config('SECRET_KEY')
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
@@ -185,17 +185,6 @@ SIMPLE_JWT = {
 }
 
 SITE_ID = 1
-
-SOCIALACCOUNT_PROVIDERS = {
-    '42': {
-        'APP': {
-            'client_id': 'YOUR_42_CLIENT_ID',
-            'secret': 'YOUR_42_CLIENT_SECRET',
-            'key': ''
-        }
-    }
-}
-
 
 LOGGING = {
     'version': 1,
