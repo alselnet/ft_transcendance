@@ -28,6 +28,7 @@ stop:
     
 clean: stop
 	@echo "Deleting database image..."
+	@rm -rf srcs/requirements/NGINX/html
 	@docker rmi srcs-postgresdb
 	@docker rmi srcs-webapp
 	@docker rmi srcs-nginx

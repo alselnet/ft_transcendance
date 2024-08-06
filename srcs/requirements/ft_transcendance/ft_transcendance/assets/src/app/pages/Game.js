@@ -97,7 +97,7 @@ const Game = async () => {
         let ball_size_ig
         let tournoiProgress = false
         let isInit = false
-        let olympicRings
+        // let olympicRings
 
         initializeGameVariables();
         showInitialMenu();
@@ -128,6 +128,7 @@ const Game = async () => {
                 console.error('Fetch error:', error);
                 Player1_name = 'Unknown Player';
             }
+            console.log(Player1_name)
             updateScores(scorePlayer1, scorePlayer2)
         }
 
@@ -143,35 +144,35 @@ const Game = async () => {
             settings.classList.remove("hidden");
         }
 
-        function addOlympicLogo() {
-            const ringRadius = 50;
-            const tubeRadius = 8;
-            const segments = 64;
-            const opacity = 0.8;
-            const ringsData = [
-                { color: 0x0081C8, position: [-80, 150, -200] },
-                { color: 0x000000, position: [0, 150, -200] },
-                { color: 0xEE334E, position: [80, 150, -200] },
-                { color: 0xF4C300, position: [-40, 100, -200] },
-                { color: 0x009F3D, position: [40, 100, -200] },
-            ];
+        // function addOlympicLogo() {
+        //     const ringRadius = 50;
+        //     const tubeRadius = 8;
+        //     const segments = 64;
+        //     const opacity = 0.8;
+        //     const ringsData = [
+        //         { color: 0x0081C8, position: [-80, 150, -200] },
+        //         { color: 0x000000, position: [0, 150, -200] },
+        //         { color: 0xEE334E, position: [80, 150, -200] },
+        //         { color: 0xF4C300, position: [-40, 100, -200] },
+        //         { color: 0x009F3D, position: [40, 100, -200] },
+        //     ];
         
-            const rings = [];
-            ringsData.forEach(data => {
-                const geometry = new THREE.TorusGeometry(ringRadius, tubeRadius, segments, segments);
-                const material = new THREE.MeshPhongMaterial({ 
-                    color: data.color,
-                    transparent: true,
-                    opacity: opacity
-                });
-                const ring = new THREE.Mesh(geometry, material);
-                ring.position.set(...data.position);
-                scene.add(ring);
-                rings.push(ring);
-            });
+        //     const rings = [];
+        //     ringsData.forEach(data => {
+        //         const geometry = new THREE.TorusGeometry(ringRadius, tubeRadius, segments, segments);
+        //         const material = new THREE.MeshPhongMaterial({ 
+        //             color: data.color,
+        //             transparent: true,
+        //             opacity: opacity
+        //         });
+        //         const ring = new THREE.Mesh(geometry, material);
+        //         ring.position.set(...data.position);
+        //         scene.add(ring);
+        //         rings.push(ring);
+        //     });
         
-            return rings;
-        }
+        //     return rings;
+        // }
 
         function drawInitialGame() {
 
@@ -238,7 +239,7 @@ const Game = async () => {
                 scene.add(point);
             }
 
-            olympicRings = addOlympicLogo();
+            // olympicRings = addOlympicLogo();
 
             camera.position.set(0, 600, 500);
             camera.lookAt(new THREE.Vector3(0, 0, 0));
@@ -257,7 +258,7 @@ const Game = async () => {
 
         localModeButton.addEventListener("click", function() {
             hideAll();
-            const roomName = "local_" + new Date().getTime();
+            const roomName = `room_${new Date().getTime()}_${Math.random().toString(36).substring(7)}`;
             connectWebSocket(roomName, ballSpeed.value, paddleSpeed.value);
         });
 
@@ -301,42 +302,89 @@ const Game = async () => {
         });
 
         async function runTournament(participants) {
-            let round = 1;
-            tournoiProgress = true;
-
-            while (participants.length > 1) {
-                let nextRoundParticipants = [];
-
-                if (participants.length % 2 !== 0) {
-                    let luckyParticipant = participants.pop();
-                    nextRoundParticipants.push(luckyParticipant);
-                }
-
-                for (let i = 0; i < participants.length; i += 2) {
-                    let player1 = participants[i];
-                    let player2 = participants[i + 1];
-                    const roomName = "local_tournoi_" + new Date().getTime();
-                    hideAll();
-                    alert(`Round: ${round}  Match: ${player1} Vs ${player2}`);
-                    await connectWebSocketTournoi(roomName, player1, player2, nextRoundParticipants, ballSpeed.value, paddleSpeed.value);
-                    if (tournoiProgress == false) {
-                        location.reload();
-                        return;
-                    }
-                }
-
-                participants = nextRoundParticipants;
-                round++;
+            if (participants.length !== 3) {
+                console.error("This function is designed for exactly 3 participants.");
+                return;
             }
-
-            alert(`Tournament Winner: ${participants[0]}`);
+        
+            tournoiProgress = true;
+        
+            const skipIndex = Math.floor(Math.random() * 3);
+            const skipPlayer = participants[skipIndex];
+            const remainingPlayers = participants.filter((_, index) => index !== skipIndex);
+        
+            let player1 = remainingPlayers[0];
+            let player2 = remainingPlayers[1];
+            let roomName = `room_${new Date().getTime()}_${Math.random().toString(36).substring(7)}`;
+            hideAll();
+            alert(`Round: 1  Match: ${player1} Vs ${player2}`);
+            const winnerFirstMatch = await connectWebSocketTournoi(roomName, player1, player2, remainingPlayers, ballSpeed.value, paddleSpeed.value);
+            if (!tournoiProgress) {
+                location.reload();
+                return;
+            }
+        
+            roomName = `room_${new Date().getTime()}_${Math.random().toString(36).substring(7)}`;
+            hideAll();
+            alert(`Round: 2  Match: ${winnerFirstMatch} Vs ${skipPlayer}`);
+            const finalWinner = await connectWebSocketTournoi(roomName, winnerFirstMatch, skipPlayer, [], ballSpeed.value, paddleSpeed.value);
+            if (!tournoiProgress) {
+                location.reload();
+                return;
+            }
+        
+            alert(`Tournament Winner: ${finalWinner}`);
             location.reload();
         }
+
+        async function runFixedTournament(participants) {
+            if (participants.length !== 3) {
+                console.error("This function is designed for exactly 3 participants.");
+                return;
+            }
+        
+            let round = 1;
+            tournoiProgress = true;
+        
+            // Tirer au sort le joueur qui saute le premier match
+            const skipIndex = Math.floor(Math.random() * 3);
+            const skipPlayer = participants[skipIndex];
+            const remainingPlayers = participants.filter((_, index) => index !== skipIndex);
+        
+            // Premier match entre les deux joueurs restants
+            let player1 = remainingPlayers[0];
+            let player2 = remainingPlayers[1];
+            let roomName = `room_${new Date().getTime()}_${Math.random().toString(36).substring(7)}`;
+            hideAll();
+            alert(`Round: ${round}  Match: ${player1} Vs ${player2}`);
+            const winnerFirstMatch = await connectWebSocketTournoi(roomName, player1, player2, [], ballSpeed.value, paddleSpeed.value);
+            if (!tournoiProgress) {
+                location.reload();
+                return;
+            }
+        
+            // Le gagnant du premier match affronte le joueur qui a sauté
+            roomName = `room_${new Date().getTime()}_${Math.random().toString(36).substring(7)}`;
+            hideAll();
+            alert(`Round: ${round + 1}  Match: ${winnerFirstMatch} Vs ${skipPlayer}`);
+            const finalWinner = await connectWebSocketTournoi(roomName, winnerFirstMatch, skipPlayer, [], ballSpeed.value, paddleSpeed.value);
+            if (!tournoiProgress) {
+                location.reload();
+                return;
+            }
+        
+            // Déterminer le gagnant final
+            alert(`Tournament Winner: ${finalWinner}`);
+            location.reload();
+        }
+
 
         function connectWebSocket(roomName, ballSpeed, paddleSpeed) {
             if (socket) {
                 socket.close();
             }
+
+            console.log(roomName)
 
             gameEnd = false
             socket = new WebSocket(`wss://${window.location.host}/ws/pong/${roomName}/`);
@@ -359,6 +407,10 @@ const Game = async () => {
                     updateGame(data);
                 } else if (data.type === 'game_over') {
                     gameEnd = true
+                    if (scorePlayer1 == 3)
+                        alert(`Player 1 wins!`);
+                    else
+                        alert(`Player 2 wins!`);
                     let fecth_data_history = {
                         winner_username: '',
                         loser_username: '',
@@ -408,10 +460,6 @@ const Game = async () => {
 
             socket.onclose = function(event) {
                 resetKeys();
-                if (scorePlayer1 == 3)
-                    alert(`Player 1 wins!`);
-                else
-                    alert(`Player 2 wins!`);
                 location.reload();
             };
 
@@ -471,15 +519,15 @@ const Game = async () => {
                         }
                         alert(`${player1_name} vs ${player2_name} - Winner: ${winner}`);
                         nextRoundParticipants.push(winner);
+                        socket.close();
+                        socket = null;
+                        hideAll();
+                        resolve(winner); 
                     }
                 };
 
                 socket.onclose = function(event) {
                     resetKeys();
-                    socket.close();
-                    socket = null;
-                    hideAll();
-                    resolve();
                 };
 
                 socket.onerror = function(error) {
@@ -527,7 +575,7 @@ const Game = async () => {
             scorePlayer1 = state.score_player1;
             scorePlayer2 = state.score_player2;
             updateScoresTournoi(scorePlayer1, scorePlayer2, player1_name, player2_name);
-            drawGameTournoi(player1_name, player2_name);
+            drawGame();
         }
 
         function updateGame(state) {
@@ -549,15 +597,6 @@ const Game = async () => {
         function updateScoresTournoi(score1, score2, player1_tournoi_name, player2_tournoi_name) {
             document.getElementById('score-player1').textContent = `${player1_tournoi_name}: ${score1}`;
             document.getElementById('score-player2').textContent = `${player2_tournoi_name}: ${score2}`;
-        }
-
-        function drawGameTournoi(player1_name, player2_name) {
-            renderer.render(scene, camera);
-            paddle1.position.z = player1Y;
-            paddle2.position.z = player2Y;
-            ball.position.x = ballX;
-            ball.position.z = ballY;
-            renderer.render(scene, camera);
         }
 
         function drawGame() {
@@ -593,20 +632,54 @@ const Game = async () => {
             updateScores(scorePlayer1, scorePlayer2);
         }
 
-        // function handleResize() {
+        // window.addEventListener('resize', () => {
         //     const width = window.innerWidth;
         //     const height = window.innerHeight;
             
+        //     // Maj taille du canvas
         //     canvas.width = width;
         //     canvas.height = height;
             
+        //     // Maj du renderer   
         //     renderer.setSize(width, height);
 
+        //     // Maj paramètres de la caméra
         //     camera.aspect = width / height;
         //     camera.updateProjectionMatrix();
             
         //     renderer.render(scene, camera);
-        // }
+        // });
+
+        window.addEventListener('resize', () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            // Mettre à jour la taille du canvas
+            canvas.width = width;
+            canvas.height = height;
+            
+            // Mettre à jour le style CSS du canvas
+            canvas.style.width = `${width}px`;
+            canvas.style.height = `${height}px`;
+            
+            // Vérifier si renderer est défini avant d'essayer d'appeler setSize
+            if (renderer) {
+                // Mettre à jour le renderer
+                renderer.setSize(width, height);
+            }
+        
+            // Vérifier si camera est défini avant d'essayer de mettre à jour la matrice de projection
+            if (camera) {
+                // Mettre à jour les paramètres de la caméra
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+            }
+        
+            // Vérifier si scene et renderer sont définis avant d'essayer de rendre la scène
+            if (scene && renderer) {
+                renderer.render(scene, camera);
+            }
+        });
 
         function handlePopState() {
             if (socket) {
@@ -630,7 +703,6 @@ const Game = async () => {
 
         window.addEventListener('popstate', handlePopState);
         window.addEventListener('hashchange', handleHashChange);
-        // window.addEventListener('resize', handleResize);
         window.addEventListener('unload', cleanUpEvents);
 
         function cleanUpEvents() {
@@ -638,7 +710,6 @@ const Game = async () => {
             document.removeEventListener('keyup', handleKeys);
             window.removeEventListener('popstate', handlePopState);
             window.removeEventListener('hashchange', handleHashChange);
-            // window.removeEventListener('resize', handleResize);
             window.removeEventListener('unload', cleanUpEvents);
         }
     }
