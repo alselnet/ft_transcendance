@@ -150,17 +150,6 @@
     color: #fff;
  }
  
- /* .settings-link {
-    position: fixed;
-    bottom: 5vh;
-    width: 75%;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: flex-start;
- } */
- 
  .settings-footer {
     display: flex;
     flex-direction: row;
@@ -343,7 +332,6 @@
  
  .settings-footer-icon {
     font-size: 5vw;
-    margin-top: 2vh;
  }
  
  .settings-footer-text {

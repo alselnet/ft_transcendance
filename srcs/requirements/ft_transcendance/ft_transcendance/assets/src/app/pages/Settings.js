@@ -4,7 +4,6 @@ import { sendConfirmationEmail, updateAvatar, update2FA, update2FAActiveClass,
       updateDataSettings, } from "../functions/SettingsFunctions.js";
 
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
-// const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
 
 const Settings = async () => {
     let section = document.querySelector("#section");

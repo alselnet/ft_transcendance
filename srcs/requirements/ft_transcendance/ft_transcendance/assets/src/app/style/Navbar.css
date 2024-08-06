@@ -30,7 +30,8 @@
 }
 
 .myNavbar .nav-link {
-    opacity: 0.75;
+    /* opacity: 0.75; */
+    opacity: 1;
     color: rgba(255, 255, 255, 0.75);
     filter: blur(2px);
     transition: all 0.3s ease;
@@ -72,7 +73,7 @@
     top: 60px;
     right: 10px;
     z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(168, 177, 184, 0.2);
     border-radius: 20px;
 }
 
@@ -92,26 +93,33 @@
 
 @media (min-height: 660px) and (min-width: 992px) {
 
-    .navbar-container-media {
+    /* .navbar-container-media {
         display: none;
+    } */
+
+    .navbar-container-sm {
+        display: none;
+    }
+
+    .navbar-container {
+        display: flex;
     }
 
 }
 
 @media (max-height: 660px) and (min-width: 992px) {
 
-    /* .navbar-container {
-        display: none;
-    } 
-        
-    .navbar-container-media {
-        display: flex;
-    }
-        */
-
-    .navbar-icon {
+    /* .navbar-icon {
         font-size: 0rem;
-        color: red;
+    } */
+
+    .navbar-container {
+        display: none;
     }
 
+    .navbar-container-sm {
+        display: flex;
+        z-index: 999999;
+    }
 }
+

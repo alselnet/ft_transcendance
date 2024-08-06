@@ -14,7 +14,7 @@ export const Navbar = () => {
         </div>
       </nav>
 
-      <nav class="navbar-container-media">
+      <nav class="navbar-container-sm">
          <div class="myNavbar-sm d-none d-lg-flex">
           <div class="navbar">
             <div class="container-fluid">

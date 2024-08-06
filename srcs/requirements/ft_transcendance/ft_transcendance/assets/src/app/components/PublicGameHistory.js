@@ -58,7 +58,7 @@ export const PublicGameHistory = async () => {
                             <thead>
                                 <tr>
                                     <th>Date</th>
-                                    <th>Vinqueur</th>
+                                    <th>Vainqueur</th>
                                     <th>Perdant</th>
                                     <th>Resultat</th>
                                     <th>Mode de jeu</th>
