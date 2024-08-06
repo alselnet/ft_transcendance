@@ -258,7 +258,7 @@ const Game = async () => {
 
         localModeButton.addEventListener("click", function() {
             hideAll();
-            const roomName = "local_" + new Date().getTime();
+            const roomName = `room_${new Date().getTime()}_${Math.random().toString(36).substring(7)}`;
             connectWebSocket(roomName, ballSpeed.value, paddleSpeed.value);
         });
 
@@ -315,7 +315,7 @@ const Game = async () => {
         
             let player1 = remainingPlayers[0];
             let player2 = remainingPlayers[1];
-            let roomName = "local_tournoi_" + new Date().getTime();
+            let roomName = `room_${new Date().getTime()}_${Math.random().toString(36).substring(7)}`;
             hideAll();
             alert(`Round: 1  Match: ${player1} Vs ${player2}`);
             const winnerFirstMatch = await connectWebSocketTournoi(roomName, player1, player2, remainingPlayers, ballSpeed.value, paddleSpeed.value);
@@ -324,7 +324,7 @@ const Game = async () => {
                 return;
             }
         
-            roomName = "local_tournoi_" + new Date().getTime();
+            roomName = `room_${new Date().getTime()}_${Math.random().toString(36).substring(7)}`;
             hideAll();
             alert(`Round: 2  Match: ${winnerFirstMatch} Vs ${skipPlayer}`);
             const finalWinner = await connectWebSocketTournoi(roomName, winnerFirstMatch, skipPlayer, [], ballSpeed.value, paddleSpeed.value);
@@ -354,7 +354,7 @@ const Game = async () => {
             // Premier match entre les deux joueurs restants
             let player1 = remainingPlayers[0];
             let player2 = remainingPlayers[1];
-            let roomName = "local_tournoi_" + new Date().getTime();
+            let roomName = `room_${new Date().getTime()}_${Math.random().toString(36).substring(7)}`;
             hideAll();
             alert(`Round: ${round}  Match: ${player1} Vs ${player2}`);
             const winnerFirstMatch = await connectWebSocketTournoi(roomName, player1, player2, [], ballSpeed.value, paddleSpeed.value);
@@ -364,7 +364,7 @@ const Game = async () => {
             }
         
             // Le gagnant du premier match affronte le joueur qui a sauté
-            roomName = "local_tournoi_" + new Date().getTime();
+            roomName = `room_${new Date().getTime()}_${Math.random().toString(36).substring(7)}`;
             hideAll();
             alert(`Round: ${round + 1}  Match: ${winnerFirstMatch} Vs ${skipPlayer}`);
             const finalWinner = await connectWebSocketTournoi(roomName, winnerFirstMatch, skipPlayer, [], ballSpeed.value, paddleSpeed.value);
@@ -383,6 +383,8 @@ const Game = async () => {
             if (socket) {
                 socket.close();
             }
+
+            console.log(roomName)
 
             gameEnd = false
             socket = new WebSocket(`wss://${window.location.host}/ws/pong/${roomName}/`);
