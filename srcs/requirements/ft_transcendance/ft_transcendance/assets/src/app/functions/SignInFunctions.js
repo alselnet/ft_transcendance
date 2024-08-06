@@ -69,7 +69,7 @@ export function handleFormSubmit(event) {
         return;
     }
     if (!passwordValid) {
-        alert("mot de passe doit contenir au moins 8 caractères, une lettre, un chiffre et un caractère spécial.");
+        alert("mot de passe doit contenir au moins 8 caractères, une lettr majuscule, un chiffre et un caractère spécial.");
         console.log('Invalid password');
         return;
     }
