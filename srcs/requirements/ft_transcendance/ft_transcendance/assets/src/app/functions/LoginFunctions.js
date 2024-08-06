@@ -86,7 +86,6 @@ function handleFormSubmit(event) {
     
         const tfa = localStorage.getItem('tfa');
 
-        console.error('TFA :', tfa)
         if (userData.two_fa_method === 'email') {
             return fetch(`${authUrl}/generate-2fa-code/`, {
                 method: 'POST',
