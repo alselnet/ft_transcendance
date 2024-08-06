@@ -9,5 +9,5 @@ export const updateActiveLink = () => {
     if (activeLink) {
         activeLink.classList.add('active');
     }
-  };
+};
   

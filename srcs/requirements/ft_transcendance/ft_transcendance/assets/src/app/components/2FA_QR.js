@@ -1,4 +1,3 @@
-
 const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
 
 const TwoFactorsAuthQR = async () => {

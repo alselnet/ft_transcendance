@@ -3,7 +3,6 @@ import { del } from "../services/Api.js";
 const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
 
 const deleteProcess = () => {
-
     document.getElementById('submit-delete-account').addEventListener('click', async () => {
         const password = document.getElementById('delete-password').value;
 

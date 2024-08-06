@@ -1,9 +1,7 @@
 import { LogOutUser } from "../functions/LogOutFunctions";
 import { removeMainComponent } from "../functions/MainFunctions.js";
 
-
 const LogOutMsg = async () => {
-
     let msg = document.querySelector("#section");
 
     removeMainComponent();

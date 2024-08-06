@@ -129,8 +129,6 @@ const FriendDashStat = () => {
         });
 
     return form;
-    
 };
-
 
 export { FriendDashStat };

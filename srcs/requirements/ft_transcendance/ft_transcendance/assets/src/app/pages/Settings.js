@@ -4,15 +4,15 @@ import { sendConfirmationEmail, updateAvatar, update2FA, update2FAActiveClass,
       updateDataSettings, } from "../functions/SettingsFunctions.js";
 
 const usersUrl = `${window.location.protocol}//${window.location.host}/api/users`
-const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
+// const authUrl = `${window.location.protocol}//${window.location.host}/api/auth`
 
 const Settings = async () => {
-   let section = document.querySelector("#section");
+    let section = document.querySelector("#section");
 
-   const isAuthenticated = await checkAuth();
-   if (!isAuthenticated) {
-       throw new Error('User is not authenticated');
-   }
+    const isAuthenticated = await checkAuth();
+    if (!isAuthenticated) {
+        throw new Error('User is not authenticated');
+    }
 
     get(`${usersUrl}/me/`)
     .then(response => {
@@ -23,13 +23,13 @@ const Settings = async () => {
     })
     .then(userData => {
        const emailConfirmationBanner = userData.mail_confirmation_status ? '' : `
-           <div class="confirm-email">
-               votre adresse mail doit etre verifiee:&nbsp
-               <a href="" id="resend-verification-email"> envoyer un mail de verification</a>
-           </div>`;
+        <div class="confirm-email">
+            votre adresse mail doit etre verifiee:&nbsp
+            <a href="" id="resend-verification-email"> envoyer un mail de verification</a>
+        </div>`;
 
-       section.innerHTML = 
-           ` 
+        section.innerHTML = 
+        ` 
         <div class="settings-container">
             <h1 class="settings-title">Parametres du compte</h1>
             <div class="settings-box">
@@ -116,21 +116,21 @@ const Settings = async () => {
    </div>
        `;
 
-       if (userData.fortytwo_account === true) {
+        if (userData.fortytwo_account === true) {
 		section.querySelector('.edit-pp').style.display = 'none';
-	} else {
-		section.querySelector('.edit-pp').addEventListener('click', (event) => {
-			event.preventDefault();
-			section.querySelector('#avatar-input').click();
-		});
+        } else {
+            section.querySelector('.edit-pp').addEventListener('click', (event) => {
+                event.preventDefault();
+                section.querySelector('#avatar-input').click();
+            });
 
-		section.querySelector('#avatar-input').addEventListener('change', (event) => {
-			const file = event.target.files[0];
-			if (file) {
-				updateAvatar(file);
-			}
-		});
-	}
+            section.querySelector('#avatar-input').addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    updateAvatar(file);
+                }
+            });
+        }
 
         const loginSearchInput = section.querySelector("#login-search");
         const searchButton = section.querySelector("#search-button");
@@ -148,19 +148,18 @@ const Settings = async () => {
         updateDataSettings();
         update2FAActiveClass(userData.two_fa_method);
 
-       if (userData.mail_confirmation_status == false)
-       {
-           section.querySelector('#resend-verification-email').addEventListener('click', (event) => {
-               event.preventDefault();
-               sendConfirmationEmail(userData.email);
-           });
-       }
+        if (userData.mail_confirmation_status == false) {
+            section.querySelector('#resend-verification-email').addEventListener('click', (event) => {
+                event.preventDefault();
+                sendConfirmationEmail(userData.email);
+            });
+        }
 
-       if (userData.fortytwo_account === true) {
-            document.getElementById('edit-username').disabled = true;
-            document.getElementById('edit-email').disabled = true;
-            document.getElementById('edit-password').disabled = true;
-            document.getElementById('dropdownMenuButton1').disabled = true;
+        if (userData.fortytwo_account === true) {
+                document.getElementById('edit-username').disabled = true;
+                document.getElementById('edit-email').disabled = true;
+                document.getElementById('edit-password').disabled = true;
+                document.getElementById('dropdownMenuButton1').disabled = true;
         }
         
         section.querySelector('#delete-account').addEventListener('click', (event) => {
@@ -173,13 +172,12 @@ const Settings = async () => {
             }
         });
 
-       initializeSettingsPage();
-   })
-   .catch(error => {
-       console.error('Error fetching user profile:', error);
-       section.innerHTML = '<p>Failed to load user profile</p>';
-   })
-   
+        initializeSettingsPage();
+        })
+        .catch(error => {
+            console.error('Error fetching user profile:', error);
+            section.innerHTML = '<p>Failed to load user profile</p>';
+        })
 };
 
 export { Settings };

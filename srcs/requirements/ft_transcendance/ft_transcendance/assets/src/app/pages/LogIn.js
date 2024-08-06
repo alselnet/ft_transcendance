@@ -4,8 +4,8 @@ import { handleFormVisibility } from '../functions/LoginFunctions.js';
 import { removeMainComponent } from "../functions/MainFunctions.js";
 
 export const LogIn = () => {
-
     removeMainComponent();
+    
     let section = document.querySelector("#section");
     if (section) {
         section.innerHTML = `

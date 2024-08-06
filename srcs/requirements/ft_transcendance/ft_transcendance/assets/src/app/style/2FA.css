@@ -1,3 +1,7 @@
+/*********************************************************/
+/*          medium & large & small screen                */
+/*********************************************************/
+
 .container-2FA
 {
    font-family: Lato, sans-serif;
@@ -15,6 +19,7 @@
    margin-bottom: 4vh;
 }
 
+/* FORMULAR */
 .login-form-2FA {
    background-color: #fbffea;
    padding: 40px;
@@ -49,6 +54,7 @@
    font-family: 'Play';
 }
 
+/* BUTTON */
 .button-2FA {
    font-family: Lato, sans-serif;
    font-size: 0.7vw;
@@ -60,12 +66,15 @@
    border: none;
    outline: none;
    background-color: transparent;
-
 }
 
 .button-2FA:hover {
    font-weight: bold;
 }
+
+/*********************************************************/
+/*                     media screen                      */
+/*********************************************************/
 
 @media (max-width: 848px) {
 
@@ -93,10 +102,6 @@
    .title-2FA {
        font-size: 1.2vw;
    }
-
-   /* input[type="text"] {
-       font-size: 1vw;
-   } */
 
    .button-2FA {
        font-size: 1vw;
