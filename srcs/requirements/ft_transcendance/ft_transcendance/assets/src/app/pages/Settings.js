@@ -30,7 +30,7 @@ const Settings = async () => {
         section.innerHTML = 
         ` 
         <div class="settings-container">
-            <h1 class="settings-title">Parametres du compte</h1>
+            <h1 class="settings-title">Paramètres du compte</h1>
             <div class="settings-box">
             <div class="editting">
                <div class="picture-wrapper">
