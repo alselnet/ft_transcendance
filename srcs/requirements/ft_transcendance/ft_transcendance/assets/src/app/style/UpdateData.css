@@ -51,3 +51,27 @@
 .button-update-data:hover {
     background-color: #616161;
 }
+
+#submit-update-password {
+    background-color: #4caf50;
+}
+
+#cancel-update-password {
+    background-color: red;
+}
+
+#submit-update-username {
+    background-color: #4caf50;
+}
+
+#cancel-update-username {
+    background-color: red;
+}
+
+#submit-update-email {
+    background-color: #4caf50;
+}
+
+#cancel-update-email {
+    background-color: red;
+}

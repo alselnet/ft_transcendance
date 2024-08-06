@@ -58,9 +58,9 @@ class MyGameHistory(APIView):
             {
                 'user': user.username,
                 'winner': game.winner.username if game.winner else 'Invité',
-                'winner_avatar': game.winner.profile.avatar.url if game.winner else 'https://paul-f4Ar2s4:4443/media/default.png',
+                'winner_avatar': game.winner.profile.avatar.url if game.winner else 'https://paul-f4Ar1s2:4443/media/default.png',
 				'loser': game.loser.username if game.loser else 'Invité',
-                'loser_avatar': game.loser.profile.avatar.url if game.loser else 'https://paul-f4Ar2s4:4443/media/default.png',
+                'loser_avatar': game.loser.profile.avatar.url if game.loser else 'https://paul-f4Ar1s2:4443/media/default.png',
                 'winner_score': game.winner_score,
                 'loser_score': game.loser_score,
                 'perfect': game.perfect,
@@ -298,9 +298,9 @@ class PublicGameHistoryView(APIView):
             {
                 'user': user.username,
                 'winner': game.winner.username if game.winner else 'Invité',
-                'winner_avatar': game.winner.profile.avatar.url if game.winner else 'https://paul-f4Ar2s4:4443/media/default.png',
+                'winner_avatar': game.winner.profile.avatar.url if game.winner else 'https://paul-f4Ar1s2:4443/media/default.png',
 				'loser': game.loser.username if game.loser else 'Invité',
-                'loser_avatar': game.loser.profile.avatar.url if game.loser else 'https://paul-f4Ar2s4:4443/media/default.png',
+                'loser_avatar': game.loser.profile.avatar.url if game.loser else 'https://paul-f4Ar1s2:4443/media/default.png',
                 'winner_score': game.winner_score,
                 'loser_score': game.loser_score,
                 'perfect': game.perfect,

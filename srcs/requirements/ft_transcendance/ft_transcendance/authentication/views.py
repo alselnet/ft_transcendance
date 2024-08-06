@@ -171,6 +171,12 @@ class Callback(APIView):
             username = user_info['login']
             email = user_info['email']
             avatar_url = user_info['image']['versions']['small']
+            test_user = User.objects.filter(username=username).first()
+            if test_user:
+                if test_user.profile.fortytwo_account == False:
+                    return Response({'error': 'A user with this username address already exists.'}, status=status.HTTP_400_BAD_REQUEST)
+            elif User.objects.filter(email=email).exists():
+                return Response({'error': 'A user with this email address already exists.'}, status=status.HTTP_400_BAD_REQUEST)
             
             user, created = User.objects.get_or_create(username=username)
             user.email = email
