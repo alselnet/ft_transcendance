@@ -128,7 +128,6 @@ const Game = async () => {
                 console.error('Fetch error:', error);
                 Player1_name = 'Unknown Player';
             }
-            console.log(Player1_name)
             updateScores(scorePlayer1, scorePlayer2)
         }
 
@@ -383,8 +382,6 @@ const Game = async () => {
             if (socket) {
                 socket.close();
             }
-
-            console.log(roomName)
 
             gameEnd = false
             socket = new WebSocket(`wss://${window.location.host}/ws/pong/${roomName}/`);
