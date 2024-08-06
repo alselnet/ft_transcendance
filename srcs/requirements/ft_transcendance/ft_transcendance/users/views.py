@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.db import transaction
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -87,47 +88,54 @@ class MyGameHistory(APIView):
         if not all(key in data for key in ['winner_username', 'loser_username', 'winner_score', 'loser_score', 'perfect', 'local_game']):
             raise ValidationError('winner_username, loser_username, winner_score, loser_score, perfect and local_game fields are required.')
 
-# UPDATING GAME STATS
-        if local_game is False:
-            if winner_username != user.username:
-                return Response({'error': 'You must be the winner to create a game summary.'}, status=status.HTTP_403_FORBIDDEN)
-            winner = get_object_or_none(User, username=winner_username)
-            loser = get_object_or_none(User, username=loser_username)
-            if (winner is None or loser is None):
-                return Response({'error': 'Winner user or loser user not found.'}, status=status.HTTP_400_BAD_REQUEST)
-            winner_profile = winner.profile
-            loser_profile = loser.profile
-            winner_profile.scored_points += winner_score
-            winner_profile.conceded_points += loser_score
-            winner_profile.played_games += 1
-            winner_profile.won_games +=1
-            if perfect:
-                winner_profile.perfect_wins += 1
-            winner_profile.save()
+#UPDATING GAME STATS
+        with transaction.atomic():
+            if not local_game:
+                if winner_username != user.username:
+                    return Response({'error': 'You must be the winner to create a game summary.'}, status=status.HTTP_403_FORBIDDEN)
+                winner = get_object_or_none(User, username=winner_username)
+                loser = get_object_or_none(User, username=loser_username)
+                if winner is None or loser is None:
+                    return Response({'error': 'Winner user or loser user not found.'}, status=status.HTTP_400_BAD_REQUEST)
 
-            loser_profile.scored_points += loser_score
-            loser_profile.conceded_points += winner_score
-            loser_profile.played_games += 1
-            loser_profile.save()
-		
-        else:
-            winner = get_object_or_none(User, username=winner_username)
-            loser = get_object_or_none(User, username=loser_username)
-            if (winner is None and loser is None):
-                return Response({'error': 'Winner user or loser user not found.'}, status=status.HTTP_400_BAD_REQUEST)
-            if user.username == winner_username:
-                user.profile.scored_points += winner_score
-                user.profile.conceded_points += loser_score
-                user.profile.won_games +=1
-                user.profile.played_games += 1
+                winner_profile = winner.profile
+                loser_profile = loser.profile
+                winner_profile.scored_points += winner_score
+                winner_profile.conceded_points += loser_score
+                winner_profile.played_games += 1
+                winner_profile.won_games += 1
                 if perfect:
-                    user.profile.perfect_wins += 1
-                user.profile.save()
+                    winner_profile.perfect_wins += 1
+                winner_profile.save()
+
+                loser_profile.scored_points += loser_score
+                loser_profile.conceded_points += winner_score
+                loser_profile.played_games += 1
+                loser_profile.save()
+
+                loser_profile.scored_points += loser_score
+                loser_profile.conceded_points += winner_score
+                loser_profile.played_games += 1
+                loser_profile.save()
+		
             else:
-                user.profile.scored_points += loser_score
-                user.profile.conceded_points += winner_score
-                user.profile.played_games += 1
-                user.profile.save()
+                winner = get_object_or_none(User, username=winner_username)
+                loser = get_object_or_none(User, username=loser_username)
+                if (winner is None and loser is None):
+                    return Response({'error': 'Winner user or loser user not found.'}, status=status.HTTP_400_BAD_REQUEST)
+                if user.username == winner_username:
+                    user.profile.scored_points += winner_score
+                    user.profile.conceded_points += loser_score
+                    user.profile.won_games +=1
+                    user.profile.played_games += 1
+                    if perfect:
+                        user.profile.perfect_wins += 1
+                    user.profile.save()
+                else:
+                    user.profile.scored_points += loser_score
+                    user.profile.conceded_points += winner_score
+                    user.profile.played_games += 1
+                    user.profile.save()
                 
 #CREATING GAME SUMMARY INSTANCE
         game_summary = GameSummary.objects.create(
