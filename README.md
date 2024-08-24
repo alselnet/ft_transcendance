@@ -19,6 +19,7 @@ The subject required us to design a SPA for playing games of Pong over the web. 
 - PostgreSQL as a Database
 - NGINX as a reverse-proxy
 - Django + Daphne for the backend
+- Pillow for profile pictures
 - Redis for Pong game sessions
 - Bootstrap for the style
 - and Jira, Notions, Discord...
