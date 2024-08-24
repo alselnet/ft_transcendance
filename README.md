@@ -1,5 +1,6 @@
 ft_transcendance
 
+-----
 This is a small single-page web application, by a team of four students of 42 School, Paris :
 
 T. Mejri (https://github.com/TasMj)
@@ -37,7 +38,8 @@ Here are some of the features we chose to implement :
 - optional 2FA (via email / QRC) and JWT to secure authentication
 - multiple browser compatibility
 - and more !
-  
+
+-----
 Quick How-to-use guide :
 
 - make sure you have the latest versions of Docker and Docker Compose !
@@ -45,6 +47,7 @@ Quick How-to-use guide :
 - make the project
 - access the site @ https://localhost:4443
 
+-----
 Some of the useful resources we used :
 
 - this incredible openclassrooms course for learning Django : https://openclassrooms.com/fr/courses/6967196-create-a-web-application-with-django/7345823-get-the-most-out-of-this-course
